@@ -3,6 +3,12 @@ package MTBMS;
 import java.util.ArrayList;
 import java.util.Date;
 
+/*
+This class will interact with the Movie and Cinema table via DB class.
+It has the methods to get, change abd delete data relate to 'movies'.
+The methods in this class are basically just calling methods from DB class.
+ */
+
 public class Movies {
     private String movieName;
     private String cinemaName;
