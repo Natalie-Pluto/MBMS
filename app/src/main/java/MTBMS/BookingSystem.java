@@ -1,7 +1,12 @@
 package MTBMS;
 
 import java.util.ArrayList;
-
+// TODO/*
+//  This class contains the main for the application.
+//  This class will interact with User table to add, edit and delete data in the table.
+//  It will make the default page for the system.
+//  It will call methods in Guest and Staff class to provide further services for the user
+//   */
 public class BookingSystem {
     private String username;
     private String password;
@@ -17,6 +22,10 @@ public class BookingSystem {
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         login();
         signUp();
+        Guest guest = new Guest(" ", " ", " ");
+        Staff staff = new Staff(" ", " ", "");
+        guest.guestService(" ");
+        staff.staffService(" ");
     }
 
     // Login will interact with User table to check the user's info

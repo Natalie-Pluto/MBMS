@@ -7,6 +7,8 @@ import java.util.Date;
 This class will interact with the Movie and Cinema table via DB class.
 It has the methods to get, change abd delete data relate to 'movies'.
 The methods in this class are basically just calling methods from DB class.
+
+Methods in this class will be called by Guest and Movies class to perform corresponding services.
  */
 
 public class Movies {

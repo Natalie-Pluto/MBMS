@@ -1,29 +1,29 @@
 package MTBMS;
 
-import java.util.ArrayList;
-/*
-This class will interact with user (guest & customer)
-It will continue the CLI for guests and provide services for them.
- */
+
+//TODO/*
+//  This class will interact with user (guest & customer)
+//  It will continue the CLI for guests and provide services for them.
+//  */
 public class Guest {
     private String username;
     private String identity;
-    public ArrayList<String> settings;
+    public String settings;
 
-    public Guest(String username, String identity, ArrayList<String> settings) {
+    public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
         this.settings = settings;
     }
 
-    /* bookingSystem class will call this method with the user's identity type.
-     It should be either 'G' for guest or 'C' for customer.
-     Note: different service for guest and customer, pls refer to the asm spec.
-     You should use this method to accept further the user's input, create suitable CLI to interact with the user.
-     It's kinda like a main method for guest class
-     */
+    // TODO/* bookingSystem class will call this method with the user's identity type.
+    //     It should be either 'G' for guest or 'C' for customer.
+    //     Note: different service for guest and customer, pls refer to the asm spec.
+    //     You should use this method to accept further the user's input, create suitable CLI to interact with the user.
+    //     It's kinda like a main method for guest class
+    //     */
     public void guestService(String identity) {
-        // TODO
+
     }
 
     // This method will call method in movie class.
@@ -48,6 +48,8 @@ public class Guest {
     }
 
     // This method will allow customers to update their password and specific settings.
+    // opt 1 for changing password
+    // opt 2 for changing settings
     public void personalInfoUpdate(int opt) {
         // TODO
     }
@@ -60,7 +62,7 @@ public class Guest {
         return identity;
     }
 
-    public ArrayList<String> getSettings() {
+    public String getSettings() {
         return settings;
     }
 
@@ -71,7 +73,7 @@ public class Guest {
     Just ignore it for sprint 1.
     */
 
-    public void setSettings(ArrayList<String> settings) {
+    public void setSettings(String settings) {
         this.settings = settings;
         // TODO
     }
