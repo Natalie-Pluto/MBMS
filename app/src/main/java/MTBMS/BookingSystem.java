@@ -49,6 +49,7 @@ public class BookingSystem {
 
     // Delete an user from User table.
     // This can only be done by manager.
+    // This method should be called by Staff class only.
     public void deleteUser (String username) {
         // TODO
     }
