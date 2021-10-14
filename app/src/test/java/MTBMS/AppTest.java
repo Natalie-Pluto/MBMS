@@ -15,6 +15,6 @@ public class AppTest {
 
     @Test
     public void deletethistest() {
-        return 1
+        return;
     }
 }
