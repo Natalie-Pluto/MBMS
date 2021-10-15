@@ -49,7 +49,7 @@ CREATE TABLE Cinema_Session (
     number_of_seats_booked INT NOT NULL,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    PRIMARY KEY(cinema, screen_type, movie)
+    PRIMARY KEY(cinema, screen_type, movie, start_time)
 );
 
 
