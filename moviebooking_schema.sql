@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS Cinema CASCADE;
 CREATE TABLE Credit_Card (
     number CHAR(5) PRIMARY KEY,
     cardholder_name VARCHAR(100) NOT NULL,
+    pin CHAR(4) NOT NULL,
     balance DECIMAL(12,5) NOT NULL -- DECIMAL(<#digits>,<#post-decimal places>)
 );
 
