@@ -19,14 +19,15 @@ CREATE TABLE Credit_Card (
 
 CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserved keyword 
     username VARCHAR(100) PRIMARY KEY,
-    password VARCHAR(100),
+    password_ VARCHAR(100),
     creditcard CHAR(5) REFERENCES Credit_Card(number),
-    is_staff BOOLEAN NOT NULL
+    is_staff BOOLEAN NOT NULL DEFAULT FALSE,
+    is_manager BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Gift_Card(
     number CHAR(18) PRIMARY KEY,
-    redeemed BOOLEAN NOT NULL
+    redeemed BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Movie(
