@@ -18,9 +18,12 @@ public class Data {
     public String getUserAuthenticated() {return this.userAuthentiated;}
 
     public Boolean isStaff(String username) {
-        return this.database.sql_getBoolean("select * from moviebooking_db where username ='" + username + "';", "is_staff");
+        return this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_staff");
     }
     
+    public Boolean isManager(String username) {
+        return this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_manager");
+    }
     
     
 
