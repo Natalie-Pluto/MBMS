@@ -1,4 +1,4 @@
-package ATMSystem;
+package MTBMS;
 
 
 import java.sql.*;
@@ -8,7 +8,7 @@ public class Database {
     private String dbPassword;
     private String dbUsername;
 
-    public Database(String dbUrl, String dbPassword, String dbUsername) {
+    public Database(String dbUrl, String dbUsername, String dbPassword) {
         this.dbUrl = dbUrl;
         this.dbPassword = dbPassword;
         this.dbUsername = dbUsername;
@@ -30,22 +30,26 @@ public class Database {
 		return true;
 	}
 
-    public ResultSet getSQLResult(String query) {
+    public String sql_getString(String query, String column) {
         /*desc todo*/
-        ResultSet result = null;
+        String output = null;
         Connection conn = null;
         String sql = query;
         try {
             conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             Statement stmt = conn.createStatement();
-            result = stmt.executeQuery(sql);
+            ResultSet result = stmt.executeQuery(sql);
+            if (result.next()) {
+                output = result.getString(column);
+            }
             stmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("ABC");
             return null;
         }
-        return result;
+        return output;
     }
 
 	public Boolean sql_getBoolean(String query, String column) {
