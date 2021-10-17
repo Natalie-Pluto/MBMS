@@ -14,7 +14,7 @@ public class Database {
         this.dbUsername = dbUsername;
     }
 
-    public boolean sql_update(String query) {
+    public Boolean sql_update(String query) {
 		/*desc todo*/
 		Connection conn = null;
 		try {
