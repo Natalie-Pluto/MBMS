@@ -1,0 +1,92 @@
+package ATMSystem;
+
+
+import java.sql.*;
+
+public class Database {
+    private String dbUrl;
+    private String dbPassword;
+    private String dbUsername;
+
+    public Database(String dbUrl, String dbPassword, String dbUsername) {
+        this.dbUrl = dbUrl;
+        this.dbPassword = dbPassword;
+        this.dbUsername = dbUsername;
+    }
+
+    public boolean sql_update(String query) {
+		/*desc todo*/
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(query);
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+    public ResultSet getSQLResult(String query) {
+        /*desc todo*/
+        ResultSet result = null;
+        Connection conn = null;
+        String sql = query;
+        try {
+            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+            Statement stmt = conn.createStatement();
+            result = stmt.executeQuery(sql);
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return result;
+    }
+
+	public Boolean sql_getBoolean(String query, String column) {
+		/*desc todo*/
+		Connection conn = null;
+		Boolean output = false;
+		String sql = query;
+		try {
+            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getBoolean(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+
+	public Double sql_getDouble(String query, String column) {
+		/*desc todo*/
+		Connection conn = null;
+		Double output = 0.0;
+		String sql = query;
+		try {
+            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getDouble(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+} 
