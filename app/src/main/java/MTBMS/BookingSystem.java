@@ -24,7 +24,7 @@ public class BookingSystem {
         signUp();
         Guest guest = new Guest(" ", " ", " ");
         Staff staff = new Staff(" ", " ", "");
-        guest.guestService(" ");
+        guest.guestService("G");
         staff.staffService(" ");
     }
 
@@ -63,7 +63,7 @@ public class BookingSystem {
         // TODO
     }
 
-    // Add an user to User tabole.
+    // Add an user to User table.
     // It should be called by signup( ) method
     public void addUser (String userInfo) {
         // TODO
