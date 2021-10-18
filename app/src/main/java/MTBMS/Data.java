@@ -10,9 +10,10 @@ public class Data {
     }
 
     public Boolean authenticate(String username, String password) {
-        Boolean validCombination =  this.database.sql_getString("select * from moviebooking_db.users where username = '" + username + "' and password_ = '" + password + "';", "username").equals(username);
-        if (validCombination) this.userAuthentiated = "user";
-        return validCombination;
+        String user =  this.database.sql_getString("select * from moviebooking_db.users where username = '" + username + "' and password_ = '" + password + "';", "username");
+        if (user == null) return false;
+        this.userAuthentiated = "user";
+        return true;
     }
 
     public String getUserAuthenticated() {return this.userAuthentiated;}

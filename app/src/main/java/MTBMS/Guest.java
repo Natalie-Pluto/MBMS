@@ -41,7 +41,7 @@ public class Guest {
             System.out.println("======================================");
             String  input1 = input.next();
             if (input1.equals("1")) {
-                System.out.println();
+                filterMovies();
             } else if (input1.equals("2")) {
                 System.out.println("Please create your username:");
                 String newAcc = input.nextLine();
@@ -61,8 +61,7 @@ public class Guest {
             switch (customerInput1){
                 case "1":
                     //TODO: list
-                    int filterMovieNumber = input.nextInt();
-                    filterMovies(filterMovieNumber);
+                    filterMovies();
                     break;
 
                 case "2":
@@ -81,8 +80,8 @@ public class Guest {
     // This method will call method in movie class.
     // It will filter and display the movies up to user's choice.
     // Both guest and customer can use this service.
-    public void filterMovies(int filterType) {
-        System.out.println("");
+    public void filterMovies() {
+        // TODO: Ask user how they wanna filter the movies and filter the movies of their choice
     }
 
     // This method will call methods in movie class
