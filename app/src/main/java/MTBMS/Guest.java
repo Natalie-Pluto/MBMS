@@ -4,6 +4,8 @@ package MTBMS;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
+
+
 //TODO/*
 //  This class will interact with user (guest & customer)
 //  It will continue the CLI for guests and provide services for them.
@@ -12,6 +14,10 @@ public class Guest {
     private String username;
     private String identity;
     public String settings;
+
+    private String goodDBUrl = "jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres";
+    private String goodDBUsername = "dbmasteruser";
+    private String goodDBPassword = "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<";
 
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -35,15 +41,19 @@ public class Guest {
             String  input1 = input.next();
             switch (input1){
                 case "1":
-                    System.out.println("Please enter your account number");
+                    System.out.println("Please enter your username");
                     //TODO: create a users instance from users database to check users info
-                    String accountNumber = input.next();
+                    String username = input.next();
                     System.out.println("Please enter your password");
                     String accountPassword = input.next();
+                    Data data = new Data(goodDBUrl, goodDBUsername, goodDBPassword);
+                    Boolean authenticated = data.authenticate(username, accountPassword);
+                    if (authenticated) System.out.println("Hi " + username + "!");
+                    else System.out.println("Login failed. Invalid username or password");
                     break;
 
                 case "2":
-                    System.out.println("Please create your account number");
+                    System.out.println("Please create your username");
                     String newAccountNumber = input.next();
                     System.out.println("Please create your account password");
                     String newAccountPassword = input.next();
