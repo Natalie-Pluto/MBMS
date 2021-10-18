@@ -27,59 +27,32 @@ public class Guest {
     //     */
     public void guestService(String identity) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Welcome to Fancy Cinemas!");
-        System.out.println("Please choose service");
         if (identity.equals("G")){
-            //Guests may only want to filter movies, so they may skip the logging process
-            System.out.println("1. Log in        2. Sign up      3. Skip");
+            // Guests can only view movies
+            // They can choose to filter movies
+            System.out.println("===============================");
+            System.out.println("Enter 1 for \"Filter Movies\"");
+            System.out.println("===============================\n");
+            System.out.println("<<Upcoming Movies!>>");
+            // TODO: List all the upcoming Movies & times then ask user to filter movies of their choice
+            System.out.println("\n======================================");
+            System.out.println("You can sign up to book your tickets!");
+            System.out.println("Enter 2 for \"Sign up\"");
+            System.out.println("======================================");
             String  input1 = input.next();
-            switch (input1){
-                case "1":
-                    System.out.println("Please enter your account number");
-                    //TODO: create a users instance from users database to check users info
-                    String accountNumber = input.next();
-                    System.out.println("Please enter your password");
-                    String accountPassword = input.next();
-                    break;
-
-                case "2":
-                    System.out.println("Please create your account number");
-                    String newAccountNumber = input.next();
-                    System.out.println("Please create your account password");
-                    String newAccountPassword = input.next();
-                    break;
-
-                case "3":
-                    System.out.println("Please choose service");
-                    System.out.println("1.Filter movies        2.Book a movie");
-                    String input2 = input.next();
-                    switch (input2){
-                        case "1":
-                            //TODO: list all the movie names and ask the user to choose
-                            //Movies movies = new Movies()；
-                            System.out.println("Please enter a number to filter a movie");
-                            int filterMovieNumber = input.nextInt();
-                            filterMovies(filterMovieNumber);
-                            //TODO: list a specific movie with its info
-                            System.out.println("Please choose a time");
-                            break;
-
-                        case "2":
-                            System.out.println("Please enter the movie name or movie number");
-                            String movieName = input.next();
-                            System.out.println("Please enter the cinema name");
-                            String cinemaName = input.next();
-                            book(movieName, cinemaName);
-                            break;
-
-                        default:
-                            System.err.println("Please enter a correct number");
-                    }
-
-                default:
-                    System.err.println("Please enter a valid number");
+            if (input1.equals("1")) {
+                System.out.println();
+            } else if (input1.equals("2")) {
+                System.out.println("Please create your username:");
+                String newAcc = input.nextLine();
+                // TODO: check if the username existed already
+                System.out.println("Please create your password:");
+                // TODO: the password input is hidden by showing asterisk symbol (*) or
+                //  by hiding the password text completely (for text or console UI)
+                String newPw = input.nextLine();
+                BookingSystem user = new BookingSystem(newAcc, newPw, "C");
+                user.signUp(newAcc, newPw);
             }
-
 
         }else if (identity.equals("C")){
             System.out.println("Please choose the service");
