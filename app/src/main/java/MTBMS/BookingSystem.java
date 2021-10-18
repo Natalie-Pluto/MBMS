@@ -14,20 +14,11 @@ import java.util.concurrent.TimeUnit;
 //  It will call methods in Guest and Staff class to provide further services for the user
 //   */
 public class BookingSystem {
-    private String username;
-    private String password;
-    private String identity;
     private static BookingSystem instance;
     private static Data dbInstance;
 
-    BookingSystem(String username, String password, String identity) {
-        this.username = username;
-        this.password = password;
-        this.identity = identity;
-    }
-
     public static void main(String[] args) throws InterruptedException {
-        instance = new BookingSystem("", "", "");
+        instance = new BookingSystem();
         dbInstance = new Data("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
                 "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
@@ -50,46 +41,7 @@ public class BookingSystem {
                     break;
                 case "2":
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    System.out.println("Please create your username:");
-                    String newAcc = timer();
-                    // TODO: check if the username existed already
-                    System.out.println("Please create your password:");
-                    String newPw = timer();
-                    System.out.println("Please choose your identity:");
-                    System.out.println("Enter 1 - for \"Customer\"");
-                    System.out.println("Enter 2 - for \"Staff\"");
-                    String id = timer();
-                    if (id.equals("1")) {
-                        BookingSystem newUser = new BookingSystem(newAcc, newAcc, "C");
-                        newUser.signUp(newAcc, newPw);
-                    } else if (id.equals("2")) {
-                        boolean isDone = false;
-                        int counter = 0;
-                        while(!isDone && counter < 4) {
-                            counter++;
-                            System.out.println("Are you a Manager?");
-                            System.out.println("Enter: Y/N");
-                            String ans = timer();
-                            if (ans.equals("Y")) {
-                                BookingSystem newUswer = new BookingSystem(newAcc, newAcc, "M");
-                                newUswer.signUp(newAcc, newPw);
-                                isDone = true;
-                            } else if (ans.equals("N")) {
-                                BookingSystem newUswer = new BookingSystem(newAcc, newAcc, "S");
-                                newUswer.signUp(newAcc, newPw);
-                                isDone = true;
-                            } else {
-                                System.out.println("============================================");
-                                System.err.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
-                                System.out.println("============================================");
-                            }
-                        }
-                    } else {
-                        System.out.println("============================================");
-                        System.err.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
-                        System.out.println("============================================");
-                    }
-                    login(newAcc, newPw);
+                    signUp("NA");
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     break;
                 case "3":
@@ -148,8 +100,70 @@ public class BookingSystem {
 
     // Signup will interact with User table to add user's info
     // Note: Need to check the username provided, it has to be unique
-    public void signUp(String newAcc, String newPw) throws InterruptedException {
-        login(newAcc, newPw);
+    public void signUp(String id) throws InterruptedException {
+        boolean success = false;
+        System.out.println("Please create your username:");
+        String newAcc = timer();
+        // TODO: check if the username existed already
+        System.out.println("Please create your password:");
+        String newPw = timer();
+        if (id.equals("")) {
+            boolean isFinished = false;
+            int counter2 = 0;
+            while (!isFinished && counter2 < 4) {
+                counter2++;
+                System.out.println("Please choose your identity:");
+                System.out.println("Enter 1 - for \"Customer\"");
+                System.out.println("Enter 2 - for \"Staff\"");
+                String input = timer();
+                if (input.equals("1")) {
+                    isFinished = true;
+                    success = true;
+                    // TODO: Add this customer's detail to users table
+                } else if (input.equals("2")) {
+                    isFinished = true;
+                    boolean isDone = false;
+                    int counter = 0;
+                    while (!isDone && counter < 4) {
+                        counter++;
+                        System.out.println("Are you a Manager?");
+                        System.out.println("Enter: Y/N");
+                        String ans = timer();
+                        if (ans.equals("Y")) {
+                            isDone = true;
+                            success = true;
+                            // TODO: Add this manager's detail to users table
+                        } else if (ans.equals("N")) {
+                            isDone = true;
+                            success = true;
+                            // TODO: Add this staff's detail to users table
+                        } else {
+                            System.out.println("============================================");
+                            System.err.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
+                            System.out.println("============================================");
+                        }
+                    }
+                } else {
+                    System.out.println("============================================");
+                    System.err.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                    System.out.println("============================================");
+                }
+            }
+        } else {
+            success = true;
+            // TODO: Add this customer's detail to users table
+        }
+        if (success) {
+            login(newAcc, newPw);
+        } else {
+            System.out.println("============================================");
+            System.err.println(RED_BOLD + "Sign up failed (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            Thread.sleep(2000);
+            System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
+            Thread.sleep(2000);
+            getGreeting();
+        }
     }
 
     // Log out for the user, return to default page
@@ -188,25 +202,6 @@ public class BookingSystem {
         // TODO
     }
 
-    public String getIdentity() {
-        return identity;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public void getGreeting() throws InterruptedException {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
