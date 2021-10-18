@@ -95,7 +95,7 @@ public class BookingSystem {
     // Signup will interact with User table to add user's info
     // Note: Need to check the username provided, it has to be unique
     public void signUp(String newAcc, String newPw) {
-
+        login(newAcc, newPw);
     }
 
     // Log out for the user, return to default page
