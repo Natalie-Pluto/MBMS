@@ -14,6 +14,8 @@ public class Database {
         this.dbUsername = dbUsername;
     }
 
+
+
     public Boolean sql_update(String query) {
 		/*desc todo*/
 		Connection conn = null;
@@ -63,6 +65,27 @@ public class Database {
 			ResultSet result = stmt.executeQuery(sql);
 			if (result.next()) {
 				output = result.getBoolean(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+
+	public Integer sql_getInt(String query, String column) {
+		/*desc todo*/
+		Connection conn = null;
+		Integer output = 0;
+		String sql = query;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getInt(column);
 			} else return null;
 			stmt.close();
 			conn.close();

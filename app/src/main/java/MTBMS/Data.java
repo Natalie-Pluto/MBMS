@@ -9,6 +9,10 @@ public class Data {
         this.database = new Database(dbUrl, dbUsername, dbPassword);
     }
 
+    public Database databaseGetter(){
+        return database;
+    }
+
     public Boolean authenticate(String username, String password) {
         String user =  this.database.sql_getString("select * from moviebooking_db.users where username = '" + username + "' and password_ = '" + password + "';", "username");
         if (user == null) return false;
