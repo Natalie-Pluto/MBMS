@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS Gift_Card CASCADE;
 DROP TABLE IF EXISTS Cinema_Session CASCADE;
 DROP TABLE IF EXISTS Movie CASCADE;
 DROP TABLE IF EXISTS Cinema CASCADE;
+DROP TABLE IF EXISTS Seat_Availability CASCADE;
 
 CREATE TABLE Credit_Card (
     number CHAR(5) PRIMARY KEY,
@@ -18,14 +19,15 @@ CREATE TABLE Credit_Card (
 
 CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserved keyword 
     username VARCHAR(100) PRIMARY KEY,
-    password VARCHAR(100),
+    password_ VARCHAR(100),
     creditcard CHAR(5) REFERENCES Credit_Card(number),
-    is_staff BOOLEAN NOT NULL
+    is_staff BOOLEAN NOT NULL DEFAULT FALSE,
+    is_manager BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Gift_Card(
     number CHAR(18) PRIMARY KEY,
-    redeemed BOOLEAN NOT NULL
+    redeemed BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Movie(
@@ -39,21 +41,30 @@ CREATE TABLE Movie(
 
 CREATE TABLE Cinema (
     cinema_name VARCHAR(100) PRIMARY KEY,
-    seat_capacity INT NOT NULL
+    seat_capacity INT NOT NULL,
+    number_of_seats_in_front_row INT NOT NULL
 );
 
 CREATE TABLE Cinema_Session (
+    session_id INT PRIMARY KEY,
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name),
     screen_type VARCHAR(6) NOT NULL,
     movie INT NOT NULL REFERENCES Movie(movie_id),
-    ticket_price DECIMAL(10,4) NOT NULL,
+    ticket_price_kids DECIMAL(10,4) NOT NULL,
+    ticket_price_adults DECIMAL(10,4) NOT NULL,
+    ticket_price_seniors DECIMAL(10,4) NOT NULL,
     number_of_seats_booked INT NOT NULL,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    PRIMARY KEY(cinema, screen_type, movie, start_time)
+    UNIQUE(cinema, screen_type, movie, start_time)
 );
 
-
+CREATE TABLE Seat_Availability (
+    seat_id INT,
+    session_id INT REFERENCES Cinema_Session(session_id),
+    available BOOLEAN NOT NULL DEFAULT TRUE,
+    PRIMARY KEY(seat_id, session_id)
+);
 
 -------------------------------------------
 -- FUNCTIONS --
