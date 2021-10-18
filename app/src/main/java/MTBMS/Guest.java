@@ -19,7 +19,7 @@ public class Guest {
     // TODO/* bookingSystem class will call this method with the user's identity type.
     //     It should be either 'G' for guest or 'C' for customer.
     //     Note: different service for guest and customer, pls refer to the asm spec.
-    //     You should use this method to accept further the user's input, create suitable CLI to interact with the user.
+    //     You should use this method to accept further user's input, create suitable CLI to interact with the user.
     //     It's kinda like a main method for guest class
     //     */
     public void guestService(String identity) {
@@ -67,8 +67,8 @@ public class Guest {
     }
 
     /*
-    User's setting is an optional feature (not specifically addressed in the assignment spec.
-    It seems like a feature that we can be designed by us.
+    User's setting is an optional feature (not specifically addressed in the assignment spec.)
+    It seems like a feature that can be designed by us.
     I will check with tutor next week.
     Just ignore it for sprint 1.
     */
