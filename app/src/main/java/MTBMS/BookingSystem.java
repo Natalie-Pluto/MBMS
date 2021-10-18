@@ -91,6 +91,7 @@ public class BookingSystem {
                 staff.staffService("M");
             } else {
                 System.out.println(ANSI_PURPLE + "Logging in as customer..." + ANSI_RESET);
+                System.out.println(ANSI_PURPLE + "Welcome " + accName + "!" + ANSI_RESET);
                 Thread.sleep(3000);
                 Guest customer = new Guest(accName, "C", " ");
                 customer.guestService("C");
@@ -156,6 +157,7 @@ public class BookingSystem {
             success = true;
             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
             // TODO: Add this customer's detail to users table
+            dbInstance.addUser(newAcc,newPw,"c");
         }
         if (success) {
             login(newAcc, newPw);

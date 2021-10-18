@@ -20,18 +20,15 @@ public class Data {
         return this.userAuthentiated;
     }
 
-    public Boolean isStaff(String username) {
-        Boolean isStaff = this.database.sql_getBoolean("select * from moviebooking_db.users where username = '" + username + "';", "is_staff");
-        if (isStaff == null) return false;
-        return isStaff;
-    }
-    
-    public Boolean isManager(String username) {
-        Boolean isManager =  this.database.sql_getBoolean("select * from moviebooking_db.users where username = '" + username + "';", "is_manager");
-        if (isManager == null) return false;
-        return isManager;
-    }
-    
-    
+    public String getIdentity(String username) {return this.database.sql_getString("select * from moviebooking_db.users where username = '" + username + "';", "identity_");}
 
+    public boolean isStaff(String username) {return getIdentity(username).equals("s");}
+    
+    public boolean isManager(String username) {return getIdentity(username).equals("m");}
+   
+    public boolean addUser(String username, String password, String identity) {
+        String updateArgs = "'" + username + "', '" + password + "', '" + identity + "'";
+        boolean updateStatus = this.database.sql_update("insert into moviebooking_db.users(username,password_,identity_) values(" + updateArgs + ");");
+        return updateStatus;
+    }
 }
