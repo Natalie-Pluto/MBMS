@@ -8,6 +8,7 @@ import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
+
 // TODO/*
 //  This class contains the main for the application.
 //  This class will interact with User table to add, edit and delete data in the table.
@@ -249,12 +250,14 @@ public class BookingSystem {
     public String readPwd() {
         String password;
         String message = "Enter password";
-        if( System.console() == null ) {
-            final JPasswordField pw = new JPasswordField();
-            password = JOptionPane.showConfirmDialog( null, pw, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE ) == JOptionPane.OK_OPTION ? new String( pw.getPassword() ) : "";
-        } else {
-            password = new String( System.console().readPassword( "%s> ") );
-        }
+        //if( System.console() == null ) {
+        //    final JPasswordField pw = new JPasswordField();
+        //    password = JOptionPane.showConfirmDialog( null, pw, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE ) == JOptionPane.OK_OPTION ? new String( pw.getPassword() ) : "";
+        //} else {
+        //        password = new String( System.console().readPassword( "%s> ") );
+        //}
+        Scanner scanner = new Scanner(System.in);
+        password = scanner.next();
         return password;
     }
 
