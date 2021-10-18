@@ -25,7 +25,7 @@ public class Guest {
     //     You should use this method to accept further user's input, create suitable CLI to interact with the user.
     //     It's kinda like a main method for guest class
     //     */
-    public void guestService(String identity) {
+    public void guestService(String identity) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         if (identity.equals("G")){
             // Guests can only view movies
