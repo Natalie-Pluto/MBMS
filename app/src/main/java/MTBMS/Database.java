@@ -4,19 +4,18 @@ package MTBMS;
 import java.sql.*;
 
 public class Database {
-    private String dbUrl;
-    private String dbPassword;
-    private String dbUsername;
+	private String dbUrl;
+	private String dbPassword;
+	private String dbUsername;
 
-    public Database(String dbUrl, String dbUsername, String dbPassword) {
-        this.dbUrl = dbUrl;
-        this.dbPassword = dbPassword;
-        this.dbUsername = dbUsername;
-    }
+	public Database(String dbUrl, String dbUsername, String dbPassword) {
+		this.dbUrl = dbUrl;
+		this.dbPassword = dbPassword;
+		this.dbUsername = dbUsername;
+	}
 
 
-
-    public Boolean sql_update(String query) {
+	public Boolean sql_update(String query) {
 		/*desc todo*/
 		Connection conn = null;
 		try {
@@ -32,27 +31,27 @@ public class Database {
 		return true;
 	}
 
-    public String sql_getString(String query, String column) {
-        /*desc todo*/
-        String output = null;
-        Connection conn = null;
-        String sql = query;
-        try {
-            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-            Statement stmt = conn.createStatement();
-            ResultSet result = stmt.executeQuery(sql);
-            if (result.next()) {
-                output = result.getString(column);
-            }
-            stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("ABC");
-            return null;
-        }
-        return output;
-    }
+	public String sql_getString(String query, String column) {
+		/*desc todo*/
+		String output = null;
+		Connection conn = null;
+		String sql = query;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getString(column);
+			}
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("ABC");
+			return null;
+		}
+		return output;
+	}
 
 	public Boolean sql_getBoolean(String query, String column) {
 		/*desc todo*/
@@ -60,7 +59,7 @@ public class Database {
 		Boolean output = false;
 		String sql = query;
 		try {
-            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
 			if (result.next()) {
@@ -74,6 +73,37 @@ public class Database {
 		}
 		return output;
 	}
+
+
+	public Double sql_getDouble(String query, String column) {
+		/*desc todo*/
+		Connection conn = null;
+		Double output = 0.0;
+		String sql = query;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getDouble(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+
+
+
+
+
+
+
+
+
 
 	public Integer sql_getInt(String query, String column) {
 		/*desc todo*/
@@ -95,25 +125,4 @@ public class Database {
 		}
 		return output;
 	}
-
-	public Double sql_getDouble(String query, String column) {
-		/*desc todo*/
-		Connection conn = null;
-		Double output = 0.0;
-		String sql = query;
-		try {
-            conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-			Statement stmt = conn.createStatement();
-			ResultSet result = stmt.executeQuery(sql);
-			if (result.next()) {
-				output = result.getDouble(column);
-			} else return null;
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return output;
-	}
-} 
+}
