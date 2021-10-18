@@ -15,3 +15,4 @@ public class DataTests {
         assertTrue(x.authenticate("ali","password1"));
     }
 }
+ 
