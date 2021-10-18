@@ -21,11 +21,15 @@ public class Data {
     }
 
     public Boolean isStaff(String username) {
-        return this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_staff");
+        Boolean isStaff = this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_staff");
+        if (isStaff == null) return false;
+        return isStaff;
     }
     
     public Boolean isManager(String username) {
-        return this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_manager");
+        Boolean isManager =  this.database.sql_getBoolean("select * from moviebooking_db where username = '" + username + "';", "is_manager");
+        if (isManager == null) return false;
+        return isManager;
     }
     
     
