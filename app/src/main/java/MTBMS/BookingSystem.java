@@ -1,5 +1,6 @@
 package MTBMS;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class BookingSystem {
                     System.out.println("Please enter your username:");
                     String accName = timer();
                     System.out.println("Please enter your password:");
-                    String accPw = timer();
+                    String accPw = readPwd();
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     login(accName, accPw);
                     break;
@@ -71,13 +72,11 @@ public class BookingSystem {
 
     // Login will interact with User table to check the user's info
     public static void login(String accName, String accPw) throws InterruptedException {
-        int counter = 0;
         if (!dbInstance.authenticate(accName, accPw)) {
             System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             Thread.sleep(3000);
             // Returning to default page
             instance.getGreeting();
-            instance.defaultPage();
         } else {
             if (dbInstance.isStaff(accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
@@ -106,7 +105,7 @@ public class BookingSystem {
         String newAcc = timer();
         // TODO: check if the username existed already
         System.out.println("Please create your password:");
-        String newPw = timer();
+        String newPw = readPwd();
         if (id.equals("")) {
             boolean isFinished = false;
             int counter2 = 0;
@@ -119,6 +118,7 @@ public class BookingSystem {
                 if (input.equals("1")) {
                     isFinished = true;
                     success = true;
+                    System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                     // TODO: Add this customer's detail to users table
                 } else if (input.equals("2")) {
                     isFinished = true;
@@ -132,10 +132,12 @@ public class BookingSystem {
                         if (ans.equals("Y")) {
                             isDone = true;
                             success = true;
+                            System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this manager's detail to users table
                         } else if (ans.equals("N")) {
                             isDone = true;
                             success = true;
+                            System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this staff's detail to users table
                         } else {
                             System.out.println("============================================");
@@ -151,6 +153,7 @@ public class BookingSystem {
             }
         } else {
             success = true;
+            System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
             // TODO: Add this customer's detail to users table
         }
         if (success) {
@@ -240,6 +243,20 @@ public class BookingSystem {
     public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
     public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
+
+    // Read password securely
+    //https://stackoverflow.com/questions/10819469/hide-input-on-command-line
+    public String readPwd() {
+        String password;
+        String message = "Enter password";
+        if( System.console() == null ) {
+            final JPasswordField pw = new JPasswordField();
+            password = JOptionPane.showConfirmDialog( null, pw, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE ) == JOptionPane.OK_OPTION ? new String( pw.getPassword() ) : "";
+        } else {
+            password = new String( System.console().readPassword( "%s> ") );
+        }
+        return password;
+    }
 
     // Timer for user's input
     public String timer() throws InterruptedException {
