@@ -88,8 +88,30 @@ public class BookingSystem {
     }
 
     // Login will interact with User table to check the user's info
-    public static void login(String accNum, String accPw) {
 
+    public static void login(String accName, String accPw) throws InterruptedException {
+        Data db = new Data("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        if (!db.authenticate(accName, accPw)) {
+            System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
+        } else {
+            if (db.isStaff(accName)) {
+                System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
+                Thread.sleep(3000);
+                Staff staff = new Staff(accName, "S", " ");
+                staff.staffService("S");
+            } else if (db.isManager(accName)) {
+                System.out.println(ANSI_PURPLE + "Logging in as manager..." + ANSI_RESET);
+                Thread.sleep(3000);
+                Staff staff = new Staff(accName, "M", " ");
+                staff.staffService("M");
+            } else {
+                System.out.println(ANSI_PURPLE + "Logging in as customer..." + ANSI_RESET);
+                Thread.sleep(3000);
+                Guest customer = new Guest(accName, "C", " ");
+                customer.guestService("C");
+            }
+        }
     }
 
     // Signup will interact with User table to add user's info
