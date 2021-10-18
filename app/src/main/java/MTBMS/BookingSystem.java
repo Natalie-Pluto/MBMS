@@ -32,10 +32,12 @@ public class BookingSystem {
             String service = input.nextLine();
             switch (service) {
                 case "1":
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     System.out.println("Please enter your username:");
                     String accName = input.nextLine();
                     System.out.println("Please enter your password:");
                     String accPw = input.nextLine();
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     login(accName, accPw);
                     break;
                 case "2":
@@ -74,6 +76,9 @@ public class BookingSystem {
                     }
                     break;
                 case "3":
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    System.out.println(ANSI_PURPLE + "Logging in as guest..." + ANSI_RESET);
+                    Thread.sleep(3000);
                     Guest guest = new Guest(" ", "G", " ");
                     guest.guestService("G");
                     break;
@@ -183,13 +188,13 @@ public class BookingSystem {
     }
 
     public static void getGreeting() {
-        System.out.println(YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET);
+        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "    Welcome to Fancy Cinemas Official Website!!" + ANSI_RESET + "\n");
         System.out.println("    If you have an account, please sign in (｡･ω･｡)ﾉ ");
         System.out.println("    If you haven't joined us, you can sign up today! o(｀ω´ )o");
         System.out.println("    If you don't want to join us today, you can continue as a guest (´･ω･`)\n");
         System.out.println(ANSI_PURPLE + "    1. Log in       2. Sign up      3. I wish to continue" + ANSI_RESET);
-        System.out.println(YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
     }
 
     // Regular

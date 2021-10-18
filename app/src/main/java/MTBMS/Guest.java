@@ -30,15 +30,17 @@ public class Guest {
         if (identity.equals("G")){
             // Guests can only view movies
             // They can choose to filter movies
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             System.out.println("===============================");
-            System.out.println("Enter 1 for \"Filter Movies\"");
+            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"" + ANSI_RESET);
             System.out.println("===============================\n");
-            System.out.println("<<Upcoming Movies!>>");
-            // TODO: List all the upcoming Movies & times then ask user to filter movies of their choice
+            System.out.println(YELLOW_BOLD + "<<Upcoming Movies!>>"   + ANSI_RESET);
+            // TODO: List all the upcoming Movies & times
             System.out.println("\n======================================");
             System.out.println("You can sign up to book your tickets!");
-            System.out.println("Enter 2 for \"Sign up\"");
+            System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
             System.out.println("======================================");
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             String  input1 = input.next();
             if (input1.equals("1")) {
                 filterMovies();
@@ -55,15 +57,19 @@ public class Guest {
             }
 
         }else if (identity.equals("C")){
-            System.out.println("Please choose the service");
-            System.out.println("1.Filter movies     2.Book a movie");
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+            System.out.println("======================================================");
+            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"   2 for \"Book Tickets\""  + ANSI_RESET);
+            System.out.println("======================================================\n");
+            // TODO: List all the upcoming Movies & times
+            System.out.println(YELLOW_BOLD + "<<Upcoming Movies!>>"   + ANSI_RESET);
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             String customerInput1 = input.next();
             switch (customerInput1){
                 case "1":
                     //TODO: list
                     filterMovies();
                     break;
-
                 case "2":
                     break;
 
@@ -133,4 +139,35 @@ public class Guest {
         this.settings = settings;
         // TODO
     }
+
+    // Regular
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+    // Bold
+    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
+    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
+    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
+
+    // Background
+    public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
+    public static final String RED_BACKGROUND = "\033[41m";    // RED
+    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
+    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
+    public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
+    public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
+    public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
+    public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
 }
