@@ -97,14 +97,6 @@ public class Database {
 	}
 
 
-
-
-
-
-
-
-
-
 	public Integer sql_getInt(String query, String column) {
 		/*desc todo*/
 		Connection conn = null;

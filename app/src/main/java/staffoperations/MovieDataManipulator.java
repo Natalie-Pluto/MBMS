@@ -1,13 +1,12 @@
 package staffoperations;
 
-import MTBMS.Data;
 import java.util.Scanner;
 import databaseutility.*;
 import MTBMS.Database;
 
 public class MovieDataManipulator {
 
-    public static void insertMovieData(Data d){
+    public static void insertMovieData(Database d){
 
         // retrieve information
         System.out.println("Enter the name of the movie: ");
@@ -35,12 +34,12 @@ public class MovieDataManipulator {
 
     }
 
-    public static void deleteMovieData(Data d){
+    public static void deleteMovieData(Database d){
         //enter which movie to delete
         System.out.println("Enter name of the movie to delete: ");
     }
 
-    public static void modifyMovieData(Data d){
+    public static void modifyMovieData(Database d){
         //display movies in database
         MovieNamesDisplay.displayMovieNames(d);
 
