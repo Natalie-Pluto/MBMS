@@ -55,7 +55,7 @@ public class Guest {
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             } else {
                 System.out.println("============================================");
-                System.err.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("============================================\n");
                 Thread.sleep(2000);
                 System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
@@ -85,7 +85,7 @@ public class Guest {
 
                 default:
                     System.out.println("============================================");
-                    System.err.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                    System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                     Thread.sleep(2000);
                     System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
