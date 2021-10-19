@@ -67,7 +67,7 @@ public class BookingSystem {
                     getGreeting();
                     break;
             }
-            getGreeting();
+            //getGreeting();
         }
     }
 
@@ -108,7 +108,7 @@ public class BookingSystem {
         // TODO: check if the username existed already
         System.out.println("Please create your password:");
         String newPw = readPwd();
-        if (id.equals("")) {
+        if (id.equals("NA")) {
             boolean isFinished = false;
             int counter2 = 0;
             while (!isFinished && counter2 < 4) {
@@ -122,6 +122,7 @@ public class BookingSystem {
                     success = true;
                     System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                     // TODO: Add this customer's detail to users table
+                    dbInstance.addUser(newAcc,newPw,"c");
                 } else if (input.equals("2")) {
                     isFinished = true;
                     boolean isDone = false;
@@ -136,14 +137,16 @@ public class BookingSystem {
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this manager's detail to users table
+                            dbInstance.addUser(newAcc,newPw,"m");
                         } else if (ans.equals("N")) {
                             isDone = true;
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this staff's detail to users table
+                            dbInstance.addUser(newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
-                            System.err.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
+                            System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
                             System.out.println("============================================");
                         }
                     }
