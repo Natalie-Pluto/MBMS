@@ -36,7 +36,8 @@ public class MovieDataManipulator {
     }
 
     public static void deleteMovieData(Data d){
-
+        //enter which movie to delete
+        System.out.println("Enter name of the movie to delete: ");
     }
 
     public static void modifyMovieData(Data d){
