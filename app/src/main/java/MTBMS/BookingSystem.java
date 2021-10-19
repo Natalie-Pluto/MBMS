@@ -1,5 +1,10 @@
 package MTBMS;
 
+import databaseutility.AddingUser;
+import databaseutility.CheckStaff;
+import databaseutility.MovieInsertion;
+import databaseutility.UserAuthenticate;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,11 +22,11 @@ import java.util.concurrent.TimeUnit;
 //   */
 public class BookingSystem {
     private static BookingSystem instance;
-    private static Data dbInstance;
+    private static Database dbInstance;
 
     public static void main(String[] args) throws InterruptedException {
         instance = new BookingSystem();
-        dbInstance = new Data("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
                 "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         instance.getGreeting();
@@ -73,18 +78,18 @@ public class BookingSystem {
 
     // Login will interact with User table to check the user's info
     public static void login(String accName, String accPw) throws InterruptedException {
-        if (!dbInstance.authenticate(accName, accPw)) {
+        if (!UserAuthenticate.authenticate(dbInstance, accName, accPw)) {
             System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             Thread.sleep(3000);
             // Returning to default page
             instance.getGreeting();
         } else {
-            if (dbInstance.isStaff(accName)) {
+            if (CheckStaff.isStaff(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
                 Thread.sleep(3000);
                 Staff staff = new Staff(accName, "S", " ");
                 staff.staffService("S");
-            } else if (dbInstance.isManager(accName)) {
+            } else if (CheckStaff.isManager(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as manager..." + ANSI_RESET);
                 Thread.sleep(3000);
                 Staff staff = new Staff(accName, "M", " ");
@@ -122,7 +127,7 @@ public class BookingSystem {
                     success = true;
                     System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                     // TODO: Add this customer's detail to users table
-                    dbInstance.addUser(newAcc,newPw,"c");
+                    AddingUser.addUser(dbInstance, newAcc,newPw,"c");
                 } else if (input.equals("2")) {
                     isFinished = true;
                     boolean isDone = false;
@@ -137,13 +142,13 @@ public class BookingSystem {
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this manager's detail to users table
-                            dbInstance.addUser(newAcc,newPw,"m");
+                            AddingUser.addUser(dbInstance, newAcc,newPw,"m");
                         } else if (ans.equals("N")) {
                             isDone = true;
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // TODO: Add this staff's detail to users table
-                            dbInstance.addUser(newAcc,newPw,"s");
+                            AddingUser.addUser(dbInstance, newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
                             System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
@@ -160,7 +165,7 @@ public class BookingSystem {
             success = true;
             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
             // TODO: Add this customer's detail to users table
-            dbInstance.addUser(newAcc,newPw,"c");
+            AddingUser.addUser(dbInstance, newAcc,newPw,"c");
         }
         if (success) {
             login(newAcc, newPw);
