@@ -152,7 +152,7 @@ public class BookingSystem {
                     }
                 } else {
                     System.out.println("============================================");
-                    System.err.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                    System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================");
                 }
             }
@@ -166,7 +166,7 @@ public class BookingSystem {
             login(newAcc, newPw);
         } else {
             System.out.println("============================================");
-            System.err.println(RED_BOLD + "Sign up failed (｡´︿`｡)" + ANSI_RESET);
+            System.out.println(RED_BOLD + "Sign up failed (｡´︿`｡)" + ANSI_RESET);
             System.out.println("============================================\n");
             Thread.sleep(2000);
             System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
