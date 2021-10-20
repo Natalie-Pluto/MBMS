@@ -181,3 +181,112 @@ Logging in as manager...
 
 Note: The user's interface for staff is not implemented at this stage.
 
+- ### **Sign up**
+
+The user can choose to sign up. The username they created has to be unique in the
+database. Therefore, if the username they provided has already existed, an error msg 
+will be printed out. They will be able to enter multiple times until the username
+they created is unique.
+
+```
+Please create your username:
+Pluto
+==========================================================
+User name already existed. Please enter again (｡´︿`｡)
+==========================================================
+```
+Once they created their unique username, they will be asked to create their password and
+choose their identity type. If invalid input received, an error message will be print out.
+Only three attempts allowed for invalid input. If the user exceed the limit, they will be 
+brought back to the default page:
+
+```
+Please create your password:
+Natalie
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+4
+============================================
+Wrong Input! (｡´︿`｡)
+============================================
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+4
+============================================
+Wrong Input! (｡´︿`｡)
+============================================
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+4
+============================================
+Wrong Input! (｡´︿`｡)
+============================================
+
+============================================
+Sign up failed (｡´︿`｡)
+============================================
+
+Returning...
+
+```
+If the user chose '2' which indicates that the user is the staff, the system will
+ask the role. If invalid input received, an error message will be print out.
+Only three attempts allowed for invalid input. If the user exceed the limit, they will be
+brought back to the default page:
+
+Note: We are aware of the security hole here: We didn't check the authenticity of 
+user's 'Staff' identity. We will fix it in sprint 2.
+
+```
+Are you a Manager?
+Enter: Y/N
+P
+============================================
+Please enter "Y" for Yes and "N" for No
+============================================
+Are you a Manager?
+Enter: Y/N
+P
+============================================
+Please enter "Y" for Yes and "N" for No
+============================================
+Are you a Manager?
+Enter: Y/N
+P
+============================================
+Please enter "Y" for Yes and "N" for No
+============================================
+
+============================================
+Sign up failed (｡´︿`｡)
+============================================
+
+Returning...
+```
+
+If nothing went wrong, the user will be signed up successfully, and the user's detail
+will be recorded in users table in our database. Then, the user will be logged in automatically.
+
+```
+Please create your username:
+nat
+Please create your password:
+disney
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+1
+Congratulations! You have made your account (｡･ω･｡)ﾉ
+Logging in as customer...
+Welcome nat!
+
+                                                                                
+======================================================
+Enter 1 for "Filter Movies"   2 for "Book Tickets"
+======================================================
+
+<<Upcoming Movies!>>
+```
