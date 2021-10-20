@@ -3,7 +3,9 @@ package MTBMS;
 import databaseutility.*;
 
 import javax.swing.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.BlockingDeque;
@@ -267,19 +269,36 @@ public class BookingSystem {
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
 
     // Read password securely
-    //https://stackoverflow.com/questions/10819469/hide-input-on-command-line
-    public String readPwd() {
-        String password;
-        String message = "Enter password";
-        //if( System.console() == null ) {
-        //    final JPasswordField pw = new JPasswordField();
-        //    password = JOptionPane.showConfirmDialog( null, pw, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE ) == JOptionPane.OK_OPTION ? new String( pw.getPassword() ) : "";
-        //} else {
-        //        password = new String( System.console().readPassword( "%s> ") );
-        //}
-        Scanner scanner = new Scanner(System.in);
-        password = scanner.next();
+    // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
+    public String readPwd() throws InterruptedException {
+        EraserThread er = new EraserThread(" ");
+        Thread mask = new Thread(er);
+        mask.start();
+        String password = timer();
+        er.stopMasking();
         return password;
+    }
+
+    static class EraserThread implements Runnable {
+        private boolean stop;
+        public EraserThread(String prompt) {
+            System.out.print(prompt);
+        }
+
+        public void run () {
+            stop = true;
+            while (stop) {
+                System.out.print("\010 ");
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        public void stopMasking() {
+            this.stop = false;
+        }
     }
 
     // Timer for user's input

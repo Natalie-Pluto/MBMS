@@ -157,8 +157,6 @@ public class Guest {
     // It will allow user to book movie tickets.
     // Note: only customer can use this service.
     public void book (String movieName, String cinemaName) {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("");
         Scanner scan = new Scanner(System.in);
         int paymentType = scan.nextInt();

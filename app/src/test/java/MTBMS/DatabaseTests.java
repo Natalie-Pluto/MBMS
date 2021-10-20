@@ -19,30 +19,31 @@ public class DatabaseTests {
     private String badDBUsername = "123123";
     private String badDBPassword = "fsadfawe";
 
+
+
     @Test
     public void initializationTest(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
     }
 
     @Test
-    public void authenticationTest(){
+    public void authenticationTest() {
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
-        addUser(d, "ali","aaa","c");
-        assert(authenticate(d,"ali","aaa"));
-
+        addUser(d, "ali", "aaa", "c");
+        assert (authenticate(d, "ali", "aaa"));
     }
 
-/*     @Test
+   /* @Test
     public void sql_UpdateTest(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
         assertTrue(d.sql_update("users"));
     }
- */
+
     @Test
     public void sql_UpdateTest2(){
         Database d = new Database(badDBUrl, badDBUsername, badDBPassword);
         assertFalse(d.sql_update("users"));
-    }
+    }*/
 
 /*     @Test
     public void sql_getStringTest1(){
