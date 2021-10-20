@@ -99,6 +99,7 @@ public class databaseUtilityTests {
 
     @Test 
     public void D1() {
+        removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
         inserter.insertMovie();
@@ -107,10 +108,25 @@ public class databaseUtilityTests {
     }
 
     @Test 
-    public void D2() {}
+    public void D2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
+    }
+
+    @Test
+    public void D3() {
+        removeMovie(dbInstance, "vscode, the movie");
+        changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
+    }
 
     @Test 
-    public void E1() {}
+    public void E1() {
+
+    }
 
     @Test
     public void F1() {}
