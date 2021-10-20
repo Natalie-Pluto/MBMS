@@ -53,7 +53,7 @@ public class Database {
 		return output;
 	}
 
-	public Boolean sql_getBoolean(String query, String column) {
+	/*public Boolean sql_getBoolean(String query, String column) {
 
 		Connection conn = null;
 		Boolean output = false;
@@ -94,7 +94,7 @@ public class Database {
 			return null;
 		}
 		return output;
-	}
+	}*/
 
 
 	public Integer sql_getInt(String query, String column) {
