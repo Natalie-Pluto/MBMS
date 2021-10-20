@@ -46,7 +46,7 @@ CREATE TABLE Cinema_Session (
     session_id INT PRIMARY KEY,
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name),
     screen_type VARCHAR(6) NOT NULL,
-    movie INT NOT NULL REFERENCES Movie(movie_id),
+    movie varchar(100) NOT NULL REFERENCES Movie(name),
     ticket_price_kids DECIMAL(10,4) NOT NULL,
     ticket_price_adults DECIMAL(10,4) NOT NULL,
     ticket_price_seniors DECIMAL(10,4) NOT NULL,
