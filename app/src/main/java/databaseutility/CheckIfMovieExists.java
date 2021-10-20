@@ -3,8 +3,8 @@ package databaseutility;
 import MTBMS.Database;
 
 public class CheckIfMovieExists {
-    public static boolean checkIfMovieExists(Database db, int movieName) {
-        Integer movieNameFromDB = db.sql_getInt("select username from moviebooking_db.Movie where movie_id = " + movieName + ";", "movie_id");
+    public static boolean checkIfMovieExists(Database db, String movieName) {
+        String movieNameFromDB = db.sql_getString("select name from moviebooking_db.Movie where name = '" + movieName + "';", "name");
         if (movieNameFromDB == null) return false;
         return movieNameFromDB.equals(movieName);
     }

@@ -21,6 +21,7 @@ import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.GetMovieDirectors.getDirectors;
 import static databaseutility.CheckIfUserExists.checkIfUserExists;
+import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
 
 import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
@@ -80,7 +81,13 @@ public class databaseUtilityTests {
 
     @Test
     public void C1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        String initialDirectors = getDirectors(dbInstance, "vscode, the movie");
+        String newDirectors = initialDirectors + " ali";
+        changeDirectors(dbInstance, "vscode, the movie", newDirectors);
+        assertFalse(getDirectors(dbInstance,"vscode, the movie").equals(initialDirectors));
     }
 
     @Test

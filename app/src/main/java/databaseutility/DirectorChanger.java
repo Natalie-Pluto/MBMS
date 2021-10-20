@@ -4,7 +4,8 @@ import MTBMS.Database;
 
 public class DirectorChanger {
     public static void changeDirectors(Database d, String movieName, String newDirectors){
-        String query = String.format("UPDATE Movie SET directors = '%s' WHERE name = '%s';", newDirectors, movieName);
-        d.sql_update(query);
+        System.out.println(newDirectors + " PLS");
+        String query = String.format("UPDATE moviebooking_db.Movie SET directors = '%s' WHERE name = '%s';", newDirectors, movieName);
+        System.out.println(d.sql_update(query) + " PGUIhhh");
     }
 }
