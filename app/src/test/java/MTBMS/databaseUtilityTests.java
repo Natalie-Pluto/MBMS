@@ -11,7 +11,6 @@ import static databaseutility.CheckStaff.isStaff;
 import static databaseutility.DirectorChanger.changeDirectors;
 import static databaseutility.MovieClassificationChanger.changeMovieClassification;
 import static databaseutility.MovieColumnsDisplay.displayMovieColumns;
-import static databaseutility.MovieInsertion.insertMovie;
 import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MovieNamesDisplay.displayMovieNames;
 import static databaseutility.MoviesCounter.countMovies;
@@ -79,6 +78,7 @@ public class databaseUtilityTests {
     public void C1() {
         MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance,"vscode, the movie");
         x.addClassification("r");
+
     }
 
     @Test

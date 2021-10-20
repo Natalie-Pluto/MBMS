@@ -27,6 +27,7 @@ public class MovieInsertionBuilder {
     }
     public void addReleaseDate(String releaseDate) {this.releaseDate = releaseDate;}
     public void addDirectors(String directors) {this.directors = directors;}
+    public void addSynopsis(String Synopsis) {this.synopsis = synopsis;}
 
     private int generateUniqueMovieID() {
         int movieID = countMovies(db) + 1;

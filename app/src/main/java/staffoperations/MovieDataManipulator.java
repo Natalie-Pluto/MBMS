@@ -30,7 +30,13 @@ public class MovieDataManipulator {
         int movie_id = count + 1;
 
         //insert movie info into database
-        MovieInsertion.insertMovie(d, movie_id, movieName, classification, releaseDate, synopsis, directors);
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(d,movieName);
+        inserter.addClassification(classification);
+        inserter.addDirectors(directors);
+        inserter.addReleaseDate(releaseDate);
+        inserter.addSynopsis(synopsis);
+        inserter.insertMovie();
+        //inserter.addGenre()
 
     }
 
