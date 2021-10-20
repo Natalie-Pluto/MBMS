@@ -29,19 +29,19 @@ import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
     static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-            "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
     @Test
     public void A1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
-        assert (checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        assert(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
     public void A2() {
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
-        assert (checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        assert(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
     }
 
@@ -55,7 +55,7 @@ public class databaseUtilityTests {
     @Test
     public void A4() {
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
-        assert (checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        assert(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
         assertFalse(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
@@ -64,7 +64,7 @@ public class databaseUtilityTests {
     public void B1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "s");
-        assert (isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        assert(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
@@ -88,16 +88,16 @@ public class databaseUtilityTests {
         String initialDirectors = getDirectors(dbInstance, "vscode, the movie");
         String newDirectors = initialDirectors + " ali";
         changeDirectors(dbInstance, "vscode, the movie", newDirectors);
-        assertFalse(getDirectors(dbInstance, "vscode, the movie").equals(initialDirectors));
+        assertFalse(getDirectors(dbInstance,"vscode, the movie").equals(initialDirectors));
     }
 
     @Test
     public void C2() {
         removeMovie(dbInstance, "movie");
-        changeDirectors(dbInstance, "movie", "afhd");
+        changeDirectors(dbInstance,"movie", "afhd");
     }
 
-   @Test
+    @Test 
     public void D1() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -123,7 +123,7 @@ public class databaseUtilityTests {
         changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
     }
 
-   @Test
+    @Test 
     public void E1() {
 
     }
