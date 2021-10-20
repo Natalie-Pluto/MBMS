@@ -138,6 +138,7 @@ Welcome to Fancy Cinemas Official Website!!
 If the user logged in as a staff/ manager, the system will bring them to the staff interface.
 
 If the user logged in as a customer, the system will bring them to the customer interface.
+(Not implemented yet)
 
 - ### **Log in**
 
@@ -290,3 +291,81 @@ Enter 1 for "Filter Movies"   2 for "Book Tickets"
 
 <<Upcoming Movies!>>
 ```
+
+- ### **Handle Invalid Input at Default Page**
+
+At the default page, user is asked to choose the service. If invalid input is received, error
+message will be printed out:
+
+```
+ Welcome to Fancy Cinemas Official Website!!
+
+    If you have an account, please sign in (｡･ω･｡)ﾉ 
+    If you haven't joined us, you can sign up today! o(｀ω´ )o
+    If you don't want to join us today, you can continue as a guest (´･ω･`)
+
+    1. Log in       2. Sign up      3. I wish to continue
+                                                                          
+
+haha
+============================================
+Wrong Input! (｡´︿`｡)
+Please enter:
+1 - for log in
+2 - for sign up
+3 - for continue
+============================================
+
+Returning...
+                                                                               
+
+    Welcome to Fancy Cinemas Official Website!!
+
+    If you have an account, please sign in (｡･ω･｡)ﾉ 
+    If you haven't joined us, you can sign up today! o(｀ω´ )o
+    If you don't want to join us today, you can continue as a guest (´･ω･`)
+
+    1. Log in       2. Sign up      3. I wish to continue
+```
+## **Tests**
+
+---
+Tests cases are available in :
+
+`/app/src/test/java/MTBMS`
+
+You can run the tests and get a code coverage report by running the following commands:
+
+```
+gradle clean build
+gradle test jacocoTestReport
+```
+
+You can find the code coverage report here:
+`/app/build/reports/jacoco/test/html/index.html`
+
+Or
+
+You can conduct black box testing with the information provided in 'Functionalities & Usages'
+section.
+
+## **Project Contributors**
+
+---
+
+Ali Lieberman -- https://github.sydney.edu.au/alie0302
+
+Chao (Charles) Luo -- https://github.sydney.edu.au/cluo3734
+
+Jiayin (Natalie) Lu -- https://github.sydney.edu.au/jilu8927
+
+Linxuan (John) Jiang -- https://github.sydney.edu.au/ljia0550
+
+Xinyuan (Albert) Wang -- https://github.sydney.edu.au/xwan2252
+
+
+## Reference
+
+---
+SOFT 2412 - Tutorial 3 - Build Automation with Gradle
+https://edstem.org/au/courses/6848/lessons/14709/slides/106167
