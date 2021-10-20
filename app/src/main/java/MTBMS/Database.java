@@ -53,8 +53,8 @@ public class Database {
 		return output;
 	}
 
-	/*public Boolean sql_getBoolean(String query, String column) {
 
+	/*public Boolean sql_getBoolean(String query, String column) {
 		Connection conn = null;
 		Boolean output = false;
 		String sql = query;
