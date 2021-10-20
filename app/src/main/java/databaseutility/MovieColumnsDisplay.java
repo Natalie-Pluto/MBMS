@@ -12,14 +12,5 @@ public class MovieColumnsDisplay {
             index++;
         }
     }
-
-    public static void displayMovieColumnsWithName(Database d, String name){
-        String query = "SELECT * FROM moviebooking_db.Movie WHERE table_schema = 'moviebooking_db' AND table_name = 'movie';";
-        String result = d.sql_getString(query, "column_name");
-        int index = 1;
-        while(result != null){
-            System.out.println(String.format("%d. %s", index, result));
-            index++;
-        }
-    }
+    
 }

@@ -3,7 +3,6 @@ package staffoperations;
 import java.util.Scanner;
 import databaseutility.*;
 import MTBMS.Database;
-import static databaseutility.MoviesCounter.countMoviesWithName;
 
 public class MovieDataManipulator {
 
@@ -51,14 +50,6 @@ public class MovieDataManipulator {
         Scanner s = new Scanner(System.in);
         String movieName = s.nextLine();
 
-        // if there are multiple movies with the same name, list them
-        if (countMoviesWithName(d, movieName) > 1) {
-
-            //get the movie id
-            System.out.print("\nEnter the movie id: ");
-        }
-
-        
 
         //display all columns of the movie
         MovieColumnsDisplay.displayMovieColumns(d);
