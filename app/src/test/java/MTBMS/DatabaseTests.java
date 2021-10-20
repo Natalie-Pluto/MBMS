@@ -10,12 +10,6 @@ public class DatabaseTests {
     private String goodDBUsername = "dbmasteruser";
     private String goodDBPassword = "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<";
 
-    //@Test
-    //public void test1() {
-    //    Database x = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
-    //    String name = x.sql_getString("select * from moviebooking_db.users where username = 'ali'", "username");
-    //    //System.out.println(name);
-    //    assert(name.equals("ali"));
-    //}
+
 } 
 
