@@ -1,9 +1,6 @@
 package MTBMS;
 
-import databaseutility.AddingUser;
-import databaseutility.CheckStaff;
-import databaseutility.MovieInsertion;
-import databaseutility.UserAuthenticate;
+import databaseutility.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -111,14 +108,25 @@ public class BookingSystem {
     public void signUp(String id) throws InterruptedException {
         boolean success = false;
         System.out.println("Please create your username:");
-        String newAcc = timer();
-        // TODO: check if the username existed already
+        boolean isExisted = true;
+        String newAcc = "";
+        while(isExisted) {
+            newAcc = timer();
+            // check if the username existed already
+            if (CheckIfUserExists.checkIfUserExists(dbInstance, newAcc)) {
+                System.out.println("==========================================================");
+                System.out.println(RED_BOLD + "User name already existed. Please enter again (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("==========================================================");
+            } else {
+                isExisted = false;
+            }
+        }
         System.out.println("Please create your password:");
         String newPw = readPwd();
         if (id.equals("NA")) {
             boolean isFinished = false;
             int counter2 = 0;
-            while (!isFinished && counter2 < 4) {
+            while (!isFinished && counter2 < 3) {
                 counter2++;
                 System.out.println("Please choose your identity:");
                 System.out.println("Enter 1 - for \"Customer\"");
@@ -128,13 +136,13 @@ public class BookingSystem {
                     isFinished = true;
                     success = true;
                     System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                    // TODO: Add this customer's detail to users table
+                    // Add this customer's detail to users table
                     AddingUser.addUser(dbInstance, newAcc,newPw,"c");
                 } else if (input.equals("2")) {
                     isFinished = true;
                     boolean isDone = false;
                     int counter = 0;
-                    while (!isDone && counter < 4) {
+                    while (!isDone && counter < 3) {
                         counter++;
                         System.out.println("Are you a Manager?");
                         System.out.println("Enter: Y/N");
@@ -143,17 +151,17 @@ public class BookingSystem {
                             isDone = true;
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                            // TODO: Add this manager's detail to users table
+                            // Add this manager's detail to users table
                             AddingUser.addUser(dbInstance, newAcc,newPw,"m");
                         } else if (ans.equals("N")) {
                             isDone = true;
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                            // TODO: Add this staff's detail to users table
+                            // Add this staff's detail to users table
                             AddingUser.addUser(dbInstance, newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
-                            System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
+                            System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                             System.out.println("============================================");
                         }
                     }
@@ -166,13 +174,13 @@ public class BookingSystem {
         } else {
             success = true;
             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-            // TODO: Add this customer's detail to users table
+            // Add this customer's detail to users table
             AddingUser.addUser(dbInstance, newAcc,newPw,"c");
         }
         if (success) {
             login(newAcc, newPw);
         } else {
-            System.out.println("============================================");
+            System.out.println("\n============================================");
             System.out.println(RED_BOLD + "Sign up failed (｡´︿`｡)" + ANSI_RESET);
             System.out.println("============================================\n");
             Thread.sleep(2000);
