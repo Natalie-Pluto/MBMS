@@ -14,8 +14,8 @@ public class DatabaseTests {
 
     @Test
     public void authenticateworks()  {
-        addUser(dbInstance, "ali");
-        authenticate(dbInstance, "ali");
+        addUser(dbInstance, "ali","aaa","c");
+        authenticate(dbInstance, "ali","aaa");
     }
 }
 
