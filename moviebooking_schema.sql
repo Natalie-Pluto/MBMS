@@ -30,14 +30,12 @@ CREATE TABLE Gift_Card(
 );
 
 CREATE TABLE Movie(
-    movie_id INT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) PRIMARY KEY,
     classification VARCHAR(30) NOT NULL,
     release_date DATE,
     synopsis TEXT,
     directors TEXT,
-    genre char(30),
-    unique(name, classification, release_date)
+    genre char(30)
 );
 
 CREATE TABLE Cinema (
