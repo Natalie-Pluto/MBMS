@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import static databaseutility.UserAuthenticate.authenticate;
 
 
 
@@ -77,7 +78,7 @@ public class BookingSystem {
 
     // Login will interact with User table to check the user's info
     public static void login(String accName, String accPw) throws InterruptedException {
-        if (!UserAuthenticate.authenticate(dbInstance, accName, accPw)) {
+        if (!authenticate(dbInstance, accName, accPw)) {
             System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             Thread.sleep(3000);
             // Returning to default page
@@ -86,13 +87,13 @@ public class BookingSystem {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
                 Thread.sleep(3000);
-                Staff staff = new Staff(accName, "S", " ");
-                staff.staffService("S");
+                //Staff staff = new Staff(accName, "S", " ");
+                //staff.staffService("S");
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as manager..." + ANSI_RESET);
                 Thread.sleep(3000);
-                Staff staff = new Staff(accName, "M", " ");
-                staff.staffService("M");
+                //Staff staff = new Staff(accName, "M", " ");
+                //staff.staffService("M");
             } else {
                 System.out.println(ANSI_PURPLE + "Logging in as customer..." + ANSI_RESET);
                 System.out.println(ANSI_PURPLE + "Welcome " + accName + "!" + ANSI_RESET);
@@ -161,7 +162,7 @@ public class BookingSystem {
                             AddingUser.addUser(dbInstance, newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
-                            System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                            System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
                             System.out.println("============================================");
                         }
                     }
@@ -240,11 +241,18 @@ public class BookingSystem {
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
 
     // Bold
     public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
 
     // Background
@@ -252,7 +260,10 @@ public class BookingSystem {
 
 
     // Bold High Intensity
+    public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
+    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
     public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
 
     // Read password securely

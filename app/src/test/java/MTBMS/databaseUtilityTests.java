@@ -10,17 +10,19 @@ import static databaseutility.CheckStaff.isManager;
 import static databaseutility.CheckStaff.isStaff;
 import static databaseutility.DirectorChanger.changeDirectors;
 import static databaseutility.MovieClassificationChanger.changeMovieClassification;
-import static databaseutility.MovieColumnsDisplay.displayMovieColumns;
+//import static databaseutility.MovieColumnsDisplay.displayMovieColumns;
 import static databaseutility.MovieNameChanger.changeMovieName;
-import static databaseutility.MovieNamesDisplay.displayMovieNames;
+//import static databaseutility.MovieNamesDisplay.displayMovieNames;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
-import static databaseutility.SynopsisChanger.changeSynopsis;
+//import static databaseutility.SynopsisChanger.changeSynopsis;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.GetMovieDirectors.getDirectors;
 import static databaseutility.CheckIfUserExists.checkIfUserExists;
+import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
+import static databaseutility.GetMovieClassification.getMovieClassification;
 
 import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
@@ -80,20 +82,51 @@ public class databaseUtilityTests {
 
     @Test
     public void C1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        String initialDirectors = getDirectors(dbInstance, "vscode, the movie");
+        String newDirectors = initialDirectors + " ali";
+        changeDirectors(dbInstance, "vscode, the movie", newDirectors);
+        assertFalse(getDirectors(dbInstance,"vscode, the movie").equals(initialDirectors));
     }
 
     @Test
-    public void C2() {}
+    public void C2() {
+        removeMovie(dbInstance, "movie");
+        changeDirectors(dbInstance,"movie", "afhd");
+    }
 
     @Test 
-    public void D1() {}
+    public void D1() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeMovieClassification(dbInstance, "vscode, the movie", "pg");
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("pg"));
+    }
 
     @Test 
-    public void D2() {}
+    public void D2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
+    }
+
+    @Test
+    public void D3() {
+        removeMovie(dbInstance, "vscode, the movie");
+        changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
+    }
 
     @Test 
-    public void E1() {}
+    public void E1() {
+
+    }
 
     @Test
     public void F1() {}
@@ -130,4 +163,26 @@ public class databaseUtilityTests {
 
     @Test 
     public void L2() {}
+
+    @Test
+    public void movieExistsTest() {
+        removeMovie(dbInstance, "vscode, the movie");
+        assertFalse(checkIfMovieExists(dbInstance,"vscode, the movie"));
+    }
+
+    @Test
+    public void changeReleaseDateTest() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2020-01-11");
+    }
+
+    @Test  
+    public void countMovieTest() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(countMovies(dbInstance)>0);
+    }
 }

@@ -66,6 +66,9 @@ CREATE TABLE Cinema_Session (
 -------------------------------------------
 
 -- sample Movie data --
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip', 'Action');
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip', 'Action');
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip', 'Action');
 
 -- sample Credit_Card data --
 

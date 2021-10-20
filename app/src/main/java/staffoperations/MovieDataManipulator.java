@@ -1,4 +1,4 @@
-package staffoperations;
+/* package staffoperations;
 
 import java.util.Scanner;
 import databaseutility.*;
@@ -43,7 +43,7 @@ public class MovieDataManipulator {
 
     public static void modifyMovieData(Database d){
         //display movies in database
-        MovieNamesDisplay.displayMovieNames(d);
+        //MovieNamesDisplay.displayMovieNames(d);
 
         //get the name of the movie to modify to
         System.out.print("/nEnter the name of the movie: ");
@@ -52,7 +52,7 @@ public class MovieDataManipulator {
 
 
         //display all columns of the movie
-        MovieColumnsDisplay.displayMovieColumns(d);
+        //MovieColumnsDisplay.displayMovieColumns(d);
 
         System.out.print("/nEnter the name of the section: ");
         s = new Scanner(System.in);
@@ -82,13 +82,13 @@ public class MovieDataManipulator {
                 String newDate = s.nextLine();
                 ReleaseDateChanger.changeReleaseDate(d, movieName, newDate);
                 break;
-            case "synopsis":
+            /* case "synopsis":
                 System.out.print("/nEnter a new synopsis: ");
                 s = new Scanner(System.in);
                 String newSynopsis = s.nextLine();
                 SynopsisChanger.changeSynopsis(d, movieName, newSynopsis);
-                break;
-            case "directors":
+                break; */
+            /* case "directors":
                 System.out.print("/nEnter new directors: ");
                 s = new Scanner(System.in);
                 String newDirectors = s.nextLine();
@@ -100,4 +100,5 @@ public class MovieDataManipulator {
 
 
     }
-}
+} */
+ 
