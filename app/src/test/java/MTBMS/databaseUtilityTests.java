@@ -77,7 +77,8 @@ public class databaseUtilityTests {
 
     @Test
     public void C1() {
-        
+        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance,"vscode, the movie");
+        x.addClassification("r");
     }
 
     @Test
