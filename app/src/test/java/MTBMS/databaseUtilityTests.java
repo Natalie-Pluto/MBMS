@@ -12,7 +12,7 @@ import static databaseutility.DirectorChanger.changeDirectors;
 import static databaseutility.MovieClassificationChanger.changeMovieClassification;
 //import static databaseutility.MovieColumnsDisplay.displayMovieColumns;
 import static databaseutility.MovieNameChanger.changeMovieName;
-import static databaseutility.MovieNamesDisplay.displayMovieNames;
+//import static databaseutility.MovieNamesDisplay.displayMovieNames;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
 //import static databaseutility.SynopsisChanger.changeSynopsis;
