@@ -166,4 +166,11 @@ public class AppTest {
         instance.defaultPage();
         assertNotNull(getOutput());
     }
+
+    @Test
+    public void defaultTest4() throws InterruptedException {
+        input("4");
+        instance.defaultPage();
+        assertNotNull(getOutput());
+    }
 }

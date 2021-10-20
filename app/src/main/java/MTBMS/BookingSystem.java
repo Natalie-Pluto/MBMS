@@ -37,9 +37,9 @@ public class BookingSystem {
                 case "1":
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     System.out.println("Please enter your username:");
-                    String accName = timer();
+                    //String accName = timer();
                     System.out.println("Please enter your password:");
-                    String accPw = readPwd();
+                    //String accPw = readPwd();
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     //login(accName, accPw, dbInstance);
                     break;
@@ -272,7 +272,7 @@ public class BookingSystem {
     }
 
     // Timer for user's input
-    public String timer() throws InterruptedException {
+    /*public String timer() throws InterruptedException {
         BlockingDeque<String> deque = new LinkedBlockingDeque<>();
 
         Thread thread = new Thread(() -> {
@@ -310,5 +310,5 @@ public class BookingSystem {
 
         thread.interrupt();
         return str;
-    }
+    }*/
 }
