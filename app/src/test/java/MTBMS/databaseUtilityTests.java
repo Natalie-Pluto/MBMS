@@ -34,19 +34,45 @@ public class databaseUtilityTests {
 
     @Test
     public void A2() {
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
+        assert(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
+    }
 
+    @Test
+    public void A3() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        assertFalse(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+    }
+
+    @Test
+    public void A4() {
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
+        assert(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        assertFalse(checkIfUserExists(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
     public void B1() {
-
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "s");
+        assert(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
-    public void B2() {}
+    public void B2() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "u");
+        assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
 
     @Test
-    public void B3() {}
+    public void B3() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
 
     @Test
     public void C1() {}
