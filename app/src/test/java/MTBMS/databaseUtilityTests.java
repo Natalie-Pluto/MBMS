@@ -163,4 +163,26 @@ public class databaseUtilityTests {
 
     @Test 
     public void L2() {}
+
+    @Test
+    public void movieExistsTest() {
+        removeMovie(dbInstance, "vscode, the movie");
+        assertFalse(checkIfMovieExists(dbInstance,"vscode, the movie"));
+    }
+
+    @Test
+    public void changeReleaseDateTest() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2020-01-11");
+    }
+
+    @Test  
+    public void countMovieTest() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(countMovies(dbInstance)>0);
+    }
 }
