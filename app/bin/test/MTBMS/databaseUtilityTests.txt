@@ -3,14 +3,18 @@ This file describes each test case in databaseUtilityTests.java.
 The structure of this file is upper-case letter for functionality e.g. A, then for example, A1 for one case
 of functionality A.
 
-A. Adding a user
+A. Adding and removing users
 A1. Adding a user with a username which does not already exist.
-A2. Adding a user with a username which already exists.
+A2. Attempting to add a user with a username which already exists does not cause error.
+A3. Attempting to remove a user which does not exist does not cause error.
+A4. Removing a user which exists
 
 B. Checking if a user is a staff member
 B1. checking if a user which is a staff member is a staff member.
-B2. checking if a user which is not a staff member is a staff member.
+B2. checking if a user which exists and is not a staff member is not a staff member.
 B3. Checking if a user which does not exist is a staff member
+B4. Checking if a user which exists and is not a staff member is not a staff member.
+B5. Checking if a user which does not exist is not a staff member.
 
 C. Changing the directors of a movie
 C1. changing directors of a movie
@@ -27,3 +31,23 @@ F1. Inserting a movie with no classification should not work
 F2. Inserting a movie with classification
 
 G. Changing movie's name
+G1. changing existing movie's named
+G2. changing name of a movie that does not exist
+
+H. Displaying movie names
+H1. Movies are displayed as required
+
+I. Displaying the number of movies in the database
+I1. The correct number of movies is returned
+
+J. Changing the release date of a movie
+J1. The release date of an existing movie can be changed
+J2. No error occurs for an attempt at changing the release date of a movie that does not exist 
+
+K. Changing the synopsis of a movie
+K1. No error occurs for an attempt at changing the synopsis of a movie that does not exist.
+K2. The synopsis of an existing movie can be changed
+
+L. user authentication
+L1. No error occurs for an attempt at user authentication for a user that does not exist
+L2. Authentication works a user that exists
