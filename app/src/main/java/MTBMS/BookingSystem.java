@@ -78,7 +78,7 @@ public class BookingSystem {
 
     // Login will interact with User table to check the user's info
     public static void login(String accName, String accPw) throws InterruptedException {
-        if (!CheckIfUserExists.authenticate(dbInstance, accName, accPw)) {
+        if (!authenticate(dbInstance, accName, accPw)) {
             System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             Thread.sleep(3000);
             // Returning to default page
