@@ -101,7 +101,7 @@ public class MovieDataManipulator {
                 System.out.print("/nEnter new directors: ");
                 s = new Scanner(System.in);
                 String newDirectors = s.nextLine();
-                DirectorChanger.changeDirectors(d, movieName, newDirectors);
+                //DirectorChanger.changeDirectors(d,movieName, newDirectors);
                 break;
 
         }
