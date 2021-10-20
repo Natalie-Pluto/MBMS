@@ -15,8 +15,12 @@ public class MovieInsertionBuilder {
     private String releaseDate = "";
     private String synopsis = "";
     private String directors = "";
+    private int movieID;
 
-    public MovieInsertionBuilder(Database db, String name) {this.db = db;}
+    public MovieInsertionBuilder(Database db, String name) {
+        this.db = db;
+        this.movieID = generateUniqueMovieID();
+    }
 
     public boolean addClassification(String classification) {
         if (Arrays.asList(validClassifications).contains(classification)) {
@@ -25,6 +29,7 @@ public class MovieInsertionBuilder {
         return false;
         
     }
+
     public void addReleaseDate(String releaseDate) {this.releaseDate = releaseDate;}
     public void addDirectors(String directors) {this.directors = directors;}
     public void addSynopsis(String Synopsis) {this.synopsis = synopsis;}
@@ -34,10 +39,12 @@ public class MovieInsertionBuilder {
         while (checkIfMovieExists(db, movieID)) movieID++;
         return movieID;
     }
+
+    public int getMovieID() {return this.movieID;}
     
     public boolean insertMovie() {
         if (classification == "") return false;
-        String query = String.format("INSERT INTO moviebooking_db.Movie VALUES(%d, %s, %s, %s, %s, %s);", generateUniqueMovieID(), name, classification, releaseDate, synopsis, directors);
+        String query = String.format("INSERT INTO moviebooking_db.Movie VALUES(%d, %s, %s, %s, %s, %s);", movieID, name, classification, releaseDate, synopsis, directors);
         this.db.sql_update(query);
         return true;
     }

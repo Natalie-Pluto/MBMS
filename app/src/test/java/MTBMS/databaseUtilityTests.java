@@ -18,7 +18,12 @@ import static databaseutility.ReleaseDateChanger.changeReleaseDate;
 import static databaseutility.SynopsisChanger.changeSynopsis;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.RemovingUser.removeUser;
+import static databaseutility.RemovingMovie.removeMovie;
+import static databaseutility.GetMovieDirectors.getDirectors;
 import static databaseutility.CheckIfUserExists.checkIfUserExists;
+import static databaseutility.GetMovieID.getMovieID;
+
+import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
@@ -76,9 +81,15 @@ public class databaseUtilityTests {
 
     @Test
     public void C1() {
-        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance,"vscode, the movie");
-        x.addClassification("r");
-
+        //MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance,"vscode, the movie");
+        //removeMovie(dbInstance, getMovieID(dbInstance, "vscode, the movie", "r", ""));
+        //x.addClassification("r");
+        //x.insertMovie();
+        //String initialDirectors = getDirectors(dbInstance, x.getMovieID());
+        //changeDirectors(dbInstance, x.getMovieID(), "ali");
+        
+        //System.out.println("please not empty string");
+        //assert(getDirectors(dbInstance, x.getMovieID()).equals("ali"));
     }
 
     @Test

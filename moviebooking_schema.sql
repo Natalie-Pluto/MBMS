@@ -33,10 +33,11 @@ CREATE TABLE Movie(
     movie_id INT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     classification VARCHAR(30) NOT NULL,
-    release_date DATE NOT NULL,
+    release_date DATE,
     synopsis TEXT,
     directors TEXT,
-    genre char(30)
+    genre char(30),
+    unique(name, classification, release_date)
 );
 
 CREATE TABLE Cinema (
