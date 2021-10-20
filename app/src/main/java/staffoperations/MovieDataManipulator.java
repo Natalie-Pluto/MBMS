@@ -82,12 +82,12 @@ public class MovieDataManipulator {
                 String newDate = s.nextLine();
                 ReleaseDateChanger.changeReleaseDate(d, movieName, newDate);
                 break;
-            case "synopsis":
+            /* case "synopsis":
                 System.out.print("/nEnter a new synopsis: ");
                 s = new Scanner(System.in);
                 String newSynopsis = s.nextLine();
                 SynopsisChanger.changeSynopsis(d, movieName, newSynopsis);
-                break;
+                break; */
             case "directors":
                 System.out.print("/nEnter new directors: ");
                 s = new Scanner(System.in);

@@ -15,7 +15,7 @@ import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MovieNamesDisplay.displayMovieNames;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
-import static databaseutility.SynopsisChanger.changeSynopsis;
+//import static databaseutility.SynopsisChanger.changeSynopsis;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.RemovingMovie.removeMovie;
