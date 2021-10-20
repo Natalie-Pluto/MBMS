@@ -35,13 +35,12 @@ CREATE TABLE Movie(
     classification VARCHAR(30) NOT NULL,
     release_date DATE NOT NULL,
     synopsis TEXT,
-    directors TEXT
+    directors TEXT,
+    genre char(30)
 );
 
 CREATE TABLE Cinema (
-    cinema_name VARCHAR(100) PRIMARY KEY,
-    seat_capacity INT NOT NULL,
-    number_of_seats_in_front_row INT NOT NULL
+    cinema_name VARCHAR(100) PRIMARY KEY
 );
 
 CREATE TABLE Cinema_Session (
@@ -52,27 +51,29 @@ CREATE TABLE Cinema_Session (
     ticket_price_kids DECIMAL(10,4) NOT NULL,
     ticket_price_adults DECIMAL(10,4) NOT NULL,
     ticket_price_seniors DECIMAL(10,4) NOT NULL,
-    number_of_seats_booked INT NOT NULL,
+    number_of_front_seats_booked INT,
+    number_of_mid_seats_booked INT,
+    number_of_back_seats_booked INT,
+    front_seat_capacity INT,
+    mid_seat_capacity INT,
+    back_seat_capacity INT,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     UNIQUE(cinema, screen_type, movie, start_time)
 );
 
-CREATE TABLE Seat_Availability (
-    seat_id INT,
-    session_id INT REFERENCES Cinema_Session(session_id),
-    available BOOLEAN NOT NULL DEFAULT TRUE,
-    PRIMARY KEY(seat_id, session_id)
-);
-
 -------------------------------------------
--- FUNCTIONS --
-
--- The functions are based on the following specification excerpt:
--- "Cinema Staff: Cinema staff should be able to insert movie data, delete movie data, 
--- modify movie data, add new shows for the upcoming week and choose the selected screen 
--- sizes. Cinema staff are also responsible for maintaining the gift card database/file 
--- and ensuring all new gift cards are entered accordingly. Only once these gift cards 
--- are entered in the database/file by the cinema staff , a customer can use the gift card."
+---- Sample Data ----
 -------------------------------------------
 
+-- sample Movie data --
+
+-- sample Credit_Card data --
+
+-- sample Users data--
+
+-- sample Cinema_Session data --
+
+-- sample Gift_Card data--
+
+-- sample Cinema data --
