@@ -86,13 +86,13 @@ public class BookingSystem {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
                 Thread.sleep(3000);
-                Staff staff = new Staff(accName, "S", " ");
-                staff.staffService("S");
+                //Staff staff = new Staff(accName, "S", " ");
+                //staff.staffService("S");
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as manager..." + ANSI_RESET);
                 Thread.sleep(3000);
-                Staff staff = new Staff(accName, "M", " ");
-                staff.staffService("M");
+                //Staff staff = new Staff(accName, "M", " ");
+                //staff.staffService("M");
             } else {
                 System.out.println(ANSI_PURPLE + "Logging in as customer..." + ANSI_RESET);
                 System.out.println(ANSI_PURPLE + "Welcome " + accName + "!" + ANSI_RESET);
