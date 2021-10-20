@@ -22,6 +22,7 @@ import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.GetMovieDirectors.getDirectors;
 import static databaseutility.CheckIfUserExists.checkIfUserExists;
 import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
+import static databaseutility.GetMovieClassification.getMovieClassification;
 
 import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
@@ -91,10 +92,19 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void C2() {}
+    public void C2() {
+        removeMovie(dbInstance, "movie");
+        changeDirectors(dbInstance,"movie", "afhd");
+    }
 
     @Test 
-    public void D1() {}
+    public void D1() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeMovieClassification(dbInstance, "vscode, the movie", "pg");
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("pg"));
+    }
 
     @Test 
     public void D2() {}
