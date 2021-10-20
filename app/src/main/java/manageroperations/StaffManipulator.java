@@ -1,4 +1,4 @@
-package manageroperations;
+/* package manageroperations;
 
 
 public class StaffManipulator {
@@ -10,3 +10,4 @@ public class StaffManipulator {
 
     }
 }
+ */
