@@ -172,11 +172,12 @@ Enter 1 for "Filter Movies"   2 for "Book Tickets"
 * If logged in as a staff:
 ```                                                                          
 Logging in as staff...
-Welcome Pluto!
 ```
 
 * If logged in as a manager:
 ```                                                                          
 Logging in as manager...
-Welcome Steve!
 ```
+
+Note: The user's interface for staff is not implemented at this stage.
+
