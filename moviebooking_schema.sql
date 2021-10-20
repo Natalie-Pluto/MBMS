@@ -30,14 +30,12 @@ CREATE TABLE Gift_Card(
 );
 
 CREATE TABLE Movie(
-    movie_id INT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) PRIMARY KEY,
     classification VARCHAR(30) NOT NULL,
     release_date DATE,
     synopsis TEXT,
     directors TEXT,
-    genre char(30),
-    unique(name, classification, release_date)
+    genre char(30)
 );
 
 CREATE TABLE Cinema (
@@ -48,7 +46,7 @@ CREATE TABLE Cinema_Session (
     session_id INT PRIMARY KEY,
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name),
     screen_type VARCHAR(6) NOT NULL,
-    movie INT NOT NULL REFERENCES Movie(movie_id),
+    movie varchar(100) NOT NULL REFERENCES Movie(name),
     ticket_price_kids DECIMAL(10,4) NOT NULL,
     ticket_price_adults DECIMAL(10,4) NOT NULL,
     ticket_price_seniors DECIMAL(10,4) NOT NULL,
@@ -68,6 +66,9 @@ CREATE TABLE Cinema_Session (
 -------------------------------------------
 
 -- sample Movie data --
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip', 'Action');
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip', 'Action');
+INSERT INTO moviebooking_db.Movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip', 'Action');
 
 -- sample Credit_Card data --
 

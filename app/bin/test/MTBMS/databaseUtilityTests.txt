@@ -20,7 +20,8 @@ C2. attempting to change the director of a movie that does not exist does not ca
 
 D. Changing movie classification
 D1. Changing movie classification to a valid classification
-D2. Changing movie classification to an invalid classification
+D2. Changing movie classification to an invalid classification does not change classification
+D3. Attempting to change the movie classification of a movie that does not exist does not cause error.
 
 E. Displaying movie columns
 E1. Checking if correct movie columns are displayed when there are movies in the database
