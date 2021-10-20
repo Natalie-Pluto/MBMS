@@ -52,7 +52,7 @@ public class MovieDataManipulator {
 
 
         //display all columns of the movie
-        MovieColumnsDisplay.displayMovieColumns(d);
+        //MovieColumnsDisplay.displayMovieColumns(d);
 
         System.out.print("/nEnter the name of the section: ");
         s = new Scanner(System.in);
