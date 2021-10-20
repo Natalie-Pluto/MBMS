@@ -7,6 +7,8 @@ import javax.xml.crypto.Data;
 import static org.junit.Assert.*;
 import java.sql.*;
 import java.util.Date;
+import static databaseutility.UserAuthenticate.authenticate;
+import static databaseutility.AddingUser.addUser;
 
 public class DatabaseTests {
     private String goodDBUrl = "jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres";
@@ -20,6 +22,14 @@ public class DatabaseTests {
     @Test
     public void initializationTest(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
+    }
+
+    @Test
+    public void authenticationTest(){
+        Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
+        addUser(d, "ali","aaa","c");
+        assert(authenticate(d,"ali","aaa"));
+
     }
 
 /*     @Test
