@@ -68,16 +68,16 @@ Note: Some existed functionalities in this version will be updated in furture re
   To install Gradle in your own machine, you can find the detailed instruction here:
   https://gradle.org/install/
 
-2. ### Connect to Database
+2. ### Connect to pgadmin4
 
-   You are connected to our shared database. The link to the shared database is:
+   The link to the pgadmin4 instance connected to our shared database is:
 
     ```
     http://13.211.7.238/pgadmin4/browser/
    ```
 
-   Username: `dbmasteruser`
-   Password: `A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<`
+   Username: alie0302@uni.sydney.edu.au
+   Password: triceratops
    
 
 ## Run the Program
