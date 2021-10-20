@@ -1,4 +1,4 @@
-package staffoperations;
+/* package staffoperations;
 
 import java.util.Scanner;
 import databaseutility.*;
@@ -88,7 +88,7 @@ public class MovieDataManipulator {
                 String newSynopsis = s.nextLine();
                 SynopsisChanger.changeSynopsis(d, movieName, newSynopsis);
                 break; */
-            case "directors":
+            /* case "directors":
                 System.out.print("/nEnter new directors: ");
                 s = new Scanner(System.in);
                 String newDirectors = s.nextLine();
@@ -100,4 +100,5 @@ public class MovieDataManipulator {
 
 
     }
-}
+} */
+ 
