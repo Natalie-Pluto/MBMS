@@ -7,4 +7,4 @@ public class SynopsisChanger {
         String query = String.format("UPDATE Movie SET synopsis = '%s' WHERE name = '%s';", newSynopsis, movieName);
         d.sql_update(query);
     }
-}
+} 

@@ -55,6 +55,7 @@ public class Database {
 		return output;
 	}
 
+<<<<<<< HEAD
 	public List<String> sql_getStrings(String query, String column) {
 		/*desc todo*/
 		String output = null;
@@ -81,6 +82,10 @@ public class Database {
 
 	public Boolean sql_getBoolean(String query, String column) {
 		/*desc todo*/
+=======
+
+	/*public Boolean sql_getBoolean(String query, String column) {
+>>>>>>> 03b7f8ce6bec8eb0d3697e3d883b7524ce691c23
 		Connection conn = null;
 		Boolean output = false;
 		String sql = query;
@@ -102,7 +107,7 @@ public class Database {
 
 
 	public Double sql_getDouble(String query, String column) {
-		/*desc todo*/
+
 		Connection conn = null;
 		Double output = 0.0;
 		String sql = query;
@@ -120,11 +125,11 @@ public class Database {
 			return null;
 		}
 		return output;
-	}
+	}*/
 
 
 	public Integer sql_getInt(String query, String column) {
-		/*desc todo*/
+
 		Connection conn = null;
 		Integer output = 0;
 		String sql = query;
@@ -143,4 +148,5 @@ public class Database {
 		}
 		return output;
 	}
+
 }
