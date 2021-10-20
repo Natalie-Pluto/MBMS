@@ -161,7 +161,7 @@ public class BookingSystem {
                             AddingUser.addUser(dbInstance, newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
-                            System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
+                            System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                             System.out.println("============================================");
                         }
                     }

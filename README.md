@@ -246,19 +246,19 @@ Are you a Manager?
 Enter: Y/N
 P
 ============================================
-Please enter "Y" for Yes and "N" for No
+Wrong Input! (｡´︿`｡)
 ============================================
 Are you a Manager?
 Enter: Y/N
 P
 ============================================
-Please enter "Y" for Yes and "N" for No
+Wrong Input! (｡´︿`｡)
 ============================================
 Are you a Manager?
 Enter: Y/N
 P
 ============================================
-Please enter "Y" for Yes and "N" for No
+Wrong Input! (｡´︿`｡)
 ============================================
 
 ============================================
