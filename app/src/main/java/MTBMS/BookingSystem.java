@@ -20,40 +20,42 @@ import java.util.concurrent.TimeUnit;
 //  It will call methods in Guest and Staff class to provide further services for the user
 //   */
 public class BookingSystem {
-    private static final BookingSystem instance = new BookingSystem();;
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-            "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");;
+    private static BookingSystem instance;
+    private static Database dbInstance;
 
     public static void main(String[] args) throws InterruptedException {
+        instance = new BookingSystem();
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         instance.getGreeting();
     }
 
     public void defaultPage() throws InterruptedException {
         Scanner input = new Scanner(System.in);
-        //while (input.hasNext()) {
+        while (input.hasNext()) {
             String service = input.nextLine();
             switch (service) {
                 case "1":
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     System.out.println("Please enter your username:");
-                    //String accName = timer();
+                    String accName = timer();
                     System.out.println("Please enter your password:");
-                    //String accPw = readPwd();
+                    String accPw = readPwd();
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    //login(accName, accPw, dbInstance);
+                    login(accName, accPw);
                     break;
                 case "2":
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    //signUp("NA", dbInstance);
+                    signUp("NA");
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     break;
                 case "3":
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     System.out.println(ANSI_PURPLE + "Logging in as guest..." + ANSI_RESET);
                     Thread.sleep(3000);
-                    //Guest guest = new Guest(" ", "G", " ");
-                    //guest.guestService("G");
+                    Guest guest = new Guest(" ", "G", " ");
+                    guest.guestService("G");
                     break;
                 default:
                     System.out.println("============================================");
@@ -66,20 +68,20 @@ public class BookingSystem {
                     Thread.sleep(2000);
                     System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
                     Thread.sleep(2000);
-                    //getGreeting();
+                    getGreeting();
                     break;
             }
             //getGreeting();
-        //}
+        }
     }
 
     // Login will interact with User table to check the user's info
-    public static void login(String accName, String accPw, Database dbInstance) throws InterruptedException {
+    public static void login(String accName, String accPw) throws InterruptedException {
         if (!UserAuthenticate.authenticate(dbInstance, accName, accPw)) {
             System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             Thread.sleep(3000);
             // Returning to default page
-            //instance.getGreeting();
+            instance.getGreeting();
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 System.out.println(ANSI_PURPLE + "Logging in as staff..." + ANSI_RESET);
@@ -96,14 +98,14 @@ public class BookingSystem {
                 System.out.println(ANSI_PURPLE + "Welcome " + accName + "!" + ANSI_RESET);
                 Thread.sleep(3000);
                 Guest customer = new Guest(accName, "C", " ");
-                //customer.guestService("C");
+                customer.guestService("C");
             }
         }
     }
 
     // Signup will interact with User table to add user's info
     // Note: Need to check the username provided, it has to be unique
-   /*public void signUp(String id, Database dbInstance) throws InterruptedException {
+    public void signUp(String id) throws InterruptedException {
         boolean success = false;
         System.out.println("Please create your username:");
         boolean isExisted = true;
@@ -135,7 +137,7 @@ public class BookingSystem {
                     success = true;
                     System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                     // Add this customer's detail to users table
-                    //AddingUser.addUser(dbInstance, newAcc,newPw,"c");
+                    AddingUser.addUser(dbInstance, newAcc,newPw,"c");
                 } else if (input.equals("2")) {
                     isFinished = true;
                     boolean isDone = false;
@@ -150,16 +152,16 @@ public class BookingSystem {
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // Add this manager's detail to users table
-                            //AddingUser.addUser(dbInstance, newAcc,newPw,"m");
+                            AddingUser.addUser(dbInstance, newAcc,newPw,"m");
                         } else if (ans.equals("N")) {
                             isDone = true;
                             success = true;
                             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                             // Add this staff's detail to users table
-                            //AddingUser.addUser(dbInstance, newAcc,newPw,"s");
+                            AddingUser.addUser(dbInstance, newAcc,newPw,"s");
                         } else {
                             System.out.println("============================================");
-                            System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                            System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
                             System.out.println("============================================");
                         }
                     }
@@ -173,11 +175,10 @@ public class BookingSystem {
             success = true;
             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
             // Add this customer's detail to users table
-            //AddingUser.addUser(dbInstance, newAcc,newPw,"c");
+            AddingUser.addUser(dbInstance, newAcc,newPw,"c");
         }
         if (success) {
-            System.out.println("success");
-            //login(newAcc, newPw, dbInstance);
+            login(newAcc, newPw);
         } else {
             System.out.println("\n============================================");
             System.out.println(RED_BOLD + "Sign up failed (｡´︿`｡)" + ANSI_RESET);
@@ -185,16 +186,16 @@ public class BookingSystem {
             Thread.sleep(2000);
             System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
             Thread.sleep(2000);
-            //getGreeting();
+            getGreeting();
         }
-    }*/
+    }
 
     // Log out for the user, return to default page
-    /*public static void logOut( ) throws InterruptedException {
+    public static void logOut( ) throws InterruptedException {
         instance.getGreeting();
         instance.defaultPage();
     }
-*/
+
     /*
     User's setting is an optional feature (not specifically addressed in the assignment spec.
     It seems like a feature that we can be designed by us.
@@ -235,16 +236,22 @@ public class BookingSystem {
         System.out.println(PURPLE_BOLD + "    1. Log in       2. Sign up      3. I wish to continue" + ANSI_RESET);
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         defaultPage();
-        System.exit(0);
     }
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
 
     // Bold
     public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
 
     // Background
@@ -252,7 +259,10 @@ public class BookingSystem {
 
 
     // Bold High Intensity
+    public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
+    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
     public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
 
     // Read password securely
@@ -272,7 +282,7 @@ public class BookingSystem {
     }
 
     // Timer for user's input
-    /*public String timer() throws InterruptedException {
+    public String timer() throws InterruptedException {
         BlockingDeque<String> deque = new LinkedBlockingDeque<>();
 
         Thread thread = new Thread(() -> {
@@ -310,5 +320,5 @@ public class BookingSystem {
 
         thread.interrupt();
         return str;
-    }*/
+    }
 }

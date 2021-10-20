@@ -46,12 +46,12 @@ public class Guest {
             if (input1.equals("1")) {
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                 //TODO: Implement filter method
-                //filterMovies();
+                filterMovies();
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             } else if (input1.equals("2")) {
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                 BookingSystem user = new BookingSystem();
-                //user.signUp("C");
+                user.signUp("C");
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             } else {
                 System.out.println("============================================");
@@ -60,7 +60,7 @@ public class Guest {
                 Thread.sleep(2000);
                 System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
                 Thread.sleep(2000);
-                //guestService("G");
+                guestService("G");
             }
             // For Customer
         }else if (identity.equals("C")){
@@ -76,7 +76,7 @@ public class Guest {
                 case "1":
                     //TODO: Implement filter method
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    //filterMovies();
+                    filterMovies();
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     break;
                 case "2":
@@ -90,9 +90,8 @@ public class Guest {
                     Thread.sleep(2000);
                     System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
                     Thread.sleep(2000);
-                    //guestService("C");
+                    guestService("C");
             }
-
         }
 
         //Ask users to continue using or close the service
@@ -159,11 +158,18 @@ public class Guest {
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
 
     // Bold
     public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
 
     // Background

@@ -23,7 +23,7 @@ public class AppTest {
     private final PrintStream systemOutput = System.out;
     private final InputStream systemInput = System.in;
 
-    public void setUpOutput() {
+    /*public void setUpOutput() {
         System.setOut(new PrintStream(testOutput));
     }
 
@@ -146,7 +146,7 @@ public class AppTest {
         assertNotNull(getOutput());
     }*/
 
-    @Test
+   /* @Test
     public void defaultTest1() throws InterruptedException {
         input("1");
         instance.defaultPage();
@@ -173,4 +173,10 @@ public class AppTest {
         instance.defaultPage();
         assertNotNull(getOutput());
     }
+
+    @Test
+    public void greetingTest() throws InterruptedException {
+        instance.getGreeting();
+        assertNotNull(getOutput());
+    }*/
 }

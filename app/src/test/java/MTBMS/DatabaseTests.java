@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.sql.*;
 import java.util.Date;
-import MTBMS.database;
+import MTBMS.Database;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.AddingUser.addUser;
 
@@ -17,5 +17,5 @@ public class DatabaseTests {
         addUser(dbInstance, "ali");
         authenticate(dbInstance, "ali");
     }
-} 
+}
 

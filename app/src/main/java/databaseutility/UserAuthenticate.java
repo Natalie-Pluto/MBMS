@@ -1,4 +1,4 @@
-/* package databaseutility;
+package databaseutility;
 
 import MTBMS.Database;
 
@@ -10,4 +10,3 @@ public class UserAuthenticate {
         return true;
     }
 }
- */
