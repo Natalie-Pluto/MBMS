@@ -43,7 +43,7 @@ public class MovieDataManipulator {
 
     public static void modifyMovieData(Database d){
         //display movies in database
-        MovieNamesDisplay.displayMovieNames(d);
+        //MovieNamesDisplay.displayMovieNames(d);
 
         //get the name of the movie to modify to
         System.out.print("/nEnter the name of the movie: ");
