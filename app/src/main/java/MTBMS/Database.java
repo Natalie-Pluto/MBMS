@@ -2,6 +2,8 @@ package MTBMS;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
 	private String dbUrl;
@@ -53,8 +55,37 @@ public class Database {
 		return output;
 	}
 
+<<<<<<< HEAD
+	public List<String> sql_getStrings(String query, String column) {
+		/*desc todo*/
+		String output = null;
+		Connection conn = null;
+		String sql = query;
+		List<String> res = new ArrayList<>(0);
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getString(column);
+				res.add(output);
+			}
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return res;
+	}
+
+
+	public Boolean sql_getBoolean(String query, String column) {
+		/*desc todo*/
+=======
 
 	/*public Boolean sql_getBoolean(String query, String column) {
+>>>>>>> 03b7f8ce6bec8eb0d3697e3d883b7524ce691c23
 		Connection conn = null;
 		Boolean output = false;
 		String sql = query;
