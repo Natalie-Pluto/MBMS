@@ -102,7 +102,6 @@ public class Database {
 
 
 	public Double sql_getDouble(String query, String column) {
-
 		Connection conn = null;
 		Double output = 0.0;
 		String sql = query;
@@ -124,7 +123,6 @@ public class Database {
 
 
 	public Integer sql_getInt(String query, String column) {
-
 		Connection conn = null;
 		Integer output = 0;
 		String sql = query;
