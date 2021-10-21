@@ -5,6 +5,7 @@ SET search_path TO 'moviebooking_db';
 DROP TABLE IF EXISTS Credit_Card CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Gift_Card CASCADE;
+DROP TABLE IF EXISTS UpcomingMovie CASCADE;
 DROP TABLE IF EXISTS Cinema_Session CASCADE;
 DROP TABLE IF EXISTS Movie CASCADE;
 DROP TABLE IF EXISTS Cinema CASCADE;
@@ -35,8 +36,14 @@ CREATE TABLE Movie(
     release_date DATE,
     synopsis TEXT,
     directors TEXT,
-    cast TEXT,
-    genre char(30)
+    genre char(30),
+    "cast" TEXT
+);
+
+CREATE TABLE UpcomingMovie(
+    name VARCHAR(100) PRIMARY KEY,
+    classification VARCHAR(30) NOT NULL,
+    release_date DATE
 );
 
 CREATE TABLE Cinema (
@@ -68,19 +75,35 @@ CREATE TABLE Cinema_Session (
 
 -- sample Movie data --
 
-INSERT INTO moviebooking_db.movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip', 'Donnie Yen, Simon Yam, Lynn Hung','Action')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip','Donnie Yen, Simon Yam, Lynn Hung','Action')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip','Donnie Yen, Simon Yam, Lynn Hung', 'Action')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Sooryavanshi', 'PG', '2021-11-05', 'The action-packed adventures of an anti-terrorist Squad in India.', 'Rohit Shetty', 'Akshay Kumar, Katrina Kaif', 'Drams, Crime')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Black Box', 'M', '2021-11-05', 'A young and talented black box analyst is on a mission to solve the reason behind the deadly crash of a brand new aircraft.', 'Yann Gozlan', 'Pierre Niney, Lou de Laâge, André Dussollier', 'Drams, Mystery, Thriller')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Dune', 'M', '2021-12-02', 'A mythic and emotionally charged hero’s journey, Dune tells the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, who must travel to the most dangerous planet in the universe to ensure the future of his family and his people', 'Denis Villeneuve', 'Rebecca Ferguson, Timothée Chalamet, Stellan Skarsgård, Zendaya','Action, Adventure, Fantasy, Science Fiction')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('THE BOSS BABY: FAMILY BUSINESS', 'PG', '2021-11-25', 'In the sequel to DreamWorks Animation’s Oscar®-nominated blockbuster comedy, the Templeton brothers Tim and his Boss Baby little bro Ted have become adults', 'Tom McGrath', 'Alec Baldwin, James McGrath', 'Comedy, Animation, Family, Fantasy, Adventure')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('VENOM: LET THERE BE CARNAGE', 'M', '2021-11-25', 'Academy Award® nominated actor Tom Hardy returns to the big screen as the lethal protector Venom, one of Marvel’s greatest and most complex characters', 'Andy Serkis', 'Woody Harrelson, Naomie Harris, Tom Hardy, Michelle Williams, Stephen Graham', 'Action, Adventure, Thriller, Science Fiction')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('SHANG-CHI AND THE LEGEND OF THE TEN RINGS', 'M', '2021-09-01', 'Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization', 'Destin Daniel Cretton', 'Chieng, Fala Chen, Meng’er Zhang', 'Action, Adventure, Fantasy, Science Fiction')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('FREE GUY', 'M', '2021-08-12', 'A bank teller who discovers he is actually a background player in an open-world video game, decides to become the hero of his own story', 'Shawn Levy', 'Ryan Reynolds, Taika Waititi, LilRel Howery, Joe Keery, Utkarsh Ambudkar, Jodie', 'Action, Adventure, Comedy, Science Fiction')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('JUNGLE CRUISE', 'M', '2021-07-28', 'Lily travels from London, to the Amazon jungle and enlists Frank’s questionable services to guide her downriver on La Quila', 'Jaume Collet-Serra', 'Jesse Plemons, Dwayne Johnson, Emily Blunt, Edgar Ramirez, Paul Giamatti', 'Adventure, Family, Fantasy')on conflict (name) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('THE LAST DUEL', 'MA15+', '2021-10-21', 'King Charles VI declares that Knight Jean de Carrouges settle his dispute with his squire by challenging him to a duel', 'Ridley Scott', 'Adam Driver, Ben Affleck, Matt Damon, Jodie Comer', 'Drama')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip','Action', 'Donnie Yen, Simon Yam, Lynn Hung')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip','Action','Donnie Yen, Simon Yam, Lynn Hung')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip', 'Action','Donnie Yen, Simon Yam, Lynn Hung')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Sooryavanshi', 'PG', '2021-11-05', 'The action-packed adventures of an anti-terrorist Squad in India.', 'Rohit Shetty', 'Drams, Crime', 'Akshay Kumar, Katrina Kaif')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Black Box', 'M', '2021-11-05', 'A young and talented black box analyst is on a mission to solve the reason behind the deadly crash of a brand new aircraft.', 'Yann Gozlan', 'Drams, Mystery, Thriller', 'Pierre Niney, Lou de Laâge, André Dussollier')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Dune', 'M', '2021-12-02', 'A mythic and emotionally charged hero’s journey, Dune tells the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, who must travel to the most dangerous planet in the universe to ensure the future of his family and his people', 'Denis Villeneuve', 'Action, Adventure, Fantasy, Science Fiction', 'Rebecca Ferguson, Timothée Chalamet, Stellan Skarsgård, Zendaya')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE BOSS BABY: FAMILY BUSINESS', 'PG', '2021-11-25', 'In the sequel to DreamWorks Animation’s Oscar®-nominated blockbuster comedy, the Templeton brothers Tim and his Boss Baby little bro Ted have become adults', 'Tom McGrath', 'Comedy, Animation, Family, Fantasy, Adventure', 'Alec Baldwin, James McGrath')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('VENOM: LET THERE BE CARNAGE', 'M', '2021-11-25', 'Academy Award® nominated actor Tom Hardy returns to the big screen as the lethal protector Venom, one of Marvel’s greatest and most complex characters', 'Andy Serkis', 'Action, Adventure, Thriller, Science Fiction', 'Woody Harrelson, Naomie Harris, Tom Hardy, Michelle Williams, Stephen Graham')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('SHANG-CHI AND THE LEGEND OF THE TEN RINGS', 'M', '2021-09-01', 'Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization', 'Destin Daniel Cretton', 'Action, Adventure, Fantasy, Science Fiction', 'Chieng, Fala Chen, Meng’er Zhang')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('FREE GUY', 'M', '2021-08-12', 'A bank teller who discovers he is actually a background player in an open-world video game, decides to become the hero of his own story', 'Shawn Levy', 'Action, Adventure, Comedy, Science Fiction', 'Ryan Reynolds, Taika Waititi, LilRel Howery, Joe Keery, Utkarsh Ambudkar, Jodie')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('JUNGLE CRUISE', 'M', '2021-07-28', 'Lily travels from London, to the Amazon jungle and enlists Frank’s questionable services to guide her downriver on La Quila', 'Jaume Collet-Serra', 'Adventure, Family, Fantasy', 'Jesse Plemons, Dwayne Johnson, Emily Blunt, Edgar Ramirez, Paul Giamatti')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE LAST DUEL', 'MA15+', '2021-10-21', 'King Charles VI declares that Knight Jean de Carrouges settle his dispute with his squire by challenging him to a duel', 'Ridley Scott', 'Drama', 'Adam Driver, Ben Affleck, Matt Damon, Jodie Comer')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Test', 'G', '2021-10-15', 'This is for testing', 'Group 1', 'Drama', 'Group 1 all members')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE HARDER THEY FALL', 'MA15+', '2021-10-21', 'A man looks to exact revenge against the guy who murdered his parents', 'Jeymes Samuel', 'Drama, Western', 'Danielle Deadwyler, Edi Gathegi, Jonathan Majors')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE SUICIDE SQUAD', 'MA15+', '2021-08-05', 'From director James Gunn comes Warner Bros. Pictures’ superhero action adventure “The Suicide Squad”', 'James Gunn', 'Action, Adventure, Fantasy, Mystery, Science Fiction', 'Capaldi, Joel Kinnaman, David Dastmalchian, John Cena, Margot Robbie')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('PAW PATROL: THE MOVIE', 'G', '2021-9-16', 'The PAW Patrol is on a roll! When their biggest rival, Humdinger, becomes Mayor of nearby Adventure City and starts wreaking havoc', 'Cal Brunker', 'Adventure, Animation, Comedy, Family', 'Kardashian West, Iain Armitage, Will Brisbin')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('SPACE JAM: A NEW LEGACY', 'PG', '2021-07-15', 'NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel', 'Malcolm D. Lee', 'Adventure, Comedy, Animation, Family, Fantasy, Science Fiction, Sport', 'LeBron James')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('MY HERO ACADEMIA: WORLD HEROE''S MISSION', 'MA15+', '2021-10-28', 'A mysterious group called Humarize strongly believes in the Quirk Singularity Doomsday theory', 'Kenji Nagasaki', 'Action, Animation', 'Okitsu')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Japanese Action Movie', 'R18+', '2021-10-21', 'Something interesting', 'Human', 'Action', 'Human')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('ANTLERS', 'MA15+', '2021-10-28', 'A small-town Oregon teacher and her brother, the local sheriff, become entwined with a young student harboring a dangerous secret with frightening consequences', 'Scott Cooper', 'Horror, Mystery', 'Jesse Plemons, Keri Russell, Amy Madigan, Rory Cochrane, Graham Greene')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28', 'Ron''s Gone Wrong tells the story of an 11-year-old boy who finds that his robot buddy doesn''t quite work', 'Alessandro Carloni', 'Adventure, Animation, Comedy, Family, Science Fiction', 'Thomas Barbusca, Bentley Kalu, Ava Morse')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams')on conflict (name) do nothing;
 
+
+-- sample UpdatingMovie data --
+
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 8', 'PG', '2021-10-23')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 9', 'PG', '2021-10-24')on conflict (name) do nothing;
 
 -- sample Credit_Card data --
 
