@@ -243,18 +243,11 @@ public class BookingSystem {
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
 
 
     // Bold
     public static final String RED_BOLD = "\033[1;31m";    // RED
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
 
     // Background
@@ -262,10 +255,7 @@ public class BookingSystem {
 
 
     // Bold High Intensity
-    public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
-    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
     public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
-    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
     public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
 
     // Read password securely

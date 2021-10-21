@@ -32,7 +32,6 @@ public class Guest {
     //     It's kinda like a main method for guest class
     //     */
     public void guestService(String identity) throws InterruptedException {
-        Scanner input = new Scanner(System.in);
         if (identity.equals("G")){
             // Guests can only view movies
             // They can choose to filter movies
@@ -47,6 +46,7 @@ public class Guest {
             System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
             System.out.println("=================================================");
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+            Scanner input = new Scanner(System.in);
             String  input1 = input.next();
             if (input1.equals("1")) {
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
@@ -76,7 +76,8 @@ public class Guest {
             // TODO: List all the upcoming Movies & times
             System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            String customerInput1 = input.next();
+            Scanner input1 = new Scanner(System.in);
+            String customerInput1 = input1.next();
             switch (customerInput1){
                 case "1":
                     //TODO: Implement filter method
@@ -87,9 +88,11 @@ public class Guest {
                 case "2":
                     //TODO: Implement book method
                     System.out.println("Please enter the movie name that you wish to book");
-                    String movieName = input.next();
+                    Scanner input2 = new Scanner(System.in);
+                    String movieName = input2.next();
                     System.out.println("Please enter the cinema name that you wish to go to");
-                    String cinemaName = input.next();
+                    Scanner input3 = new Scanner(System.in);
+                    String cinemaName = input3.next();
                     book(movieName, cinemaName);
                     break;
 
@@ -121,7 +124,7 @@ public class Guest {
         switch (filterType){
             case "1":
                 System.out.println("Please enter the name of the movie");
-                String movieName = input.next();
+               // String movieName = input.next();
                 break;
 
             case "2":
@@ -131,18 +134,18 @@ public class Guest {
 
             case "3":
                 System.out.println("Please enter the name of the cinema");
-                String cinemaName = input.next();
+                //String cinemaName = input.next();
                 //
                 break;
             case "4":
                 System.out.println("Which Classification do you want to filter?");
-                String classification = input.next();
+                //String classification = input.next();
                 //
                 break;
 
             case "5":
                 System.out.println("What type of movie do you want to filter?");
-                String genre = input.next();
+                //String genre = input.next();
                 //
                 break;
 
@@ -184,7 +187,7 @@ public class Guest {
     // This method will allow customers to update their password and specific settings.
     // opt 1 for changing password
     // opt 2 for changing settings
-    public void personalInfoUpdate(String opt) {//change opt from int to String
+    public void personalInfoUpdate(String opt) throws InterruptedException {//change opt from int to String
         Scanner input = new Scanner(System.in);
         switch(opt){
             case "1":
@@ -194,10 +197,12 @@ public class Guest {
 
 
                 //check new password twice to ensure customers are typing their expected password correctly
+                // Hi John, I have made your pwd input hidden XD!!! You can delete this msg.
+                BookingSystem bs = new BookingSystem();
                 System.out.println("Please enter your new password");
-                String newPwd_1 = input.next();
+                String newPwd_1 = bs.readPwd();
                 System.out.println("Please enter your new password again");
-                String newPwd_2 = input.next();
+                String newPwd_2 = bs.readPwd();
                 if (newPwd_1.equals(newPwd_2)){
                     //TODO: update new password to database
                     System.out.println("Password changed, please login again");
