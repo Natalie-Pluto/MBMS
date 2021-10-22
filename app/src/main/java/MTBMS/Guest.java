@@ -35,16 +35,8 @@ public class Guest {
         if (identity.equals("G")){
             // Guests can only view movies
             // They can choose to filter movies
-            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            System.out.println("===============================");
-            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"" + ANSI_RESET);
-            System.out.println("===============================\n");
-            System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
-            // TODO: List all the upcoming Movies & times
-            System.out.println("\n=================================================");
-            System.out.println("You can sign up to book your tickets! (｡･ω･｡)ﾉ ");
-            System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
-            System.out.println("=================================================");
+
+
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             Scanner input = new Scanner(System.in);
             String  input1 = input.next();
@@ -198,11 +190,10 @@ public class Guest {
 
                 //check new password twice to ensure customers are typing their expected password correctly
                 // Hi John, I have made your pwd input hidden XD!!! You can delete this msg.
-                BookingSystem bs = new BookingSystem();
                 System.out.println("Please enter your new password");
-                String newPwd_1 = bs.readPwd();
+                String newPwd_1 = BookingSystem.readPwd();
                 System.out.println("Please enter your new password again");
-                String newPwd_2 = bs.readPwd();
+                String newPwd_2 = BookingSystem.readPwd();
                 if (newPwd_1.equals(newPwd_2)){
                     //TODO: update new password to database
                     System.out.println("Password changed, please login again");
