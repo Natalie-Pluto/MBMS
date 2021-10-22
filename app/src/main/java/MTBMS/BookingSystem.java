@@ -129,9 +129,7 @@ public class BookingSystem {
                 }
             } else {
                 success = true;
-                System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                // Add this customer's detail to users table
-                AddingUser.addUser(dbInstance, newAcc, newPw, "c");
+                instance.cSignup(newAcc, newPw);
             }
             if (success) {
                 login(newAcc, newPw);
@@ -218,6 +216,12 @@ public class BookingSystem {
             instance.signinMsg1();
         }
         return success;
+    }
+
+    public void cSignup(String newAcc, String newPw) {
+        System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
+        // Add this customer's detail to users table
+        AddingUser.addUser(dbInstance, newAcc, newPw, "c");
     }
 
 
