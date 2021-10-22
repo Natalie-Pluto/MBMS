@@ -106,6 +106,7 @@ INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 8', 'PG', '2021-1
 INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 9', 'PG', '2021-10-24')on conflict (name) do nothing;
 
 -- sample Cinema data --
+
 INSERT INTO moviebooking_db.cinema VALUES('Warringah Mall')on conflict (cinema_name) do nothing;
 INSERT INTO moviebooking_db.cinema VALUES('Town Hall')on conflict (cinema_name) do nothing;
 INSERT INTO moviebooking_db.cinema VALUES('Blacktown')on conflict (cinema_name) do nothing;
