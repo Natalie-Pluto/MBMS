@@ -15,7 +15,6 @@ public class MovieInsertionBuilder {
     private String releaseDate = "null";
     private String synopsis = "null";
     private String directors = "null";
-    private int movieID;
 
     public MovieInsertionBuilder(Database db, String name) {
         this.db = db;
@@ -40,7 +39,6 @@ public class MovieInsertionBuilder {
         if (!synopsis.equals("null")) this.synopsis = "'" + this.synopsis + "'";
         if (!directors.equals("null")) this.directors = "'" + this.directors + "'";
         String query = String.format("INSERT INTO moviebooking_db.Movie VALUES('%s', '%s', %s, %s, %s) on conflict (name) DO NOTHING;", name, classification, releaseDate, synopsis, directors);
-        System.out.println(query + " look right?");
         this.db.sql_update(query);
         return true;
     }
