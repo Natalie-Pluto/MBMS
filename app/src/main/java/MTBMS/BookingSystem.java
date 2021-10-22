@@ -29,7 +29,7 @@ public class BookingSystem {
     public static void main(String[] args) throws InterruptedException {
         instance = new BookingSystem();
         dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+                "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting();
         options();
@@ -52,7 +52,7 @@ public class BookingSystem {
                 seperator();
                 break;
             case "3":
-
+                // TODO filter movies
                 break;
             case "4":
                 System.out.println("Test");
@@ -98,7 +98,7 @@ public class BookingSystem {
         System.out.println("Please create your username:");
         boolean isExisted = true;
         String newAcc = "";
-        while(isExisted) {
+        while (isExisted) {
             newAcc = Timer.timer("g");
             // check if the username existed already
             if (CheckIfUserExists.checkIfUserExists(dbInstance, newAcc)) {
@@ -111,7 +111,7 @@ public class BookingSystem {
         String newPw = readPwd();
         createPwd2();
         String newPw2 = readPwd();
-        if(checkPwd(newPw, newPw2)) {
+        if (checkPwd(newPw, newPw2)) {
             if (id.equals("NA")) {
                 boolean isFinished = false;
                 int counter2 = 0;
@@ -119,39 +119,12 @@ public class BookingSystem {
                     counter2++;
                     instance.signinMsg4();
                     String input = Timer.timer("g");
-                    if (input.equals("1")) {
+                    String num = instance.signUpHelper(input, newAcc, newPw);
+                    if (num.equals("1")) {
                         isFinished = true;
                         success = true;
-                        System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                        // Add this customer's detail to users table
-                        AddingUser.addUser(dbInstance, newAcc, newPw, "c");
-                    } else if (input.equals("2")) {
-                        isFinished = true;
-                        boolean isDone = false;
-                        int counter = 0;
-                        while (!isDone && counter < 3) {
-                            counter++;
-                            System.out.println("Are you a Manager?");
-                            System.out.println("Enter: Y/N");
-                            String ans = Timer.timer("g");
-                            if (ans.equals("Y")) {
-                                isDone = true;
-                                success = true;
-                                System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                                // Add this manager's detail to users table
-                                AddingUser.addUser(dbInstance, newAcc, newPw, "m");
-                            } else if (ans.equals("N")) {
-                                isDone = true;
-                                success = true;
-                                System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
-                                // Add this staff's detail to users table
-                                AddingUser.addUser(dbInstance, newAcc, newPw, "s");
-                            } else {
-                                instance.signinMsg2();
-                            }
-                        }
-                    } else {
-                        instance.signinMsg1();
+                    } else if (!num.equals("0")) {
+                        instance.signUpHelper(num, newAcc, newPw);
                     }
                 }
             } else {
@@ -170,7 +143,7 @@ public class BookingSystem {
     }
 
     // Log out for the user, return to default page
-    public static void logOut( ) throws InterruptedException {
+    public static void logOut() throws InterruptedException {
         getGreeting();
         options();
     }
@@ -213,6 +186,40 @@ public class BookingSystem {
         }
         return true;
     }
+
+    public String signUpHelper(String input, String newAcc, String newPw) throws InterruptedException {
+        String success = "0";
+        if (input.equals("1")) {
+            success = "1";
+            System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
+            // Add this customer's detail to users table
+            AddingUser.addUser(dbInstance, newAcc, newPw, "c");
+        } else if (input.equals("3")) {
+            System.out.println("Please enter the staff code:");
+            if (Timer.timer("g").equals("zootopia")) {
+                success = "1";
+                System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
+                // Add this manager's detail to users table
+                AddingUser.addUser(dbInstance, newAcc, newPw, "m");
+            } else {
+                success = "3";
+            }
+        } else if (input.equals("2")) {
+            System.out.println("Please enter the staff code:");
+            if (Timer.timer("g").equals("shawshank")) {
+                success = "1";
+                System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
+                // Add this staff's detail to users table
+                AddingUser.addUser(dbInstance, newAcc, newPw, "s");
+            } else {
+                success = "2";
+            }
+        } else {
+            instance.signinMsg1();
+        }
+        return success;
+    }
+
 
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
     static class EraserThread implements Runnable {
@@ -328,12 +335,6 @@ public class BookingSystem {
         System.out.println("============================================");
     }
 
-    public void signinMsg2() {
-        System.out.println("============================================");
-        System.out.println(RED_BOLD + "Please enter \"Y\" for Yes and \"N\" for No" + ANSI_RESET);
-        System.out.println("============================================");
-    }
-
     public void signinMsg3() {
         System.out.println("==========================================================");
         System.out.println(RED_BOLD + "User name already existed. Please enter again (｡´︿`｡)" + ANSI_RESET);
@@ -344,6 +345,7 @@ public class BookingSystem {
         System.out.println("Please choose your identity:");
         System.out.println("Enter 1 - for \"Customer\"");
         System.out.println("Enter 2 - for \"Staff\"");
+        System.out.println("Enter 3 - for \"Manager\"");
     }
 
 
