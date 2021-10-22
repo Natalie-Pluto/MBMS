@@ -1,16 +1,7 @@
 package MTBMS;
 
 import databaseutility.*;
-
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.TimeUnit;
 import static databaseutility.UserAuthenticate.authenticate;
 
 
@@ -54,8 +45,9 @@ public class BookingSystem {
             case "3":
                 // TODO filter movies
                 break;
-            case "4":
+            case "Carribean":
                 System.out.println("Test");
+                break;
             default:
                 wrongInput();
                 options();
@@ -68,11 +60,10 @@ public class BookingSystem {
     public static void login(String accName, String accPw) throws InterruptedException {
         if (!instance.tryLogin(accName, accPw)) {
             instance.loginMsg();
-            if (Timer.timer("g").equals("back")) {
-                getGreeting();
-                options();
-            } else {
-                login(username(), password());
+            String name = instance.backCheck1();
+            String pw = instance.backCheck2();
+            if(!name.equals("back") || !pw.equals("back")) {
+                login(name, pw);
             }
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
@@ -95,8 +86,10 @@ public class BookingSystem {
     // Note: Need to check the username provided, it has to be unique
     public static void signUp(String id) throws InterruptedException {
         boolean success = false;
-        System.out.println("Please create your username:");
         boolean isExisted = true;
+        boolean isValid = false;
+        boolean isMatched = false;
+        System.out.println("Please create your username:");
         String newAcc = "";
         while (isExisted) {
             newAcc = Timer.timer("g");
@@ -107,35 +100,49 @@ public class BookingSystem {
                 isExisted = false;
             }
         }
-        createPwd();
-        String newPw = readPwd();
-        createPwd2();
-        String newPw2 = readPwd();
-        if (checkPwd(newPw, newPw2)) {
-            if (id.equals("NA")) {
-                boolean isFinished = false;
-                int counter2 = 0;
-                while (!isFinished && counter2 < 3) {
-                    counter2++;
-                    instance.signinMsg4();
-                    String input = Timer.timer("g");
-                    String num = instance.signUpHelper(input, newAcc, newPw);
-                    if (num.equals("1")) {
-                        isFinished = true;
-                        success = true;
-                    } else if (!num.equals("0")) {
-                        instance.signUpHelper(num, newAcc, newPw);
+        while (!isMatched) {
+            createPwd();
+            String newPw = "";
+            while (!isValid) {
+                newPw = readPwd();
+                if (newPw.length() < 5) {
+                    System.out.println(RED_BOLD + "Password has to be longer than 4 characters! (｡´︿`｡) Please try again" + ANSI_RESET);
+                } else {
+                    isValid = true;
+                }
+            }
+            createPwd2();
+            String newPw2 = readPwd();
+            if (checkPwd(newPw, newPw2)) {
+                isMatched = true;
+                if (id.equals("NA")) {
+                    boolean isFinished = false;
+                    int counter2 = 0;
+                    while (!isFinished && counter2 < 3) {
+                        counter2++;
+                        instance.signinMsg4();
+                        String input = Timer.timer("g");
+                        String num = instance.signUpHelper(input, newAcc, newPw);
+                        if (num.equals("1")) {
+                            isFinished = true;
+                            success = true;
+                        } else if (!num.equals("0")) {
+                            instance.signUpHelper(num, newAcc, newPw);
+                        }
                     }
+                } else {
+                    success = true;
+                    instance.cSignup(newAcc, newPw);
+                }
+                if (success) {
+                    login(newAcc, newPw);
+                } else {
+                    instance.signinFailed();
+                    getGreeting();
                 }
             } else {
-                success = true;
-                instance.cSignup(newAcc, newPw);
-            }
-            if (success) {
-                login(newAcc, newPw);
-            } else {
-                instance.signinFailed();
-                getGreeting();
+                System.out.println(RED_BOLD + "Password not matching! (｡´︿`｡)" + ANSI_RESET);
+                isValid = false;
             }
         }
     }
@@ -155,7 +162,7 @@ public class BookingSystem {
     // Get password
     public static String password() throws InterruptedException {
         System.out.println("Please enter your password:");
-        return Timer.timer("g");
+        return readPwd();
     }
 
 
@@ -174,12 +181,29 @@ public class BookingSystem {
         return pwd1.equals(pwd2);
     }
 
+    public String backCheck1() throws InterruptedException {
+        String name = username();
+        if (name.equals("back")) {
+            getGreeting();
+            options();
+        }
+        return name;
+    }
+
+    public String backCheck2() throws InterruptedException {
+        String pw = password();
+        if (pw.equals("back")) {
+            getGreeting();
+            options();
+        }
+        return pw;
+    }
+
     // Retry log in
     public boolean tryLogin(String username, String pwd) throws InterruptedException {
         if (!authenticate(dbInstance, username, pwd)) {
-            System.err.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
-            System.err.println("Please try again: ");
-            Thread.sleep(3000);
+            System.out.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
+            System.out.println(RED_BOLD + "Please try again" + ANSI_RESET);
             return false;
         }
         return true;
@@ -194,7 +218,7 @@ public class BookingSystem {
             AddingUser.addUser(dbInstance, newAcc, newPw, "c");
         } else if (input.equals("3")) {
             System.out.println("Please enter the staff code:");
-            if (Timer.timer("g").equals("zootopia")) {
+            if (readPwd().equals("zootopia")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this manager's detail to users table
@@ -204,7 +228,7 @@ public class BookingSystem {
             }
         } else if (input.equals("2")) {
             System.out.println("Please enter the staff code:");
-            if (Timer.timer("g").equals("shawshank")) {
+            if (readPwd().equals("shawshank")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this staff's detail to users table
@@ -251,16 +275,17 @@ public class BookingSystem {
 
     // Below are the print methods:
     public static void defaultPage() {
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("===============================");
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Filter Movies\"" + ANSI_RESET);
         System.out.println("===============================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         // TODO: List all the upcoming Movies & times
         System.out.println("\n=================================================");
-        System.out.println("You can sign up to book your tickets! (｡･ω･｡)ﾉ ");
+        System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
         System.out.println("=================================================");
+        seperator();
     }
 
     public static void createPwd() {
@@ -297,7 +322,7 @@ public class BookingSystem {
 
     public void loginMsg() {
         System.out.println(ANSI_PURPLE + "If you wish to return to the default page, please enter \"back\"" + ANSI_RESET);
-
+        seperator();
     }
 
     public static void wrongInput() throws InterruptedException {
@@ -318,8 +343,8 @@ public class BookingSystem {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "    Welcome to Fancy Cinemas Official Website!!" + ANSI_RESET + "\n");
         System.out.println("    If you have an account, please sign in (｡･ω･｡)ﾉ ");
-        System.out.println("    If you haven't joined us, you can sign up today! o(｀ω´ )o");
-        System.out.println(PURPLE_BOLD + "    1. Log in       2. Sign up" + ANSI_RESET);
+        System.out.println("    If you haven't joined us, you can sign up today! o(｀ω´ )o\n");
+        System.out.println(PURPLE_BOLD + "    Enter 1 for \"Log in\"" + "            Enter 2 for \"Sign up\"" + ANSI_RESET);
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         defaultPage();
     }
