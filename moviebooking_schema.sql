@@ -66,6 +66,8 @@ CREATE TABLE Cinema_Session (
     back_seat_capacity INT,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
+    session_date DATE,
+    ticket_price_student DECIMAL NOT NULL,
     UNIQUE(cinema, screen_type, movie, start_time)
 );
 
@@ -113,6 +115,22 @@ INSERT INTO moviebooking_db.cinema VALUES('Blacktown')on conflict (cinema_name) 
 INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name) do nothing;
 
 -- sample Credit_Card data --
+
+-- sample cinema_session data --
+
+INSERT INTO moviebooking_db.cinema_session VALUES('1', 'Warringah Mall', 'Gold', 'IP Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-25', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('2', 'Warringah Mall', 'Gold', 'FREE GUY', '35', '45', '40','0', '0', '0', '20', '20', '20', '10:00', '12:00', '2021-10-25', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('3', 'Warringah Mall', 'Bronze', 'JUNGLE CRUISE', '10', '20', '15','0', '0', '0', '15', '15', '15', '17:00', '19:00', '2021-10-28', '10')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('4', 'Warringah Mall', 'Sliver', 'THE LAST DUEL', '20', '30', '25','0', '0', '0', '20', '20', '20', '11:00', '13:00', '2021-10-25', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('5', 'Town Hall', 'Gold', 'SHANG-CHI AND THE LEGEND OF THE TEN RINGS', '35', '45', '40','0', '0', '0', '20', '20', '20', '18:30', '20:30', '2021-10-26', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('6', 'Town Hall', 'Sliver', 'PAW PATROL: THE MOVIE', '20', '30', '25','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-25', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('7', 'Town Hall', 'Bronze', 'SPACE JAM: A NEW LEGACY', '10', '20', '15','0', '0', '0', '20', '20', '20', '12:00', '14:00', '2021-10-27', '15')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('8', 'Eastgarden', 'Sliver', 'IP Man', '20', '30', '25','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-25', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('9', 'Eastgarden', 'Gold', 'IP Man', '25', '35', '28','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-26', '25')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('10', 'Blacktown', 'Gold', 'IP Man', '25', '35', '28','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-28', '25')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('11', 'Blacktown', 'Gold', 'IP Man', '25', '35', '28','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-25', '25')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('12', 'Blacktown', 'Gold', 'IP Man', '25', '35', '28','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-26', '25')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('13', 'Blacktown', 'Gold', 'IP Man', '25', '35', '28','0', '0', '0', '20', '20', '20', '17:00', '19:00', '2021-10-25', '25')on conflict (session_id) do nothing;
 
 -- sample Users data--
 

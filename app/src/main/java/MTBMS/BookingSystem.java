@@ -43,7 +43,7 @@ public class BookingSystem {
                 seperator();
                 break;
             case "3":
-                // TODO filter movies
+                // TODO now showing
                 break;
             case "Carribean":
                 System.out.println("Test");
@@ -276,7 +276,7 @@ public class BookingSystem {
     // Below are the print methods:
     public static void defaultPage() {
         System.out.println("===============================");
-        System.out.println(PURPLE_BOLD + "Enter 3 for \"Filter Movies\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for \"Now Showing\"" + ANSI_RESET);
         System.out.println("===============================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
