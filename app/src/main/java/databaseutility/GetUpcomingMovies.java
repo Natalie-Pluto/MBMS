@@ -12,11 +12,8 @@ public class GetUpcomingMovies {
         String query = "select * from moviebooking_db.upcomingmovie";
         List<String> name = db.sql_getStrings(query,"name");
         List<String> classification = db.sql_getStrings(query,"classification");
-        for (String n : name) {
-            System.out.print(n + " ");
-        }
-        for (String c : classification) {
-            System.out.println(PURPLE_BOLD + "[" + c + "]" + ANSI_RESET);
+        for (int i = 0; i < name.size(); i++) {
+            System.out.println(name.get(i) + " " + PURPLE_BOLD + "[" + classification.get(i) + "]" + ANSI_RESET);
         }
     }
 
