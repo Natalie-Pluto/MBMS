@@ -181,11 +181,11 @@ public class AppTest {
         assertNotNull(getOutput());
     }*/
 
-    @Test
+   /* @Test
     public void greetingTest() throws InterruptedException {
         BookingSystem.getGreeting(dbInstance);
         assertNotNull(getOutput());
-    }
+    }*/
 }
 
 
