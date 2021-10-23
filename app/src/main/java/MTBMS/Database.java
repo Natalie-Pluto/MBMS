@@ -142,4 +142,24 @@ public class Database {
 		return output;
 	}
 
+	public Date sql_getDate(String query, String column) {
+		Connection conn = null;
+		Date output;
+		String sql = query;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getDate(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+
 }

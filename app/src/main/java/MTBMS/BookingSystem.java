@@ -279,7 +279,7 @@ public class BookingSystem {
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Filter Movies\"" + ANSI_RESET);
         System.out.println("===============================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
-        // TODO: List all the upcoming Movies & times
+        GetUpcomingMovies.getUpcomingMovies(dbInstance);
         System.out.println("\n=================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
