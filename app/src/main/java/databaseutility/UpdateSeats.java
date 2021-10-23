@@ -2,7 +2,6 @@ package databaseutility;
 
 import MTBMS.Database;
 import utils.StringUtils;
-
 public class UpdateSeats {
     public void updateSeats(Database db, String cinemaName, String movieName, String startTime, String screenType, int numBooked, String seatLocation){
         if (StringUtils.isNotEmpty(cinemaName) && StringUtils.isNotEmpty(movieName)
