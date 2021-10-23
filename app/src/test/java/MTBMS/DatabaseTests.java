@@ -21,7 +21,7 @@ public class DatabaseTests {
 
 
 
-    /*@Test
+    @Test
     public void initializationTest(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
     }
@@ -31,7 +31,7 @@ public class DatabaseTests {
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
         addUser(d, "ali", "aaa", "c");
         assert (authenticate(d, "ali", "aaa"));
-    }*/
+    }
 
    /* @Test
     public void sql_UpdateTest(){
