@@ -1,4 +1,4 @@
-/* package databaseutility;
+ package databaseutility;
 
 import MTBMS.Database;
 
@@ -15,4 +15,4 @@ public class MovieNamesDisplay {
         }
     }
 }
- */
+ 
