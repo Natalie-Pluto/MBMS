@@ -3,14 +3,21 @@ import MTBMS.Database;
 import utils.StringUtils;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 // For listing upcoming movie in the default page
 public class GetUpcomingMovies {
     public static void getUpcomingMovies(Database db) {
         String query = "select * from moviebooking_db.upcomingmovie";
-        String name = db.sql_getString(query,"name");
-        String classification = db.sql_getString(query,"classification");
-        System.out.println(name + " " + PURPLE_BOLD +  "[" + classification + "]" + ANSI_RESET);
+        List<String> name = db.sql_getStrings(query,"name");
+        List<String> classification = db.sql_getStrings(query,"classification");
+        for (String n : name) {
+            System.out.print(n + " ");
+        }
+        for (String c : classification) {
+            System.out.println(PURPLE_BOLD + "[" + c + "]" + ANSI_RESET);
+        }
     }
 
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE

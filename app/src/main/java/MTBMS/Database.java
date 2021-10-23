@@ -65,7 +65,7 @@ public class Database {
 			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
-			if (result.next()) {
+			while (result.next()) {
 				output = result.getString(column);
 				res.add(output);
 			}
