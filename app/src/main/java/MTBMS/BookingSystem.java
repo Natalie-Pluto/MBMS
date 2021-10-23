@@ -22,7 +22,7 @@ public class BookingSystem {
         dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
                 "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
-        getGreeting();
+        getGreeting(dbInstance);
         options();
     }
 
@@ -138,7 +138,7 @@ public class BookingSystem {
                     login(newAcc, newPw);
                 } else {
                     instance.signinFailed();
-                    getGreeting();
+                    getGreeting(dbInstance);
                 }
             } else {
                 System.out.println(RED_BOLD + "Password not matching! (｡´︿`｡)" + ANSI_RESET);
@@ -149,7 +149,7 @@ public class BookingSystem {
 
     // Log out for the user, return to default page
     public static void logOut() throws InterruptedException {
-        getGreeting();
+        getGreeting(dbInstance);
         options();
     }
 
@@ -184,7 +184,7 @@ public class BookingSystem {
     public String backCheck1() throws InterruptedException {
         String name = username();
         if (name.equals("back")) {
-            getGreeting();
+            getGreeting(dbInstance);
             options();
         }
         return name;
@@ -193,7 +193,7 @@ public class BookingSystem {
     public String backCheck2() throws InterruptedException {
         String pw = password();
         if (pw.equals("back")) {
-            getGreeting();
+            getGreeting(dbInstance);
             options();
         }
         return pw;
@@ -336,10 +336,10 @@ public class BookingSystem {
         Thread.sleep(2000);
         System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
         Thread.sleep(2000);
-        getGreeting();
+        getGreeting(dbInstance);
     }
 
-    public static void getGreeting() {
+    public static void getGreeting(Database dbInstance) {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "    Welcome to Fancy Cinemas Official Website!!" + ANSI_RESET + "\n");
         System.out.println("    If you have an account, please sign in (｡･ω･｡)ﾉ ");

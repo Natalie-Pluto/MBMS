@@ -12,7 +12,8 @@ public class Timer {
     // Types are for identifying which interface should this user be taken to after input time out
     public static String timer(String type) throws InterruptedException {
         BlockingDeque<String> deque = new LinkedBlockingDeque<>();
-
+        Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         Thread thread = new Thread(() -> {
             Scanner scanner = new Scanner(System.in);
             String input;
@@ -43,7 +44,7 @@ public class Timer {
         if(str == null) {
             if (type.equals("g")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                BookingSystem.getGreeting();
+                BookingSystem.getGreeting(dbInstance);
                 BookingSystem.options();
             } else if (type.equals("c")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
