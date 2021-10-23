@@ -1,9 +1,10 @@
 package movieManagement;
 import MTBMS.Database;
+import databaseutility.AddingUpcomingMovie;
 import databaseutility.DeleteAllUpcoming;
 
+import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -50,7 +51,11 @@ public class UpdateUpcomingMovieTable {
             // Delete all rows in the table
             DeleteAllUpcoming.deleteUpcoming(dbInstance);
             // Add upcoming movies (movies that are going to be played 7 days after and 14 days before today)
-
+            try {
+                AddingUpcomingMovie.addUpcomingMovie(dbInstance);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
