@@ -274,7 +274,7 @@ public class BookingSystem {
 
 
     // Below are the print methods:
-    public static void defaultPage() {
+    public static void defaultPage(Database dbInstance) {
         System.out.println("===============================");
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Now Showing\"" + ANSI_RESET);
         System.out.println("===============================\n");
@@ -346,7 +346,7 @@ public class BookingSystem {
         System.out.println("    If you haven't joined us, you can sign up today! o(｀ω´ )o\n");
         System.out.println(PURPLE_BOLD + "    Enter 1 for \"Log in\"" + "            Enter 2 for \"Sign up\"" + ANSI_RESET);
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        defaultPage();
+        defaultPage(dbInstance);
     }
 
     public void signinFailed() throws InterruptedException {
