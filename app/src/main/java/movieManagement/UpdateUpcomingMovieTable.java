@@ -50,7 +50,9 @@ public class UpdateUpcomingMovieTable {
         public void run() {
             // Delete all rows in the table
             DeleteAllUpcoming.deleteUpcoming(dbInstance);
-            // Add upcoming movies (movies that are going to be played 7 days after and 14 days before today)
+            // Add upcoming movies
+            // The movie which it’s showing date is 7 days after this Monday and within future 14 days
+            // will be added into upcoming movie table
             try {
                 AddingUpcomingMovie.addUpcomingMovie(dbInstance);
             } catch (ParseException e) {

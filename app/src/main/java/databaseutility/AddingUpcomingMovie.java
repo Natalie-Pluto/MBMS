@@ -9,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 public class AddingUpcomingMovie {
-
+    // The movie which it’s showing date is 7 days after this Monday and within future 14 days
+    // will be added into upcoming movie table
     public static void addUpcomingMovie(Database db) throws ParseException {
         boolean updateStatus = false;
         List<String> names = GetMovieNames.getMovieNames(db);

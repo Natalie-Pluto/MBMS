@@ -1,6 +1,8 @@
 package MTBMS;
 
 import databaseutility.*;
+import movieManagement.UpdateUpcomingMovieTable;
+
 import java.util.Scanner;
 import static databaseutility.UserAuthenticate.authenticate;
 
@@ -24,6 +26,8 @@ public class BookingSystem {
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
+        // Update upcoming movie table every Monday at 6am
+        new UpdateUpcomingMovieTable();
     }
 
     public static void options() throws InterruptedException {
