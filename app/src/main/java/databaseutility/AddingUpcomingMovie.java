@@ -10,7 +10,8 @@ import java.util.List;
 
 public class AddingUpcomingMovie {
 
-    public static boolean addUpcomingMovie(Database db) throws ParseException {
+    public static void addUpcomingMovie(Database db) throws ParseException {
+        boolean updateStatus = false;
         List<String> names = GetMovieNames.getMovieNames(db);
         List<String> targetName = new ArrayList<>();
         SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd");
@@ -28,9 +29,15 @@ public class AddingUpcomingMovie {
                 e.printStackTrace();
             }
         }
-
-
-
-        return true;
+        for (String nn : targetName) {
+            String classification = GetMovieClassification.getMovieClassification(db, nn);
+            Date Sdate = GetMovieShowDate.getMovieShowDate(db, nn);
+            String updateArgs = "'" + nn +"', '" + classification + "', '" + Sdate + "'";
+            updateStatus = db.sql_update("insert into moviebooking_db.upcomingmovie values(" + updateArgs + ") on conflict (name) do nothing;;");
+            if(!updateStatus) {
+                System.out.println("Error happened when adding upcoming movies");
+                break;
+            }
+        }
     }
 }
