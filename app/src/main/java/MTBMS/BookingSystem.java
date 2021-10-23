@@ -139,6 +139,7 @@ public class BookingSystem {
                 } else {
                     instance.signinFailed();
                     getGreeting(dbInstance);
+                    options();
                 }
             } else {
                 System.out.println(RED_BOLD + "Password not matching! (｡´︿`｡)" + ANSI_RESET);
@@ -163,6 +164,29 @@ public class BookingSystem {
     public static String password() throws InterruptedException {
         System.out.println("Please enter your password:");
         return readPwd();
+    }
+
+    // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
+    static class EraserThread implements Runnable {
+        private boolean stop;
+        public EraserThread(String prompt) {
+            System.out.print(prompt);
+        }
+
+        public void run () {
+            stop = true;
+            while (stop) {
+                System.out.print("\010 ");
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        public void stopMasking() {
+            this.stop = false;
+        }
     }
 
 
@@ -248,29 +272,6 @@ public class BookingSystem {
         AddingUser.addUser(dbInstance, newAcc, newPw, "c");
     }
 
-
-    // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
-    static class EraserThread implements Runnable {
-        private boolean stop;
-        public EraserThread(String prompt) {
-            System.out.print(prompt);
-        }
-
-        public void run () {
-            stop = true;
-            while (stop) {
-                System.out.print("\010 ");
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        public void stopMasking() {
-            this.stop = false;
-        }
-    }
 
 
     // Below are the print methods:
