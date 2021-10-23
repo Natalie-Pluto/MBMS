@@ -1,6 +1,5 @@
 package databaseutility;
 
-
 import MTBMS.Database;
 import utils.StringUtils;
 
