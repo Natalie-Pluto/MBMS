@@ -1,9 +1,6 @@
 package databaseutility;
 import MTBMS.Database;
-import utils.StringUtils;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 // For listing upcoming movie in the default page

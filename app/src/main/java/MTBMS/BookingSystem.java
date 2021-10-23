@@ -1,6 +1,8 @@
 package MTBMS;
 
 import databaseutility.*;
+import movieManagement.ListNowShowing;
+import movieManagement.MovieDetails;
 import movieManagement.UpdateUpcomingMovieTable;
 
 import java.util.Scanner;
@@ -21,13 +23,15 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException {
         instance = new BookingSystem();
-        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+               // "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        // Update upcoming movie table every Monday at 6am
+        new UpdateUpcomingMovieTable();
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
-        // Update upcoming movie table every Monday at 6am
-        new UpdateUpcomingMovieTable();
     }
 
     public static void options() throws InterruptedException {
@@ -47,14 +51,28 @@ public class BookingSystem {
                 seperator();
                 break;
             case "3":
-                // TODO now showing
+                nowShowing();
+                options();
+                break;
+            case "4":
+                upcomingFilter();
+                options();
+                break;
+            case "5":
+                showingFilter();
+                options();
                 break;
             case "Carribean":
                 System.out.println("Test");
                 break;
             default:
-                wrongInput();
-                options();
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                    wrongInput();
+                    options();
+                } else {
+                    movieDetail(service);
+                    options();
+                }
                 break;
         }
 
@@ -157,6 +175,7 @@ public class BookingSystem {
         getGreeting(dbInstance);
         options();
     }
+
 
     // Get username
     public static String username() throws InterruptedException {
@@ -276,20 +295,56 @@ public class BookingSystem {
         AddingUser.addUser(dbInstance, newAcc, newPw, "c");
     }
 
+    public static void showingFilter() {
+        System.out.println(PURPLE_BOLD + "    Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+    }
+
+    public static void upcomingFilter() {
+        System.out.println(PURPLE_BOLD + "    Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+    }
+
+    public static void movieDetail(String name) {
+        seperator();
+        MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
+        System.out.println("\n===================================================================");
+        System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println("=====================================================================");
+        seperator();
+    }
+
 
 
     // Below are the print methods:
     public static void defaultPage(Database dbInstance) {
-        System.out.println("===============================");
-        System.out.println(PURPLE_BOLD + "Enter 3 for \"Now Showing\"" + ANSI_RESET);
-        System.out.println("===============================\n");
+        System.out.println("=====================================================================");
+        System.out.println(PURPLE_BOLD + "    Enter 3 for \"Now Showing\"" + "       " + "Enter 4 for \"Filter\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "    Enter movie name for more details" + ANSI_RESET);
+        System.out.println("=====================================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
-        System.out.println("\n=================================================");
+        System.out.println("\n=====================================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
-        System.out.println("=================================================");
+        System.out.println("=====================================================================");
+        seperator();
+    }
+
+    // List all now showing
+    public static void nowShowing() {
+        seperator();
+        System.out.println("=====================================================================");
+        System.out.println(PURPLE_BOLD + "   Enter 5 for \"Filter\"" + "      " + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println("=====================================================================\n");
+        System.out.println(YELLOW_BOLD_BRIGHT + "<<Now Showing!>>"   + ANSI_RESET);
+        ListNowShowing.listNowShowing(dbInstance);
+        System.out.println("\n===================================================================");
+        System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println("=====================================================================");
         seperator();
     }
 
@@ -336,7 +391,10 @@ public class BookingSystem {
         System.out.println("Please enter:");
         System.out.println("1 - for log in");
         System.out.println("2 - for sign up");
-        System.out.println("3 - for filter movies");
+        System.out.println("3 - for now showing");
+        System.out.println("4 - for filter upcoming movies");
+        System.out.println("5 - for filter now showing movies");
+        System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
         Thread.sleep(2000);
         System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);

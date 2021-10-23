@@ -18,22 +18,23 @@ public class AddingUpcomingMovie {
         SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd");
         for (String n : names) {
             try {
-                Date date = obj.parse(GetMovieShowDate.getMovieShowDate(db, n).toString());
+                Date date = obj.parse(GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''")).toString());
                 // Current date
                 Date currDate = obj.parse(new Date().toString());
-                long difference = date.getTime() - currDate.getTime();
-                if (difference > 7 && difference < 14) {
-                    targetName.add(n);
+                if (date != null) {
+                    long difference = date.getTime() - currDate.getTime();
+                    if (difference > 7 && difference < 14) {
+                        targetName.add(n);
+                    }
                 }
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
         for (String nn : targetName) {
-            String classification = GetMovieClassification.getMovieClassification(db, nn);
-            Date Sdate = GetMovieShowDate.getMovieShowDate(db, nn);
-            String updateArgs = "'" + nn +"', '" + classification + "', '" + Sdate + "'";
+            String classification = GetMovieClassification.getMovieClassification(db, nn.replace("'", "''"));
+            Date Sdate = GetMovieShowDate.getMovieShowDate(db, nn.replace("'", "''"));
+            String updateArgs = "'" + nn.replace("'", "''") +"', '" + classification + "', '" + Sdate + "'";
             updateStatus = db.sql_update("insert into moviebooking_db.upcomingmovie values(" + updateArgs + ") on conflict (name) do nothing;;");
             if(!updateStatus) {
                 System.out.println("Error happened when adding upcoming movies");

@@ -72,7 +72,6 @@ public class Database {
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		return res;
@@ -156,7 +155,6 @@ public class Database {
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		return output;

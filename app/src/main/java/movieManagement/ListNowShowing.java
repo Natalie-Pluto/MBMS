@@ -14,10 +14,12 @@ public class ListNowShowing {
         Date currDate = new Date();
         List<String> name = GetMovieNames.getMovieNames(db);
         for(String n : name) {
-            Date showDate = GetMovieShowDate.getMovieShowDate(db, n);
-            if (currDate.after(showDate)) {
-                String classification = GetMovieClassification.getMovieClassification(db, n);
-                System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+            Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+            if (showDate != null) {
+                if (currDate.after(showDate)) {
+                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
+                    System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+                }
             }
         }
     }
