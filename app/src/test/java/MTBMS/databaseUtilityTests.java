@@ -27,7 +27,7 @@ import static databaseutility.GetMovieClassification.getMovieClassification;
 import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
-/*public class databaseUtilityTests {
+public class databaseUtilityTests {
     static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
     "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
@@ -80,11 +80,12 @@ import databaseutility.MovieInsertionBuilder;
         assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
-    @Test
+    /* @Test
     public void C1() {
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
         inserter.insertMovie();
+        System.out.println(checkIfMovieExists(dbInstance, "vscode, the movie" + " hehe"));
         String initialDirectors = getDirectors(dbInstance, "vscode, the movie");
         String newDirectors = initialDirectors + " ali";
         changeDirectors(dbInstance, "vscode, the movie", newDirectors);
@@ -115,7 +116,7 @@ import databaseutility.MovieInsertionBuilder;
         inserter.insertMovie();
         changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
-    }
+    } */
 
     @Test
     public void D3() {
@@ -185,4 +186,4 @@ import databaseutility.MovieInsertionBuilder;
         inserter.insertMovie();
         assert(countMovies(dbInstance)>0);
     }
-}*/
+}
