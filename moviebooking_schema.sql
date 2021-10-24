@@ -57,7 +57,7 @@ CREATE TABLE Cinema_Session (
     screen_type VARCHAR(6) NOT NULL,
     movie varchar(100) NOT NULL REFERENCES Movie(name),
     ticket_price_kids DECIMAL(10,4) NOT NULL,
-    ticket_price_adults DECIMAL(10,4) NOT NULL,
+    DECIMAL(10,4) NOT NULL,
     ticket_price_seniors DECIMAL(10,4) NOT NULL,
     number_of_front_seats_booked INT,
     number_of_mid_seats_booked INT,
