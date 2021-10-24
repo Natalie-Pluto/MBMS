@@ -56,15 +56,18 @@ public class BookingSystem {
                 options();
                 break;
             case "4":
-                upcomingFilter();
-                options();
+                filterMovie("U" + upcomingFilter());
                 break;
             case "5":
-                showingFilter();
-                options();
+                filterMovie("S" + showingFilter());
                 break;
             case "Carribean":
                 System.out.println("Test");
+                break;
+            case "return":
+                seperator();
+                defaultPage(dbInstance);
+                options();
                 break;
             default:
                 if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
@@ -190,6 +193,35 @@ public class BookingSystem {
         return readPwd();
     }
 
+    // "U6" -> filter upcoming movies via cinema
+    // "U7" -> filter upcoming movies via screen size
+    // "S6" -> filter now showing movies via cinema
+    // "S7" -> filter now showing movies via screen size
+    public static void filterMovie(String type) throws InterruptedException {
+        if(type.equals("U6")) {
+            // TODO filter upcoming movies via cinema name
+        } else if (type.equals("U7")) {
+            // TODO filter upcoming movies via screen size
+        } else if (type.equals("S6")) {
+            // TODO filter now showing movies via cinema name
+        } else if (type.equals("S7")) {
+            // TODO filter now showing movies via screen size
+        } else {
+            seperator();
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            if (type.contains("U")) {
+                defaultPage(dbInstance);
+                options();
+            } else if (type.contains("S")) {
+                nowShowing();
+                options();
+            }
+        }
+
+    }
+
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
     static class EraserThread implements Runnable {
         private boolean stop;
@@ -296,12 +328,18 @@ public class BookingSystem {
         AddingUser.addUser(dbInstance, newAcc, newPw, "c");
     }
 
-    public static void showingFilter() {
-        System.out.println(PURPLE_BOLD + "    Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+    public static String showingFilter() throws InterruptedException {
+        seperator();
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        seperator();
+        return Timer.timer("g");
     }
 
-    public static void upcomingFilter() {
-        System.out.println(PURPLE_BOLD + "    Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+    public static String upcomingFilter() throws InterruptedException {
+        seperator();
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        seperator();
+        return Timer.timer("g");
     }
 
     public static void movieDetail(String name) {
@@ -311,6 +349,8 @@ public class BookingSystem {
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for \"Now Showing\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println("=====================================================================");
         seperator();
     }
@@ -319,6 +359,7 @@ public class BookingSystem {
 
     // Below are the print methods:
     public static void defaultPage(Database dbInstance) {
+        seperator();
         System.out.println("=====================================================================");
         System.out.println(PURPLE_BOLD + "    Enter 3 for \"Now Showing\"" + "       " + "Enter 4 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "    Enter movie name for more details" + ANSI_RESET);
@@ -345,6 +386,7 @@ public class BookingSystem {
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println("=====================================================================");
         seperator();
     }
@@ -398,9 +440,6 @@ public class BookingSystem {
         System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
         Thread.sleep(2000);
-        System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
-        Thread.sleep(2000);
-        getGreeting(dbInstance);
     }
 
     public static void getGreeting(Database dbInstance) {
@@ -409,7 +448,6 @@ public class BookingSystem {
         System.out.println("    If you have an account, please sign in (｡･ω･｡)ﾉ ");
         System.out.println("    If you haven't joined us, you can sign up today! o(｀ω´ )o\n");
         System.out.println(PURPLE_BOLD + "    Enter 1 for \"Log in\"" + "            Enter 2 for \"Sign up\"" + ANSI_RESET);
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         defaultPage(dbInstance);
     }
 
