@@ -67,7 +67,7 @@ CREATE TABLE Cinema_Session (
     back_seat_capacity INT,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    ticket_price_student DECIMAL(10,4) NOT NULL,
+    ticket_price_students DECIMAL(10,4) NOT NULL,
     UNIQUE(cinema, screen_type, movie, start_time)
 );
 
