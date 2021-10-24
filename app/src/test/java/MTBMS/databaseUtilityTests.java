@@ -10,12 +10,11 @@ import static databaseutility.CheckStaff.isManager;
 import static databaseutility.CheckStaff.isStaff;
 import static databaseutility.DirectorChanger.changeDirectors;
 import static databaseutility.MovieClassificationChanger.changeMovieClassification;
-//import static databaseutility.MovieColumnsDisplay.displayMovieColumns;
 import static databaseutility.MovieNameChanger.changeMovieName;
 //import static databaseutility.MovieNamesDisplay.displayMovieNames;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
-//import static databaseutility.SynopsisChanger.changeSynopsis;
+import static databaseutility.SynopsisChanger.changeSynopsis;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.RemovingMovie.removeMovie;
@@ -126,7 +125,7 @@ public class databaseUtilityTests {
 
     @Test 
     public void E1() {
-
+        
     }
 
     @Test

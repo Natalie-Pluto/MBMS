@@ -1,29 +1,30 @@
-This file describes each test case in databaseUtilityTests.java.
+This file describes each test case in databaseUtilityTests.java. databaseutilityTests.java tests the 
+classes in the databaseutility package.
 
-The structure of this file is upper-case letter for functionality e.g. A, then for example, A1 for one case
+The structure of this file is upper-case letter for databaseutility class (i.e. functionality) e.g. A, then for example, A1 for one case
 of functionality A.
 
-A. Adding and removing users
+A. AddingUser and RemovingUser
 A1. Adding a user with a username which does not already exist.
 A2. Attempting to add a user with a username which already exists does not cause error.
 A3. Attempting to remove a user which does not exist does not cause error.
 A4. Removing a user which exists
 
-B. Checking if a user is a staff member
+B. CheckStaff
 B1. checking if a user which is a staff member is a staff member.
 B2. checking if a user which exists and is not a staff member is not a staff member.
 B3. Checking if a user which does not exist is not a staff member.
 
-C. Changing the directors of a movie
+C. DirectorChanger
 C1. changing directors of a movie that exists 
 C2. attempting to change the director of a movie that does not exist does not cause error.
 
-D. Changing movie classification
+D. MovieClassificationChanger
 D1. Changing movie classification to a valid classification
 D2. Changing movie classification to an invalid classification does not change classification
 D3. Attempting to change the movie classification of a movie that does not exist does not cause error.
 
-E. Displaying movie columns
+E. MovieColumnsDisplay
 E1. Checking if correct movie columns are displayed when there are movies in the database
 
 F. Inserting movies and removing movies
