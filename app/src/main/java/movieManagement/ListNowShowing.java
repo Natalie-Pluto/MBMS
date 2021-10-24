@@ -4,23 +4,18 @@ import MTBMS.Database;
 import databaseutility.GetMovieClassification;
 import databaseutility.GetMovieNames;
 import databaseutility.GetMovieShowDate;
+import databaseutility.GetNowShowing;
 
 import java.util.Date;
 import java.util.List;
 
 public class ListNowShowing {
     public static void listNowShowing(Database db) {
-        // Current date
-        Date currDate = new Date();
-        List<String> name = GetMovieNames.getMovieNames(db);
+        List<String> name = GetNowShowing.getNowShowing(db);
         for(String n : name) {
+            String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
-            if (showDate != null) {
-                if (currDate.after(showDate)) {
-                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-                    System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
-                }
-            }
+            System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
         }
     }
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
