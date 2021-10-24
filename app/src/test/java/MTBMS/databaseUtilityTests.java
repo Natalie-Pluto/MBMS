@@ -80,7 +80,7 @@ public class databaseUtilityTests {
         assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
-    /* @Test
+    @Test
     public void C1() {
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
@@ -116,7 +116,7 @@ public class databaseUtilityTests {
         inserter.insertMovie();
         changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
-    } */
+    } 
 
     @Test
     public void D3() {
