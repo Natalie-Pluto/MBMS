@@ -5,6 +5,7 @@ import movieManagement.ListNowShowing;
 import movieManagement.MovieDetails;
 import movieManagement.UpdateUpcomingMovieTable;
 
+import java.text.ParseException;
 import java.util.Scanner;
 import static databaseutility.UserAuthenticate.authenticate;
 
@@ -21,12 +22,12 @@ public class BookingSystem {
     private static BookingSystem instance;
     private static Database dbInstance;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-               // "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+               "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list

@@ -13,25 +13,8 @@ public class AddingUpcomingMovie {
     // will be added into upcoming movie table
     public static void addUpcomingMovie(Database db) throws ParseException {
         boolean updateStatus = false;
-        List<String> names = GetMovieNames.getMovieNames(db);
-        List<String> targetName = new ArrayList<>();
-        SimpleDateFormat obj = new SimpleDateFormat("yyyy-MM-dd");
-        for (String n : names) {
-            try {
-                Date date = obj.parse(GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''")).toString());
-                // Current date
-                Date currDate = obj.parse(new Date().toString());
-                if (date != null) {
-                    long difference = date.getTime() - currDate.getTime();
-                    if (difference > 7 && difference < 14) {
-                        targetName.add(n);
-                    }
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-        for (String nn : targetName) {
+        List<String> names = GetNewUpcomingMovie.getNewUpcomingMovie(db);
+        for (String nn : names) {
             String classification = GetMovieClassification.getMovieClassification(db, nn.replace("'", "''"));
             Date Sdate = GetMovieShowDate.getMovieShowDate(db, nn.replace("'", "''"));
             String updateArgs = "'" + nn.replace("'", "''") +"', '" + classification + "', '" + Sdate + "'";
