@@ -61,7 +61,7 @@ public class BookingSystem {
             case "5":
                 filterMovie("S" + showingFilter());
                 break;
-            case "Carribean":
+            case "Caribbean":
                 System.out.println("Test");
                 break;
             case "return":
@@ -102,7 +102,7 @@ public class BookingSystem {
             } else {
                 instance.loginGreeting("c", accName);
                 Guest customer = new Guest(accName, "C", " ");
-                customer.guestService("C");
+                customer.guestService();
             }
         }
     }
@@ -380,7 +380,7 @@ public class BookingSystem {
         seperator();
     }
 
-    public static void filterMsg(String type, String value) {
+    public static void filterMsg(String type, String value) throws InterruptedException {
         if (type.equals("a")) {
             seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);

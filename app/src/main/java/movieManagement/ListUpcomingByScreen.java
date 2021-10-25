@@ -1,10 +1,7 @@
 package movieManagement;
 
 import MTBMS.Database;
-import databaseutility.FilterScreenSize;
-import databaseutility.FilterUpcomingScreen;
-import databaseutility.GetMovieClassification;
-import databaseutility.GetMovieShowDate;
+import databaseutility.*;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +12,15 @@ public class ListUpcomingByScreen {
     public static void listUpcomingByScreen(Database db, String screenType) {
         List<String> name = FilterUpcomingScreen.filterUpcomingScreen(db, screenType);
         if(name.isEmpty()) {
-            System.out.println("\n=======================================================");
-            System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
-            System.out.println("=======================================================\n");
+            if(!CheckScreenTypeExist.checkScreenExist(db,screenType)) {
+                System.out.println("\n========================================================");
+                System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("========================================================\n");
+            } else {
+                System.out.println("\n==============================================================================");
+                System.out.println(RED_BOLD + "Sorry no upcoming movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("==============================================================================\n");
+            }
         } else {
             for (String n : name) {
                 String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));

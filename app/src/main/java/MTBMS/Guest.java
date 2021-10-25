@@ -1,5 +1,7 @@
 package MTBMS;
 import databaseutility.*;
+import movieManagement.ListNowShowing;
+
 import java.util.regex.*;
 
 
@@ -13,11 +15,8 @@ public class Guest {
     private String username;
     private String identity;
     private String settings;
-    private BookingSystem BS = new BookingSystem();
-    //Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                                      //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
-    Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
@@ -30,74 +29,53 @@ public class Guest {
     //     You should use this method to accept further user's input, create suitable CLI to interact with the user.
     //     It's kinda like a main method for guest class
     //     */
-    public void guestService(String identity) throws InterruptedException {
-        Scanner input = new Scanner(System.in);
-        if (identity.equals("G")){
-            // Guests can only view movies
-            // They can choose to filter movies
-            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            System.out.println("======================================================");
-            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"   2 for \"Sign Up\""  + ANSI_RESET);
-            System.out.println("======================================================\n");
-            String  input1 = input.next();
-            if (input1.equals("1")) {
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                //TODO: Implement filter method
-                filterMovies();
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            } else if (input1.equals("2")) {
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                BookingSystem user = new BookingSystem();
-                user.signUp("C");
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            } else {
+    public void guestService() throws InterruptedException {
+        customerHomePage();
+        Scanner input1 = new Scanner(System.in);
+        String customerInput1 = input1.next();
+        switch (customerInput1) {
+            case "1":
+
+                break;
+            case "2":
+                book();
+                break;
+
+            default:
                 System.out.println("============================================");
                 System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("============================================\n");
                 Thread.sleep(2000);
                 System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
                 Thread.sleep(2000);
-                guestService("G");
-            }
+                guestService();
 
-            // For Customer
-        }else if (identity.equals("C")){
-            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            System.out.println("======================================================");
-            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"   2 for \"Book Tickets\""  + ANSI_RESET);
-            System.out.println("======================================================\n");
-            // TODO: List all the upcoming Movies & times
-            System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
-            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            Scanner input1 = new Scanner(System.in);
-            String customerInput1 = input1.next();
-            switch (customerInput1){
-                case "1":
-                    //Implement filter method
-                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    filterMovies();
-                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                    break;
+                //Ask users to continue using or close the service
+                continueService();
 
-                case "2":
-                    book();
-                    break;
-
-                default:
-                    System.out.println("============================================");
-                    System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
-                    System.out.println("============================================\n");
-                    Thread.sleep(2000);
-                    System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
-                    Thread.sleep(2000);
-                    guestService("C");
-            }
         }
-
-        //Ask users to continue using or close the service
-        continueService();
-
     }
+
+    public static void customerHomePage() {
+        BookingSystem.seperator();
+        System.out.println("======================================================");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Now Showing\"   Enter 2 for \"Filter\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println("======================================================\n");
+        System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>" + ANSI_RESET);
+        GetUpcomingMovies.getUpcomingMovies(dbInstance);
+        BookingSystem.seperator();
+    }
+
+    public static void nowShowingCus() {
+        System.out.println("=====================================================================");
+        System.out.println(PURPLE_BOLD + "   Enter 5 for \"Filter\"" + "      " + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println("=====================================================================\n");
+        System.out.println(YELLOW_BOLD_BRIGHT + "<<Now Showing!>>"   + ANSI_RESET);
+        ListNowShowing.listNowShowing(dbInstance);
+    }
+
     public void continueService() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
@@ -108,7 +86,7 @@ public class Guest {
         String service = input.nextLine();
         switch (service) {
             case "1":
-                guestService(identity);
+                guestService();
                 break;
 
             case "2":
@@ -230,6 +208,7 @@ public class Guest {
 
         }
     }
+
     public int getPaymentType() {
         Scanner input = new Scanner(System.in);
         System.out.println("Which payment do you want to make?");
@@ -326,7 +305,7 @@ public class Guest {
                     //update new password to database
                     ChangingUserPassword.changeUserPassword(dbInstance, username, newPwd_1);
                     System.out.println("Password changed, please login again");
-                    guestService(identity);
+                    guestService();
                 }else {
                     System.out.println("Two Passwords do not match, please try again");
                     personalInfoUpdate(opt);
@@ -375,25 +354,21 @@ public class Guest {
         // TODO
     }
 
-    // Regular
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
+        // Regular
+        public static final String ANSI_RESET = "\u001B[0m";
+        public static final String ANSI_PURPLE = "\u001B[35m";
 
 
-    // Bold
-    public static final String RED_BOLD = "\033[1;31m";    // RED
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+        // Bold
+        public static final String RED_BOLD = "\033[1;31m";    // RED
+        public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
 
-    // Background
-    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
+        // Background
+        public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
 
-    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+
+        // Bold High Intensity
+        public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+        public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
 
 }

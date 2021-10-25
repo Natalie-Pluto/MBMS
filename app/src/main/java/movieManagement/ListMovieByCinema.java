@@ -1,5 +1,6 @@
 package movieManagement;
 
+import MTBMS.BookingSystem;
 import MTBMS.Database;
 import databaseutility.*;
 
@@ -9,12 +10,18 @@ import java.util.List;
 import static MTBMS.BookingSystem.RED_BOLD;
 
 public class ListMovieByCinema {
-    public static void listMovieByCinema(Database db, String cinema) {
+    public static void listMovieByCinema(Database db, String cinema) throws InterruptedException {
         List<String> name = FilterCinema.filterCinema(db, cinema);
         if (name.isEmpty()) {
-            System.out.println("\n=======================================================");
-            System.out.println(RED_BOLD + "Wrong input, please check the cinema name entered (｡´︿`｡)" + ANSI_RESET);
-            System.out.println("=======================================================\n");
+            if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
+                System.out.println("\n========================================================");
+                System.out.println(RED_BOLD + "Wrong input, please check the cinema name entered (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("========================================================\n");
+            } else {
+                System.out.println("\n========================================================");
+                System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("========================================================\n");
+            }
         } else {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
             for (String n : name) {
