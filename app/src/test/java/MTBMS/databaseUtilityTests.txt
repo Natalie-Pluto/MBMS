@@ -45,9 +45,31 @@ AddMovieSession_2 Inserting a session with a session id that does not already ex
 ChangeSeatCapacity_1 Attempt to change cinema capacity with a parameter combination that does not map to a unique session
 ChangeSeatCapacity_2 Changing the seat capacity with a parameter combination that maps to a unique session works 
 
+ChangingCreditCardBalance_1 changing the balance on a credit card that exists works
+ChangingCreditCardBalance_2 attempting the change the balance of a credit card that does not exist does not cause issues
 
+ChangingIdentity_1 changing the identity of a user that exists works
+ChangingIdentity_2 attempting the change the identity of a user that does not exist does not cause issues
 
+ChangingUserPassword_1 changing the user password of a user that exists works
+ChangingUserPassword_2 attempting the change the password of a user that does not exist does not cause issues
 
+CheckIfMovieExists_1 checking if a movie that exists, exists
+CheckIfMovieExists_2 checking if a movie that does not exist, does not exist
+
+CheckIfUserExists_1 checking if a user exists, exists
+CheckingIfUserExists_2 checking if a user does not exist, does not exist
+
+DeleteAllUpcoming_1 checking that all entries in the table for upcoming movies are deleted
+
+FilterCinema_1 (todo)
+
+FilterScreenSize_1 (todo)
+
+GetEndTime_1 the end time of a session that exists can be retrieved
+GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
+
+// ignore anything under this comment
 
 F. Inserting movies and removing movies
 F1. Inserting a movie with no classification should not work
