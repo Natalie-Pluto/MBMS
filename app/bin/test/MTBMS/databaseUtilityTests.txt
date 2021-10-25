@@ -1,36 +1,39 @@
-This file describes each test case in databaseUtilityTests.java.
+This file describes the tests for the classes in the databaseutility package
+The line format of the test descriptions: <<databaseutility class>_<number>> <description>
 
-The structure of this file is upper-case letter for functionality e.g. A, then for example, A1 for one case
-of functionality A.
+AddingUser_1 Adding a user with a username which does not already exist
+AddingUser_2 Attempting to add a user with a username which already exist does not cause error
 
-A. Adding and removing users
-A1. Adding a user with a username which does not already exist.
-A2. Attempting to add a user with a username which already exists does not cause error.
-A3. Attempting to remove a user which does not exist does not cause error.
-A4. Removing a user which exists
+RemovingUser_1 Attempting to remove a user which does not exist does not cause error
+RemovingUser_2 Removing a user which exists
 
-B. Checking if a user is a staff member
-B1. checking if a user which is a staff member is a staff member.
-B2. checking if a user which exists and is not a staff member is not a staff member.
-B3. Checking if a user which does not exist is not a staff member.
+CheckStaff_1 checking if a user which is a staff member is a staff member
+CheckStaff_2 checking if a user which exists and is not a staff member is not a staff member
+CheckStaff_3 Checking if a user which does not exist is not a staff member.
 
-C. Changing the directors of a movie
-C1. changing directors of a movie that exists 
-C2. attempting to change the director of a movie that does not exist does not cause error.
+DirectorChanger_1 changing directors of a movie that exists 
+DirectorChanger_2 attempting to change the director of a movie that does not exist does not cause error.
 
-D. Changing movie classification
-D1. Changing movie classification to a valid classification
-D2. Changing movie classification to an invalid classification does not change classification
-D3. Attempting to change the movie classification of a movie that does not exist does not cause error.
+MovieClassificationChanger_1 Changing movie classification to a valid classification
+MovieClassificationChanger_2 Changing movie classification to an invalid classification does not change classification
+MovieClassificationChanger_3 Attempting to change the movie classification of a movie that does not exist does not cause error.
 
-E. Displaying movie columns
-E1. Checking if correct movie columns are displayed when there are movies in the database
+MovieInsertionBuilder_1 Attempting to insert a movie without classification
+MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors
+MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors
+MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis
+MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis
+MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date
+MovieInsertionBuilder_7 Inserting a movie with classifcation an synopsis but without release date or directors
+MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis
+MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis
+
 
 F. Inserting movies and removing movies
 F1. Inserting a movie with no classification should not work
 F2. Inserting a movie with classification
 F3. Removing a movie that exists
-F4. Attempting to remove a movie that does not exist should cause error
+F4. Attempting to remove a movie that does not exist should not cause error
 
 G. Changing movie's name
 G1. changing existing movie's named
