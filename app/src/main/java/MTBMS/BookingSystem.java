@@ -202,8 +202,6 @@ public class BookingSystem {
     public static void filterMovie(String type) throws InterruptedException {
         if(type.equals("U6")) {
             // TODO filter upcoming movies via cinema name
-        } else if (type.equals("U7")) {
-            // TODO filter upcoming movies via screen size
         } else if (type.equals("S6")) {
             // TODO filter now showing movies via cinema name
         } else if (type.equals("S7")) {
@@ -339,7 +337,7 @@ public class BookingSystem {
 
     public static String upcomingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }

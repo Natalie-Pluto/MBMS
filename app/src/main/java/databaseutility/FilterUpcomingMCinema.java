@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FilterUpcomingMCinema {
-    public static List<String> filterUpcomingCinema(Database db, String movieName){
-        if (movieName == null || movieName.length() == 0){
+    public static List<String> filterUpcomingCinema(Database db, String cinema){
+        if (cinema == null || cinema.length() == 0){
             return new ArrayList<>();
         }else {
-            return db.sql_getStrings("select name from moviebooking_db.movie where name = " + movieName + ";", "name");
+            return db.sql_getStrings("select distinct name from moviebooking_db.upcomingmovie join moviebooking_db.cinema_session on (name = movie) where cinema = '" + cinema + "'", "name");
         }
     }
 }
