@@ -136,6 +136,7 @@ public class Guest {
         BookingSystem.seperator();
         BookingSystem.listCinema();
         String cinema = Timer.timer("c");
+        BookingSystem.seperator();
         ListMovieByCinema.listMovieByCinema(dbInstance, cinema);
         book();
     }
