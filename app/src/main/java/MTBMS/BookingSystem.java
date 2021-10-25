@@ -1,9 +1,7 @@
 package MTBMS;
 
 import databaseutility.*;
-import movieManagement.ListNowShowing;
-import movieManagement.MovieDetails;
-import movieManagement.UpdateUpcomingMovieTable;
+import movieManagement.*;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -201,16 +199,23 @@ public class BookingSystem {
     // "S7" -> filter now showing movies via screen size
     public static void filterMovie(String type) throws InterruptedException {
         if(type.equals("U6")) {
-            // TODO filter upcoming movies via cinema name
+            listCinema();
+            String cinema = Timer.timer("g");
+            filterMsg("a", cinema);
+        } else if (type.equals("U7")) {
+            listScreen();
+            String screen = Timer.timer("g");
+            filterMsg("b", screen);
         } else if (type.equals("S6")) {
-            // TODO filter now showing movies via cinema name
+            listCinema();
+            String cinemaName = Timer.timer("g");
+            filterMsg("c", cinemaName);
         } else if (type.equals("S7")) {
-            // TODO filter now showing movies via screen size
+            listScreen();
+            String size = Timer.timer("g");
+            filterMsg("d", size);
         } else {
-            seperator();
-            System.out.println("\n============================================");
-            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
-            System.out.println("============================================\n");
+            filterMsg("e", " ");
             if (type.contains("U")) {
                 defaultPage(dbInstance);
                 options();
@@ -337,7 +342,7 @@ public class BookingSystem {
 
     public static String upcomingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }
@@ -355,6 +360,48 @@ public class BookingSystem {
         seperator();
     }
 
+    public static void listCinema() {
+        seperator();
+        System.out.println("Please select a cinema:");
+        System.out.println("Warringah Mall");
+        System.out.println("Town Hall");
+        System.out.println("Eastgarden");
+        System.out.println("Blacktown");
+        seperator();
+    }
+
+    public static void listScreen() {
+        System.out.println("Please select a screen size:");
+        System.out.println("Gold");
+        System.out.println("Sliver");
+        System.out.println("Bronze");
+        seperator();
+    }
+
+    public static void filterMsg(String type, String value) {
+        if (type.equals("a")) {
+            ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
+            msg();
+            seperator();
+        } else if (type.equals("b")) {
+            ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
+            msg();
+            seperator();
+        } else if (type.equals("c")) {
+            ListMovieByCinema.listMovieByCinema(dbInstance, value);
+            msg();
+            seperator();
+        } else if (type.equals("d")) {
+            ListMovieByScreen.listMovieByScreen(dbInstance, value);
+            msg();
+            seperator();
+        } else if (type.equals("e")){
+            seperator();
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+        }
+    }
 
 
     // Below are the print methods:
@@ -366,12 +413,16 @@ public class BookingSystem {
         System.out.println("=====================================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
+        msg();
+        seperator();
+    }
+
+    public static void msg() {
         System.out.println("\n=====================================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
         System.out.println("=====================================================================");
-        seperator();
     }
 
     // List all now showing

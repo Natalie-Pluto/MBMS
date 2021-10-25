@@ -9,9 +9,16 @@ import databaseutility.GetMovieShowDate;
 import java.util.Date;
 import java.util.List;
 
+import static MTBMS.BookingSystem.RED_BOLD;
+
 public class ListUpcomingByScreen {
     public static void listUpcomingByScreen(Database db, String screenType) {
         List<String> name = FilterUpcomingScreen.filterUpcomingScreen(db, screenType);
+        if(name == null) {
+            System.out.println("\n=======================================================");
+            System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("=======================================================\n");
+        }
         for (String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
