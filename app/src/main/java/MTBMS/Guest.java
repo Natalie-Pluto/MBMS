@@ -1,5 +1,7 @@
 package MTBMS;
+import movieManagement.*;
 import databaseutility.*;
+import java.util.regex.*;
 
 
 import javax.print.attribute.AttributeSetUtilities;
@@ -35,9 +37,10 @@ public class Guest {
         if (identity.equals("G")){
             // Guests can only view movies
             // They can choose to filter movies
-
-
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+            System.out.println("======================================================");
+            System.out.println(PURPLE_BOLD + "Enter 1 for \"Filter Movies\"   2 for \"Sign Up\""  + ANSI_RESET);
+            System.out.println("======================================================\n");
             Scanner input = new Scanner(System.in);
             String  input1 = input.next();
             if (input1.equals("1")) {
@@ -72,20 +75,13 @@ public class Guest {
             String customerInput1 = input1.next();
             switch (customerInput1){
                 case "1":
-                    //TODO: Implement filter method
+                    //Implement filter method
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     filterMovies();
                     System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
                     break;
                 case "2":
-                    //TODO: Implement book method
-                    System.out.println("Please enter the movie name that you wish to book");
-                    Scanner input2 = new Scanner(System.in);
-                    String movieName = input2.next();
-                    System.out.println("Please enter the cinema name that you wish to go to");
-                    Scanner input3 = new Scanner(System.in);
-                    String cinemaName = input3.next();
-                    book(movieName, cinemaName);
+                    book();
                     break;
 
                 default:
@@ -111,34 +107,36 @@ public class Guest {
         // TODO: Ask user how they wanna filter the movies and filter the movies of their choice
         Scanner input = new Scanner(System.in);
         System.out.println("Do you want to filter movies by");
-        System.out.println("1.Names        2.Times        3.Cinema Name        4.Classification        5.Genre");
+        System.out.println("1.Names        2.Screen Size        3.Cinema Name        4.Classification        5.Genre");
         String filterType = input.next();
         switch (filterType){
             case "1":
                 System.out.println("Please enter the name of the movie");
-               // String movieName = input.next();
+                String movieName = input.next();
+                FilterMovieName.filterMovieName(dbInstance, movieName);
                 break;
 
             case "2":
-                System.out.println("");
-                //
+                System.out.println("Please enter the size of the screen you want to filter");
+                String screenType = input.next();
+                FilterScreenSize.filterScreenSize(dbInstance, screenType);
                 break;
 
             case "3":
                 System.out.println("Please enter the name of the cinema");
-                //String cinemaName = input.next();
-                //
+                String cinemaName = input.next();
+                FilterCinema.filterCinema(dbInstance, cinemaName);
                 break;
             case "4":
                 System.out.println("Which Classification do you want to filter?");
-                //String classification = input.next();
-                //
+                String classification = input.next();
+                FilterClassification.filterClassification(dbInstance, classification);
                 break;
 
             case "5":
                 System.out.println("What type of movie do you want to filter?");
-                //String genre = input.next();
-                //
+                String genre = input.next();
+                FilterGenre.filterGenre(dbInstance, genre);
                 break;
 
             default:
@@ -151,30 +149,73 @@ public class Guest {
     // This method will call methods in movie class
     // It will allow user to book movie tickets.
     // Note: only customer can use this service.
-    public void book (String movieName, String cinemaName) {
-        System.out.println("");
-        Scanner scan = new Scanner(System.in);
-        int paymentType = scan.nextInt();
-        if(checkPayment(paymentType)){
+    public void book() {
+        System.out.println("Please enter the movie name that you wish to book");
+        Scanner input = new Scanner(System.in);
+        String movieName = input.next();
+        System.out.println("Please enter the cinema name that you wish to go to");
+        String cinemaName = input.next();
+        if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)){
+            System.err.println("Movie " + movieName + "does not exist, please enter the correct movie name");
+            book();
+            return;
+        }
+        if (!CheckIfCinemaExists.checkIfCinemaExists(dbInstance, cinemaName)){
+            System.err.println("Cinema " + cinemaName + "does not exist, please enter the correct cinema name");
+            book();
+            return;
+        }
+        System.out.println("Which payment do you want to make?");
+        System.out.println("1.Credit Card       2.Gift Card");
+        int paymentType = input.nextInt();
+        if (checkPayment(paymentType)){
         //TODO
-        }else System.out.println("");
+        }else {
+            System.out.println("You have successfully booked a movie!");
+
+        }
+
+
     }
 
     // This method should be called by book( )
     // It will check if the payment is successful.
     public boolean checkPayment(int paymentType) {
-        //TODO: call methods from databaseutility
+        //call methods from databaseutility
+        Scanner input = new Scanner(System.in);
         switch (paymentType){
-            case 1:
+            case 1://card
+
                 break;
 
-            case 2:
-                break;
+            case 2://giftcard
+                String pattern = "\\d{14}[GX]";
+                System.out.println("Please enter your gift card number");
+                String giftCardNum = input.nextLine();
+                if (!Pattern.matches(pattern, giftCardNum)){
+                    System.out.println("Wrong gift card number");
+                    checkPayment(paymentType);
+                    break;
+                }
+
+                if (RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)){
+                    RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
+                    break;
+
+                }else {
+                    System.out.println("This card does not exist or has been redeemed");
+                    checkPayment(paymentType);
+                    break;
+                }
 
             default:
+                System.err.println("Please enter the correct number");
+                checkPayment(paymentType);
         }
-        return true;
+        return false;
     }
+
+
 
     // This method will allow customers to update their password and specific settings.
     // opt 1 for changing password
@@ -186,17 +227,19 @@ public class Guest {
                 System.out.println("Please enter your present password");
                 String presentPwd = input.next();
                 //TODO: check pwd
-
-
                 //check new password twice to ensure customers are typing their expected password correctly
-                // Hi John, I have made your pwd input hidden XD!!! You can delete this msg.
                 System.out.println("Please enter your new password");
                 String newPwd_1 = BookingSystem.readPwd();
                 System.out.println("Please enter your new password again");
                 String newPwd_2 = BookingSystem.readPwd();
-                if (newPwd_1.equals(newPwd_2)){
-                    //TODO: update new password to database
+                if (newPwd_2.equals(presentPwd) || newPwd_1.equals(presentPwd)) {
+                    System.out.println("New password can not be the same as your present one");
+                    personalInfoUpdate(opt);
+                }else if (newPwd_1.equals(newPwd_2)){
+                    //update new password to database
+                    ChangingUserPassword.changeUserPassword(dbInstance, username, newPwd_1);
                     System.out.println("Password changed, please login again");
+                    guestService(identity);
                 }else {
                     System.out.println("Two Passwords do not match, please try again");
                     personalInfoUpdate(opt);

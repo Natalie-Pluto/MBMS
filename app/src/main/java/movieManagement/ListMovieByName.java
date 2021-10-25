@@ -6,9 +6,9 @@ import databaseutility.*;
 import java.util.Date;
 import java.util.List;
 //TODO
-public class ListMovieByScreen {
-    public static void listMovieByScreen(Database db, String screenType) {
-        List<String> name = FilterScreenSize.filterScreenSize(db, screenType);
+public class ListMovieByName {
+    public static void listMovieByName(Database db, String movieName) {
+        List<String> name = FilterMovieName.filterMovieName(db, movieName);
         for (String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
