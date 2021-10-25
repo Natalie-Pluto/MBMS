@@ -119,18 +119,6 @@ INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name)
 -- sample cinema_session data --
 
 INSERT INTO moviebooking_db.cinema_session VALUES('1', 'Warringah Mall', 'Gold', 'Ip Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '35')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('2', 'Warringah Mall', 'Gold', 'FREE GUY', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-25 10:00:00', '2021-10-25 12:00:00', '35')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('3', 'Warringah Mall', 'Bronze', 'JUNGLE CRUISE', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-10-28 17:00:00', '2021-10-28 19:00:00', '10')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('4', 'Warringah Mall', 'Sliver', 'THE LAST DUEL', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 11:00:00', '2021-10-25 13:00:00', '20')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('5', 'Town Hall', 'Gold', 'SHANG-CHI AND THE LEGEND OF THE TEN RINGS', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-26 18:30:00', '2021-10-26 20:30:00', '35')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('6', 'Town Hall', 'Sliver', 'PAW PATROL: THE MOVIE', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '20')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('7', 'Town Hall', 'Bronze', 'SPACE JAM: A NEW LEGACY', '10', '20', '15','0', '0', '0', '20', '20', '20', '2021-10-27 12:00:00', '2021-10-27 14:00:00', '15')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('8', 'Eastgarden', 'Sliver', 'THE SUICIDE SQUAD', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '20')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('9', 'Eastgarden', 'Bronze', 'THE HARDER THEY FALL', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-10-26 20:00:00', '2021-10-26 22:00:00', '10')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('10', 'Blacktown', 'Gold', 'Ip Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-28 21:00:00', '2021-10-28 23:00:00', '35')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('11', 'Blacktown', 'Sliver', 'FREE GUY', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '25')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('12', 'Blacktown', 'Gold', 'THE LAST DUEL', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-26 17:00:00', '2021-10-26 19:00:00', '35')on conflict (session_id) do nothing;
-INSERT INTO moviebooking_db.cinema_session VALUES('13', 'Blacktown', 'Sliver', 'Ip Man 2', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 09:00:00', '2021-10-25 11:00:00', '20')on conflict (session_id) do nothing;
 
 -- sample Users data--
 
