@@ -181,6 +181,49 @@ public class databaseUtilityTests {
 
     @Test 
     public void changeSeatCapacity_2() {}
+
+    @Test
+    public void ChangingCreditCardBalance_1() {}
+
+    @Test
+    public void ChangingCreditCardBalance_2() {}
+
+    @Test
+    public void ChangingIdentity_1() {}
+    
+    @Test
+    public void ChangingIdentity_2() {}
+
+    @Test
+    public void ChangingUserPassword_1() {}
+
+    @Test
+    public void ChangingUserPassword_2() {}
+
+    @Test
+    public void ChangingUserPassword_3() {}
+
+    @Test 
+    public void CheckIfUserExists_1() {}
+
+    @Test
+    public void CheckIfUserExists_2() {}
+
+    @Test
+    public void DeleteAllUpcoming_1() {}
+
+    @Test 
+    public void FilterCinema_1() {}
+
+    @Test
+    public void FilterScreenSize_1() {}
+
+    @Test
+    public void GetEndTime_1() {}
+
+    @Test
+    public void GetEndTime_2() {}
+
     
 
 }

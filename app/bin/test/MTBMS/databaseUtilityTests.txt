@@ -45,34 +45,129 @@ AddMovieSession_2 Inserting a session with a session id that does not already ex
 ChangeSeatCapacity_1 Attempt to change cinema capacity with a parameter combination that does not map to a unique session
 ChangeSeatCapacity_2 Changing the seat capacity with a parameter combination that maps to a unique session works 
 
+ChangingCreditCardBalance_1 changing the balance on a credit card that exists works
+ChangingCreditCardBalance_2 attempting the change the balance of a credit card that does not exist does not cause issues
 
+ChangingIdentity_1 changing the identity of a user that exists works
+ChangingIdentity_2 attempting the change the identity of a user that does not exist does not cause issues
 
+ChangingUserPassword_1 changing the user password of a user that exists works
+ChangingUserPassword_2 attempting the change the password of a user that does not exist does not cause issues
 
+CheckIfMovieExists_1 checking if a movie that exists, exists
+CheckIfMovieExists_2 checking if a movie that does not exist, does not exist
 
-F. Inserting movies and removing movies
-F1. Inserting a movie with no classification should not work
-F2. Inserting a movie with classification
-F3. Removing a movie that exists
-F4. Attempting to remove a movie that does not exist should not cause error
+CheckIfUserExists_1 checking if a user exists, exists
+CheckingIfUserExists_2 checking if a user does not exist, does not exist
 
-G. Changing movie's name
-G1. changing existing movie's named
-G2. changing name of a movie that does not exist
+DeleteAllUpcoming_1 checking that all entries in the table for upcoming movies are deleted
 
-H. Displaying movie names
-H1. Movies are displayed as required
+FilterCinema_1 (todo)
 
-I. Displaying the number of movies in the database
-I1. The correct number of movies is returned
+FilterScreenSize_1 (todo)
 
-J. Changing the release date of a movie
-J1. The release date of an existing movie can be changed
-J2. No error occurs for an attempt at changing the release date of a movie that does not exist 
+GetEndTime_1 the end time of a session that exists can be retrieved
+GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
 
-K. Changing the synopsis of a movie
-K1. No error occurs for an attempt at changing the synopsis of a movie that does not exist.
-K2. The synopsis of an existing movie can be changed
+GetMovieCast_1 the movie cast of a session that exists can be retrieved
+GetMovieCast_2 attempting to get the movie cast of a session that does not exist does not cause issues
 
-L. user authentication
-L1. No error occurs for an attempt at user authentication for a user that does not exist
-L2. Authentication works a user that exists
+GetMovieClassification_1 the classification of a movie that exists can be retrieved
+GetMovieClassification_2 attempting to get the classification of a movie that does not exist does not cause issues
+
+GetMovieDirectors_1 the directors of a session that exists can be retrieved
+GetMovieDirectors_2 attempting to get the director of a session that does not exist does not cause issues
+
+GetMovieNames_1 attempting to get the names of all the movies in the database does not cause issues
+
+GetMovieReleaseDate_1 the release of a session that exists can be retrieved
+GetMovieReleaseDate_2 attempting to get the release of a movie that does not exist does not cause issues
+
+GetMovieScreenSize_1 attempting to get the screen size of a session does not cause issues
+
+GetMovieShowDate_1 the show date of a movie that exists can be retrieved
+GetMovieShowDate_2 attempting to get the show date of a movie that does not exist does not cause issues
+
+GetMovieShowingTime_1 attempting to get the showing times of a movie at a particular cinema does not cause issues
+
+GetMovieSynopsis_1 the synopsis of a movie that exists can be retrieved
+GetMovieSynopsis_2 attempting to get the synopsis of a movie that does not exist does not cause issues
+
+GetNewUpcomingMovie_1 attempting to get a list of upcoming movies does not cause issues
+
+GetNowShowing_1 attempting to get a list of the currently showing movies does not cause issues
+
+GetStartTime_1 the start time of a session that exists can be retrieved 
+GetStartTime_2 attempting to get the start time of a session that does not exist does not cause issues
+
+GetTicketPrice_kids_1 the kids ticket price of a session that exists can be retrieved
+GetTicketPrice_kids_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_adults_1 the adults ticket price of a session that exists can be retrieved
+GetTicketPrice_adults_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_students_1 the students ticket price of a session that exists can be retrieved
+GetTicketPrice_students_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
+
+MovieNameChanger_1 the name of a movie that exists can be changed
+MovieNameChanger_2 attempting to change the name of a movie that does not exist does not cause issues
+
+MoviesCounter_1 attempting to get the number of movies in the database does not cause issues
+
+RedeemedCheck_1 the redeemed status of a gift card that exists can be retrieved
+RedeemedCheck_2 attempting to get the redeemed status of a gift card that does not exist does not cause issues
+
+RedeemingGiftCard_1 a gift card that exists can be redeemed
+RedeemingGiftCard_2 attempting to redeem a gift card that does not exist does not cause issues
+
+ReleaseDateChanger_1 the release date of a movie that exists can be changed
+ReleaseDateChanger_2 attempting to change the release date of a movie that does not exist does not cause issues
+
+RemovingCinema_1 a cinema that exists can be removed
+RemovingCinema_2 attempting to remove a cinema that does not exist does not cause issues
+
+RemovingCreditCard_1 a credit card that exists can be removed
+RemovingCreditCard_2 attempting to remove a credit card that does not exist does not cause issues
+
+RemovingGiftCard_1 a gift card that exists can be removed
+RemovingGiftCard_2 attempting to remove a gift card that does not exist does not cause issues
+
+RemovingMovie_1 a movie that exists can be removed
+RemovingMovie_2 attemptnig to remove a movie that does not exist does not cause issues
+
+RemovingSession_1 a session that exists can be removed
+RemovingSession_2 attempting to remove a session that does not exist does not cause issues
+
+SetSessionTime_setStartTime_1 the start time of a session that exists can be set
+SetSessionTime_setStartTime_2 attempting to set the start time of a session that does not exist does not cause issues
+
+SetSessionTime_setEndTime_1 the end time of a session that exists can be set
+SetSessionTimee_setEndTime_2 attempting to set the end time of a session that does not exist does not cause issues
+
+SetTicketPrice_kids_1 the kids price of an existing session can be set
+SetTicketPrice_kids_2 attempting to set the kids price of a session that does not exist does not cause issues
+
+SetTicketPrice_adults_1 the adults price of an existing session can be set
+SetTicketPrice_adults_2 attempting to set adults price of a session that does not exist does not cause issues
+
+SetTicketPrice_students_1 the students price of an existing session can be set
+SetTicketPrice_students_2 attempting to set Students price of a session that does not exist does not cause issues
+
+SetTicketPrice_seniors_1 the seniors price of an existing session can be set
+SetTicketPrice_seniors_2 attempting to set the seniors price of a session that does not exist does not cause issues
+
+SynopsisChanger_1 the synopsis of a movie that exists can be set
+SynopsisChanger_2 attempt to set a synopsis of a movie that does not exist does not cause issues
+
+UpdateScreenSize_1 the screen of a session that exists can be updated
+UpdateScreenSize_2 attempting to update the screen size of a session that does not exist does not cause issues
+
+UpdateSeats_1 the number of front seats booked for a session that exists can be updated
+UpdateSeats_2 the number of mid seats booked for a session that exists can be updated
+UpdateSeats_3 the number of back seats booked for a session that exists can be updated
+UpdateSeats_4 attempting to update the number of seats booked for a session that does not exist does not cause issues
+
+UserAuthenticate_1 No error occurs for an attempt at user authentication for a user that does not exist
+UserAuthenticate_2 Authentication works a user that exists
