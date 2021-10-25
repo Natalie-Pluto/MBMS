@@ -149,6 +149,38 @@ public class databaseUtilityTests {
     @Test
     public void MovieInsertionBuilder_9() {}
 
+    @Test
+    public void AddingCinema_1() {}
+
+    @Test
+    public void AddingCinema_2() {}
+
+    @Test 
+    public void AddingCreditCard_1() {}
+
+    @Test 
+    public void AddingCreditCard_2() {}
+
+    @Test
+    public void AddingGiftCard_1() {}
+
+    @Test
+    public void AddingGiftCard_2() {}
+
+    @Test
+    public void AddingUpcomingMovie_1() {}
+
+    @Test
+    public void AddMovieSession_1() {}
+
+    @Test
+    public void AddMovieSession_2() {}
+
+    @Test
+    public void changeSeatCapacity_1() {}
+
+    @Test 
+    public void changeSeatCapacity_2() {}
     
 
 }
