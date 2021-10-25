@@ -1,12 +1,8 @@
 package MTBMS;
-import movieManagement.*;
 import databaseutility.*;
 import java.util.regex.*;
 
 
-import javax.print.attribute.AttributeSetUtilities;
-import java.rmi.ServerError;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 //TODO/*
@@ -113,7 +109,7 @@ public class Guest {
             case "1":
                 System.out.println("Please enter the name of the movie");
                 String movieName = input.next();
-                FilterMovieName.filterMovieName(dbInstance, movieName);
+                FilterMovieCinemaName.filterMovieName(dbInstance, movieName);
                 break;
 
             case "2":

@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.List;
 //TODO
 public class ListMovieByName {
-    public static void listMovieByName(Database db, String movieName) {
-        List<String> name = FilterMovieName.filterMovieName(db, movieName);
+    public static void listMovieByCinemaName(Database db, String movieName) {
+        List<String> name = FilterMovieCinemaName.filterMovieName(db, movieName);
         for (String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
