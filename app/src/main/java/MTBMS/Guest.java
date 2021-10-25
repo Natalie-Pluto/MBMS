@@ -46,7 +46,7 @@ public class Guest {
                 filterMovies("U" + CupcomingFilter());
                 break;
             case "3":
-                book();
+                bookingHelper();
                 break;
             case "4":
                 filterMovies("S" + CshowingFilter());
@@ -132,9 +132,18 @@ public class Guest {
         return Timer.timer("c");
     }
 
+    public static void bookingHelper() throws InterruptedException {
+        BookingSystem.seperator();
+        BookingSystem.listCinema();
+        String cinema = Timer.timer("c");
+        ListMovieByCinema.listMovieByCinema(dbInstance, cinema);
+        book();
+    }
+
     public static void continueService() throws InterruptedException {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
         System.out.println("======================================================\n");
         String service = Timer.timer("c");
         switch (service) {
@@ -145,8 +154,36 @@ public class Guest {
             case "2":
                 BookingSystem.logOut();
                 break;
+            case "3":
+                bookingHelper();
+                break;
             default:
                 System.out.println("Please enter the correct number");
+                continueService();
+        }
+    }
+
+    public static void continueService1() throws InterruptedException {
+        System.out.println("======================================================");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
+        System.out.println("======================================================\n");
+        String service = Timer.timer("c");
+        switch (service) {
+            case "1":
+                customerHomePage();
+                guestService();
+                break;
+            case "2":
+                BookingSystem.logOut();
+                break;
+            case "3":
+                book();
+                break;
+            default:
+                System.out.println("=================================");
+                System.out.println(RED_BOLD + "Please enter the correct number" + ANSI_RESET);
+                System.out.println("=================================");
                 continueService();
         }
     }
@@ -186,7 +223,7 @@ public class Guest {
         if (type.equals("a")) {
             BookingSystem.seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
-            continueService();
+            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("b")) {
             BookingSystem.seperator();
@@ -195,12 +232,12 @@ public class Guest {
             BookingSystem.seperator();
         } else if (type.equals("c")) {
             BookingSystem.seperator();
-            ListMovieByCinema.listMovieByCinema(dbInstance, value);
-            continueService();
+            ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
+            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("d")) {
             BookingSystem.seperator();
-            ListMovieByScreen.listMovieByScreen(dbInstance, value);
+            ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
             continueService();
             BookingSystem.seperator();
         } else if (type.equals("e")){
@@ -215,7 +252,7 @@ public class Guest {
     // It will allow user to book movie tickets.
     // Note: only customer can use this service.
     public static void book() throws InterruptedException {
-        //Scanner input = new Scanner(System.in);
+        BookingSystem.seperator();
         String movieName = checkMovieName();
         String cinemaName = checkCinemaName(movieName);
         String movieStartTime = checkStartTime(movieName, cinemaName);
@@ -223,6 +260,7 @@ public class Guest {
         int audienceNum = getAudienceNum();
         String seatLocation = getSeatLocation();
         updateSeats(movieName, cinemaName, movieStartTime, screenType, audienceNum, seatLocation);
+        BookingSystem.seperator();
 
     }
 
@@ -267,8 +305,6 @@ public class Guest {
 
 
 
-
-
     // This method should be called by book( )
     // It will check if the payment is successful.
     public static boolean checkPayment(int paymentType) throws InterruptedException {
@@ -309,14 +345,11 @@ public class Guest {
         return false;
     }
 
-    public static String checkMovieName(){
-        Scanner input = new Scanner(System.in);
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+    public static String checkMovieName() throws InterruptedException {
         System.out.println("======================================================");
         System.out.println("Please enter the movie name that you wish to book");
         System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String movieName = input.nextLine();
+        String movieName = Timer.timer("c");
         if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
             System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name");
             checkMovieName();
@@ -325,37 +358,29 @@ public class Guest {
         return movieName;
     }
 
-    public static String checkCinemaName(String movieName){
-        Scanner input = new Scanner(System.in);
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+    public static String checkCinemaName(String movieName) throws InterruptedException {
         System.out.println("======================================================");
         System.out.println("Please enter the cinema name that you wish to book");
         System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String cinemaName = input.nextLine();
+        String cinemaName = Timer.timer("c");
         if (!(CheckIfCinemaExists.checkIfCinemaExists(dbInstance, cinemaName))) {
             System.out.println("Cinema " + cinemaName + " does not exist, please enter the correct cinema name");
             checkCinemaName(movieName);
         } else if(!(CheckIfCinemaHasMovie.checkIfCinemaHasMovie(dbInstance, movieName, cinemaName))) {
-            System.out.println(cinemaName + "currently does not have " + movieName + "being showed");
+            System.out.println(cinemaName + " currently does not have " + movieName + " being showed");
         }
-
         return cinemaName;
     }
 
-    public static String checkStartTime(String movieName, String cinemaName){
-        Scanner input = new Scanner(System.in);
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+    public static String checkStartTime(String movieName, String cinemaName) throws InterruptedException {
         System.out.println("======================================================");
         System.out.println("Please enter the start time of the movie that you wish to book");
         System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String startTime = input.nextLine();
+        String startTime = Timer.timer("c");
         if (!(GetStartTime.getStartTime(dbInstance, cinemaName, movieName).contains(startTime))){
             System.out.println(movieName + " does not have start time at " + startTime + " in " + cinemaName);
             checkStartTime(movieName, cinemaName);
         }
-
         return startTime;
     }
 

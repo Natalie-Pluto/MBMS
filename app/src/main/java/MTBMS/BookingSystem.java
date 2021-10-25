@@ -402,12 +402,12 @@ public class BookingSystem {
             seperator();
         } else if (type.equals("c")) {
             seperator();
-            ListMovieByCinema.listMovieByCinema(dbInstance, value);
+            ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
             msg2();
             seperator();
         } else if (type.equals("d")) {
             seperator();
-            ListMovieByScreen.listMovieByScreen(dbInstance, value);
+            ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
             msg2();
             seperator();
         } else if (type.equals("e")){
