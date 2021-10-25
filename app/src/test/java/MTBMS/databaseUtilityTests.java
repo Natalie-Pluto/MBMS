@@ -122,5 +122,33 @@ public class databaseUtilityTests {
         changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
     }
 
+    @Test 
+    public void MovieInsertionBuilder_1() {}
+
+    @Test
+    public void MovieInsertionBuilder_2() {}
+
+    @Test
+    public void MovieInsertionBuilder_3() {}
+
+    @Test
+    public void MovieInsertionBuilder_4() {}
+
+    @Test
+    public void MovieInsertionBuilder_5() {}
+
+    @Test
+    public void MovieInsertionBuilder_6() {}
+
+    @Test
+    public void MovieInsertionBuilder_7() {}
+
+    @Test
+    public void MovieInsertionBuidler_8() {}
+
+    @Test
+    public void MovieInsertionBuilder_9() {}
+
     
+
 }
