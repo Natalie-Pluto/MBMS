@@ -1,4 +1,4 @@
-/* package staffoperations;
+package staffoperations;
 
 import java.util.Scanner;
 import databaseutility.*;
@@ -41,7 +41,7 @@ public class MovieDataManipulator {
         System.out.println("Enter name of the movie to delete: ");
     }
 
-    public static void modifyMovieData(Database d){
+    public static void modifyMovieData(Database d) {
         //display movies in database
         //MovieNamesDisplay.displayMovieNames(d);
 
@@ -59,7 +59,7 @@ public class MovieDataManipulator {
         String nameOfColumn = s.nextLine();
 
         //enter modified info
-        switch(nameOfColumn){
+        switch (nameOfColumn) {
             case "movie_id":
                 System.out.println("movie_id can not be modified.");
                 break;
@@ -82,13 +82,13 @@ public class MovieDataManipulator {
                 String newDate = s.nextLine();
                 ReleaseDateChanger.changeReleaseDate(d, movieName, newDate);
                 break;
-            /* case "synopsis":
+            case "synopsis":
                 System.out.print("/nEnter a new synopsis: ");
                 s = new Scanner(System.in);
                 String newSynopsis = s.nextLine();
                 SynopsisChanger.changeSynopsis(d, movieName, newSynopsis);
-                break; */
-            /* case "directors":
+                break;
+            case "directors":
                 System.out.print("/nEnter new directors: ");
                 s = new Scanner(System.in);
                 String newDirectors = s.nextLine();
@@ -98,7 +98,7 @@ public class MovieDataManipulator {
         }
 
 
-
     }
-} */
+}
+
  
