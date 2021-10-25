@@ -97,8 +97,45 @@ GetNewUpcomingMovie_1 attempting to get a list of upcoming movies does not cause
 
 GetNowShowing_1 attempting to get a list of the currently showing movies does not cause issues
 
-GetEndTime_1 the end time of a session that exists can be retrieved 
-GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
+GetStartTime_1 the start time of a session that exists can be retrieved 
+GetStartTime_2 attempting to get the start time of a session that does not exist does not cause issues
+
+GetTicketPrice_kids_1 the kids ticket price of a session that exists can be retrieved
+GetTicketPrice_kids_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_adults_1 the adults ticket price of a session that exists can be retrieved
+GetTicketPrice_adults_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_students_1 the students ticket price of a session that exists can be retrieved
+GetTicketPrice_students_2 attempting to get the ticket price of a session that does not exist does not cause issues
+
+GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
+
+MovieNameChanger_1 the name of a movie that exists can be changed
+MovieNameChanger_2 attempting to change the name of a movie that does not exist does not cause issues
+
+MoviesCounter_1 attempting to get the number of movies in the database does not cause issues
+
+RedeemedCheck_1 the redeemed status of a gift card that exists can be retrieved
+RedeemedCheck_2 attempting to get the redeemed status of a gift card that does not exist does not cause issues
+
+RedeemingGiftCard_1 a gift card that exists can be redeemed
+RedeemingGiftCard_2 attempting to redeem a gift card that does not exist does not cause issues
+
+ReleaseDateChanger_1 the release date of a movie that exists can be changed
+ReleaseDateChanger_2 attempting to change the release date of a movie that does not exist does not cause issues
+
+RemovingCinema_1 a cinema that exists can be removed
+RemovingCinema_2 attempting to remove a cinema that does not exist does not cause issues
+
+RemovingCreditCard_1 a credit card that exists can be removed
+RemovingCreditCard_2 attempting to remove a credit card that does not exist does not cause issues
+
+RemovingGiftCard_1 a gift card that exists can be removed
+RemovingGiftCard_2 attempting to remove a gift card that does not exist does not cause issues
+
+RemovingMovie_1 a movie that exists can be removed
+RemovingMovie_2 attemptnig to remove a movie that does not exist does not cause issues
 
 
 
