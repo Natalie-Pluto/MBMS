@@ -60,25 +60,25 @@ public class DatabaseTests {
     @Test
     public void sql_getIntTest2() {
         Database d = new Database(badDBUrl, badDBUsername, badDBPassword);
-        assertEquals(0, (int) d.sql_getInt("Cinema_session", "session_id"));
+        assertTrue( d.sql_getInt("Cinema_session", "session_id") == 0);
     }
 
     @Test
     public void sql_getIntTest1(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
-        assertNotEquals(0, (int) d.sql_getInt("Cinema_session", "session_id"));
+        assertFalse((int) d.sql_getInt("Cinema_session", "session_id") == 0);
     }
  */
 /*     @Test
     public void sql_getDoubleTest1() {
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
-        assertNotEquals(0.0, d.sql_getDouble("Cinema_session", "ticket_price_adults"), 0.0);
+        assertFalse(d.sql_getDouble("Cinema_session", "ticket_price_adults") == 0.0);
     }
 
     @Test
     public void sql_getDoubleTest2() {
         Database d = new Database(badDBUrl, badDBUsername, badDBPassword);
-        assertEquals(0.0, d.sql_getDouble("Cinema_session", "ticket_price_adults"), 0.0);
+        assertTrue(d.sql_getDouble("Cinema_session", "ticket_price_adults") == 0.0);
     }
 
     @Test
