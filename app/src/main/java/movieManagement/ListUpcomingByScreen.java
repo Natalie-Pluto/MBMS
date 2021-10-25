@@ -14,15 +14,16 @@ import static MTBMS.BookingSystem.RED_BOLD;
 public class ListUpcomingByScreen {
     public static void listUpcomingByScreen(Database db, String screenType) {
         List<String> name = FilterUpcomingScreen.filterUpcomingScreen(db, screenType);
-        if(name == null) {
+        if(name.isEmpty()) {
             System.out.println("\n=======================================================");
             System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
             System.out.println("=======================================================\n");
-        }
-        for (String n : name) {
-            String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-            Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
-            System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+        } else {
+            for (String n : name) {
+                String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
+                Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+                System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+            }
         }
     }
 

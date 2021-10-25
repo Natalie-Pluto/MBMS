@@ -65,7 +65,6 @@ public class BookingSystem {
                 System.out.println("Test");
                 break;
             case "return":
-                seperator();
                 defaultPage(dbInstance);
                 options();
                 break;
@@ -218,13 +217,11 @@ public class BookingSystem {
             filterMsg("e", " ");
             if (type.contains("U")) {
                 defaultPage(dbInstance);
-                options();
             } else if (type.contains("S")) {
                 nowShowing();
-                options();
             }
         }
-
+        options();
     }
 
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
@@ -335,14 +332,14 @@ public class BookingSystem {
 
     public static String showingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "     " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }
 
     public static String upcomingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "     " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }
@@ -362,7 +359,9 @@ public class BookingSystem {
 
     public static void listCinema() {
         seperator();
-        System.out.println("Please select a cinema:");
+        System.out.println("=======================");
+        System.out.println(PURPLE_BOLD + "Please select a cinema:" + ANSI_RESET);
+        System.out.println("=======================");
         System.out.println("Warringah Mall");
         System.out.println("Town Hall");
         System.out.println("Eastgarden");
@@ -371,7 +370,10 @@ public class BookingSystem {
     }
 
     public static void listScreen() {
-        System.out.println("Please select a screen size:");
+        seperator();
+        System.out.println("============================");
+        System.out.println(PURPLE_BOLD + "Please select a screen size:" + ANSI_RESET);
+        System.out.println("============================");
         System.out.println("Gold");
         System.out.println("Sliver");
         System.out.println("Bronze");
@@ -380,20 +382,24 @@ public class BookingSystem {
 
     public static void filterMsg(String type, String value) {
         if (type.equals("a")) {
+            seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
-            msg();
+            msg2();
             seperator();
         } else if (type.equals("b")) {
+            seperator();
             ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
-            msg();
+            msg2();
             seperator();
         } else if (type.equals("c")) {
+            seperator();
             ListMovieByCinema.listMovieByCinema(dbInstance, value);
-            msg();
+            msg2();
             seperator();
         } else if (type.equals("d")) {
+            seperator();
             ListMovieByScreen.listMovieByScreen(dbInstance, value);
-            msg();
+            msg2();
             seperator();
         } else if (type.equals("e")){
             seperator();
@@ -422,6 +428,15 @@ public class BookingSystem {
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println("=====================================================================");
+    }
+
+    public static void msg2() {
+        System.out.println("\n=====================================================================");
+        System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println("=====================================================================");
     }
 
