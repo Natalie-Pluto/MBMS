@@ -102,7 +102,8 @@ public class BookingSystem {
             } else {
                 instance.loginGreeting("c", accName);
                 Guest customer = new Guest(accName, "C", " ");
-                customer.guestService();
+                Guest.customerHomePage();
+                Guest.guestService();
             }
         }
     }
@@ -175,8 +176,16 @@ public class BookingSystem {
 
     // Log out for the user, return to default page
     public static void logOut() throws InterruptedException {
+        msg3();
+        Thread.sleep(2000);
         getGreeting(dbInstance);
         options();
+    }
+
+    public static void msg3() {
+        System.out.println("=================");
+        System.out.println(PURPLE_BOLD + "Logging out..." + ANSI_RESET);
+        System.out.println("=================");
     }
 
 
@@ -505,7 +514,6 @@ public class BookingSystem {
         System.out.println("5 - for filter now showing movies");
         System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
-        Thread.sleep(2000);
     }
 
     public static void getGreeting(Database dbInstance) {

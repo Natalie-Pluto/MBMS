@@ -35,10 +35,9 @@ public class Guest {
     //     It's kinda like a main method for guest class
     //     */
     public static void guestService() throws InterruptedException {
-        customerHomePage();
-        Scanner input1 = new Scanner(System.in);
-        String customerInput1 = input1.next();
-        switch (customerInput1) {
+        Scanner input = new Scanner(System.in);
+        String service = input.nextLine();
+        switch (service) {
             case "1":
                 nowShowingCus();
                 guestService();
@@ -53,27 +52,45 @@ public class Guest {
                 filterMovies("S" + CshowingFilter());
                 break;
             case "5":
-                book();
-                break;
-            case "6":
-                book();
+                BookingSystem.logOut();
                 break;
             case "return":
-                book();
+                customerHomePage();
+                guestService();
                 break;
             default:
-                System.out.println("============================================");
-                System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("============================================\n");
-                Thread.sleep(2000);
-                System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
-                Thread.sleep(2000);
-                guestService();
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                    wrongInput();
+                    guestService();
+                } else {
+                    movieDetail(service);
+                }
+                break;
 
         }
 
         //Ask users to continue using or close the service
         continueService();
+    }
+
+    public static void wrongInput() throws InterruptedException {
+        System.out.println("============================================");
+        System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+        System.out.println("Please enter:");
+        System.out.println("1 - for now showing");
+        System.out.println("2 - for filter upcoming movies");
+        System.out.println("3 - for booking tickets");
+        System.out.println("4 - for filter now showing movies");
+        System.out.println("5 - for log out");
+        System.out.println("Enter correct movie name for movie detail");
+        System.out.println("============================================\n");
+    }
+
+    public static void movieDetail(String name) throws InterruptedException {
+        BookingSystem.seperator();
+        MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
+        continueService();
+        BookingSystem.seperator();
     }
 
     public static void customerHomePage() {
@@ -82,6 +99,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Now Showing\"   Enter 2 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>" + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
@@ -93,6 +111,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"   Enter 4 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Now Showing!>>"   + ANSI_RESET);
         ListNowShowing.listNowShowing(dbInstance);
@@ -114,22 +133,18 @@ public class Guest {
     }
 
     public static void continueService() throws InterruptedException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the main page\"   2 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String service = input.nextLine();
+        String service = Timer.timer("c");
         switch (service) {
             case "1":
+                customerHomePage();
                 guestService();
                 break;
-
             case "2":
                 BookingSystem.logOut();
                 break;
-
             default:
                 System.out.println("Please enter the correct number");
                 continueService();
@@ -139,9 +154,61 @@ public class Guest {
     // This method will call method in movie class.
     // It will filter and display the movies up to user's choice.
     // Both guest and customer can use this service.
-    public static void filterMovies(String type) {
+    public static void filterMovies(String type) throws InterruptedException {
+        if(type.equals("U5")) {
+            BookingSystem.listCinema();
+            String cinema = Timer.timer("c");
+            filterMsg("a", cinema);
+        } else if (type.equals("U6")) {
+            BookingSystem.listScreen();
+            String screen = Timer.timer("c");
+            filterMsg("b", screen);
+        } else if (type.equals("S5")) {
+            BookingSystem.listCinema();
+            String cinemaName = Timer.timer("c");
+            filterMsg("c", cinemaName);
+        } else if (type.equals("S6")) {
+            BookingSystem.listScreen();
+            String size = Timer.timer("c");
+            filterMsg("d", size);
+        } else {
+            BookingSystem.filterMsg("e", " ");
+            if (type.contains("U")) {
+                guestService();
+            } else if (type.contains("S")) {
+                nowShowingCus();
+            }
+        }
+        guestService();
+    }
 
-
+    public static void filterMsg(String type, String value) throws InterruptedException {
+        if (type.equals("a")) {
+            BookingSystem.seperator();
+            ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
+            continueService();
+            BookingSystem.seperator();
+        } else if (type.equals("b")) {
+            BookingSystem.seperator();
+            ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
+            continueService();
+            BookingSystem.seperator();
+        } else if (type.equals("c")) {
+            BookingSystem.seperator();
+            ListMovieByCinema.listMovieByCinema(dbInstance, value);
+            continueService();
+            BookingSystem.seperator();
+        } else if (type.equals("d")) {
+            BookingSystem.seperator();
+            ListMovieByScreen.listMovieByScreen(dbInstance, value);
+            continueService();
+            BookingSystem.seperator();
+        } else if (type.equals("e")){
+            BookingSystem.seperator();
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+        }
     }
 
     // This method will call methods in movie class
