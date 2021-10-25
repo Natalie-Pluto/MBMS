@@ -34,18 +34,18 @@ public class UpdateUpcomingMovieTable {
         int hour = with.get(Calendar.HOUR_OF_DAY);
         int delayInDays = dayToDelay.get(dayOfWeek);
         int delayInHours = 0;
-        if(delayInDays == 6 && hour < 6){
-            delayInHours = 6 - hour;
+        if(delayInDays == 6 && hour < 11){
+            delayInHours = 11 - hour;
         }else{
-            delayInHours = delayInDays * 24 + ((24-hour) + 6);
+            delayInHours = delayInDays * 24 + ((24-hour) + 11);
         }
         scheduler.scheduleAtFixedRate(new MondayUpdate(), delayInHours,
-                174, TimeUnit.HOURS);
+                179, TimeUnit.HOURS);
     }
 
     public static class MondayUpdate implements Runnable{
         Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                                           "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+                                          "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         //Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         @Override
         public void run() {

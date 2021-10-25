@@ -6,3 +6,6 @@ build
 
 # ignore an auto generated huge file (ali)
 java_pid10516.hprof
+
+# ignore an auto generated huge file (ali)
+java_pid6708.hprof
