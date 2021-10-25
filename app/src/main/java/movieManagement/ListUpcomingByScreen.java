@@ -1,14 +1,17 @@
 package movieManagement;
 
 import MTBMS.Database;
-import databaseutility.*;
+import databaseutility.FilterScreenSize;
+import databaseutility.FilterUpcomingScreen;
+import databaseutility.GetMovieClassification;
+import databaseutility.GetMovieShowDate;
 
 import java.util.Date;
 import java.util.List;
-//TODO
-public class ListMovieByName {
-    public static void listMovieByName(Database db, String movieName) {
-        List<String> name = FilterMovieName.filterMovieName(db, movieName);
+
+public class ListUpcomingByScreen {
+    public static void listUpcomingByScreen(Database db, String screenType) {
+        List<String> name = FilterUpcomingScreen.filterUpcomingScreen(db, screenType);
         for (String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
