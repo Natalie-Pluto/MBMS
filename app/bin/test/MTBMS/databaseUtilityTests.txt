@@ -69,6 +69,39 @@ FilterScreenSize_1 (todo)
 GetEndTime_1 the end time of a session that exists can be retrieved
 GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
 
+GetMovieCast_1 the movie cast of a session that exists can be retrieved
+GetMovieCast_2 attempting to get the movie cast of a session that does not exist does not cause issues
+
+GetMovieClassification_1 the classification of a movie that exists can be retrieved
+GetMovieClassification_2 attempting to get the classification of a movie that does not exist does not cause issues
+
+GetMovieDirectors_1 the directors of a session that exists can be retrieved
+GetMovieDirectors_2 attempting to get the director of a session that does not exist does not cause issues
+
+GetMovieNames_1 attempting to get the names of all the movies in the database does not cause issues
+
+GetMovieReleaseDate_1 the release of a session that exists can be retrieved
+GetMovieReleaseDate_2 attempting to get the release of a movie that does not exist does not cause issues
+
+GetMovieScreenSize_1 attempting to get the screen size of a session does not cause issues
+
+GetMovieShowDate_1 the show date of a movie that exists can be retrieved
+GetMovieShowDate_2 attempting to get the show date of a movie that does not exist does not cause issues
+
+GetMovieShowingTime_1 attempting to get the showing times of a movie at a particular cinema does not cause issues
+
+GetMovieSynopsis_1 the synopsis of a movie that exists can be retrieved
+GetMovieSynopsis_2 attempting to get the synopsis of a movie that does not exist does not cause issues
+
+GetNewUpcomingMovie_1 attempting to get a list of upcoming movies does not cause issues
+
+GetNowShowing_1 attempting to get a list of the currently showing movies does not cause issues
+
+GetEndTime_1 the end time of a session that exists can be retrieved 
+GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
+
+
+
 // ignore anything under this comment
 
 F. Inserting movies and removing movies
