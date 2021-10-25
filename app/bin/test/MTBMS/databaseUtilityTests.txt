@@ -28,6 +28,26 @@ MovieInsertionBuilder_7 Inserting a movie with classifcation an synopsis but wit
 MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis
 MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis
 
+AddingCinema_1 adding a cinema with a name that does not already exist
+AddingCinema_2 attempting to add a cinema with a name that already exists should not cause issues
+
+AddingCreditCard_1 adding a credit card with a credit card number that does not exist 
+AddingCreditCard_2 adding a credit card with a credit card number that does exist should not cause issues
+
+AddingGiftCard_1 adding a gift card with a gift card number that does not exist 
+AddingGiftCard_2 adding a gift card with a gift card number that does exist should not cause issues
+
+AddingUpcomingMovie_1 : TODO (more difficult to test this class)
+
+AddMovieSession_1 Inserting a session with a session id that does not already occur in the database
+AddMovieSession_2 Inserting a session with a session id that does not already exist in the database should not cause issues
+
+ChangeSeatCapacity_1 Attempt to change cinema capacity with a parameter combination that does not map to a unique session
+ChangeSeatCapacity_2 Changing the seat capacity with a parameter combination that maps to a unique session works 
+
+
+
+
 
 F. Inserting movies and removing movies
 F1. Inserting a movie with no classification should not work
