@@ -224,6 +224,206 @@ public class databaseUtilityTests {
     @Test
     public void GetEndTime_2() {}
 
-    
+    @Test
+    public void GetMovieCast_1() {}
+
+    @Test
+    public void GetMovieCast_2() {}
+
+    @Test 
+    public void GetMovieClassification_1() {}
+
+    @Test
+    public void GetMovieClassification_2() {}
+
+    @Test
+    public void GetMovieDirectors_1() {}
+
+    @Test
+    public void GetMovieDirectors_2() {}
+
+    @Test
+    public void GetMovieNames_1() {}
+
+    @Test 
+    public void GetMovieReleaseDate_1() {}
+
+    @Test
+    public void GetMovieReleaseDate_2() {}
+
+    @Test
+    public void GetMovieScreenSize_1() {}
+
+    @Test
+    public void GetMovieShowDate_1() {}
+
+    @Test
+    public void GetMovieShowDate_2() {}
+
+    @Test
+    public void GetMovieShowingTime_1() {}
+
+    @Test
+    public void GetMovieSynopsis_1() {}
+
+    @Test
+    public void GetMovieSynopsis_2() {}
+
+    @Test
+    public void GetNewUpcomingMovie_1() {}
+
+    @Test
+    public void GetNowShowing_1() {}
+
+    @Test
+    public void GetStartTime_1() {}
+
+    @Test
+    public void GetStartTime_2() {}
+
+    @Test
+    public void GetTicketPrice_kids_1() {}
+
+    @Test
+    public void GetTicketPrice_kids_2() {}
+
+    @Test
+    public void GetTicketPrice_adults_1() {}
+
+    @Test
+    public void GetTicketPrice_adults_2() {}
+
+    @Test
+    public void GetTicketPrice_students_1() {}
+
+    @Test
+    public void GetTicketPrice_students_2() {}
+
+    @Test
+    public void GetUpcomingMovies_1() {}
+
+    @Test
+    public void MovieNameChanger_1() {}
+
+    @Test
+    public void MovieNameChanger_2() {}
+
+    @Test
+    public void MoviesCounter_1() {}
+
+    @Test
+    public void RedeemedCheck_1() {}
+
+    @Test
+    public void RedeemedCheck_2() {}
+
+    @Test
+    public void RedeemingGiftCard_1() {}
+
+    @Test
+    public void RedeemingGiftCard_2() {}
+
+    @Test
+    public void ReleaseDateChanger_1() {}
+
+    @Test
+    public void ReleaseDateChanger_2() {}
+
+    @Test
+    public void RemovingCinema_1() {}
+
+    @Test
+    public void RemovingCinema_2() {}
+
+    @Test
+    public void RemovingCreditCard_1() {}
+
+    @Test
+    public void RemovingCreditCard_2() {}
+
+    @Test
+    public void RemovingGiftCard_1() {}
+
+    @Test
+    public void RemovingGiftCard_2() {}
+
+    @Test
+    public void RemovingMovie_1() {}
+
+    @Test
+    public void RemovingMovie_2() {}
+
+    @Test
+    public void RemovingSession_1() {}
+
+    @Test
+    public void RemovingSession_2() {}
+
+    @Test
+    public void SetSessionTime_setStartTime_1() {}
+
+    @Test
+    public void SetSessionTime_setStartTime_2() {}
+
+    @Test
+    public void SetSessionTime_setEndTime_1() {}
+
+    @Test
+    public void SetSessionTimee_setEndTime_2() {}
+
+    @Test
+    public void SetTicketPrice_kids_1() {}
+
+    @Test
+    public void SetTicketPrice_kids_2() {}
+
+    @Test
+    public void SetTicketPrice_adults_1() {}
+
+    @Test
+    public void SetTicketPrice_adults_2() {}
+
+    @Test
+    public void SetTicketPrice_students_1() {}
+
+    @Test
+    public void SetTicketPrice_students_2() {}
+
+    @Test
+    public void SetTicketPrice_seniors_1() {}
+
+    @Test
+    public void SetTicketPrice_seniors_2() {}
+
+    @Test
+    public void SynopsisChanger_1() {}
+
+    @Test
+    public void SynopsisChanger_2() {}
+
+    @Test
+    public void UpdateScreenSize_1() {}
+
+    @Test
+    public void UpdateScreenSize_2() {}
+
+    @Test
+    public void UpdateSeats_1() {}
+
+    @Test
+    public void UpdateSeats_2() {}
+
+    @Test
+    public void UpdateSeats_3() {}
+
+    @Test
+    public void UpdateSeats_4() {}
+
+    @Test
+    public void UserAuthenticate_1() {}
+
+    @Test
+    public void UserAuthenticate_2() {}
+
 
 }
