@@ -14,7 +14,7 @@ public class StaffService {
         String input = "";
 
         //keep running unless user quits
-        Outer: while(!input.equals("-Exit-")){
+        Outer: while(s.hasNext()){
 
             // retrieve information
             input = s.nextLine();

@@ -22,7 +22,6 @@ import static databaseutility.UserAuthenticate.authenticate;
 public class BookingSystem {
     private static BookingSystem instance;
     private static Database dbInstance;
-    Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
@@ -126,13 +125,22 @@ public class BookingSystem {
                 isExisted = false;
             }
         }
-        while (!isMatched) {
+        int counter1 = 0;
+        while (!isMatched && counter1 < 3) {
+            int counter3 = 0;
+            counter1++;
             createPwd();
             String newPw = "";
-            while (!isValid) {
+            while (!isValid && counter3 < 3) {
+                counter3++;
                 newPw = readPwd();
                 if (newPw.length() < 5) {
                     System.out.println(RED_BOLD + "Password has to be longer than 4 characters! (｡´︿`｡) Please try again" + ANSI_RESET);
+                    if (counter3 == 3) {
+                        instance.signinFailed();
+                        getGreeting(dbInstance);
+                        options();
+                    }
                 } else {
                     isValid = true;
                 }
@@ -169,6 +177,11 @@ public class BookingSystem {
                 }
             } else {
                 System.out.println(RED_BOLD + "Password not matching! (｡´︿`｡)" + ANSI_RESET);
+                if(counter1 == 3) {
+                    instance.signinFailed();
+                    getGreeting(dbInstance);
+                    options();
+                }
                 isValid = false;
             }
         }

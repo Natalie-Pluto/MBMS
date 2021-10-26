@@ -23,12 +23,19 @@ A movie ticket booking & management application written in Java.
 ---
 This project is a simple ticket booking & management system. 
 
-You are viewing the sprint 1 ver. 1.1. 
+You are viewing the sprint 2 ver. 2.1. 
 
-By far, the system can perform user's login, signup. The valid new user's detail
-will be recorded in our database.
+By far, the program is able to perform all the functionalities related to guest user interface. 
+(Some features such as case-insensitive search will be updated in sprint 3)
 
-Note: Some existed functionalities in this version will be updated in furture releases.
+The customer interface is able to perform all features in guest user's interface. Booking option is make available for the customers.
+Despite customers are able to choose the "booking" option, there are some issue related to booking and payment remain unsolved in this version,
+user could meet booking or payment failure. This will be fixed in the next sprint.
+
+The staff interface is made available for staff/manager in this version. However, the CLI format is not finalised. User will be 
+directed to staff interface if they logged in as staff/manager, but the functionalities related to
+staff interface is not fully implemented hence users could meet unexpected error. These issues will all 
+be fixed in the next sprint.
 
 
 ## Setup
@@ -77,8 +84,21 @@ Note: Some existed functionalities in this version will be updated in furture re
    ```
 
    Username: alie0302@uni.sydney.edu.au
-   Password: triceratops
    
+   Password: triceratops
+
+    #### Personal database:
+
+   If you don't want to use the shared database we provided, you can use your local database.
+  We have provide you the database schema in `moviebooking_schema.sql`
+   
+    To connect to your local database Please change all the database connection into the following
+format:
+
+    ```
+    dbInstance =  new Database("jdbc:postgresql://localhost:<port>/<database_name>", "<username>", "<password>");
+    ```
+  
 
 ## Run the Program
 
@@ -103,13 +123,12 @@ If run successful, you will see the greeting:
 ```
 > Task :app:run
                                                                      
-    Welcome to Fancy Cinemas Official Website!!
+       Welcome to Fancy Cinemas Official Website!!
 
     If you have an account, please sign in (｡･ω･｡)ﾉ 
     If you haven't joined us, you can sign up today! o(｀ω´ )o
-    If you don't want to join us today, you can continue as a guest (´･ω･`)
 
-    1. Log in       2. Sign up      3. I wish to continue                                                                    
+    Enter 1 for "Log in"            Enter 2 for "Sign up"                                                                  
 
 ```
 Now, you can use the application :)
@@ -120,39 +139,88 @@ Now, you can use the application :)
 
 - ### **User's Interface**
 
-  The User's interface we made for the application is CLI. The program will start with the default page where
-  the user will be asked to log in, sign up or continue as a guest:
-  
-  (Note: The default page will be updated later.)
+**The User's interface we made for the application is CLI.** 
 
+Guest User Interface (Default Page)
+  
+The program will start with guest user interface as the default page where
+user can view the list of the upcoming movies. They can also choose to view the list of movies which are now showing.
+  They can filter upcoming movies or movies which are now showing through cinema name or screen size. They are able to view
+  the movie details by typing in the movie name. They can also choose to log in or sign up at the default page. 
+  They won't be able to book movie ticket at the default page.
+  
 ```
-Welcome to Fancy Cinemas Official Website!!
+    Welcome to Fancy Cinemas Official Website!!
 
     If you have an account, please sign in (｡･ω･｡)ﾉ 
     If you haven't joined us, you can sign up today! o(｀ω´ )o
-    If you don't want to join us today, you can continue as a guest (´･ω･`)
 
-    1. Log in       2. Sign up      3. I wish to continue     
+    Enter 1 for "Log in"            Enter 2 for "Sign up"                                    
+
+=====================================================================
+    Enter 3 for "Now Showing"       Enter 4 for "Filter"
+    Enter movie name for more details
+=====================================================================
+
+<<Upcoming Movies!>>
+Sooryavanshi [PG] 2021-11-05
+Black Box [M] 2021-11-05
+
+=====================================================================
+You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ 
+Enter 1 for "Log in"
+Enter 2 for "Sign up"
+=====================================================================
 ```
+Customer Interface:
+
+If the user logged in as a customer, the system will bring them to the customer interface. In customer interface
+has the same functionalities as the default page, additionally, it will allow user to book movie tickets.
+Despite customers are able to choose the "booking" option, there are some issue related to booking and payment remain unsolved in this version,
+user could meet booking or payment failure. This will be fixed in the next sprint.
+
+```
+Logging in as customer...
+Welcome Andy!
+
+======================================================
+Enter 1 for "Now Showing"   Enter 2 for "Filter"
+Enter 3 for "Booking"
+Enter movie name for more details
+Enter 5 for "Log out"
+======================================================
+
+<<Upcoming Movies!>>
+Sooryavanshi [PG] 2021-11-05
+Black Box [M] 2021-11-05
+```
+
+Staff Interface:
 
 If the user logged in as a staff/ manager, the system will bring them to the staff interface.
 
-If the user logged in as a customer, the system will bring them to the customer interface.
-(Not implemented yet)
+(Not fully implemented yet)
+
 
 - ### **Log in**
 
-Users who have made their account can log in at the default page. They have to enter valid usernane
-and password otherwise an error message will be printed out and they will be brought back to default page:
+Users who have made their account can log in at the default page. They have to enter a valid username
+and password otherwise an error message will be printed out. They will be able to enter the username and
+the password for unlimited times, but they can choose to return to the default page by type in `back`.
+The password entered by the user will be hidden for security.
 
 ```
 Please enter your username:
-ali
+Andy
 Please enter your password:
-password1
-                                                                         
-Incorrect username or password (｡´︿`｡)                                                                                                                                      
+                                                                                                                                                                              
+Incorrect username or password (｡´︿`｡)
+Please try again
+If you wish to return to the default page, please enter "back"
+
+Please enter your username:                                                                                                                                  
 ```
+
 
 If log in successfully, the system will identify the user's identity and bring them to the 
 right interface:
@@ -161,26 +229,40 @@ right interface:
 
 ```                                                                          
 Logging in as customer...
-Welcome Lappland!
+Welcome Andy!
 
 ======================================================
-Enter 1 for "Filter Movies"   2 for "Book Tickets"
+Enter 1 for "Now Showing"   Enter 2 for "Filter"
+Enter 3 for "Booking"
+Enter movie name for more details
+Enter 5 for "Log out"
 ======================================================
 
 <<Upcoming Movies!>>
-
+Sooryavanshi [PG] 2021-11-05
+Black Box [M] 2021-11-05
 ```
-* If logged in as a staff:
+* If logged in as a staff: (Not implemented correctly at this stage.)
 ```                                                                          
 Logging in as staff...
+Welcome Pluto!
+Note: To quit, Enter "-Exit-"
+1.Modify Movie 2.Add/Remove Gift Card 3.Generate Upcoming Movie Report
+Enter the number to operate: 
+Staff operations exits.
 ```
 
-* If logged in as a manager:
+* If logged in as a manager: (Not implemented correctly at this stage.)
 ```                                                                          
 Logging in as manager...
+Welcome Nat!
+Note: To quit, Enter "-Exit-"
+1.Modify Movie 2.Add/Remove Gift Card 3.Generate Upcoming Movie Report
+Enter the number to operate: 
+Staff operations exits.
 ```
 
-Note: The user's interface for staff is not implemented at this stage.
+Note: The user's interface will be fully implemented in next sprint.
 
 - ### **Sign up**
 
@@ -196,32 +278,73 @@ Pluto
 User name already existed. Please enter again (｡´︿`｡)
 ==========================================================
 ```
-Once they created their unique username, they will be asked to create their password and
-choose their identity type. If invalid input received, an error message will be print out.
+Once they created their unique username, they will be asked to create their password. A valid password
+has to be over 4 character. If the user enter the invalid password, an error message will be shown:
+
+```
+Please create your username:
+Judy
+Please create your password:
+                                                                                                                                                                            
+Password has to be longer than 4 characters! (｡´︿`｡) Please try again
+
+```
+Only three attempts allowed, if user exceed the limit, they will be taken back to the default page:
+
+```
+============================================
+Sign up failed (｡´︿`｡)
+============================================
+Returning...
+```
+
+After they have created the valid password,they will be asked to enter the password they just created again.
+If not matching, an error message will be shown, they will be able to create their password again:
+
+```
+Please enter your password again:
+                                                                                                                                                                            
+Please create your password:
+
+Password not matching! (｡´︿`｡)
+
+Please create your password:
+
+```
+
+Only three attempts allowed, if user exceed the limit, they will be taken back to the default page:
+
+```
+============================================
+Sign up failed (｡´︿`｡)
+============================================
+Returning...
+```
+
+After they have successfully set their username and password, they will be asked to choose their identity type:
+
+```
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+Enter 3 - for "Manager"
+```
+If invalid input received, an error message will be print out:
+
+```
+============================================
+Wrong Input! (｡´︿`｡)
+============================================
+Please choose your identity:
+Enter 1 - for "Customer"
+Enter 2 - for "Staff"
+Enter 3 - for "Manager"
+```
+
 Only three attempts allowed for invalid input. If the user exceed the limit, they will be 
 brought back to the default page:
 
 ```
-Please create your password:
-Natalie
-Please choose your identity:
-Enter 1 - for "Customer"
-Enter 2 - for "Staff"
-4
-============================================
-Wrong Input! (｡´︿`｡)
-============================================
-Please choose your identity:
-Enter 1 - for "Customer"
-Enter 2 - for "Staff"
-4
-============================================
-Wrong Input! (｡´︿`｡)
-============================================
-Please choose your identity:
-Enter 1 - for "Customer"
-Enter 2 - for "Staff"
-4
 ============================================
 Wrong Input! (｡´︿`｡)
 ============================================
@@ -231,15 +354,9 @@ Sign up failed (｡´︿`｡)
 ============================================
 
 Returning...
-
 ```
-If the user chose '2' which indicates that the user is the staff, the system will
-ask the role. If invalid input received, an error message will be print out.
-Only three attempts allowed for invalid input. If the user exceed the limit, they will be
-brought back to the default page:
+If the user chose '2' which 
 
-Note: We are aware of the security hole here: We didn't check the authenticity of 
-user's 'Staff' identity. We will fix it in sprint 2.
 
 ```
 Are you a Manager?
