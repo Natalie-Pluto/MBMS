@@ -66,6 +66,7 @@ import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
 import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
 import static databaseutility.CheckIfCreditCardExists.checkIfCreditCardExists;
+import static databaseutility.CheckIfGiftCardExists.checkIfGiftCardExists;
 
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
@@ -331,13 +332,13 @@ public class databaseUtilityTests {
     public void AddingGiftCard_1() {
         removeGiftCard(dbInstance, "111111111111111111");
         addGiftCard(dbInstance, "111111111111111111");
-        //assert(checkIfCreditCardExists(dbInstance, "23222"));
+        assert(checkIfGiftCardExists(dbInstance, "111111111111111111"));
     }
 
     @Test
     public void AddingGiftCard_2() {
-        addCreditCard(dbInstance, "111111111111111111", "ali", "1111");
-        addCreditCard(dbInstance, "111111111111111111", "ali", "1111");
+        addGiftCard(dbInstance, "111111111111111111");
+        addGiftCard(dbInstance, "111111111111111111");
     }
 
     @Test
@@ -801,12 +802,22 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void checkIfCardExists_1() {
+    public void checkIfCreditCardExists_1() {
 
     }
 
     @Test
-    public void checkIfCardExists_2() {
+    public void checkIfCreditCardExists_2() {
+
+    }
+
+    @Test
+    public void checkIfGiftCardExists_1() {
+
+    }
+
+    @Test
+    public void checkIfGiftCardExists_2() {
 
     }
 

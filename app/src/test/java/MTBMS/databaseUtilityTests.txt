@@ -191,3 +191,6 @@ CheckIfHolderNameExists_2 a holder name that does not exist, does not exist
 
 CheckIfCreditCardExists_1 a credit card that exists, exists
 CheckIfCreditCardExists_2 a credit card that does not exist, does not exist
+
+CheckIfGiftCardExists_1 a gift card that exists, exists
+CheckIfGiftCardExists_2 a gift card that does not exist, does not exist

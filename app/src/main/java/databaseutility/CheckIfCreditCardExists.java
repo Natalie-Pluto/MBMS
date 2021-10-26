@@ -8,6 +8,6 @@ public class CheckIfCreditCardExists{
         String query = String.format("SELECT number FROM moviebooking_db.credit_card where number = '%s';", cardNumber);
         String i = d.sql_getString(query, "number");
         if (i == null) return false;
-        return true;
+        return i.equals(cardNumber);
     }
 }
