@@ -28,9 +28,12 @@ public class BookingSystem {
         //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
           //                      "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
+        DeleteAllUpcoming.deleteUpcoming(dbInstance);
+        AddingUpcomingMovie.addUpcomingMovie(dbInstance);
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
@@ -527,6 +530,7 @@ public class BookingSystem {
         System.out.println("5 - for filter now showing movies");
         System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
+        Thread.sleep(2000);
     }
 
     public static void getGreeting(Database dbInstance) {
