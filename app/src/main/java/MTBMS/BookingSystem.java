@@ -28,8 +28,6 @@ public class BookingSystem {
         dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
-        DeleteAllUpcoming.deleteUpcoming(dbInstance);
-        AddingUpcomingMovie.addUpcomingMovie(dbInstance);
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
