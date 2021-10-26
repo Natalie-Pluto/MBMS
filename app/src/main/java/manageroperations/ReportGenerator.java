@@ -1,8 +1,10 @@
-/* package manageroperations;
+package manageroperations;
+
+import databaseutility.*;
+import MTBMS.Database;
 
 public class ReportGenerator {
-    public void getCancellationReport(String txtFilePath){
+    public static void getCancellationReport(Database d){
 
     }
 }
- */
