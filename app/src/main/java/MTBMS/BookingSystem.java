@@ -41,6 +41,47 @@ public class BookingSystem {
 
     public static void options() throws InterruptedException {
         Scanner input = new Scanner(System.in);
+<<<<<<< HEAD
+        while (input.hasNext()) {gu
+            String service = input.nextLine();
+            switch (service) {
+                case "1":
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    System.out.println("Please enter your username:");
+                    String accName = timer();
+                    System.out.println("Please enter your password:");
+                    String accPw = readPwd();
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    login(accName, accPw);
+                    break;
+                case "2":
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    signUp("NA");
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    break;
+                case "3":
+                    System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                    System.out.println(ANSI_PURPLE + "Logging in as guest..." + ANSI_RESET);
+                    Thread.sleep(3000);
+                    Guest guest = new Guest(" ", "G", " ");
+                    guest.guestService("G");
+                    break;
+                default:
+                    System.out.println("============================================");
+                    System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+                    System.out.println("Please enter:");
+                    System.out.println("1 - for log in");
+                    System.out.println("2 - for sign up");
+                    System.out.println("3 - for continue");
+                    System.out.println("============================================\n");
+                    Thread.sleep(2000);
+                    System.out.println(ANSI_PURPLE + "Returning...\n" + ANSI_RESET);
+                    Thread.sleep(2000);
+                    getGreeting();
+                    break;
+            }
+            //getGreeting();
+=======
         String service = input.nextLine();
         switch (service) {
             case "1":
@@ -81,6 +122,7 @@ public class BookingSystem {
                     options();
                 }
                 break;
+>>>>>>> e0e8a2805b574a4d7ff9371b88100cc2b1e4e30b
         }
 
     }
