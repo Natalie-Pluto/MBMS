@@ -4,6 +4,10 @@ import databaseutility.*;
 import movieManagement.ListNowShowing;
 import movieManagement.MovieDetails;
 import movieManagement.UpdateUpcomingMovieTable;
+import staffoperations.GiftCardManipulator;
+import staffoperations.MovieDataManipulator;
+import manageroperations.*;
+import staffoperations.StaffService;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -21,6 +25,7 @@ import static databaseutility.UserAuthenticate.authenticate;
 public class BookingSystem {
     private static BookingSystem instance;
     private static Database dbInstance;
+    Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
@@ -96,12 +101,10 @@ public class BookingSystem {
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 instance.loginGreeting("s", accName);
-                //Staff staff = new Staff(accName, "S", " ");
-                //staff.staffService("S");
+                StaffService.staffService(dbInstance);
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 instance.loginGreeting("m", accName);
-                //Staff staff = new Staff(accName, "M", " ");
-                //staff.staffService("M");
+                ManagerService.managerService(dbInstance);
             } else {
                 instance.loginGreeting("c", accName);
                 Guest customer = new Guest(accName, "C", " ");
@@ -480,6 +483,8 @@ public class BookingSystem {
         System.out.println("Enter 2 - for \"Staff\"");
         System.out.println("Enter 3 - for \"Manager\"");
     }
+
+
 
 
     // Regular
