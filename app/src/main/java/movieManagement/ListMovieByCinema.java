@@ -2,6 +2,7 @@ package movieManagement;
 
 import MTBMS.BookingSystem;
 import MTBMS.Database;
+import MTBMS.Guest;
 import databaseutility.*;
 
 import java.util.Date;
@@ -17,10 +18,12 @@ public class ListMovieByCinema {
                 System.out.println("\n========================================================");
                 System.out.println(RED_BOLD + "Wrong input, please check the cinema name entered (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("========================================================\n");
+                Guest.bookingHelper();
             } else {
                 System.out.println("\n========================================================");
                 System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("========================================================\n");
+                Guest.bookingHelper();
             }
         } else {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
