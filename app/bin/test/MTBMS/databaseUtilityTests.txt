@@ -7,9 +7,16 @@ AddingUser_2 Attempting to add a user with a username which already exist does n
 RemovingUser_1 Attempting to remove a user which does not exist does not cause error
 RemovingUser_2 Removing a user which exists
 
-CheckStaff_1 checking if a user which is a staff member is a staff member
-CheckStaff_2 checking if a user which exists and is not a staff member is not a staff member
-CheckStaff_3 Checking if a user which does not exist is not a staff member.
+CheckStaff_isStaff_1 checking if a user which is a staff member is a staff member
+CheckStaff_isStaff_2 checking if a user which exists and is not a staff member is not a staff member
+CheckStaff_isStaff_3 Checking if a user which does not exist is not a staff member.
+
+CheckStaff_isManager_1 checking if a user which is a manager is a manager.
+CheckStaff_isManager_2 checking if a user which exists and is not a manager is not a manager
+CheckStaff_isManager_3 checking if a user which does not exist and is not a manager 
+
+CheckStaff_getIdentity_1 checking that the identity of a user can be retrieved
+CheckStaff_getIdentity_2 attempting to get the identity of a user that does not exist does not cause issues
 
 DirectorChanger_1 changing directors of a movie that exists 
 DirectorChanger_2 attempting to change the director of a movie that does not exist does not cause error.
@@ -175,3 +182,6 @@ UpdateSeats_4 attempting to update the number of seats booked for a session that
 
 UserAuthenticate_1 No error occurs for an attempt at user authentication for a user that does not exist
 UserAuthenticate_2 Authentication works a user that exists
+
+CheckIfCinemaExists_1 a cinema that exists exists
+CheckIfCinemaExists_2 a cinema that does not exist does not exist
