@@ -55,7 +55,6 @@ public class Database {
 		return output;
 	}
 
-<<<<<<< HEAD
 	public List<String> sql_getStrings(String query, String column) {
 		/*desc todo*/
 		String output = null;
@@ -66,14 +65,13 @@ public class Database {
 			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 			Statement stmt = conn.createStatement();
 			ResultSet result = stmt.executeQuery(sql);
-			if (result.next()) {
+			while (result.next()) {
 				output = result.getString(column);
 				res.add(output);
 			}
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		}
 		return res;
@@ -82,10 +80,6 @@ public class Database {
 
 	public Boolean sql_getBoolean(String query, String column) {
 		/*desc todo*/
-=======
-
-	/*public Boolean sql_getBoolean(String query, String column) {
->>>>>>> 03b7f8ce6bec8eb0d3697e3d883b7524ce691c23
 		Connection conn = null;
 		Boolean output = false;
 		String sql = query;
@@ -107,7 +101,6 @@ public class Database {
 
 
 	public Double sql_getDouble(String query, String column) {
-
 		Connection conn = null;
 		Double output = 0.0;
 		String sql = query;
@@ -125,11 +118,10 @@ public class Database {
 			return null;
 		}
 		return output;
-	}*/
+	}
 
 
 	public Integer sql_getInt(String query, String column) {
-
 		Connection conn = null;
 		Integer output = 0;
 		String sql = query;
@@ -144,6 +136,25 @@ public class Database {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
+		}
+		return output;
+	}
+
+	public Date sql_getDate(String query, String column) {
+		Connection conn = null;
+		Date output;
+		String sql = query;
+		try {
+			conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+			Statement stmt = conn.createStatement();
+			ResultSet result = stmt.executeQuery(sql);
+			if (result.next()) {
+				output = result.getDate(column);
+			} else return null;
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
 			return null;
 		}
 		return output;

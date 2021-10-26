@@ -5,6 +5,7 @@ SET search_path TO 'moviebooking_db';
 DROP TABLE IF EXISTS Credit_Card CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Gift_Card CASCADE;
+DROP TABLE IF EXISTS UpcomingMovie CASCADE;
 DROP TABLE IF EXISTS Cinema_Session CASCADE;
 DROP TABLE IF EXISTS Movie CASCADE;
 DROP TABLE IF EXISTS Cinema CASCADE;
@@ -35,7 +36,15 @@ CREATE TABLE Movie(
     release_date DATE,
     synopsis TEXT,
     directors TEXT,
-    genre char(30)
+    genre varchar(100),
+    "cast" TEXT,
+    showing_date Date
+);
+
+CREATE TABLE UpcomingMovie(
+    name VARCHAR(100) PRIMARY KEY,
+    classification VARCHAR(30) NOT NULL,
+    showing_date DATE
 );
 
 CREATE TABLE Cinema (
@@ -48,7 +57,6 @@ CREATE TABLE Cinema_Session (
     screen_type VARCHAR(6) NOT NULL,
     movie varchar(100) NOT NULL REFERENCES Movie(name),
     ticket_price_kids DECIMAL(10,4) NOT NULL,
-    ticket_price_adults DECIMAL(10,4) NOT NULL,
     ticket_price_seniors DECIMAL(10,4) NOT NULL,
     number_of_front_seats_booked INT,
     number_of_mid_seats_booked INT,
@@ -58,6 +66,7 @@ CREATE TABLE Cinema_Session (
     back_seat_capacity INT,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
+    ticket_price_students DECIMAL(10,4) NOT NULL,
     UNIQUE(cinema, screen_type, movie, start_time)
 );
 
@@ -66,11 +75,65 @@ CREATE TABLE Cinema_Session (
 -------------------------------------------
 
 -- sample Movie data --
-INSERT INTO moviebooking_db.Movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip', 'Action');
-INSERT INTO moviebooking_db.Movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip', 'Action');
-INSERT INTO moviebooking_db.Movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip', 'Action');
+
+INSERT INTO moviebooking_db.movie VALUES('Ip Man', 'PG', '2008-12-18', 'Ip Man vs Japanese villain general', 'Wilson yip','Action', 'Donnie Yen, Simon Yam, Lynn Hung', '2021-10-25')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Ip Man 2', 'PG', '2010-4-29', 'Ip Man vs American muscular boxer', 'Wilson yip','Action','Donnie Yen, Simon Yam, Lynn Hung', '2021-10-25')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Ip Man 3', 'PG', '2016-01-26', 'Ip Man vs Mike Tyson', 'Wilson yip', 'Action','Donnie Yen, Simon Yam, Lynn Hung', '2021-10-25')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Sooryavanshi', 'PG', '2021-11-05', 'The action-packed adventures of an anti-terrorist Squad in India.', 'Rohit Shetty', 'Drams, Crime', 'Akshay Kumar, Katrina Kaif', '2021-11-05')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Black Box', 'M', '2021-11-05', 'A young and talented black box analyst is on a mission to solve the reason behind the deadly crash of a brand new aircraft.', 'Yann Gozlan', 'Drams, Mystery, Thriller', 'Pierre Niney, Lou de Laâge, André Dussollier', '2021-11-05')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Dune', 'M', '2021-12-02', 'A mythic and emotionally charged hero’s journey, Dune tells the story of Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, who must travel to the most dangerous planet in the universe to ensure the future of his family and his people', 'Denis Villeneuve', 'Action, Adventure, Fantasy, Science Fiction', 'Rebecca Ferguson, Timothée Chalamet, Stellan Skarsgård, Zendaya', '2021-12-02')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE BOSS BABY: FAMILY BUSINESS', 'PG', '2021-11-25', 'In the sequel to DreamWorks Animation’s Oscar®-nominated blockbuster comedy, the Templeton brothers Tim and his Boss Baby little bro Ted have become adults', 'Tom McGrath', 'Comedy, Animation, Family, Fantasy, Adventure', 'Alec Baldwin, James McGrath', '2021-11-25')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('VENOM: LET THERE BE CARNAGE', 'M', '2021-11-25', 'Academy Award® nominated actor Tom Hardy returns to the big screen as the lethal protector Venom, one of Marvel’s greatest and most complex characters', 'Andy Serkis', 'Action, Adventure, Thriller, Science Fiction', 'Woody Harrelson, Naomie Harris, Tom Hardy, Michelle Williams, Stephen Graham', '2021-11-25')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('SHANG-CHI AND THE LEGEND OF THE TEN RINGS', 'M', '2021-09-01', 'Shang-Chi must confront the past he thought he left behind when he is drawn into the web of the mysterious Ten Rings organization', 'Destin Daniel Cretton', 'Action, Adventure, Fantasy, Science Fiction', 'Chieng, Fala Chen, Meng’er Zhang', '2021-09-01')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('FREE GUY', 'M', '2021-08-12', 'A bank teller who discovers he is actually a background player in an open-world video game, decides to become the hero of his own story', 'Shawn Levy', 'Action, Adventure, Comedy, Science Fiction', 'Ryan Reynolds, Taika Waititi, LilRel Howery, Joe Keery, Utkarsh Ambudkar, Jodie', '2021-08-12')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('JUNGLE CRUISE', 'M', '2021-07-28', 'Lily travels from London, to the Amazon jungle and enlists Frank’s questionable services to guide her downriver on La Quila', 'Jaume Collet-Serra', 'Adventure, Family, Fantasy', 'Jesse Plemons, Dwayne Johnson, Emily Blunt, Edgar Ramirez, Paul Giamatti', '2021-07-28')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE LAST DUEL', 'MA15+', '2021-10-21', 'King Charles VI declares that Knight Jean de Carrouges settle his dispute with his squire by challenging him to a duel', 'Ridley Scott', 'Drama', 'Adam Driver, Ben Affleck, Matt Damon, Jodie Comer', '2021-10-21')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Test', 'G', '2021-10-15', 'This is for testing', 'Group 1', 'Drama', 'Group 1 all members', '2021-10-15')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE HARDER THEY FALL', 'MA15+', '2021-10-21', 'A man looks to exact revenge against the guy who murdered his parents', 'Jeymes Samuel', 'Drama, Western', 'Danielle Deadwyler, Edi Gathegi, Jonathan Majors', '2021-10-21')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('THE SUICIDE SQUAD', 'MA15+', '2021-08-05', 'From director James Gunn comes Warner Bros. Pictures’ superhero action adventure “The Suicide Squad”', 'James Gunn', 'Action, Adventure, Fantasy, Mystery, Science Fiction', 'Capaldi, Joel Kinnaman, David Dastmalchian, John Cena, Margot Robbie', '2021-08-05')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('PAW PATROL: THE MOVIE', 'G', '2021-9-16', 'The PAW Patrol is on a roll! When their biggest rival, Humdinger, becomes Mayor of nearby Adventure City and starts wreaking havoc', 'Cal Brunker', 'Adventure, Animation, Comedy, Family', 'Kardashian West, Iain Armitage, Will Brisbin', '2021-9-16')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('SPACE JAM: A NEW LEGACY', 'PG', '2021-07-15', 'NBA superstar LeBron James teams up with Bugs Bunny and the rest of the Looney Tunes for this long-awaited sequel', 'Malcolm D. Lee', 'Adventure, Comedy, Animation, Family, Fantasy, Science Fiction, Sport', 'LeBron James', '2021-07-15')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('MY HERO ACADEMIA: WORLD HEROE''S MISSION', 'MA15+', '2021-10-28', 'A mysterious group called Humarize strongly believes in the Quirk Singularity Doomsday theory', 'Kenji Nagasaki', 'Action, Animation', 'Okitsu', '2021-10-28')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Japanese Action Movie', 'R18+', '2021-10-21', 'Something interesting', 'Human', 'Action', 'Human', '2021-10-21')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('ANTLERS', 'MA15+', '2021-10-28', 'A small-town Oregon teacher and her brother, the local sheriff, become entwined with a young student harboring a dangerous secret with frightening consequences', 'Scott Cooper', 'Horror, Mystery', 'Jesse Plemons, Keri Russell, Amy Madigan, Rory Cochrane, Graham Greene', '2021-10-28')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28', 'Ron''s Gone Wrong tells the story of an 11-year-old boy who finds that his robot buddy doesn''t quite work', 'Alessandro Carloni', 'Adventure, Animation, Comedy, Family, Science Fiction', 'Thomas Barbusca, Bentley Kalu, Ava Morse', '2021-10-28')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-28')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-30')on conflict (name) do nothing;
+
+
+-- sample UpdatingMovie data --
+
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 8', 'PG', '2021-10-23')on conflict (name) do nothing;
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 9', 'PG', '2021-10-24')on conflict (name) do nothing;
+
+-- sample Cinema data --
+
+INSERT INTO moviebooking_db.cinema VALUES('Warringah Mall')on conflict (cinema_name) do nothing;
+INSERT INTO moviebooking_db.cinema VALUES('Town Hall')on conflict (cinema_name) do nothing;
+INSERT INTO moviebooking_db.cinema VALUES('Blacktown')on conflict (cinema_name) do nothing;
+INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name) do nothing;
 
 -- sample Credit_Card data --
+
+-- sample cinema_session data --
+
+INSERT INTO moviebooking_db.cinema_session VALUES('1', 'Warringah Mall', 'Gold', 'Ip Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('1', 'Warringah Mall', 'Gold', 'Ip Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('2', 'Warringah Mall', 'Gold', 'FREE GUY', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-25 10:00:00', '2021-10-25 12:00:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('3', 'Warringah Mall', 'Bronze', 'JUNGLE CRUISE', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-10-28 17:00:00', '2021-10-28 19:00:00', '10')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('4', 'Warringah Mall', 'Sliver', 'THE LAST DUEL', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 11:00:00', '2021-10-25 13:00:00', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('5', 'Town Hall', 'Gold', 'SHANG-CHI AND THE LEGEND OF THE TEN RINGS', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-26 18:30:00', '2021-10-26 20:30:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('6', 'Town Hall', 'Sliver', 'PAW PATROL: THE MOVIE', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('7', 'Town Hall', 'Bronze', 'SPACE JAM: A NEW LEGACY', '10', '20', '15','0', '0', '0', '20', '20', '20', '2021-10-27 12:00:00', '2021-10-27 14:00:00', '15')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('8', 'Eastgarden', 'Sliver', 'THE SUICIDE SQUAD', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '20')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('9', 'Eastgarden', 'Bronze', 'THE HARDER THEY FALL', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-10-26 20:00:00', '2021-10-26 22:00:00', '10')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('10', 'Blacktown', 'Gold', 'Ip Man', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-28 21:00:00', '2021-10-28 23:00:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('11', 'Blacktown', 'Sliver', 'FREE GUY', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-10-25 17:00:00', '2021-10-25 19:00:00', '25')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('12', 'Blacktown', 'Gold', 'THE LAST DUEL', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-10-26 17:00:00', '2021-10-26 19:00:00', '35')on conflict (session_id) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('13', 'Blacktown', 'Sliver', 'Ip Man 2', '20', '30', '25','0', '0', '0', '20', '20', '20', '2021-10-25 09:00:00', '2021-10-25 11:00:00', '20')on conflict (session_id) do nothing;
+
+-- sample Users data--
+
 
 -- sample Users data--
 

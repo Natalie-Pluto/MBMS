@@ -10,8 +10,7 @@ public class FilterScreenSize {
         if (screenType == null || screenType.length() == 0){
             return new ArrayList<>();
         }else {
-            return db.sql_getStrings("select cs.movie from cinema_session as cs inner join movie as mv on cs.movie" +
-                    "= mv.name and cs.screen_type = '"+screenType+"';", "movie");
+            return db.sql_getStrings("select distinct movie from moviebooking_db.cinema_session where screen_type = '"+screenType + "';", "movie");
         }
     }
 }
