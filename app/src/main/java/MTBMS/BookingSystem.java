@@ -36,7 +36,7 @@ public class BookingSystem {
 
     public void defaultPage() throws InterruptedException {
         Scanner input = new Scanner(System.in);
-        while (input.hasNext()) {
+        while (input.hasNext()) {gu
             String service = input.nextLine();
             switch (service) {
                 case "1":
