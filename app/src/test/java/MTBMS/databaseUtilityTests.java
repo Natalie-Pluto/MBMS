@@ -5,25 +5,71 @@ import static org.junit.Assert.*;
 import java.sql.*;
 import java.util.Date;
 import static databaseutility.AddingUser.addUser;
-import static databaseutility.CheckStaff.getIdentity;
-import static databaseutility.CheckStaff.isManager;
+import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.CheckStaff.isStaff;
+import static databaseutility.CheckStaff.isManager;
+import static databaseutility.CheckStaff.getIdentity;
 import static databaseutility.DirectorChanger.changeDirectors;
 import static databaseutility.MovieClassificationChanger.changeMovieClassification;
+import static databaseutility.AddingCinema.addCinema;
+import static databaseutility.AddingCreditCard.addCreditCard;
+import static databaseutility.AddingGiftCard.addGiftCard;
+import static databaseutility.AddingUpcomingMovie.addUpcomingMovie;
+import static databaseutility.AddMovieSession.addMovieSession;
+import static databaseutility.ChangeSeatCapacity.changeSeatCapacity;
+import static databaseutility.ChangingCreditCardBalance.changeCreditCardBalance;
+import static databaseutility.ChangingIdentity.changeIdentity;
+import static databaseutility.ChangingUserPassword.changeUserPassword;
+import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
+import static databaseutility.CheckIfUserExists.checkIfUserExists;
+import static databaseutility.DeleteAllUpcoming.deleteUpcoming;
+import static databaseutility.FilterCinema.filterCinema;
+import static databaseutility.FilterScreenSize.filterScreenSize;
+import static databaseutility.GetEndTime.getEndTime;
+import static databaseutility.GetMovieCast.getMovieCast;
+import static databaseutility.GetMovieClassification.getMovieClassification;
+import static databaseutility.GetMovieDirectors.getDirectors;
+import static databaseutility.GetMovieNames.getMovieNames;
+import static databaseutility.GetMovieReleaseDate.getMovieReleasedate;
+import static databaseutility.GetMovieScreensize.getMovieScreensize;
+import static databaseutility.GetMovieShowDate.getMovieShowDate;
+import static databaseutility.GetMovieShowingTime.getShowingTime;
+import static databaseutility.GetMovieSynopsis.getMovieSynopsis;
+import static databaseutility.GetNewUpcomingMovie.getNewUpcomingMovie;
+import static databaseutility.GetNowShowing.getNowShowing;
+import static databaseutility.GetStartTime.getStartTime;
+import static databaseutility.GetTicketPrice.getTicketPriceKids;
+import static databaseutility.GetTicketPrice.getTicketPriceStudents;
+import static databaseutility.GetTicketPrice.getTicketPriceAdults;
+import static databaseutility.GetTicketPrice.getTicketPriceSeniors;
+import static databaseutility.GetUpcomingMovies.getUpcomingMovies;
 import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MoviesCounter.countMovies;
+import static databaseutility.RedeemedCheck.giftCardRedeemed;
+import static databaseutility.RedeemingGiftCard.redeemGiftCard;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
-import static databaseutility.SynopsisChanger.changeSynopsis;
-import static databaseutility.UserAuthenticate.authenticate;
-import static databaseutility.RemovingUser.removeUser;
+import static databaseutility.RemovingCinema.removeCinema;
+import static databaseutility.RemovingCreditCard.removeCreditCard;
+import static databaseutility.RemovingGiftCard.removegiftCard;
 import static databaseutility.RemovingMovie.removeMovie;
-import static databaseutility.GetMovieDirectors.getDirectors;
-import static databaseutility.CheckIfUserExists.checkIfUserExists;
-import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
-import static databaseutility.GetMovieClassification.getMovieClassification;
-import databaseutility.GetMovieDirectors;
-import databaseutility.MovieInsertionBuilder;
+import static databaseutility.RemovingSession.removeSession;
+import static databaseutility.SetSessionTime.setEndTime;
+import static databaseutility.SetSessionTime.setStartTime;
+import static databaseutility.SetTicketPrice.setKidsTicketPrice;
+import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
+import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
+import static databaseutility.SetTicketPrice.setSeniorsTicketPrice;
+import static databaseutility.SynopsisChanger.changeSynopsis;
+import static databaseutility.UpdateScreenSize.updateScreenSize;
+import static databaseutility.UpdateSeats.updateSeats;
+import static databaseutility.UserAuthenticate.authenticate;
+import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
+import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
+import static databaseutility.CheckIfCardExist.checkIfCardExist;
 
+import databaseutility.CheckIfCardExist;
+//import databaseutility.GetMovieDirectors;
+import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
     static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
@@ -59,23 +105,56 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void CheckStaff_1() {
+    public void CheckStaff_isStaff_1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
         addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "s");
         assert(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
-    public void CheckStaff_2() {
+    public void CheckStaff_isStaff_isStaff_2() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
-        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "u");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "z");
         assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
     }
 
     @Test
-    public void CheckStaff_3() {
+    public void CheckStaff_isStaff_3() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
         assertFalse(isStaff(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
+
+    @Test
+    public void CheckStaff_isManager_1() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "m");
+        assert(isManager(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
+
+    @Test
+    public void CheckStaff_isManager_2() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "z");
+        assertFalse(isManager(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
+
+    @Test
+    public void CheckStaff_isManager_3() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        assertFalse(isManager(dbInstance, "aaaaaaaaaaaaaaaaaaaa"));
+    }
+
+    @Test
+    public void CheckStaff_getIdentity_1() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        addUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa", "ghj", "c");
+        assert(getIdentity(dbInstance, "aaaaaaaaaaaaaaaaaaaa").equals("c"));
+    }
+
+    @Test
+    public void CheckStaff_getIdentity_2() {
+        removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
+        getIdentity(dbInstance, "aaaaaaaaaaaaaaaaaaaa").equals("c");
     }
 
     @Test
@@ -123,40 +202,126 @@ public class databaseUtilityTests {
     }
 
     @Test 
-    public void MovieInsertionBuilder_1() {}
+    public void MovieInsertionBuilder_1() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.insertMovie();
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_2() {}
+    public void MovieInsertionBuilder_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_3() {}
+    public void MovieInsertionBuilder_3() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_4() {}
+    public void MovieInsertionBuilder_4() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_5() {}
+    public void MovieInsertionBuilder_5() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_6() {}
+    public void MovieInsertionBuilder_6() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_7() {}
+    public void MovieInsertionBuilder_7() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
+    
 
     @Test
-    public void MovieInsertionBuidler_8() {}
+    public void MovieInsertionBuidler_8() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_9() {}
-
-    @Test
-    public void AddingCinema_1() {}
-
-    @Test
-    public void AddingCinema_2() {}
+    public void MovieInsertionBuilder_9() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test 
-    public void AddingCreditCard_1() {}
+    public void MovieInsertionBuilder_10() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("invalid classification");
+        inserter.insertMovie();
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
+
+    @Test
+    public void AddingCinema_1() {
+        removeCinema(dbInstance, "Ali's cinema");
+        addCinema(dbInstance, "Ali's cinema");
+        assert(checkIfCinemaExists(dbInstance, "Ali's cinema"));
+    }
+
+    @Test
+    public void AddingCinema_2() {
+        addCinema(dbInstance, "Ali's cinema");
+        addCinema(dbInstance, "Ali's cinema");
+    }
+
+    @Test 
+    public void AddingCreditCard_1() {
+        removeCreditCard(dbInstance, "23322");
+        addCreditCard(dbInstance, "23322", "ali", "1111");
+        assert(checkIfCardExist(dbInstance, "23322"));
+    }
 
     @Test 
     public void AddingCreditCard_2() {}
@@ -224,6 +389,229 @@ public class databaseUtilityTests {
     @Test
     public void GetEndTime_2() {}
 
-    
+    @Test
+    public void GetMovieCast_1() {}
+
+    @Test
+    public void GetMovieCast_2() {}
+
+    @Test 
+    public void GetMovieClassification_1() {}
+
+    @Test
+    public void GetMovieClassification_2() {}
+
+    @Test
+    public void GetMovieDirectors_1() {}
+
+    @Test
+    public void GetMovieDirectors_2() {}
+
+    @Test
+    public void GetMovieNames_1() {}
+
+    @Test 
+    public void GetMovieReleaseDate_1() {}
+
+    @Test
+    public void GetMovieReleaseDate_2() {}
+
+    @Test
+    public void GetMovieScreenSize_1() {}
+
+    @Test
+    public void GetMovieShowDate_1() {}
+
+    @Test
+    public void GetMovieShowDate_2() {}
+
+    @Test
+    public void GetMovieShowingTime_1() {}
+
+    @Test
+    public void GetMovieSynopsis_1() {}
+
+    @Test
+    public void GetMovieSynopsis_2() {}
+
+    @Test
+    public void GetNewUpcomingMovie_1() {}
+
+    @Test
+    public void GetNowShowing_1() {}
+
+    @Test
+    public void GetStartTime_1() {}
+
+    @Test
+    public void GetStartTime_2() {}
+
+    @Test
+    public void GetTicketPrice_kids_1() {}
+
+    @Test
+    public void GetTicketPrice_kids_2() {}
+
+    @Test
+    public void GetTicketPrice_adults_1() {}
+
+    @Test
+    public void GetTicketPrice_adults_2() {}
+
+    @Test
+    public void GetTicketPrice_students_1() {}
+
+    @Test
+    public void GetTicketPrice_students_2() {}
+
+    @Test
+    public void GetTicketPrice_seniors_1() {}
+
+    @Test
+    public void GetTicketPrice_seniors_2() {}
+
+    @Test
+    public void GetUpcomingMovies_1() {}
+
+    @Test
+    public void MovieNameChanger_1() {}
+
+    @Test
+    public void MovieNameChanger_2() {}
+
+    @Test
+    public void MoviesCounter_1() {}
+
+    @Test
+    public void RedeemedCheck_1() {}
+
+    @Test
+    public void RedeemedCheck_2() {}
+
+    @Test
+    public void RedeemingGiftCard_1() {}
+
+    @Test
+    public void RedeemingGiftCard_2() {}
+
+    @Test
+    public void ReleaseDateChanger_1() {}
+
+    @Test
+    public void ReleaseDateChanger_2() {}
+
+    @Test
+    public void RemovingCinema_1() {}
+
+    @Test
+    public void RemovingCinema_2() {}
+
+    @Test
+    public void RemovingCreditCard_1() {}
+
+    @Test
+    public void RemovingCreditCard_2() {}
+
+    @Test
+    public void RemovingGiftCard_1() {}
+
+    @Test
+    public void RemovingGiftCard_2() {}
+
+    @Test
+    public void RemovingMovie_1() {}
+
+    @Test
+    public void RemovingMovie_2() {}
+
+    @Test
+    public void RemovingSession_1() {}
+
+    @Test
+    public void RemovingSession_2() {}
+
+    @Test
+    public void SetSessionTime_setStartTime_1() {}
+
+    @Test
+    public void SetSessionTime_setStartTime_2() {}
+
+    @Test
+    public void SetSessionTime_setEndTime_1() {}
+
+    @Test
+    public void SetSessionTimee_setEndTime_2() {}
+
+    @Test
+    public void SetTicketPrice_kids_1() {}
+
+    @Test
+    public void SetTicketPrice_kids_2() {}
+
+    @Test
+    public void SetTicketPrice_adults_1() {}
+
+    @Test
+    public void SetTicketPrice_adults_2() {}
+
+    @Test
+    public void SetTicketPrice_students_1() {}
+
+    @Test
+    public void SetTicketPrice_students_2() {}
+
+    @Test
+    public void SetTicketPrice_seniors_1() {}
+
+    @Test
+    public void SetTicketPrice_seniors_2() {}
+
+    @Test
+    public void SynopsisChanger_1() {}
+
+    @Test
+    public void SynopsisChanger_2() {}
+
+    @Test
+    public void UpdateScreenSize_1() {}
+
+    @Test
+    public void UpdateScreenSize_2() {}
+
+    @Test
+    public void UpdateSeats_1() {}
+
+    @Test
+    public void UpdateSeats_2() {}
+
+    @Test
+    public void UpdateSeats_3() {}
+
+    @Test
+    public void UpdateSeats_4() {}
+
+    @Test
+    public void UserAuthenticate_1() {}
+
+    @Test
+    public void UserAuthenticate_2() {}
+
+    @Test
+    public void CheckIfCinemaExists_1() {}
+
+    @Test
+    public void CheckIfCinemaExists_2() {}
+
+    @Test
+    public void CheckIfHolderNameExists_1() {}
+
+    @Test
+    public void CheckIfHolderNameExists_2() {}
+
+    @Test
+    public void checkIfCardExists_1() {}
+
+    @Test
+    public void checkIfCardExists_2() {}
 
 }

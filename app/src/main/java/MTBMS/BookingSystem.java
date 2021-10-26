@@ -1,13 +1,10 @@
 package MTBMS;
 
 import databaseutility.*;
-import movieManagement.ListNowShowing;
-import movieManagement.MovieDetails;
-import movieManagement.UpdateUpcomingMovieTable;
-import staffoperations.GiftCardManipulator;
-import staffoperations.MovieDataManipulator;
+import movieManagement.*;
+import staffoperations.*;
 import manageroperations.*;
-import staffoperations.StaffService;
+
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -29,14 +26,12 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                                "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+          //                      "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
-       // dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
-        DeleteAllUpcoming.deleteUpcoming(dbInstance);
-        AddingUpcomingMovie.addUpcomingMovie(dbInstance);
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
@@ -68,11 +63,10 @@ public class BookingSystem {
             case "5":
                 filterMovie("S" + showingFilter());
                 break;
-            case "Carribean":
+            case "Caribbean":
                 System.out.println("Test");
                 break;
             case "return":
-                seperator();
                 defaultPage(dbInstance);
                 options();
                 break;
@@ -108,7 +102,8 @@ public class BookingSystem {
             } else {
                 instance.loginGreeting("c", accName);
                 Guest customer = new Guest(accName, "C", " ");
-                customer.guestService("C");
+                Guest.customerHomePage();
+                Guest.guestService();
             }
         }
     }
@@ -181,8 +176,16 @@ public class BookingSystem {
 
     // Log out for the user, return to default page
     public static void logOut() throws InterruptedException {
+        msg3();
+        Thread.sleep(2000);
         getGreeting(dbInstance);
         options();
+    }
+
+    public static void msg3() {
+        System.out.println("=================");
+        System.out.println(PURPLE_BOLD + "Logging out..." + ANSI_RESET);
+        System.out.println("=================");
     }
 
 
@@ -204,27 +207,30 @@ public class BookingSystem {
     // "S7" -> filter now showing movies via screen size
     public static void filterMovie(String type) throws InterruptedException {
         if(type.equals("U6")) {
-            // TODO filter upcoming movies via cinema name
+            listCinema();
+            String cinema = Timer.timer("g");
+            filterMsg("a", cinema);
         } else if (type.equals("U7")) {
-            // TODO filter upcoming movies via screen size
+            listScreen();
+            String screen = Timer.timer("g");
+            filterMsg("b", screen);
         } else if (type.equals("S6")) {
-            // TODO filter now showing movies via cinema name
+            listCinema();
+            String cinemaName = Timer.timer("g");
+            filterMsg("c", cinemaName);
         } else if (type.equals("S7")) {
-            // TODO filter now showing movies via screen size
+            listScreen();
+            String size = Timer.timer("g");
+            filterMsg("d", size);
         } else {
-            seperator();
-            System.out.println("\n============================================");
-            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
-            System.out.println("============================================\n");
+            filterMsg("e", " ");
             if (type.contains("U")) {
                 defaultPage(dbInstance);
-                options();
             } else if (type.contains("S")) {
                 nowShowing();
-                options();
             }
         }
-
+        options();
     }
 
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
@@ -335,14 +341,14 @@ public class BookingSystem {
 
     public static String showingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "     " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }
 
     public static String upcomingFilter() throws InterruptedException {
         seperator();
-        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "       " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Filter through cinema\"" + "     " + "Enter 7 for \"Filter through screen size\"" + ANSI_RESET);
         seperator();
         return Timer.timer("g");
     }
@@ -360,6 +366,57 @@ public class BookingSystem {
         seperator();
     }
 
+    public static void listCinema() {
+        seperator();
+        System.out.println("=======================");
+        System.out.println(PURPLE_BOLD + "Please select a cinema:" + ANSI_RESET);
+        System.out.println("=======================");
+        System.out.println("Warringah Mall");
+        System.out.println("Town Hall");
+        System.out.println("Eastgarden");
+        System.out.println("Blacktown");
+        seperator();
+    }
+
+    public static void listScreen() {
+        seperator();
+        System.out.println("============================");
+        System.out.println(PURPLE_BOLD + "Please select a screen size:" + ANSI_RESET);
+        System.out.println("============================");
+        System.out.println("Gold");
+        System.out.println("Sliver");
+        System.out.println("Bronze");
+        seperator();
+    }
+
+    public static void filterMsg(String type, String value) throws InterruptedException {
+        if (type.equals("a")) {
+            seperator();
+            ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
+            msg2();
+            seperator();
+        } else if (type.equals("b")) {
+            seperator();
+            ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
+            msg2();
+            seperator();
+        } else if (type.equals("c")) {
+            seperator();
+            ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
+            msg2();
+            seperator();
+        } else if (type.equals("d")) {
+            seperator();
+            ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
+            msg2();
+            seperator();
+        } else if (type.equals("e")){
+            seperator();
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Wrong input (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+        }
+    }
 
 
     // Below are the print methods:
@@ -371,12 +428,25 @@ public class BookingSystem {
         System.out.println("=====================================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
+        msg();
+        seperator();
+    }
+
+    public static void msg() {
         System.out.println("\n=====================================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
         System.out.println("=====================================================================");
-        seperator();
+    }
+
+    public static void msg2() {
+        System.out.println("\n=====================================================================");
+        System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Sign up\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
+        System.out.println("=====================================================================");
     }
 
     // List all now showing
@@ -444,7 +514,6 @@ public class BookingSystem {
         System.out.println("5 - for filter now showing movies");
         System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
-        Thread.sleep(2000);
     }
 
     public static void getGreeting(Database dbInstance) {

@@ -22,7 +22,7 @@ public class MovieInsertionBuilder {
     }
 
     public boolean addClassification(String classification) {
-        if (Arrays.asList(validClassifications).contains(classification)) {
+        if (Arrays.asList(validClassifications).contains(classification.toLowerCase())) {
             this.classification = classification;
             return true;
         }
