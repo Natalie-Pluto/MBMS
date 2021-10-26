@@ -65,7 +65,7 @@ public class GiftCardManipulator {
                 continue;
             }
 
-            RemovingGiftCard.removegiftCard(d, cardNumber);
+            RemovingGiftCard.removeGiftCard(d, cardNumber); // 
             System.out.println("Success: gift card removed.");
         }
     }
