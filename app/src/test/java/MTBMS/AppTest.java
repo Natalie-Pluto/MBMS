@@ -3,7 +3,12 @@
  */
 package MTBMS;
 
+import databaseutility.AddMovieSession;
+import databaseutility.AddingCinema;
+import databaseutility.RemovingCinema;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,13 +21,15 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-            "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");;
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+            //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
     private final InputStream systemInput = System.in;
 
+    @BeforeEach
     public void setUpOutput() {
         System.setOut(new PrintStream(testOutput));
     }
@@ -31,16 +38,23 @@ public class AppTest {
         return testOutput.toString();
     }
 
+    private void getInput(String data) {
+        //sources from https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println/1119559#1119559
+        ByteArrayInputStream testInput = new ByteArrayInputStream(data.getBytes());
+        System.setIn(testInput);
+    }
+
+    @AfterEach
+    private void reset() {
+        System.setIn(systemInput);
+        System.setOut(systemOutput);
+    }
+
 
     /*private void input(String data){
 
 
     }*/
-
-    private void reset() {
-        System.setIn(systemInput);
-        System.setOut(systemOutput);
-    }
 
     /*@Test
     public void loginIn1() throws InterruptedException {
@@ -67,27 +81,27 @@ public class AppTest {
         assertNotNull(getOutput());
     }*/
 
-    /*@Test
+   /* @Test
     public void guestService4() throws InterruptedException {
         Guest guest = new Guest("Bean", "C", " ");
-        input("1");
-        guest.guestService("C");
+        getInput("1");
+        guest.guestService();
         assertNotNull(getOutput());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void guestService5() throws InterruptedException {
         Guest guest = new Guest("Bean", "C", " ");
-        input("2");
-        guest.guestService("C");
+        getInput("2");
+        guest.guestService();
         assertNotNull(getOutput());
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void guestService1() throws InterruptedException {
         Guest guest = new Guest("Bean", "C", " ");
-        input("1");
-        guest.guestService("G");
+        getInput("1");
+        guest.guestService();
         assertNotNull(getOutput());
     }*/
 
@@ -185,6 +199,83 @@ public class AppTest {
     public void greetingTest() throws InterruptedException {
         BookingSystem.getGreeting(dbInstance);
         assertNotNull(getOutput());
+    }
+
+    @Test
+    public void getPaymentTypeTest_1() throws InterruptedException {
+        getInput("1");
+        assertEquals("1", Guest.getPaymentType());
+
+
+    }
+
+    /*@Test public void updateSeatsTest() throws InterruptedException {
+        getInput("2" + System.lineSeparator() + "00000000000001GC");
+        Guest.updateSeats("Test", "Test", "2021-10-27 18:00","silver", 1,"front");
+    }*/
+
+    @Test public void getPaymentTypeTest_2(){
+        getInput("2");
+        assertEquals("Wrong output","2", Guest.getPaymentType());
+    }
+
+    /*@Test public void getPaymentTypeTest_w(){
+        getInput("wrong input");
+        assertNotEquals("Wrong output", Guest.getPaymentType(), "wrong input");
+    } */
+
+   /* @Test public void checkPaymentTest_2() throws InterruptedException {
+        getInput("00000000000006GC");
+        assertTrue(Guest.checkPayment("2"));
+    }*/
+
+    @Test public void checkMovieName_1() throws InterruptedException {
+        getInput("Test");
+        assertEquals(Guest.checkMovieName(), "Test");
+    }
+
+    @Test public void checkCinemaName_1() throws  InterruptedException {
+        getInput("Blacktown");
+        assertEquals(Guest.checkCinemaName("Ip Man"), "Blacktown");
+    }
+
+    @Test public void checkStartTimeTest() throws InterruptedException{
+        getInput("2021-10-28 21:00:00");
+        assertEquals("2021-10-28 21:00:00", Guest.checkStartTime("Ip Man", "Blacktown"));
+    }
+
+    @Test public void getAudienceNumTest() {
+
+    }
+
+    @Test public void getSeatLocationTest() throws InterruptedException {
+        getInput("front");
+        assertEquals("front", Guest.getSeatLocation());
+    }
+
+    @Test public void getCardNumTest() throws InterruptedException{
+        getInput("0000");
+        assertEquals("0000", Guest.getCardNum());
+    }
+
+    @Test public void cardNumberCheckTest_r() throws  InterruptedException{
+        getInput("00000");
+        assertTrue(Guest.cardNumberCheck());
+    }
+
+    @Test public void getCardHolderNameTest() throws InterruptedException{
+        getInput("test");
+        assertEquals("test", Guest.getCardHolderName());
+    }
+
+    /*@Test public void cardHolderNameCheckTest_r() throws InterruptedException{
+        getInput("johnny");
+        assertTrue(Guest.cardHolderNameCheck());
+    }*/
+
+    @Test public void saveCreditCardTest() {
+        getInput("1");
+        Guest.saveCreditCard("alien", "00001");
     }
 }
 

@@ -1,6 +1,8 @@
 package MTBMS;
 import movieManagement.*;
 import databaseutility.*;
+
+import java.util.UUID;
 import java.util.regex.*;
 
 
@@ -20,8 +22,8 @@ public class Guest {
 
     //Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
     //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-
-    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
@@ -257,15 +259,14 @@ public class Guest {
         String movieName = checkMovieName();
         String cinemaName = checkCinemaName(movieName);
         String movieStartTime = checkStartTime(movieName, cinemaName);
-        //System.out.println(GetSingleScreenSize.getSingleScreenSize(dbInstance, movieName, cinemaName, movieStartTime));
         String screenType = GetSingleScreenSize.getSingleScreenSize(dbInstance, movieName, cinemaName, movieStartTime);
         int audienceNum = getAudienceNum();
         String seatLocation = getSeatLocation();
         updateSeats(movieName, cinemaName, movieStartTime, screenType, audienceNum, seatLocation);
         BookingSystem.seperator();
-
     }
 
+    /*
     public static String getBookChoice(){
         Scanner input = new Scanner(System.in);
         BookingSystem.seperator();
@@ -297,38 +298,43 @@ public class Guest {
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
         BookingSystem.seperator();
     }
+    */
 
     public static void updateSeats(String movieName, String cinemaName, String movieStartTime, String screenType, int audienceNum, String seatLocation) throws InterruptedException {
-        int paymentType = getPaymentType();
+        UUID transId = UUID.randomUUID();
+        String paymentType = getPaymentType();
         if (checkPayment(paymentType)) {
             UpdateSeats updateSeats = new UpdateSeats();
             updateSeats.updateSeats(dbInstance, cinemaName, movieName, movieStartTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
             System.out.println(GREEN_BOLD + "You have successfully booked a movie!" + ANSI_RESET);
-            if (paymentType == 1){
+            System.out.println("\n Transaction id: " + transId);
+
+            /*if (paymentType == 1){
                 String cardNum = getCardNum();
                 cardNumberCheck();
                 String cardHolderName = getCardHolderName();
                 cardNumberCheck();
-            }
+            }*/
             //TODO: auto-generated id
         }
 
     }
-    public static int getPaymentType() {
+
+    public static String getPaymentType() {
         Scanner input = new Scanner(System.in);
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Which payment do you want to make?" + ANSI_RESET);
         System.out.println(YELLOW_BOLD + "1.Credit Card       2.Gift Card"+ ANSI_RESET);
         System.out.println("======================================================\n");
 
-        int paymentType = input.nextInt();
+        String paymentType = input.nextLine();
         switch (paymentType){
-            case 1:
-                return 1;
+            case "1":
+                return "1";
 
-            case 2:
-                return 2;
+            case "2":
+                return "2";
 
             default:
                 System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
@@ -342,23 +348,21 @@ public class Guest {
 
     // This method should be called by book( )
     // It will check if the payment is successful.
-    public static boolean checkPayment(int paymentType) throws InterruptedException {
+    public static boolean checkPayment(String paymentType) throws InterruptedException {
         Scanner input = new Scanner(System.in);
         switch (paymentType){
-            case 1://card
+            /*case "1"://card
                 if(cardNumberCheck()){
                     if (cardHolderNameCheck()){
                     //TODO: update balance
                         String cardNum = getCardNum();
-
                         String cardHolderName = getCardHolderName();
-
 
                     }
                 }
                 break;
-
-            case 2://giftcard
+            */
+            case "2"://giftcard
                 BookingSystem.seperator();
                 System.out.println("======================================================");
                 System.out.println(PURPLE_BOLD + "Please enter your gift card number" + ANSI_RESET);
@@ -446,7 +450,6 @@ public class Guest {
 
 
     public static String getSeatLocation() throws InterruptedException {
-        Scanner input = new Scanner(System.in);
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Please select your seats location" + ANSI_RESET);
         System.out.println(YELLOW_BOLD + "1.front        2.mid       3.back" + ANSI_RESET);
@@ -456,7 +459,6 @@ public class Guest {
     }
 
     public static String getCardNum() throws InterruptedException {
-        Scanner input = new Scanner(System.in);
         System.out.println("Please enter your card number");
         //TODO hide card number
         String cardNum = Timer.timer("c");
@@ -473,30 +475,27 @@ public class Guest {
     }
 
     public static String getCardHolderName() throws InterruptedException {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Please enter your cardholder name");
         String cardHolderName = Timer.timer("c");
         return cardHolderName;
     }
     public static boolean cardHolderNameCheck() throws InterruptedException {
         String cardHolderName = getCardHolderName();
-        if (!(CheckIfCreditCardExists.checkIfCreditCardExists(dbInstance, cardHolderName))){
-            System.out.println(RED_BOLD + "Wrong cardholder number" + ANSI_RESET);
+        if (!(CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
+            System.out.println(RED_BOLD + "Wrong cardholder name" + ANSI_RESET);
             return cardHolderNameCheck();
         }
 
         return true;
     }
 
-    public void cancelTrans(){
-        Scanner input = new Scanner(System.in);
+    public void cancelTrans() throws InterruptedException {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel transaction" + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String cancel = input.nextLine();
+        String cancel = Timer.timer("c");
         if (cancel.equals("cancel")){
             getPaymentType();
         }

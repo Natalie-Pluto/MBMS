@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class BookingSystemTest {
-    Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
 
     /*@Test
     public void testPage(){
