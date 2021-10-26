@@ -32,7 +32,8 @@ public class ListNowShowingCinema {
                 System.out.println("===============================================\n");
                 System.out.println(PURPLE_BOLD_BRIGHT + "Showing Time" + ANSI_RESET);
                 for (String time : showingTime) {
-                    System.out.println(time);
+                    String size = GetSingleScreenSize.getSingleScreenSize(db, n.replace("'", "''"), cinema, time);
+                    System.out.println(time + " " + PURPLE_BOLD + "[" + size + "]" + ANSI_RESET);
                 }
                 System.out.println("");
             }
