@@ -64,7 +64,10 @@ import static databaseutility.UpdateScreenSize.updateScreenSize;
 import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
+import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
+import static databaseutility.CheckIfCardExist.checkIfCardExist;
 
+import databaseutility.CheckIfCardExist;
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
@@ -308,10 +311,17 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void AddingCinema_2() {}
+    public void AddingCinema_2() {
+        addCinema(dbInstance, "Ali's cinema");
+        addCinema(dbInstance, "Ali's cinema");
+    }
 
     @Test 
-    public void AddingCreditCard_1() {}
+    public void AddingCreditCard_1() {
+        removeCreditCard(dbInstance, "23322");
+        addCreditCard(dbInstance, "23322", "ali", "1111");
+        assert(checkIfCardExist(dbInstance, "23322"));
+    }
 
     @Test 
     public void AddingCreditCard_2() {}
@@ -592,6 +602,16 @@ public class databaseUtilityTests {
     @Test
     public void CheckIfCinemaExists_2() {}
 
+    @Test
+    public void CheckIfHolderNameExists_1() {}
 
+    @Test
+    public void CheckIfHolderNameExists_2() {}
+
+    @Test
+    public void checkIfCardExists_1() {}
+
+    @Test
+    public void checkIfCardExists_2() {}
 
 }

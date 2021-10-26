@@ -39,7 +39,7 @@ MovieInsertionBuilder_10 Attempting to insert a movie with invalid classificatio
 AddingCinema_1 adding a cinema with a name that does not already exist
 AddingCinema_2 attempting to add a cinema with a name that already exists should not cause issues
 
-AddingCreditCard_1 adding a credit card with a credit card number that does not exist 
+AddingCreditCard_1 adding a credit card with a credit card number that does not exist should work
 AddingCreditCard_2 adding a credit card with a credit card number that does exist should not cause issues
 
 AddingGiftCard_1 adding a gift card with a gift card number that does not exist 
@@ -185,3 +185,9 @@ UserAuthenticate_2 Authentication works a user that exists
 
 CheckIfCinemaExists_1 a cinema that exists exists
 CheckIfCinemaExists_2 a cinema that does not exist does not exist
+
+CheckIfHolderNameExists_1 a holdername that exists, exists
+CheckIfHolderNameExists_2 a holder name that does not exist, does not exist
+
+CheckIfCardExists_1 a credit card that exists, exists
+CheckIfCardExists_2 a credit card that does not exist, does not exist
