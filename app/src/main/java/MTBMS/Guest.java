@@ -409,7 +409,7 @@ public class Guest {
     }
     public static boolean cardNumberCheck() throws InterruptedException {
         String cardNum = getCardNum();
-        if (!(CheckIfCardExist.checkIfCardExist(dbInstance, cardNum))){
+        if (!(CheckIfCreditCardExists.checkIfCreditCardExists(dbInstance, cardNum))){
             System.out.println("Wrong card number");
             cardNumberCheck();
         }
@@ -425,7 +425,7 @@ public class Guest {
     }
     public static boolean cardHolderNameCheck() throws InterruptedException {
         String cardHolderName = getCardHolderName();
-        if (!(CheckIfCardExist.checkIfCardExist(dbInstance, cardHolderName))){
+        if (!(CheckIfCreditCardExists.checkIfCreditCardExists(dbInstance, cardHolderName))){
             System.out.println("Wrong cardholder number");
             cardHolderNameCheck();
         }

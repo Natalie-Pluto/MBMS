@@ -50,7 +50,7 @@ import static databaseutility.RedeemingGiftCard.redeemGiftCard;
 import static databaseutility.ReleaseDateChanger.changeReleaseDate;
 import static databaseutility.RemovingCinema.removeCinema;
 import static databaseutility.RemovingCreditCard.removeCreditCard;
-import static databaseutility.RemovingGiftCard.removegiftCard;
+import static databaseutility.RemovingGiftCard.removeGiftCard;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.RemovingSession.removeSession;
 import static databaseutility.SetSessionTime.setEndTime;
@@ -65,9 +65,8 @@ import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
 import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
-import static databaseutility.CheckIfCardExist.checkIfCardExist;
+import static databaseutility.CheckIfCreditCardExists.checkIfCreditCardExists;
 
-import databaseutility.CheckIfCardExist;
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
@@ -274,7 +273,6 @@ public class databaseUtilityTests {
         assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
     }
     
-
     @Test
     public void MovieInsertionBuidler_8() {
         removeMovie(dbInstance, "vscode, the movie");
@@ -320,298 +318,496 @@ public class databaseUtilityTests {
     public void AddingCreditCard_1() {
         removeCreditCard(dbInstance, "23322");
         addCreditCard(dbInstance, "23322", "ali", "1111");
-        assert(checkIfCardExist(dbInstance, "23322"));
+        assert(checkIfCreditCardExists(dbInstance, "23322"));
     }
 
     @Test 
-    public void AddingCreditCard_2() {}
+    public void AddingCreditCard_2() {
+        addCreditCard(dbInstance, "23322", "ali", "1111");
+        addCreditCard(dbInstance, "23322", "ali", "1111");
+    }
 
     @Test
-    public void AddingGiftCard_1() {}
+    public void AddingGiftCard_1() {
+        removeGiftCard(dbInstance, "111111111111111111");
+        addGiftCard(dbInstance, "111111111111111111");
+        //assert(checkIfCreditCardExists(dbInstance, "23222"));
+    }
 
     @Test
-    public void AddingGiftCard_2() {}
+    public void AddingGiftCard_2() {
+        addCreditCard(dbInstance, "111111111111111111", "ali", "1111");
+        addCreditCard(dbInstance, "111111111111111111", "ali", "1111");
+    }
 
     @Test
-    public void AddingUpcomingMovie_1() {}
+    public void AddingUpcomingMovie_1() {
+
+    }
 
     @Test
-    public void AddMovieSession_1() {}
+    public void AddMovieSession_1() {
+
+    }
 
     @Test
-    public void AddMovieSession_2() {}
+    public void AddMovieSession_2() {
+
+    }
 
     @Test
-    public void changeSeatCapacity_1() {}
+    public void changeSeatCapacity_1() {
+
+    }
 
     @Test 
-    public void changeSeatCapacity_2() {}
+    public void changeSeatCapacity_2() {
+
+    }
 
     @Test
-    public void ChangingCreditCardBalance_1() {}
+    public void ChangingCreditCardBalance_1() {
+
+    }
 
     @Test
-    public void ChangingCreditCardBalance_2() {}
+    public void ChangingCreditCardBalance_2() {
+
+    }
 
     @Test
-    public void ChangingIdentity_1() {}
+    public void ChangingIdentity_1() {
+
+    }
     
     @Test
-    public void ChangingIdentity_2() {}
+    public void ChangingIdentity_2() {
+
+    }
 
     @Test
-    public void ChangingUserPassword_1() {}
+    public void ChangingUserPassword_1() {
+
+    }
 
     @Test
-    public void ChangingUserPassword_2() {}
+    public void ChangingUserPassword_2() {
+
+    }
 
     @Test
-    public void ChangingUserPassword_3() {}
+    public void ChangingUserPassword_3() {
 
-    @Test 
-    public void CheckIfUserExists_1() {}
-
-    @Test
-    public void CheckIfUserExists_2() {}
-
-    @Test
-    public void DeleteAllUpcoming_1() {}
-
-    @Test 
-    public void FilterCinema_1() {}
-
-    @Test
-    public void FilterScreenSize_1() {}
-
-    @Test
-    public void GetEndTime_1() {}
-
-    @Test
-    public void GetEndTime_2() {}
-
-    @Test
-    public void GetMovieCast_1() {}
-
-    @Test
-    public void GetMovieCast_2() {}
+    }
 
     @Test 
-    public void GetMovieClassification_1() {}
+    public void CheckIfUserExists_1() {
+
+    }
 
     @Test
-    public void GetMovieClassification_2() {}
+    public void CheckIfUserExists_2() {
+
+    }
 
     @Test
-    public void GetMovieDirectors_1() {}
+    public void DeleteAllUpcoming_1() {
 
-    @Test
-    public void GetMovieDirectors_2() {}
-
-    @Test
-    public void GetMovieNames_1() {}
+    }
 
     @Test 
-    public void GetMovieReleaseDate_1() {}
+    public void FilterCinema_1() {
 
+    }
+
+    @Test
+    public void FilterScreenSize_1() {
+
+    }
+
+    @Test
+    public void GetEndTime_1() {
+
+    }
+
+    @Test
+    public void GetEndTime_2() {
+
+    }
+
+    @Test
+    public void GetMovieCast_1() {
+
+    }
+
+    @Test
+    public void GetMovieCast_2() {
+
+    }
+
+    @Test 
+    public void GetMovieClassification_1() {
+
+    }
+
+    @Test
+    public void GetMovieClassification_2() {
+
+    }
+
+    @Test
+    public void GetMovieDirectors_1() {
+
+    }
+
     @Test
-    public void GetMovieReleaseDate_2() {}
+    public void GetMovieDirectors_2() {
 
+    }
+
+    @Test
+    public void GetMovieNames_1() {
+
+    }
+
+    @Test 
+    public void GetMovieReleaseDate_1() {
+
+    }
+
     @Test
-    public void GetMovieScreenSize_1() {}
+    public void GetMovieReleaseDate_2() {
 
+    }
+
+    @Test
+    public void GetMovieScreenSize_1() {
+
+    }
+
     @Test
-    public void GetMovieShowDate_1() {}
+    public void GetMovieShowDate_1() {
 
+    }
+
     @Test
-    public void GetMovieShowDate_2() {}
+    public void GetMovieShowDate_2() {
+
+    }
 
     @Test
-    public void GetMovieShowingTime_1() {}
+    public void GetMovieShowingTime_1() {
 
+    }
+
     @Test
-    public void GetMovieSynopsis_1() {}
+    public void GetMovieSynopsis_1() {
 
+    }
+
     @Test
-    public void GetMovieSynopsis_2() {}
+    public void GetMovieSynopsis_2() {
+
+    }
 
     @Test
-    public void GetNewUpcomingMovie_1() {}
+    public void GetNewUpcomingMovie_1() {
 
+    }
+
     @Test
-    public void GetNowShowing_1() {}
+    public void GetNowShowing_1() {
 
+    }
+
     @Test
-    public void GetStartTime_1() {}
+    public void GetStartTime_1() {
+
+    }
 
     @Test
-    public void GetStartTime_2() {}
+    public void GetStartTime_2() {
 
+    }
+
     @Test
-    public void GetTicketPrice_kids_1() {}
+    public void GetTicketPrice_kids_1() {
 
+    }
+
     @Test
-    public void GetTicketPrice_kids_2() {}
+    public void GetTicketPrice_kids_2() {
+
+    }
 
     @Test
-    public void GetTicketPrice_adults_1() {}
+    public void GetTicketPrice_adults_1() {
 
+    }
+
     @Test
-    public void GetTicketPrice_adults_2() {}
+    public void GetTicketPrice_adults_2() {
 
+    }
+
     @Test
-    public void GetTicketPrice_students_1() {}
+    public void GetTicketPrice_students_1() {
+
+    }
 
     @Test
-    public void GetTicketPrice_students_2() {}
+    public void GetTicketPrice_students_2() {
 
+    }
+
     @Test
-    public void GetTicketPrice_seniors_1() {}
+    public void GetTicketPrice_seniors_1() {
 
+    }
+
     @Test
-    public void GetTicketPrice_seniors_2() {}
+    public void GetTicketPrice_seniors_2() {
+
+    }
 
     @Test
-    public void GetUpcomingMovies_1() {}
+    public void GetUpcomingMovies_1() {
 
+    }
+
     @Test
-    public void MovieNameChanger_1() {}
+    public void MovieNameChanger_1() {
 
+    }
+
     @Test
-    public void MovieNameChanger_2() {}
+    public void MovieNameChanger_2() {
+
+    }
 
     @Test
-    public void MoviesCounter_1() {}
+    public void MoviesCounter_1() {
 
+    }
+
     @Test
-    public void RedeemedCheck_1() {}
+    public void RedeemedCheck_1() {
 
+    }
+
     @Test
-    public void RedeemedCheck_2() {}
+    public void RedeemedCheck_2() {
+
+    }
 
     @Test
-    public void RedeemingGiftCard_1() {}
+    public void RedeemingGiftCard_1() {
 
+    }
+
     @Test
-    public void RedeemingGiftCard_2() {}
+    public void RedeemingGiftCard_2() {
 
+    }
+
     @Test
-    public void ReleaseDateChanger_1() {}
+    public void ReleaseDateChanger_1() {
+        
+    }
 
     @Test
-    public void ReleaseDateChanger_2() {}
+    public void ReleaseDateChanger_2() {
+
+    }
 
     @Test
-    public void RemovingCinema_1() {}
+    public void RemovingCinema_1() {
 
+    }
+
     @Test
-    public void RemovingCinema_2() {}
+    public void RemovingCinema_2() {
 
+    }
+
     @Test
-    public void RemovingCreditCard_1() {}
+    public void RemovingCreditCard_1() {
+
+    }
 
     @Test
-    public void RemovingCreditCard_2() {}
+    public void RemovingCreditCard_2() {
 
+    }
+
     @Test
-    public void RemovingGiftCard_1() {}
+    public void RemovingGiftCard_1() {
 
+    }
+
     @Test
-    public void RemovingGiftCard_2() {}
+    public void RemovingGiftCard_2() {
+
+    }
 
     @Test
-    public void RemovingMovie_1() {}
+    public void RemovingMovie_1() {
 
+    }
+
     @Test
-    public void RemovingMovie_2() {}
+    public void RemovingMovie_2() {
 
+    }
+
     @Test
-    public void RemovingSession_1() {}
+    public void RemovingSession_1() {
+
+    }
 
     @Test
-    public void RemovingSession_2() {}
+    public void RemovingSession_2() {
+        
+    }
 
     @Test
-    public void SetSessionTime_setStartTime_1() {}
+    public void SetSessionTime_setStartTime_1() {
 
+    }
+
     @Test
-    public void SetSessionTime_setStartTime_2() {}
+    public void SetSessionTime_setStartTime_2() {
 
+    }
+
     @Test
-    public void SetSessionTime_setEndTime_1() {}
+    public void SetSessionTime_setEndTime_1() {
+
+    }
 
     @Test
-    public void SetSessionTimee_setEndTime_2() {}
+    public void SetSessionTimee_setEndTime_2() {
 
+    }
+
     @Test
-    public void SetTicketPrice_kids_1() {}
+    public void SetTicketPrice_kids_1() {
 
+    }
+
     @Test
-    public void SetTicketPrice_kids_2() {}
+    public void SetTicketPrice_kids_2() {
+
+    }
 
     @Test
-    public void SetTicketPrice_adults_1() {}
+    public void SetTicketPrice_adults_1() {
 
+    }
+
     @Test
-    public void SetTicketPrice_adults_2() {}
+    public void SetTicketPrice_adults_2() {
+        
+    }
 
     @Test
-    public void SetTicketPrice_students_1() {}
+    public void SetTicketPrice_students_1() {
 
+    }
+
     @Test
-    public void SetTicketPrice_students_2() {}
+    public void SetTicketPrice_students_2() {
+
+    }
 
     @Test
-    public void SetTicketPrice_seniors_1() {}
+    public void SetTicketPrice_seniors_1() {
 
+    }
+
     @Test
-    public void SetTicketPrice_seniors_2() {}
+    public void SetTicketPrice_seniors_2() {
 
+    }
+
     @Test
-    public void SynopsisChanger_1() {}
+    public void SynopsisChanger_1() {
+
+    }
 
     @Test
-    public void SynopsisChanger_2() {}
+    public void SynopsisChanger_2() {
 
+    }
+
     @Test
-    public void UpdateScreenSize_1() {}
+    public void UpdateScreenSize_1() {
 
+    }
+
     @Test
-    public void UpdateScreenSize_2() {}
+    public void UpdateScreenSize_2() {
+
+    }
 
     @Test
-    public void UpdateSeats_1() {}
+    public void UpdateSeats_1() {
 
+    }
+
     @Test
-    public void UpdateSeats_2() {}
+    public void UpdateSeats_2() {
 
+    }
+
     @Test
-    public void UpdateSeats_3() {}
+    public void UpdateSeats_3() {
+
+    }
 
     @Test
-    public void UpdateSeats_4() {}
+    public void UpdateSeats_4() {
 
+    }
+
     @Test
-    public void UserAuthenticate_1() {}
+    public void UserAuthenticate_1() {
 
+    }
+
     @Test
-    public void UserAuthenticate_2() {}
+    public void UserAuthenticate_2() {
+
+    }
 
     @Test
-    public void CheckIfCinemaExists_1() {}
+    public void CheckIfCinemaExists_1() {
 
+    }
+
     @Test
-    public void CheckIfCinemaExists_2() {}
+    public void CheckIfCinemaExists_2() {
 
+    }
+
     @Test
-    public void CheckIfHolderNameExists_1() {}
+    public void CheckIfHolderNameExists_1() {
+
+    }
 
     @Test
-    public void CheckIfHolderNameExists_2() {}
+    public void CheckIfHolderNameExists_2() {
 
+    }
+
     @Test
-    public void checkIfCardExists_1() {}
+    public void checkIfCardExists_1() {
 
+    }
+
     @Test
-    public void checkIfCardExists_2() {}
+    public void checkIfCardExists_2() {
+
+    }
 
 }
