@@ -7,9 +7,16 @@ AddingUser_2 Attempting to add a user with a username which already exist does n
 RemovingUser_1 Attempting to remove a user which does not exist does not cause error
 RemovingUser_2 Removing a user which exists
 
-CheckStaff_1 checking if a user which is a staff member is a staff member
-CheckStaff_2 checking if a user which exists and is not a staff member is not a staff member
-CheckStaff_3 Checking if a user which does not exist is not a staff member.
+CheckStaff_isStaff_1 checking if a user which is a staff member is a staff member
+CheckStaff_isStaff_2 checking if a user which exists and is not a staff member is not a staff member
+CheckStaff_isStaff_3 Checking if a user which does not exist is not a staff member.
+
+CheckStaff_isManager_1 checking if a user which is a manager is a manager.
+CheckStaff_isManager_2 checking if a user which exists and is not a manager is not a manager
+CheckStaff_isManager_3 checking if a user which does not exist and is not a manager 
+
+CheckStaff_getIdentity_1 checking that the identity of a user can be retrieved
+CheckStaff_getIdentity_2 attempting to get the identity of a user that does not exist does not cause issues
 
 DirectorChanger_1 changing directors of a movie that exists 
 DirectorChanger_2 attempting to change the director of a movie that does not exist does not cause error.
@@ -18,15 +25,16 @@ MovieClassificationChanger_1 Changing movie classification to a valid classifica
 MovieClassificationChanger_2 Changing movie classification to an invalid classification does not change classification
 MovieClassificationChanger_3 Attempting to change the movie classification of a movie that does not exist does not cause error.
 
-MovieInsertionBuilder_1 Attempting to insert a movie without classification
-MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors
-MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors
-MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis
-MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis
-MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date
-MovieInsertionBuilder_7 Inserting a movie with classifcation an synopsis but without release date or directors
-MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis
-MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis
+MovieInsertionBuilder_1 Attempting to insert a movie without classification should not work and not cause issues
+MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors should work
+MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors should work
+MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis should work
+MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis should work
+MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date should work
+MovieInsertionBuilder_7 Inserting a movie with classifcation and synopsis but without release date or directors should work
+MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis should work
+MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis should work
+MovieInsertionBuilder_10 Attempting to insert a movie with invalid classification should not work and not cause issues
 
 AddingCinema_1 adding a cinema with a name that does not already exist
 AddingCinema_2 attempting to add a cinema with a name that already exists should not cause issues
@@ -101,13 +109,16 @@ GetStartTime_1 the start time of a session that exists can be retrieved
 GetStartTime_2 attempting to get the start time of a session that does not exist does not cause issues
 
 GetTicketPrice_kids_1 the kids ticket price of a session that exists can be retrieved
-GetTicketPrice_kids_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_kids_2 attempting to get the kids ticket price of a session that does not exist does not cause issues
 
 GetTicketPrice_adults_1 the adults ticket price of a session that exists can be retrieved
-GetTicketPrice_adults_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_adults_2 attempting to get the adults ticket price of a session that does not exist does not cause issues
 
 GetTicketPrice_students_1 the students ticket price of a session that exists can be retrieved
-GetTicketPrice_students_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_students_2 attempting to get the students ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_seniors_1 the seniors ticket price of a session that exists can be retrieved
+GetTicketPrice_seniors_2 attempting to get the seniors ticket price of a session that does not exist does not cause issues
 
 GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
 
@@ -171,3 +182,6 @@ UpdateSeats_4 attempting to update the number of seats booked for a session that
 
 UserAuthenticate_1 No error occurs for an attempt at user authentication for a user that does not exist
 UserAuthenticate_2 Authentication works a user that exists
+
+CheckIfCinemaExists_1 a cinema that exists exists
+CheckIfCinemaExists_2 a cinema that does not exist does not exist
