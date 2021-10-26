@@ -55,7 +55,7 @@ CREATE TABLE Cinema_Session (
     session_id INT, 
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name),
     screen_type VARCHAR(6) NOT NULL,
-    movie varchar(100) NOT NULL REFERENCES Movie(name),
+    movie varchar(100) NOT NULL REFERENCES Movie(name) ON UPDATE CASCADE ON DELETE CASCADE,
     ticket_price_kids DECIMAL(10,4),
     ticket_price_seniors DECIMAL(10,4),
     ticket_price_adults DECIMAL(10,4),
