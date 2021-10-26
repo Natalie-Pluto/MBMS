@@ -48,7 +48,7 @@ public class DatabaseTests {
 /*     @Test
     public void sql_getStringTest1(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
-        assertNotNull(d.sql_getString("users","username"));
+        assertNotNull(d.sql_getString("select username from movingbooking_db","username"));
     }
 
     @Test
