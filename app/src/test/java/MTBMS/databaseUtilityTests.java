@@ -123,31 +123,106 @@ public class databaseUtilityTests {
     }
 
     @Test 
-    public void MovieInsertionBuilder_1() {}
+    public void MovieInsertionBuilder_1() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.insertMovie();
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_2() {}
+    public void MovieInsertionBuilder_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_3() {}
+    public void MovieInsertionBuilder_3() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_4() {}
+    public void MovieInsertionBuilder_4() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_5() {}
+    public void MovieInsertionBuilder_5() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addReleaseDate("2001-02-26");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_6() {}
+    public void MovieInsertionBuilder_6() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_7() {}
+    public void MovieInsertionBuilder_7() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addSynopsis("As ali writes database utility tests, he discovers..");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
+    
 
     @Test
-    public void MovieInsertionBuidler_8() {}
+    public void MovieInsertionBuidler_8() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.addDirectors("ali");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
-    public void MovieInsertionBuilder_9() {}
+    public void MovieInsertionBuilder_9() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("pg");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
+
+    @Test 
+    public void MovieInsertionBuilder_10() {
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("invalid classification");
+        inserter.insertMovie();
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
+    }
 
     @Test
     public void AddingCinema_1() {}

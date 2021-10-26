@@ -18,15 +18,16 @@ MovieClassificationChanger_1 Changing movie classification to a valid classifica
 MovieClassificationChanger_2 Changing movie classification to an invalid classification does not change classification
 MovieClassificationChanger_3 Attempting to change the movie classification of a movie that does not exist does not cause error.
 
-MovieInsertionBuilder_1 Attempting to insert a movie without classification
-MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors
-MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors
-MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis
-MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis
-MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date
-MovieInsertionBuilder_7 Inserting a movie with classifcation an synopsis but without release date or directors
-MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis
-MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis
+MovieInsertionBuilder_1 Attempting to insert a movie without classification should not work and not cause issues
+MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors should work
+MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors should work
+MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis should work
+MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis should work
+MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date should work
+MovieInsertionBuilder_7 Inserting a movie with classifcation and synopsis but without release date or directors should work
+MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis should work
+MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis should work
+MovieInsertionBuilder_10 Attempting to insert a movie with invalid classification should not work and not cause issues
 
 AddingCinema_1 adding a cinema with a name that does not already exist
 AddingCinema_2 attempting to add a cinema with a name that already exists should not cause issues
