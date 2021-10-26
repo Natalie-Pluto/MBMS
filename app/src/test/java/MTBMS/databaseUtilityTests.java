@@ -21,8 +21,62 @@ import static databaseutility.GetMovieDirectors.getDirectors;
 import static databaseutility.CheckIfUserExists.checkIfUserExists;
 import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
 import static databaseutility.GetMovieClassification.getMovieClassification;
-import databaseutility.GetMovieDirectors;
+import static databaseutility.RemovingCinema.removeCinema;
+import static databaseutility.AddingCinema.addCinema;
+import static databaseutility.AddingCreditCard.addCreditCard;
+import static databaseutility.AddingUpcomingMovie.addUpcomingMovie;
+import static databaseutility.AddMovieSession.addMovieSession;
+import static databaseutility.ChangeSeatCapacity.changeSeatCapacity;
+import static databaseutility.ChangingCreditCardBalance.changeCreditCardBalance;
+import static databaseutility.ChangingIdentity.changeIdentity;
+import static databaseutility.ChangingUserPassword.changeUserPassword;
+import static databaseutility.CheckIfMovieExists.checkIfMovieExists;
+import static databaseutility.CheckIfUserExists.checkIfUserExists;
+import static databaseutility.DeleteAllUpcoming.deleteUpcoming;
+import static databaseutility.FilterCinema.filterCinema;
+import static databaseutility.FilterScreenSize.filterScreenSize;
+import static databaseutility.GetEndTime.getEndTime;
+import static databaseutility.GetMovieCast.getMovieCast;
+import static databaseutility.GetMovieClassification.getMovieClassification;
+import static databaseutility.GetMovieDirectors.getDirectors;
+import static databaseutility.GetMovieNames.getMovieNames;
+import static databaseutility.GetMovieReleaseDate.getMovieReleasedate;
+import static databaseutility.GetMovieScreensize.getMovieScreensize;
+import static databaseutility.GetMovieShowDate.getMovieShowDate;
+import static databaseutility.GetMovieShowingTime.getShowingTime;
+import static databaseutility.GetMovieSynopsis.getMovieSynopsis;
+import static databaseutility.GetNewUpcomingMovie.getNewUpcomingMovie;
+import static databaseutility.GetNowShowing.getNowShowing;
+import static databaseutility.GetStartTime.getStartTime;
+import static databaseutility.GetTicketPrice.getTicketPriceKids;
+import static databaseutility.GetTicketPrice.getTicketPriceStudents;
+import static databaseutility.GetTicketPrice.getTicketPriceAdults;
+import static databaseutility.GetTicketPrice.getTicketPriceSeniors;
+import static databaseutility.GetUpcomingMovies.getUpcomingMovies;
+import static databaseutility.MovieNameChanger.changeMovieName;
+import static databaseutility.MoviesCounter.countMovies;
+import static databaseutility.RedeemedCheck.giftCardRedeemed;
+import static databaseutility.RedeemingGiftCard.redeemGiftCard;
+import static databaseutility.ReleaseDateChanger.changeReleaseDate;
+import static databaseutility.RemovingCinema.removeCinema;
+import static databaseutility.RemovingCreditCard.removeCreditCard;
+import static databaseutility.RemovingGiftCard.removegiftCard;
+import static databaseutility.RemovingMovie.removeMovie;
+import static databaseutility.RemovingSession.removeSession;
+import static databaseutility.SetSessionTime.setEndTime;
+import static databaseutility.SetSessionTime.setStartTime;
+import static databaseutility.SetTicketPrice.setKidsTicketPrice;
+import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
+import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
+import static databaseutility.SetTicketPrice.setSeniorsTicketPrice;
+import static databaseutility.SynopsisChanger.changeSynopsis;
+import static databaseutility.UpdateScreenSize.updateScreenSize;
+import static databaseutility.UpdateSeats.updateSeats;
+import static databaseutility.UserAuthenticate.authenticate;
+
+//import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
+
 
 
 public class databaseUtilityTests {
@@ -225,7 +279,10 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void AddingCinema_1() {}
+    public void AddingCinema_1() {
+        removeCinema(dbInstance, "Ali's cinema");
+        
+    }
 
     @Test
     public void AddingCinema_2() {}
@@ -373,6 +430,12 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_students_2() {}
+
+    @Test
+    public void GetTicketPrice_seniors_1() {}
+
+    @Test
+    public void GetTicketPrice_seniors_2() {}
 
     @Test
     public void GetUpcomingMovies_1() {}

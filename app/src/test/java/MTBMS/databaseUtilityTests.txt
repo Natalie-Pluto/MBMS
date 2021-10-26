@@ -102,13 +102,16 @@ GetStartTime_1 the start time of a session that exists can be retrieved
 GetStartTime_2 attempting to get the start time of a session that does not exist does not cause issues
 
 GetTicketPrice_kids_1 the kids ticket price of a session that exists can be retrieved
-GetTicketPrice_kids_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_kids_2 attempting to get the kids ticket price of a session that does not exist does not cause issues
 
 GetTicketPrice_adults_1 the adults ticket price of a session that exists can be retrieved
-GetTicketPrice_adults_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_adults_2 attempting to get the adults ticket price of a session that does not exist does not cause issues
 
 GetTicketPrice_students_1 the students ticket price of a session that exists can be retrieved
-GetTicketPrice_students_2 attempting to get the ticket price of a session that does not exist does not cause issues
+GetTicketPrice_students_2 attempting to get the students ticket price of a session that does not exist does not cause issues
+
+GetTicketPrice_seniors_1 the seniors ticket price of a session that exists can be retrieved
+GetTicketPrice_seniors_2 attempting to get the seniors ticket price of a session that does not exist does not cause issues
 
 GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
 
