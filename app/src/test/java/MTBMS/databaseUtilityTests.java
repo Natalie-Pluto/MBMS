@@ -67,6 +67,7 @@ import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
 import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
 import static databaseutility.CheckIfCreditCardExists.checkIfCreditCardExists;
 import static databaseutility.CheckIfGiftCardExists.checkIfGiftCardExists;
+import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
 
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
@@ -343,17 +344,28 @@ public class databaseUtilityTests {
 
     @Test
     public void AddingUpcomingMovie_1() {
-
+        // TODO: description
     }
 
     @Test
     public void AddMovieSession_1() {
-
+        removeSession(dbInstance, 50);
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("invalid classification");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        assert(checkIfSessionExists(dbInstance,50));
     }
 
     @Test
     public void AddMovieSession_2() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("invalid classification");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
     }
 
     @Test
