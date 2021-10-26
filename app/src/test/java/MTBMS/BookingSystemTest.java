@@ -16,36 +16,32 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class BookingSystemTest {
+    Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
-    @Test
+    /*@Test
     public void testPage(){
-        BookingSystem bookingSystem = new BookingSystem();
-        bookingSystem.defaultPage();
+        BookingSystem.defaultPage(dbInstance);
     }
 
     @Test
-    public void testLogin(){
-        BookingSystem bookingSystem = new BookingSystem();
-        bookingSystem.login(xx,xxx,);
+    public void testLogin() throws InterruptedException {
+        BookingSystem.login("xx","xxx");
     }
 
     @Test
-    public void testSignUp(){
-        BookingSystem bookingSystem = new BookingSystem();
-        bookingSystem.signUp("xxx_id");
+    public void testSignUp() throws InterruptedException {
+        BookingSystem.signUp("xxx_id");
     }
 
     @Test
-    public void testLoginOut(){
-        BookingSystem bookingSystem = new BookingSystem();
-        bookingSystem.logOut();
+    public void testLoginOut() throws InterruptedException {
+        BookingSystem.logOut();
     }
 
     @Test
     public void testGretting(){
-        BookingSystem bookingSystem = new BookingSystem();
-        bookingSystem.getGreeting();
-    }
+        BookingSystem.getGreeting(dbInstance);
+    }*/
 
 
 }
