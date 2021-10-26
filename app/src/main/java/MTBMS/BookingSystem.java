@@ -29,7 +29,7 @@ public class BookingSystem {
           //                      "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
         //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
         DeleteAllUpcoming.deleteUpcoming(dbInstance);
@@ -331,6 +331,7 @@ public class BookingSystem {
                 // Add this manager's detail to users table
                 AddingUser.addUser(dbInstance, newAcc, newPw, "m");
             } else {
+                System.out.println(RED_BOLD + "Wrong Passcode." + ANSI_RESET);
                 success = "3";
             }
         } else if (input.equals("2")) {
@@ -341,6 +342,7 @@ public class BookingSystem {
                 // Add this staff's detail to users table
                 AddingUser.addUser(dbInstance, newAcc, newPw, "s");
             } else {
+                System.out.println(RED_BOLD + "Wrong Passcode." + ANSI_RESET);
                 success = "2";
             }
         } else {
