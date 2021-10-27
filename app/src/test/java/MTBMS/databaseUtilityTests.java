@@ -355,7 +355,7 @@ public class databaseUtilityTests {
         inserter.addClassification("invalid classification");
         inserter.insertMovie();
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
-        assert(checkIfSessionExists(dbInstance,50));
+        assert(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20"));
     }
 
     @Test
