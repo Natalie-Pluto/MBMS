@@ -693,7 +693,10 @@ public class databaseUtilityTests {
 
     @Test
     public void GetMovieShowDate_1() {
-        
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        getMovieShowDate(dbInstance, "vscode, the movie");
     }
 
     @Test
