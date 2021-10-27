@@ -515,14 +515,17 @@ public class databaseUtilityTests {
 
     @Test
     public void ChangingCreditCardBalance_1() {
-        //addCreditCard(dbInstance, "11111", "ali", "1110");
-        //changeCreditCardBalance(dbInstance, "11111", 100);
-        //assert(getCreditCardBalance(dbInstance, "11111") == 100.0);
+        addCreditCard(dbInstance, "11111", "ali", "1110");
+        changeCreditCardBalance(dbInstance, "11111", 100.0);
+        assert(getCreditCardBalance(dbInstance, "11111") == 100.0);
+        changeCreditCardBalance(dbInstance, "11111", 10.0);
+        assert(getCreditCardBalance(dbInstance, "11111") == 10.0);
     }
 
     @Test
     public void ChangingCreditCardBalance_2() {
-
+        removeCreditCard(dbInstance, "11111");
+        changeCreditCardBalance(dbInstance, "11111", 100.0);
     }
 
     @Test
