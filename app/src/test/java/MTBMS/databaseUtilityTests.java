@@ -613,7 +613,7 @@ public class databaseUtilityTests {
         inserter.addClassification("r18+");
         inserter.insertMovie();
         setMovieCast(dbInstance, "vscode, the movie" ,"ali");
-        //assert(getMovieCast(dbInstance, "vscode, the movie").equals("ali"));
+        assert(getMovieCast(dbInstance, "vscode, the movie").equals("ali"));
     }
 
     @Test
