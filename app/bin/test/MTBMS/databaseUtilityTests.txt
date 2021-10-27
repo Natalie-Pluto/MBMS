@@ -222,3 +222,6 @@ GetCreditCardBalance_2 attempting to get the balance of a credit card that does 
 
 GetUserPassword_1 the password of a user can be retrieved
 GetUserPassword_2 attempting to get the password of a user that does not exist does not cause issues
+
+SetMovieCast_1 the cast of a movie that exists can be set
+SetMovieCast_2 attempting to change the cast of a movie that does not exist does not cause issues

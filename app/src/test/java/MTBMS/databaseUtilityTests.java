@@ -75,6 +75,7 @@ import static databaseutility.GetSeatCapacity.getBackSeatCapacity;
 import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
 import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
 import static databaseutility.GetUserPassword.getUserPassword;
+import static databaseutility.SetMovieCast.setMovieCast;
 
 import databaseutility.ChangeSeatCapacity;
 import databaseutility.CheckIfSessionExists;
@@ -606,12 +607,17 @@ public class databaseUtilityTests {
 
     @Test
     public void GetMovieCast_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        setMovieCast(dbInstance, "vscode, the movie" ,"ali");
+        //assert(getMovieCast(dbInstance, "vscode, the movie").equals("ali"));
     }
 
     @Test
     public void GetMovieCast_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieCast(dbInstance, "vscode, the movie");
     }
 
     @Test 
@@ -1006,6 +1012,17 @@ public class databaseUtilityTests {
 
     @Test
     public void GetUserPassword_2() {
+
+    }
+
+    @Test
+    public void SetMovieCast_1() {
+
+    }
+    
+
+    @Test
+    public void SetMovieCast_2() {
 
     }
 
