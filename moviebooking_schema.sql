@@ -64,13 +64,13 @@ CREATE TABLE Cinema_Session (
     number_of_front_seats_booked INT,
     number_of_mid_seats_booked INT,
     number_of_back_seats_booked INT,
-    front_seat_capacity INT,
-    mid_seat_capacity INT,
-    back_seat_capacity INT,
+    front_seat_capacity INT DEFAULT 0,
+    mid_seat_capacity INT DEFAULT 0,
+    back_seat_capacity INT DEFAULT 0,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     ticket_price_students DECIMAL(10,4),
-	CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
+	CONSTRAINT frontMidBackCheck CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
     PRIMARY KEY(cinema, screen_type, movie, start_time)
 );
 
