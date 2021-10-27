@@ -10,11 +10,11 @@ import static MTBMS.BookingSystem.RED_BOLD;
 
 public class ListNowShowingCinema {
     public static void listNowShowingCinema(Database db, String cinema) throws InterruptedException {
-        List<String> name = FilterNowshowingCinema.filternowshowingCinema(db, cinema);
-        if (name.isEmpty()) {
+        List<String> name_ = FilterNowshowingCinema.filternowshowingCinema(db, cinema);
+        if (name_.isEmpty()) {
             if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
                 System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Wrong input, please check the cinema name entered (｡´︿`｡)" + ANSI_RESET);
+                System.out.println(RED_BOLD + "Wrong input, please check the cinema name_ entered (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("========================================================\n");
             } else {
                 System.out.println("\n========================================================");
@@ -23,7 +23,7 @@ public class ListNowShowingCinema {
             }
         } else {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
-            for (String n : name) {
+            for (String n : name_) {
                 String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
                 String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                 List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);

@@ -10,7 +10,7 @@ public class FilterUpcomingScreen {
         if (screen == null || screen.length() == 0){
             return new ArrayList<>();
         }else {
-            return db.sql_getStrings("select distinct name from moviebooking_db.upcomingmovie join moviebooking_db.cinema_session on (name = movie) where screen_type = '" + screen + "'", "name");
+            return db.sql_getStrings("select distinct name_ from moviebooking_db.upcomingmovie join moviebooking_db.cinema_session on (name_ = movie) where screen_type = '" + screen + "'", "name_");
         }
     }
 }

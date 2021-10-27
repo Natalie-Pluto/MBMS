@@ -7,11 +7,11 @@ import java.util.List;
 public class GetUpcomingMovies {
     public static void getUpcomingMovies(Database db) {
         String query = "select * from moviebooking_db.upcomingmovie";
-        List<String> name = db.sql_getStrings(query,"name");
+        List<String> name_ = db.sql_getStrings(query,"name_");
         List<String> classification = db.sql_getStrings(query,"classification");
         List<String> date = db.sql_getStrings(query,"showing_date");
-        for (int i = 0; i < name.size(); i++) {
-            System.out.println(name.get(i) + " " + PURPLE_BOLD + "[" + classification.get(i) + "]" + ANSI_RESET + " " + YELLOW_BOLD + date.get(i) + ANSI_RESET);
+        for (int i = 0; i < name_.size(); i++) {
+            System.out.println(name_.get(i) + " " + PURPLE_BOLD + "[" + classification.get(i) + "]" + ANSI_RESET + " " + YELLOW_BOLD + date.get(i) + ANSI_RESET);
         }
     }
 

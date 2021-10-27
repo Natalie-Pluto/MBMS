@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ListNowShowing {
     public static void listNowShowing(Database db) {
-        List<String> name = GetNowShowing.getNowShowing(db);
-        for(String n : name) {
+        List<String> name_ = GetNowShowing.getNowShowing(db);
+        for(String n : name_) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
             System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);

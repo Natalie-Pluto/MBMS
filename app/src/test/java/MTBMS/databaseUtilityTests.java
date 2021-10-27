@@ -76,9 +76,11 @@ import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
 import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
 import static databaseutility.GetUserPassword.getUserPassword;
 import static databaseutility.SetMovieCast.setMovieCast;
+import static databaseutility.SetMovieShowDate.setMovieShowDate;
 
 import databaseutility.ChangeSeatCapacity;
 import databaseutility.CheckIfSessionExists;
+import databaseutility.GetMovieShowingTime;
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
@@ -697,32 +699,61 @@ public class databaseUtilityTests {
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
         inserter.insertMovie();
-        getMovieShowDate(dbInstance, "vscode, the movie");
+        setMovieShowDate(dbInstance, "vscode, the movie","2017-03-31");
+        assert(getMovieShowDate(dbInstance, "vscode, the movie").equals("2017-03-31"));
+        
     }
 
     @Test
     public void GetMovieShowDate_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieShowDate(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieShowingTime_1() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addCinema(dbInstance, "ali's cinema");
+        getShowingTime(dbInstance, "vscode, the movie", "ali's cinema");
+    }
 
+    @Test
+    public void GetMovieShowingTime_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        addCinema(dbInstance, "ali's cinema");
+        getShowingTime(dbInstance, "vscode, the movie", "ali's cinema");
+    }
+
+    @Test
+    public void GetMovieShowingTime_3() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        removeCinema(dbInstance, "ali's cinema");
+        getShowingTime(dbInstance, "vscode, the movie", "ali's cinema");
     }
 
     @Test
     public void GetMovieSynopsis_1() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        //MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        //inserter.addClassification("r18+");
+        //inserter.addSynopsis("this is a synopsis");
+        //inserter.insertMovie();
+        //assert(getMovieSynopsis(dbInstance, "vscode, the movie").equals("this is a synopsis"));
     }
 
     @Test
     public void GetMovieSynopsis_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieSynopsis(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetNewUpcomingMovie_1() {
-
+        
     }
 
     @Test

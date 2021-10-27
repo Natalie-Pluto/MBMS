@@ -8,7 +8,7 @@ public class MovieClassificationChanger {
 
     public static void changeMovieClassification(Database d, String movieName, String txt){
         if (!Arrays.asList(validClassifications).contains(txt)) return;
-        String query = String.format("UPDATE moviebooking_db.Movie SET classification = '%s' WHERE name = '%s';", txt, movieName);
+        String query = String.format("UPDATE moviebooking_db.Movie SET classification = '%s' WHERE name_ = '%s';", txt, movieName);
         d.sql_update(query);
     }
 }

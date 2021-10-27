@@ -10,7 +10,7 @@ public class FilterGenre {
         if (genre == null || genre.length() == 0){
             return new ArrayList<>();
         }else {
-            return db.sql_getStrings("select name from moviebooking_db.movie where genre = " + genre + ";", "name");
+            return db.sql_getStrings("select name_ from moviebooking_db.movie where genre = " + genre + ";", "name_");
         }
     }
 }
