@@ -9,9 +9,9 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)){
             return null;
         }else {
-            double kidPrice = db.sql_getDouble(String.format("select ticket_price_kids from cinema_session " +
-                    "where cinema = '%s' and movie = '%s' and start_time = to_timestamp(%s) " +
-                    "and screen_type = '%s';",cinemaName,movieName,startTime,screenType), "ticket_price_kids");
+            double kidPrice = db.sql_getDouble(String.format("select ticket_price_kids from moviebooking_db.cinema_session " +
+                    "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
+                    "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_kids");
             return kidPrice;
         }
     }
@@ -21,9 +21,9 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)||StringUtils.isEmpty(screenType)){
             return null;
         }else {
-            double adultPrice = db.sql_getDouble(String.format("select ticket_price_adults from cinema_session " +
-                    "where cinema = '%s' and movie = '%s' and start_time = to_timestamp(%s) " +
-                    "and screen_type = '%s';",cinemaName,movieName,startTime,screenType), "ticket_price_adults");
+            double adultPrice = db.sql_getDouble(String.format("select ticket_price_adults from moviebooking_db.cinema_session " +
+                    "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
+                    "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_adults");
             return adultPrice;
         }
     }
@@ -33,9 +33,9 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)||StringUtils.isEmpty(screenType)){
             return null;
         }else {
-            double studentPrice = db.sql_getDouble(String.format("select ticket_price_students from cinema_session " +
-                    "where cinema = '%s' and movie = '%s' and start_time = to_timestamp(%s) " +
-                    "and screen_type = '%s';",cinemaName,movieName,startTime,screenType), "ticket_price_students");
+            double studentPrice = db.sql_getDouble(String.format("select ticket_price_students from moviebooking_db.cinema_session " +
+                    "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
+                    "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_students");
             return studentPrice;
         }
     }
@@ -46,8 +46,8 @@ public class GetTicketPrice {
             return null;
         }else {
             double seniorsPrice = db.sql_getDouble(String.format("select ticket_price_seniors from cinema_session " +
-                    "where cinema = '%s' and movie = '%s' and start_time = to_timestamp(%s) " +
-                    "and screen_type = '%s';",cinemaName,movieName,startTime,screenType), "ticket_price_seniors");
+                    "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
+                    "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_seniors");
             return seniorsPrice;
         }
     }

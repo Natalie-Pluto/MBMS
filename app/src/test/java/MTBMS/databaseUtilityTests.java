@@ -764,17 +764,31 @@ public class databaseUtilityTests {
 
     @Test
     public void GetStartTime_1() {
-
-    }
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        System.out.println(getStartTime(dbInstance, "ali's cinema", "vscode, the movie"));
+        assert(getStartTime(dbInstance, "ali's cinema", "vscode, the movie").equals("2017-03-31 09:30:20"));
+    }   
 
     @Test
     public void GetStartTime_2() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        getStartTime(dbInstance, "ali's cinema", "vscode, the movie");
     }
 
     @Test
     public void GetTicketPrice_kids_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setKidsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
+        assert(getTicketPriceKids(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
@@ -784,7 +798,13 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_adults_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setAdultsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
+        assert(getTicketPriceAdults(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
@@ -794,7 +814,13 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_students_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setStudentsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
+        assert(getTicketPriceStudents(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
@@ -804,7 +830,13 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_seniors_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setSeniorsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
+        //assert(getTicketPriceSeniors(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
