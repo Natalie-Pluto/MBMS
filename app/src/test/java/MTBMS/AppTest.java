@@ -296,11 +296,11 @@ public class AppTest {
     }
 
     @Test public void checkMovieName_1() throws InterruptedException {
-        /*RemovingMovie.removeMovie(dbInstance, "Test");
+        RemovingMovie.removeMovie(dbInstance, "Test");
         MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
-        mib.insertMovie(); */
-        getInput("Ip Man");
-        assertEquals(Guest.checkMovieName(), "Ip Man");
+        mib.insertMovie();
+        getInput("Test");
+        assertEquals(Guest.checkMovieName(), "Test");
     }
 
     @Test public void checkCinemaName_1() throws  InterruptedException {
