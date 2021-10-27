@@ -369,9 +369,9 @@ public class BookingSystem {
         return Timer.timer("g");
     }
 
-    public static void movieDetail(Database dbInstance, String name_) {
+    public static void movieDetail(Database dbInstance, String name) {
         seperator();
-        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''"));
+        MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
         System.out.println("\n===================================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
@@ -440,7 +440,7 @@ public class BookingSystem {
         seperator();
         System.out.println("=====================================================================");
         System.out.println(PURPLE_BOLD + "    Enter 3 for \"Now Showing\"" + "       " + "Enter 4 for \"Filter\"" + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "    Enter movie name_ for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "    Enter movie name for more details" + ANSI_RESET);
         System.out.println("=====================================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>"   + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
@@ -469,7 +469,7 @@ public class BookingSystem {
     public static void nowShowing(Database dbInstance) {
         seperator();
         System.out.println("=====================================================================");
-        System.out.println(PURPLE_BOLD + "   Enter 5 for \"Filter\"" + "      " + "Enter movie name_ for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "   Enter 5 for \"Filter\"" + "      " + "Enter movie name for more details" + ANSI_RESET);
         System.out.println("=====================================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Now Showing!>>"   + ANSI_RESET);
         ListNowShowing.listNowShowing(dbInstance);
@@ -528,7 +528,7 @@ public class BookingSystem {
         System.out.println("3 - for now showing");
         System.out.println("4 - for filter upcoming movies");
         System.out.println("5 - for filter now showing movies");
-        System.out.println("Enter correct movie name_ for movie detail");
+        System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
         Thread.sleep(2000);
     }
@@ -559,7 +559,7 @@ public class BookingSystem {
 
     public void signinMsg3() {
         System.out.println("==========================================================");
-        System.out.println(RED_BOLD + "User name_ already existed. Please enter again (｡´︿`｡)" + ANSI_RESET);
+        System.out.println(RED_BOLD + "User name already existed. Please enter again (｡´︿`｡)" + ANSI_RESET);
         System.out.println("==========================================================");
     }
 
