@@ -84,13 +84,13 @@ public class Guest {
         System.out.println("3 - for booking tickets");
         System.out.println("4 - for filter now showing movies");
         System.out.println("5 - for log out");
-        System.out.println("Enter correct movie name for movie detail");
+        System.out.println("Enter correct movie name_ for movie detail");
         System.out.println("============================================\n");
     }
 
-    public static void movieDetail(String name) throws InterruptedException {
+    public static void movieDetail(String name_) throws InterruptedException {
         BookingSystem.seperator();
-        MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
+        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''"));
         continueService();
     }
 
@@ -99,7 +99,7 @@ public class Guest {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Now Showing\"   Enter 2 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>" + ANSI_RESET);
@@ -110,7 +110,7 @@ public class Guest {
     public static void nowShowingCus() {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"   Enter 4 for \"Filter\"" + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
@@ -407,7 +407,7 @@ public class Guest {
     }
     public static String getMovieName() throws InterruptedException {
         System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Please enter the movie name that you wish to book" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Please enter the movie name_ that you wish to book" + ANSI_RESET);
         System.out.println("======================================================\n");
         String movieName = Timer.timer("c");
         return movieName;
@@ -415,7 +415,7 @@ public class Guest {
     public static String checkMovieName() throws InterruptedException {
         String movieName = getMovieName();
         if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
-            System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name\n");
+            System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name_\n");
             return checkMovieName();
         }
 
@@ -424,12 +424,12 @@ public class Guest {
 
     public static String checkCinemaName(String movieName) throws InterruptedException {
         System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "Please enter the cinema name that you wish to book" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Please enter the cinema name_ that you wish to book" + ANSI_RESET);
         System.out.println("======================================================\n");
         String cinemaName = Timer.timer("c");
 
         if (!(CheckIfCinemaExists.checkIfCinemaExists(dbInstance, cinemaName))) {
-            System.out.println(RED_BOLD + "Cinema " + cinemaName + " does not exist, please enter the correct cinema name\n" + ANSI_RESET);
+            System.out.println(RED_BOLD + "Cinema " + cinemaName + " does not exist, please enter the correct cinema name_\n" + ANSI_RESET);
             return checkCinemaName(movieName);
 
         } else if(!(CheckIfCinemaHasMovie.checkIfCinemaHasMovie(dbInstance, movieName, cinemaName))) {
@@ -490,14 +490,14 @@ public class Guest {
     }
 
     public static String getCardHolderName() throws InterruptedException {
-        System.out.println("Please enter your cardholder name");
+        System.out.println("Please enter your cardholder name_");
         String cardHolderName = Timer.timer("c");
         return cardHolderName;
     }
     public static boolean cardHolderNameCheck() throws InterruptedException {
         String cardHolderName = getCardHolderName();
         if (!(CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
-            System.out.println(RED_BOLD + "Wrong cardholder name" + ANSI_RESET);
+            System.out.println(RED_BOLD + "Wrong cardholder name_" + ANSI_RESET);
             return cardHolderNameCheck();
         }
 

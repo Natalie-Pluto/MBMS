@@ -108,6 +108,8 @@ GetMovieShowDate_1 the show date of a movie that exists can be retrieved
 GetMovieShowDate_2 attempting to get the show date of a movie that does not exist does not cause issues
 
 GetMovieShowingTime_1 attempting to get the showing times of a movie at a particular cinema does not cause issues
+GetMovieShowingTime_2 attempting to get the showing times of a movie that does not exist does not cause issues
+GetMovieShowingTime_3 attempting to get the showing times of a movie at a cinema that does not exist does not cause issues
 
 GetMovieSynopsis_1 the synopsis of a movie that exists can be retrieved
 GetMovieSynopsis_2 attempting to get the synopsis of a movie that does not exist does not cause issues
@@ -226,3 +228,6 @@ GetUserPassword_2 attempting to get the password of a user that does not exist d
 
 SetMovieCast_1 the cast of a movie that exists can be set
 SetMovieCast_2 attempting to change the cast of a movie that does not exist does not cause issues
+
+SetMovieShowDate_1 the show date of an exising movie can be set
+SetMovieShowDate_2 attempting to set the date of a movie that does not exist does not cause issues

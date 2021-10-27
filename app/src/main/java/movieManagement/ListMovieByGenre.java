@@ -8,8 +8,8 @@ import java.util.List;
 //TODO
 public class ListMovieByGenre {
     public static void listMovieByName(Database db, String genre) {
-        List<String> name = FilterGenre.filterGenre(db, genre);
-        for (String n : name) {
+        List<String> name_ = FilterGenre.filterGenre(db, genre);
+        for (String n : name_) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
             String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
             System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);

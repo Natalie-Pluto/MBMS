@@ -18,7 +18,7 @@ public class MovieDataManipulator {
         while(!input.equals("-Exit-")) {
 
             // retrieve information
-            System.out.println("Enter the name of the movie to add: ");
+            System.out.println("Enter the name_ of the movie to add: ");
             input = s.nextLine();
 
             //quit if user wants to quit
@@ -93,7 +93,7 @@ public class MovieDataManipulator {
         while(!input.equals("-Exit-")) {
 
             // retrieve information
-            System.out.println("Enter the name of the movie to delete: ");
+            System.out.println("Enter the name_ of the movie to delete: ");
             input = s.nextLine();
             if(input.equals("-Exit-")){
                 break;
@@ -114,7 +114,7 @@ public class MovieDataManipulator {
 
     }
 
-    //modify movie name needs to be updated
+    //modify movie name_ needs to be updated
     //as it is a foreign key in cinema_session table
     public static void modifyMovieData(Database d) {
 
@@ -128,14 +128,14 @@ public class MovieDataManipulator {
         //keep running unless user quits
         Outer: while(!input.equals("-Exit-")) {
 
-            //get the name of the movie to modify to
-            System.out.println("Enter the name of the movie: ");
+            //get the name_ of the movie to modify to
+            System.out.println("Enter the name_ of the movie: ");
             input = s.nextLine();
             if(input.equals("-Exit-")){
                 break Outer;
             }
 
-            //check if the provided name exists
+            //check if the provided name_ exists
             boolean existence = CheckIfMovieExists.checkIfMovieExists(d, input);
             if(existence == false){
                 System.out.println("Error: Movie does not exist.");
@@ -147,7 +147,7 @@ public class MovieDataManipulator {
             //or to start to modify a new movie or quit the process
             boolean toModifySameMovie = true;
             Inner: while(toModifySameMovie == true) {
-                System.out.println("Enter the number of the section to modify: \n1.name 2.classification 3.release_date 4.synopsis 5.directors ");
+                System.out.println("Enter the number of the section to modify: \n1.name_ 2.classification 3.release_date 4.synopsis 5.directors ");
                 input = s.nextLine();
                 if (input.equals("-Exit-")) {
                     break Outer;
@@ -156,18 +156,18 @@ public class MovieDataManipulator {
                 //enter modified info
                 switch (input) {
 
-                    //modify movie name
+                    //modify movie name_
                     case "1":
-                        System.out.println("\nEnter a new name: ");
+                        System.out.println("\nEnter a new name_: ");
                         input = s.nextLine();
                         if (input.equals("-Exit-")) {
                             break Outer;
                         }
 
-                        //check if the provided new name is a duplicate
+                        //check if the provided new name_ is a duplicate
                         boolean duplicate = CheckIfMovieExists.checkIfMovieExists(d, input);
                         if (duplicate == true) {
-                            System.out.println("Error: Movie name exists.");
+                            System.out.println("Error: Movie name_ exists.");
                             continue Outer;
                         }
                         nameChanged = true;
@@ -175,7 +175,7 @@ public class MovieDataManipulator {
                         MovieNameChanger.changeMovieName(d, originalName, newName);
 
                         //provide user with options to continue
-                        System.out.println("Success: Movie name changed.");
+                        System.out.println("Success: Movie name_ changed.");
                         System.out.println("Options: 1.Continue to modify this movie");
                         System.out.println("Options: 2.Modify info of a movie");
                         System.out.println("Enter the option number to continue.");
@@ -192,7 +192,7 @@ public class MovieDataManipulator {
                             break Outer;
                         }
 
-                        //check if movie name has changed, if changed, use the new name to modify movie data
+                        //check if movie name_ has changed, if changed, use the new name_ to modify movie data
                         if(nameChanged == true){
                             MovieClassificationChanger.changeMovieClassification(d, newName, input);
                         }else{
@@ -217,7 +217,7 @@ public class MovieDataManipulator {
                             break Outer;
                         }
 
-                        //check if movie name has changed, if changed, use the new name to modify movie data
+                        //check if movie name_ has changed, if changed, use the new name_ to modify movie data
                         if(nameChanged == true){
                             ReleaseDateChanger.changeReleaseDate(d, newName, input);
                         }else{
@@ -242,7 +242,7 @@ public class MovieDataManipulator {
                             break Outer;
                         }
 
-                        //check if movie name has changed, if changed, use the new name to modify movie data
+                        //check if movie name_ has changed, if changed, use the new name_ to modify movie data
                         if(nameChanged == true){
                             SynopsisChanger.changeSynopsis(d, newName, input);
                         }else{
@@ -267,7 +267,7 @@ public class MovieDataManipulator {
                             break Outer;
                         }
 
-                        //check if movie name has changed, if changed, use the new name to modify movie data
+                        //check if movie name_ has changed, if changed, use the new name_ to modify movie data
                         if(nameChanged == true){
                             DirectorChanger.changeDirectors(d, newName, input);
                         }else{

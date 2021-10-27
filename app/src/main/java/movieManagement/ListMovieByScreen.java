@@ -11,8 +11,8 @@ import static MTBMS.BookingSystem.RED_BOLD;
 //TODO
 public class ListMovieByScreen {
     public static void listMovieByScreen(Database db, String screenType) {
-        List<String> name = FilterScreenSize.filterScreenSize(db, screenType);
-        if(name.isEmpty()) {
+        List<String> name_ = FilterScreenSize.filterScreenSize(db, screenType);
+        if(name_.isEmpty()) {
             if(!CheckScreenTypeExist.checkScreenExist(db,screenType)) {
                 System.out.println("\n=========================================================");
                 System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
@@ -23,7 +23,7 @@ public class ListMovieByScreen {
                 System.out.println("==============================================================================\n");
             }
         } else {
-            for (String n : name) {
+            for (String n : name_) {
                 String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
                 String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                 System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
