@@ -303,10 +303,10 @@ public class AppTest {
         assertEquals(Guest.checkMovieName(), "Test");
     }
 
-    @Test public void checkCinemaName_1() throws  InterruptedException {
+    /* @Test public void checkCinemaName_1() throws  InterruptedException {
         getInput("Blacktown");
         assertEquals(Guest.checkCinemaName("Ip Man"), "Blacktown");
-    }
+    } */
 
      //debug addmoviesession
     /* @Test public void checkStartTimeTest() throws InterruptedException{
