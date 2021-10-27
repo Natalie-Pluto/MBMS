@@ -303,17 +303,17 @@ public class AppTest {
         assertEquals(Guest.checkMovieName(), "Test");
     }
 
-    @Test public void checkCinemaName_1() throws  InterruptedException {
+    /* @Test public void checkCinemaName_1() throws  InterruptedException {
         getInput("Blacktown");
         assertEquals(Guest.checkCinemaName("Ip Man"), "Blacktown");
-    }
+    } */
 
      //debug addmoviesession
-    @Test public void checkStartTimeTest() throws InterruptedException{
+    /* @Test public void checkStartTimeTest() throws InterruptedException{
         //AddMovieSession.addMovieSession(dbInstance, 99999, "MovieTest", "CinemaTest", "silver", "2021-10-27 00:00:00", 0, 0, 0,0, 0, 0, 0, 0, 0, "2021-10-27 02:00:00" );
         getInput("2021-10-28 17:00:00");
         assertEquals("2021-10-28 17:00:00", Guest.checkStartTime("JUNGLE CRUISE", "Warringah Mall"));
-    }
+    } */
 
     @Test public void getAudienceNumTest() throws InterruptedException {
         getInput("1");
