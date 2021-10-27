@@ -624,12 +624,17 @@ public class databaseUtilityTests {
 
     @Test 
     public void GetMovieClassification_1() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
     }
 
     @Test
     public void GetMovieClassification_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieClassification(dbInstance, "vscode, the movie");
     }
 
     @Test
