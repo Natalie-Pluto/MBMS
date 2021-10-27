@@ -70,7 +70,7 @@ CREATE TABLE Cinema_Session (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     ticket_price_students DECIMAL(10,4),
-	CONSTRAINT frontMidBackCheck CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
+    --CONSTRAINT frontMidBackCheck CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
     PRIMARY KEY(cinema, screen_type, movie, start_time)
 );
 
