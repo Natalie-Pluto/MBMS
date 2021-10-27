@@ -39,7 +39,7 @@ CREATE TABLE Movie(
     synopsis TEXT,
     directors TEXT,
     genre varchar(100),
-    "cast" TEXT,
+    cast_ TEXT,
     showing_date Date
 );
 
