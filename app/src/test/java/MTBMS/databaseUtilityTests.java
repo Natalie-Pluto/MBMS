@@ -661,12 +661,18 @@ public class databaseUtilityTests {
 
     @Test 
     public void GetMovieReleaseDate_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-03-31");
+        System.out.println(getMovieReleasedate(dbInstance, "vscode, the movie"));
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-03-31"));
     }
 
     @Test
     public void GetMovieReleaseDate_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieReleasedate(dbInstance, "vscode, the movie");
     }
 
     @Test
