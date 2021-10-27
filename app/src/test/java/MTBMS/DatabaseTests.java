@@ -21,7 +21,7 @@ public class DatabaseTests {
 
 
 
-    @Test
+   @Test
     public void initializationTest(){
         Database d = new Database(goodDBUrl, goodDBUsername, goodDBPassword);
     }
@@ -94,5 +94,5 @@ public class DatabaseTests {
     } */
 
 
-} 
+}
 

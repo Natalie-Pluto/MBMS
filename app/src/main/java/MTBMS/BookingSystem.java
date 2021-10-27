@@ -27,8 +27,6 @@ public class BookingSystem {
         instance = new BookingSystem();
         //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
           //                      "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-
-        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
@@ -56,7 +54,7 @@ public class BookingSystem {
                 seperator();
                 break;
             case "3":
-                nowShowing();
+                nowShowing(dbInstance);
                 options();
                 break;
             case "4":
@@ -243,7 +241,7 @@ public class BookingSystem {
             if (type.contains("U")) {
                 defaultPage(dbInstance);
             } else if (type.contains("S")) {
-                nowShowing();
+                nowShowing(dbInstance);
             }
         }
         options();
@@ -468,7 +466,7 @@ public class BookingSystem {
     }
 
     // List all now showing
-    public static void nowShowing() {
+    public static void nowShowing(Database dbInstance) {
         seperator();
         System.out.println("=====================================================================");
         System.out.println(PURPLE_BOLD + "   Enter 5 for \"Filter\"" + "      " + "Enter movie name for more details" + ANSI_RESET);
