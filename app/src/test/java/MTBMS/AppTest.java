@@ -309,24 +309,24 @@ public class AppTest {
         assertEquals("0000", Guest.getCardNum());
     }
 
-    @Test public void cardNumberCheckTest_r() throws  InterruptedException{
+   /* @Test public void cardNumberCheckTest_r() throws  InterruptedException{
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("99999");
         assertTrue(Guest.cardNumberCheck());
-    }
+    }*/
 
     @Test public void getCardHolderNameTest() throws InterruptedException{
         getInput("TestName");
         assertEquals("TestName", Guest.getCardHolderName());
     }
 
-    @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
+    /*@Test public void cardHolderNameCheckTest_r() throws InterruptedException{
         RemovingCreditCardHolderName.removeCreditCardHolderName(dbInstance, "TestName");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("TestName");
         assertTrue(Guest.cardHolderNameCheck());
-    }
+    }*/
 
     @Test public void saveCreditCardTest_1() {
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
