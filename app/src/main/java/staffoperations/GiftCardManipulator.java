@@ -6,7 +6,7 @@ import databaseutility.*;
 
 
 public class GiftCardManipulator {
-    public static void addGiftCard(Database d){
+    /*public static void addGiftCard(Database d){
 
         System.out.println("Note: To quit, Enter \"-Exit-\"");
         Scanner s = new Scanner(System.in);
@@ -68,5 +68,5 @@ public class GiftCardManipulator {
             RemovingGiftCard.removeGiftCard(d, cardNumber); // 
             System.out.println("Success: gift card removed.");
         }
-    }
+    }*/
 }

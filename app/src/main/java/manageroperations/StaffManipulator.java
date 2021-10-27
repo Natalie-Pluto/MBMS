@@ -5,7 +5,7 @@ import databaseutility.*;
 import MTBMS.Database;
 
 public class StaffManipulator {
-    public static void addStaff(Database d){
+   /* public static void addStaff(Database d){
 
         System.out.println("Note: To quit, Enter \"-Exit-\"");
         Scanner s = new Scanner(System.in);
@@ -76,5 +76,5 @@ public class StaffManipulator {
             System.out.println("Success: Staff removed.");
         }
 
-    }
+    }*/
 }

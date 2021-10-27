@@ -5,7 +5,7 @@ import MTBMS.Database;
 import java.util.Scanner;
 
 public class StaffService {
-    public static void staffService(Database d){
+    /*public static void staffService(Database d){
 
         System.out.println("Note: To quit, Enter \"-Exit-\"");
         System.out.println("1.Modify Movie 2.Add/Remove Gift Card 3.Generate Upcoming Movie Report");
@@ -55,6 +55,6 @@ public class StaffService {
             }
         }
         System.out.println("Staff operations exits.");
-    }
+    }*/
 
 }

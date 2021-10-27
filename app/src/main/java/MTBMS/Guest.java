@@ -20,9 +20,9 @@ public class Guest {
     private String identity;
     private String settings;
 
-    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -149,12 +149,9 @@ public class Guest {
         System.out.println("======================================================\n");
         return Timer.timer("c");
     }
+
     public static void continueService() throws InterruptedException {
-        System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String service = Timer.timer("c");
+        String service = getContinueService();
         switch (service) {
             case "1":
                 customerHomePage();
@@ -399,7 +396,7 @@ public class Guest {
                 }
 
             default:
-                System.out.println(RED_BOLD + "Please enter the correct number" + ANSI_RESET);
+                wrongInputMsg();
                 checkPayment(paymentType);
 
         }
@@ -414,7 +411,7 @@ public class Guest {
     }
     public static String checkMovieName() throws InterruptedException {
         String movieName = getMovieName();
-        if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
+        if (CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
             System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name_\n");
             return checkMovieName();
         }
@@ -496,7 +493,7 @@ public class Guest {
     }
     public static boolean cardHolderNameCheck() throws InterruptedException {
         String cardHolderName = getCardHolderName();
-        if (!(CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
+        if ((CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
             System.out.println(RED_BOLD + "Wrong cardholder name_" + ANSI_RESET);
             return cardHolderNameCheck();
         }
