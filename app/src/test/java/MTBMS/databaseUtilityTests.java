@@ -550,18 +550,13 @@ public class databaseUtilityTests {
         removeUser(dbInstance, "ali");
         addUser(dbInstance, "ali", "10e9rsidfh", "c");
         changeUserPassword(dbInstance, "ali", "new pass");
-        //assert(getUserPassword(dbInstance, "ali").equals("new pass"));
+        assert(getUserPassword(dbInstance, "ali").equals("new pass"));
     }
 
     @Test
     public void ChangingUserPassword_2() {
         removeUser(dbInstance, "ali");
         changeUserPassword(dbInstance, "ali", "new pass");
-    }
-
-    @Test
-    public void ChangingUserPassword_3() {
-
     }
 
     @Test 
@@ -991,6 +986,16 @@ public class databaseUtilityTests {
 
     @Test
     public void getCreditCardBalance_2() {
+
+    }
+
+    @Test
+    public void GetUserPassword_1() {
+        
+    }
+
+    @Test
+    public void GetUserPassword_2() {
 
     }
 
