@@ -349,10 +349,10 @@ public class databaseUtilityTests {
 
     @Test
     public void AddMovieSession_1() {
-        removeSession(dbInstance, 50);
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
-        inserter.addClassification("invalid classification");
+        inserter.addClassification("r18+");
         inserter.insertMovie();
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         assert(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20"));
@@ -362,7 +362,7 @@ public class databaseUtilityTests {
     public void AddMovieSession_2() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
-        inserter.addClassification("invalid classification");
+        inserter.addClassification("r18+");
         inserter.insertMovie();
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
@@ -370,6 +370,11 @@ public class databaseUtilityTests {
 
     @Test
     public void changeSeatCapacity_1() {
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
 
     }
 
