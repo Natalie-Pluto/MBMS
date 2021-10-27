@@ -163,6 +163,98 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
+    @Test
+    public void filterMsgTest1() throws InterruptedException {
+        BookingSystem.filterMsg(dbInstance,"a", "Warringah Mall");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMsgTest2() throws InterruptedException {
+        BookingSystem.filterMsg(dbInstance,"b", "Gold");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMsgTest3() throws InterruptedException {
+        BookingSystem.filterMsg(dbInstance,"c", "Warringah Mall");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMsgTest4() throws InterruptedException {
+        BookingSystem.filterMsg(dbInstance,"d", "Gold");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMsgTest5() throws InterruptedException {
+        BookingSystem.filterMsg(dbInstance,"4", " ");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void listScreenTest() {
+        BookingSystem.listScreen();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void listCinemaTest5() {
+        BookingSystem.listCinema();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void movieDetailTest() {
+        BookingSystem.movieDetail(dbInstance, "Test");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void upcomingFilterTest() throws InterruptedException {
+        getInput("6");
+        BookingSystem.upcomingFilter();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void nowshowingFilterTest() throws InterruptedException {
+        getInput("6");
+        BookingSystem.showingFilter();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void csignUpTest() throws InterruptedException {
+        instance.cSignup(dbInstance, "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void signUpHelperTest1() throws InterruptedException {
+        instance.signUpHelper(dbInstance, "1", "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void signUpHelperTest2() throws InterruptedException {
+        instance.signUpHelper(dbInstance, "1", "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void signUpHelperTest3() throws InterruptedException {
+        instance.signUpHelper(dbInstance, "1", "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+
+
 
     @Test
     public void loginIn1() throws InterruptedException {

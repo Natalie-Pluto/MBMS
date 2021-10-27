@@ -75,7 +75,7 @@ public class BookingSystem {
                     wrongInput();
                     options();
                 } else {
-                    movieDetail(service);
+                    movieDetail(dbInstance, service);
                     options();
                 }
                 break;
@@ -157,17 +157,17 @@ public class BookingSystem {
                         counter2++;
                         instance.signinMsg4();
                         String input = Timer.timer("g");
-                        String num = instance.signUpHelper(input, newAcc, newPw);
+                        String num = instance.signUpHelper(dbInstance, input, newAcc, newPw);
                         if (num.equals("1")) {
                             isFinished = true;
                             success = true;
                         } else if (!num.equals("0")) {
-                            instance.signUpHelper(num, newAcc, newPw);
+                            instance.signUpHelper(dbInstance, num, newAcc, newPw);
                         }
                     }
                 } else {
                     success = true;
-                    instance.cSignup(newAcc, newPw);
+                    instance.cSignup(dbInstance, newAcc, newPw);
                 }
                 if (success) {
                     login(newAcc, newPw);
@@ -223,21 +223,21 @@ public class BookingSystem {
         if(type.equals("U6")) {
             listCinema();
             String cinema = Timer.timer("g");
-            filterMsg("a", cinema);
+            filterMsg(dbInstance,"a", cinema);
         } else if (type.equals("U7")) {
             listScreen();
             String screen = Timer.timer("g");
-            filterMsg("b", screen);
+            filterMsg(dbInstance,"b", screen);
         } else if (type.equals("S6")) {
             listCinema();
             String cinemaName = Timer.timer("g");
-            filterMsg("c", cinemaName);
+            filterMsg(dbInstance,"c", cinemaName);
         } else if (type.equals("S7")) {
             listScreen();
             String size = Timer.timer("g");
-            filterMsg("d", size);
+            filterMsg(dbInstance,"d", size);
         } else {
-            filterMsg("e", " ");
+            filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
                 defaultPage(dbInstance);
             } else if (type.contains("S")) {
@@ -314,7 +314,7 @@ public class BookingSystem {
         return true;
     }
 
-    public String signUpHelper(String input, String newAcc, String newPw) throws InterruptedException {
+    public String signUpHelper(Database dbInstance, String input, String newAcc, String newPw) throws InterruptedException {
         String success = "0";
         if (input.equals("1")) {
             success = "1";
@@ -349,7 +349,7 @@ public class BookingSystem {
         return success;
     }
 
-    public void cSignup(String newAcc, String newPw) {
+    public void cSignup(Database dbInstance, String newAcc, String newPw) {
         System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
         // Add this customer's detail to users table
         AddingUser.addUser(dbInstance, newAcc, newPw, "c");
@@ -369,7 +369,7 @@ public class BookingSystem {
         return Timer.timer("g");
     }
 
-    public static void movieDetail(String name) {
+    public static void movieDetail(Database dbInstance, String name) {
         seperator();
         MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
         System.out.println("\n===================================================================");
@@ -405,7 +405,7 @@ public class BookingSystem {
         seperator();
     }
 
-    public static void filterMsg(String type, String value) throws InterruptedException {
+    public static void filterMsg(Database dbInstance, String type, String value) throws InterruptedException {
         if (type.equals("a")) {
             seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);

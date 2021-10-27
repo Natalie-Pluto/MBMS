@@ -212,7 +212,7 @@ public class Guest {
             String size = Timer.timer("c");
             filterMsg("d", size);
         } else {
-            BookingSystem.filterMsg("e", " ");
+            BookingSystem.filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
                 guestService();
             } else if (type.contains("S")) {
