@@ -149,12 +149,9 @@ public class Guest {
         System.out.println("======================================================\n");
         return Timer.timer("c");
     }
+
     public static void continueService() throws InterruptedException {
-        System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String service = Timer.timer("c");
+        String service = getContinueService();
         switch (service) {
             case "1":
                 customerHomePage();
@@ -399,7 +396,7 @@ public class Guest {
                 }
 
             default:
-                System.out.println(RED_BOLD + "Please enter the correct number" + ANSI_RESET);
+                wrongInputMsg();
                 checkPayment(paymentType);
 
         }
@@ -414,7 +411,7 @@ public class Guest {
     }
     public static String checkMovieName() throws InterruptedException {
         String movieName = getMovieName();
-        if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
+        if (CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
             System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name_\n");
             return checkMovieName();
         }
@@ -496,7 +493,7 @@ public class Guest {
     }
     public static boolean cardHolderNameCheck() throws InterruptedException {
         String cardHolderName = getCardHolderName();
-        if (!(CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
+        if ((CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance, cardHolderName))){
             System.out.println(RED_BOLD + "Wrong cardholder name_" + ANSI_RESET);
             return cardHolderNameCheck();
         }
