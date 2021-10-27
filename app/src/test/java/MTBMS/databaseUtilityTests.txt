@@ -50,8 +50,17 @@ AddingUpcomingMovie_1 : TODO (more difficult to test this class)
 AddMovieSession_1 Inserting a session that does not already occur in the database
 AddMovieSession_2 Attempting to insert a session that already exists in the database should not cause issues
 
-ChangeSeatCapacity_1 Attempt to change cinema capacity with a parameter combination that does not map to a unique session
-ChangeSeatCapacity_2 Changing the seat capacity with a parameter combination that maps to a unique session works 
+ChangeSeatCapacity_front_1 Attempt to change a session's front seat capacity with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_front_2 Changing the front seat capacity with a parameter combination that identifies a session works 
+ChangeSeatCapacity_front_3 Changing the front seat capacity to be more than the mid seat capacity should not work
+
+ChangeSeatCapacity_mid_1 Attempt to change a session's mid seat capacity with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_mid_2 Changing the mid seat capacity with a parameter combination that identifies a session works 
+ChangeSeatCapacity_mid_3 Changing the mid seat capacity to be more than the back seat capacity should not work
+
+ChangeSeatCapacity_back_1 Attempt to change a session's back seat capacity with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_back_2 Changing the back seat capacity with a parameter combination that identifies a session works 
+ChangeSeatCapacity_back_3 Changing the back seat capacity to be less than the mid seat capacity should not work
 
 ChangingCreditCardBalance_1 changing the balance on a credit card that exists works
 ChangingCreditCardBalance_2 attempting the change the balance of a credit card that does not exist does not cause issues

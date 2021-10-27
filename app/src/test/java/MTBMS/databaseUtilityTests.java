@@ -371,7 +371,7 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void changeSeatCapacity_1() {
+    public void changeSeatCapacity_front_1() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
@@ -381,7 +381,37 @@ public class databaseUtilityTests {
     }
 
     @Test 
-    public void changeSeatCapacity_2() {
+    public void changeSeatCapacity_front_2() {
+
+    }
+
+    @Test
+    public void changeSeatCapacity_mid_1() {
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+
+    }
+
+    @Test 
+    public void changeSeatCapacity_mid_2() {
+
+    }
+
+    @Test
+    public void changeSeatCapacity_back_1() {
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+
+    }
+
+    @Test 
+    public void changeSeatCapacity_back_2() {
 
     }
 
