@@ -679,12 +679,21 @@ public class databaseUtilityTests {
 
     @Test
     public void GetMovieScreenSize_1() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        getMovieScreensize(dbInstance, "vscode, the movie");
+    }
 
+    @Test
+    public void GetMovieScreenSize_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieScreensize(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieShowDate_1() {
-
+        
     }
 
     @Test

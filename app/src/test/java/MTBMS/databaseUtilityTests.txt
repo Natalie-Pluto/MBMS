@@ -101,7 +101,8 @@ GetMovieNames_1 attempting to get the names of all the movies in the database do
 GetMovieReleaseDate_1 the release of a movie that exists can be retrieved
 GetMovieReleaseDate_2 attempting to get the release of a movie that does not exist does not cause issues
 
-GetMovieScreenSize_1 attempting to get the screen size of a session does not cause issues
+GetMovieScreenSize_1 attempting to get the screen sizes of a movie does not cause issues
+GetMovieScreenSize_2 attempting to get the screen sizes of a movie that does not exist does not cause issues
 
 GetMovieShowDate_1 the show date of a movie that exists can be retrieved
 GetMovieShowDate_2 attempting to get the show date of a movie that does not exist does not cause issues
