@@ -639,17 +639,24 @@ public class databaseUtilityTests {
 
     @Test
     public void GetMovieDirectors_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeDirectors(dbInstance, "vscode, the movie", "ali");
+        assert(getDirectors(dbInstance, "vscode, the movie").equals("ali"));
+        
+        
     }
 
     @Test
     public void GetMovieDirectors_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getDirectors(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieNames_1() {
-
+        getMovieNames(dbInstance);
     }
 
     @Test 

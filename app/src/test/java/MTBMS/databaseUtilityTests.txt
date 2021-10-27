@@ -93,8 +93,8 @@ GetMovieCast_2 attempting to get the movie cast of a session that does not exist
 GetMovieClassification_1 the classification of a movie that exists can be retrieved
 GetMovieClassification_2 attempting to get the classification of a movie that does not exist does not cause issues
 
-GetMovieDirectors_1 the directors of a session that exists can be retrieved
-GetMovieDirectors_2 attempting to get the director of a session that does not exist does not cause issues
+GetMovieDirectors_1 the directors of a movie that exists can be retrieved
+GetMovieDirectors_2 attempting to get the director of a movie that does not exist does not cause issues
 
 GetMovieNames_1 attempting to get the names of all the movies in the database does not cause issues
 
