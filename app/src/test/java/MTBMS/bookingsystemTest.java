@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class bookingsystemTest {
-    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-     // "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+        "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -359,8 +359,6 @@ public class bookingsystemTest {
         getInput("Nat");
         assertNotNull(BookingSystem.username());
     }
-
-
 
 
     @Test
