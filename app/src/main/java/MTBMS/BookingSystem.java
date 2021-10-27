@@ -46,7 +46,7 @@ public class BookingSystem {
                 String name = username();
                 String password = password();
                 seperator();
-                login(name, password);
+                login(dbInstance, name, password);
                 break;
             case "2":
                 seperator();
@@ -58,10 +58,12 @@ public class BookingSystem {
                 options();
                 break;
             case "4":
-                filterMovie("U" + upcomingFilter());
+                filterMovie(dbInstance, "U" + upcomingFilter());
+                options();
                 break;
             case "5":
-                filterMovie("S" + showingFilter());
+                filterMovie(dbInstance, "S" + showingFilter());
+                options();
                 break;
             case "Caribbean":
                 System.out.println("Test");
@@ -84,13 +86,13 @@ public class BookingSystem {
     }
 
     // Login will interact with User table to check the user's info
-    public static void login(String accName, String accPw) throws InterruptedException {
-        if (!instance.tryLogin(accName, accPw)) {
+    public static void login(Database dbInstance, String accName, String accPw) throws InterruptedException {
+        if (!instance.tryLogin(dbInstance, accName, accPw)) {
             instance.loginMsg();
-            String name = instance.backCheck1();
-            String pw = instance.backCheck2();
+            String name = instance.backCheck1(dbInstance);
+            String pw = instance.backCheck2(dbInstance);
             if(!name.equals("back") || !pw.equals("back")) {
-                login(name, pw);
+                login(dbInstance, name, pw);
             }
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
@@ -170,7 +172,7 @@ public class BookingSystem {
                     instance.cSignup(dbInstance, newAcc, newPw);
                 }
                 if (success) {
-                    login(newAcc, newPw);
+                    login(dbInstance, newAcc, newPw);
                 } else {
                     instance.signinFailed();
                     getGreeting(dbInstance);
@@ -219,7 +221,7 @@ public class BookingSystem {
     // "U7" -> filter upcoming movies via screen size
     // "S6" -> filter now showing movies via cinema
     // "S7" -> filter now showing movies via screen size
-    public static void filterMovie(String type) throws InterruptedException {
+    public static void filterMovie(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U6")) {
             listCinema();
             String cinema = Timer.timer("g");
@@ -244,7 +246,6 @@ public class BookingSystem {
                 nowShowing(dbInstance);
             }
         }
-        options();
     }
 
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
@@ -286,7 +287,7 @@ public class BookingSystem {
         return pwd1.equals(pwd2);
     }
 
-    public String backCheck1() throws InterruptedException {
+    public String backCheck1(Database dbInstance) throws InterruptedException {
         String name = username();
         if (name.equals("back")) {
             getGreeting(dbInstance);
@@ -295,7 +296,7 @@ public class BookingSystem {
         return name;
     }
 
-    public String backCheck2() throws InterruptedException {
+    public String backCheck2(Database dbInstance) throws InterruptedException {
         String pw = password();
         if (pw.equals("back")) {
             getGreeting(dbInstance);
@@ -305,7 +306,7 @@ public class BookingSystem {
     }
 
     // Retry log in
-    public boolean tryLogin(String username, String pwd) throws InterruptedException {
+    public boolean tryLogin(Database dbInstance, String username, String pwd) {
         if (!authenticate(dbInstance, username, pwd)) {
             System.out.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             System.out.println(RED_BOLD + "Please try again" + ANSI_RESET);
