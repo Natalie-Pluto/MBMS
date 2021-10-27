@@ -73,6 +73,7 @@ import static databaseutility.GetSeatCapacity.getFrontSeatCapacity;
 import static databaseutility.GetSeatCapacity.getMidSeatCapacity;
 import static databaseutility.GetSeatCapacity.getBackSeatCapacity;
 import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
+import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
 
 import databaseutility.ChangeSeatCapacity;
 import databaseutility.CheckIfSessionExists;
@@ -514,7 +515,9 @@ public class databaseUtilityTests {
 
     @Test
     public void ChangingCreditCardBalance_1() {
-
+        //addCreditCard(dbInstance, "11111", "ali", "1110");
+        //changeCreditCardBalance(dbInstance, "11111", 100);
+        //assert(getCreditCardBalance(dbInstance, "11111") == 100.0);
     }
 
     @Test
@@ -948,22 +951,32 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void checkIfCreditCardExists_1() {
+    public void CheckIfCreditCardExists_1() {
 
     }
 
     @Test
-    public void checkIfCreditCardExists_2() {
+    public void CheckIfCreditCardExists_2() {
 
     }
 
     @Test
-    public void checkIfGiftCardExists_1() {
+    public void CheckIfGiftCardExists_1() {
 
     }
 
     @Test
-    public void checkIfGiftCardExists_2() {
+    public void CheckIfGiftCardExists_2() {
+
+    }
+
+    @Test
+    public void GetCreditCardBalance_1() {
+
+    }
+
+    @Test
+    public void getCreditCardBalance_2() {
 
     }
 
