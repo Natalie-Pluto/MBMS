@@ -530,12 +530,18 @@ public class databaseUtilityTests {
 
     @Test
     public void ChangingIdentity_1() {
-
+        removeUser(dbInstance, "ali");
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        changeIdentity(dbInstance, "ali", "m");
+        assert(isManager(dbInstance, "ali"));
+        changeIdentity(dbInstance, "ali", "c");
+        assertFalse(isManager(dbInstance, "ali"));
     }
     
     @Test
     public void ChangingIdentity_2() {
-
+        removeUser(dbInstance, "ali");
+        changeIdentity(dbInstance, "ali", "m");
     }
 
     @Test
