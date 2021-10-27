@@ -573,27 +573,35 @@ public class databaseUtilityTests {
 
     @Test
     public void DeleteAllUpcoming_1() {
-
+        // TODO
     }
 
     @Test 
     public void FilterCinema_1() {
-
+        // TODO
     }
 
     @Test
     public void FilterScreenSize_1() {
-
+        // TODO
     }
 
     @Test
     public void GetEndTime_1() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 11:20:20");
+        assert(getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20").equals("2017-03-31 11:20:20"));
     }
 
     @Test
     public void GetEndTime_2() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
     }
 
     @Test

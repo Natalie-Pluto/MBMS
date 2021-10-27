@@ -19,9 +19,8 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-           // "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -321,13 +320,13 @@ public class AppTest {
         assertEquals("TestName", Guest.getCardHolderName());
     }
 
-    @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
+    /* @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
         RemovingCreditCardHolderName.removeCreditCardHolderName(dbInstance, "TestName");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("TestName");
         assertTrue(Guest.cardHolderNameCheck());
     }
-
+ */
     @Test public void saveCreditCardTest_1() {
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
