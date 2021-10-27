@@ -74,6 +74,7 @@ import static databaseutility.GetSeatCapacity.getMidSeatCapacity;
 import static databaseutility.GetSeatCapacity.getBackSeatCapacity;
 import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
 import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
+import static databaseutility.GetUserPassword.getUserPassword;
 
 import databaseutility.ChangeSeatCapacity;
 import databaseutility.CheckIfSessionExists;
@@ -546,12 +547,16 @@ public class databaseUtilityTests {
 
     @Test
     public void ChangingUserPassword_1() {
-
+        removeUser(dbInstance, "ali");
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        changeUserPassword(dbInstance, "ali", "new pass");
+        //assert(getUserPassword(dbInstance, "ali").equals("new pass"));
     }
 
     @Test
     public void ChangingUserPassword_2() {
-
+        removeUser(dbInstance, "ali");
+        changeUserPassword(dbInstance, "ali", "new pass");
     }
 
     @Test

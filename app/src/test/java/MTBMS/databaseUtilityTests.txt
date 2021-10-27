@@ -219,3 +219,6 @@ CheckIfGiftCardExists_2 a session that does not exist, does not exist
 
 GetCreditCardBalance_1 the balance of a credit card can be retrieved
 GetCreditCardBalance_2 attempting to get the balance of a credit card that does not exist does not cause issues
+
+GetUserPassword_1 the password of a user can be retrieved
+GetUserPassword_2 attempting to get the password of a user that does not exist does not cause issues
