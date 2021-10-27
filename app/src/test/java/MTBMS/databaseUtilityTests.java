@@ -561,12 +561,14 @@ public class databaseUtilityTests {
 
     @Test 
     public void CheckIfUserExists_1() {
-
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        assert(checkIfUserExists(dbInstance, "ali"));
     }
 
     @Test
     public void CheckIfUserExists_2() {
-
+        removeUser(dbInstance, "ali");
+        assertFalse(checkIfUserExists(dbInstance, "ali"));
     }
 
     @Test
