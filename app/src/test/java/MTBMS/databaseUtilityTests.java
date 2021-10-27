@@ -738,11 +738,12 @@ public class databaseUtilityTests {
     @Test
     public void GetMovieSynopsis_1() {
         removeMovie(dbInstance, "vscode, the movie");
-        //MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
-        //inserter.addClassification("r18+");
-        //inserter.addSynopsis("this is a synopsis");
-        //inserter.insertMovie();
-        //assert(getMovieSynopsis(dbInstance, "vscode, the movie").equals("this is a synopsis"));
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.addSynopsis("this is a synopsis");
+        inserter.insertMovie();
+        changeSynopsis(dbInstance, "vscode, the movie", "this is a synopsis");
+        assert(getMovieSynopsis(dbInstance, "vscode, the movie").equals("this is a synopsis"));
     }
 
     @Test
@@ -753,7 +754,7 @@ public class databaseUtilityTests {
 
     @Test
     public void GetNewUpcomingMovie_1() {
-        
+        getNewUpcomingMovie(dbInstance);
     }
 
     @Test
