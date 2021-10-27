@@ -3,7 +3,7 @@ package MTBMS;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.sql.*;
-import java.util.Date;
+
 import static databaseutility.AddingUser.addUser;
 import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.CheckStaff.isStaff;

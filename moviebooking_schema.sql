@@ -40,7 +40,7 @@ CREATE TABLE Movie(
     directors TEXT,
     genre varchar(100),
     cast_ TEXT,
-    showing_date Date
+    showing_date String
 );
 
 CREATE TABLE UpcomingMovie(

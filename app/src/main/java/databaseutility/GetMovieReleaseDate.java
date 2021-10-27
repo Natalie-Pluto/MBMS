@@ -2,7 +2,7 @@ package databaseutility;
 
 import MTBMS.Database;
 
-import java.util.Date;
+;
 
 public class GetMovieReleaseDate {
     public static String getMovieReleasedate(Database db, String movieName) {
