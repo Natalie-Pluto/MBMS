@@ -386,6 +386,8 @@ public class databaseUtilityTests {
 
     @Test 
     public void changeSeatCapacity_front_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        removeCinema(dbInstance, "ali's cinema");
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
