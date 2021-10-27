@@ -52,15 +52,16 @@ AddMovieSession_2 Attempting to insert a session that already exists in the data
 
 ChangeSeatCapacity_front_1 Attempt to change a session's front seat capacity with a parameter combination that does not identify a session should not cause issues
 ChangeSeatCapacity_front_2 Changing the front seat capacity with a parameter combination that identifies a session works 
-ChangeSeatCapacity_front_3 Changing the front seat capacity to be more than the mid seat capacity should not work
+//ChangeSeatCapacity_front_3 Changing the front seat capacity to be more than the mid seat capacity should not work
 
 ChangeSeatCapacity_mid_1 Attempt to change a session's mid seat capacity with a parameter combination that does not identify a session should not cause issues
 ChangeSeatCapacity_mid_2 Changing the mid seat capacity with a parameter combination that identifies a session works 
-ChangeSeatCapacity_mid_3 Changing the mid seat capacity to be more than the back seat capacity should not work
+//ChangeSeatCapacity_mid_3 Changing the mid seat capacity to be more than the back seat capacity should not work
+//ChangeSeatCapacity_mid_4 Changing the mid seat capacity to be less than the front seat capacity should not work
 
 ChangeSeatCapacity_back_1 Attempt to change a session's back seat capacity with a parameter combination that does not identify a session should not cause issues
 ChangeSeatCapacity_back_2 Changing the back seat capacity with a parameter combination that identifies a session works 
-ChangeSeatCapacity_back_3 Changing the back seat capacity to be less than the mid seat capacity should not work
+//ChangeSeatCapacity_back_3 Changing the back seat capacity to be less than the mid seat capacity should not work
 
 ChangingCreditCardBalance_1 changing the balance on a credit card that exists works
 ChangingCreditCardBalance_2 attempting the change the balance of a credit card that does not exist does not cause issues
@@ -203,3 +204,14 @@ CheckIfCreditCardExists_2 a credit card that does not exist, does not exist
 
 CheckIfGiftCardExists_1 a gift card that exists, exists
 CheckIfGiftCardExists_2 a gift card that does not exist, does not exist
+
+GetSeatCapacity_front_1 front seat capacity for an existing session can be retrieved
+GetSeatCapacity_front_2 attempting to get the front seat capacity for a session that does not exist should not cause issues
+
+GetSeatCapacity_mid_1 front seat capacity for an existing session can be retrieved
+GetSeatCapacity_mid_2 attempting to get the front seat capacity for a session that does not exist should not cause issues
+
+GetSeatCapacity_back_1 front seat capacity for an existing session can be retrieved
+GetSeatCapacity_back_2 attempting to get the front seat capacity for a session that does not exist should not cause issues
+
+CheckIfSessionExist
