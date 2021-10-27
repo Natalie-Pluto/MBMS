@@ -1,3 +1,5 @@
+begin transaction;
+
 DROP schema IF EXISTS moviebooking_db CASCADE;
 CREATE schema moviebooking_db;
 SET search_path TO 'moviebooking_db';
@@ -68,6 +70,7 @@ CREATE TABLE Cinema_Session (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP,
     ticket_price_students DECIMAL(10,4),
+	CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
     PRIMARY KEY(cinema, screen_type, movie, start_time)
 );
 
@@ -1148,3 +1151,4 @@ insert into moviebooking_db.users (username, password_, identity_)  values ('ATh
 -- sample Gift_Card data--
 
 -- sample Cinema data --
+commit;
