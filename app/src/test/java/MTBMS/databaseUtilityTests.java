@@ -846,7 +846,7 @@ public class databaseUtilityTests {
 
     @Test
     public void GetUpcomingMovies_1() {
-
+        getUpcomingMovies(dbInstance);
     }
 
     @Test
@@ -861,7 +861,7 @@ public class databaseUtilityTests {
 
     @Test
     public void MoviesCounter_1() {
-
+        countMovies(dbInstance);
     }
 
     @Test
