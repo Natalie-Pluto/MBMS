@@ -93,8 +93,8 @@ GetMovieCast_2 attempting to get the movie cast of a session that does not exist
 GetMovieClassification_1 the classification of a movie that exists can be retrieved
 GetMovieClassification_2 attempting to get the classification of a movie that does not exist does not cause issues
 
-GetMovieDirectors_1 the directors of a session that exists can be retrieved
-GetMovieDirectors_2 attempting to get the director of a session that does not exist does not cause issues
+GetMovieDirectors_1 the directors of a movie that exists can be retrieved
+GetMovieDirectors_2 attempting to get the director of a movie that does not exist does not cause issues
 
 GetMovieNames_1 attempting to get the names of all the movies in the database does not cause issues
 
@@ -219,3 +219,9 @@ CheckIfGiftCardExists_2 a session that does not exist, does not exist
 
 GetCreditCardBalance_1 the balance of a credit card can be retrieved
 GetCreditCardBalance_2 attempting to get the balance of a credit card that does not exist does not cause issues
+
+GetUserPassword_1 the password of a user can be retrieved
+GetUserPassword_2 attempting to get the password of a user that does not exist does not cause issues
+
+SetMovieCast_1 the cast of a movie that exists can be set
+SetMovieCast_2 attempting to change the cast of a movie that does not exist does not cause issues

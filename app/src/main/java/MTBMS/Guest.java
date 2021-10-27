@@ -337,13 +337,16 @@ public class Guest {
                 return "2";
 
             default:
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-                System.out.println("======================================================");
-                System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
-                System.out.println("======================================================\n");
-                System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+                getPaymentTypeWrongMsg();
                 return getPaymentType();
         }
+    }
+    public static void getPaymentTypeWrongMsg(){
+        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+        System.out.println("======================================================");
+        System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
+        System.out.println("======================================================\n");
+        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
     }
 
     // This method should be called by book( )
@@ -354,9 +357,9 @@ public class Guest {
             /*case "1"://card
                 if(cardNumberCheck()){
                     if (cardHolderNameCheck()){
-                    //TODO: update balance
-                        String cardNum = getCardNum();
-                        String cardHolderName = getCardHolderName();
+                    //update balance
+                        //String cardNum = getCardNum();
+                        //String cardHolderName = getCardHolderName();
 
                     }
                 }

@@ -74,6 +74,8 @@ import static databaseutility.GetSeatCapacity.getMidSeatCapacity;
 import static databaseutility.GetSeatCapacity.getBackSeatCapacity;
 import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
 import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
+import static databaseutility.GetUserPassword.getUserPassword;
+import static databaseutility.SetMovieCast.setMovieCast;
 
 import databaseutility.ChangeSeatCapacity;
 import databaseutility.CheckIfSessionExists;
@@ -386,6 +388,8 @@ public class databaseUtilityTests {
 
     @Test 
     public void changeSeatCapacity_front_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        removeCinema(dbInstance, "ali's cinema");
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
@@ -517,109 +521,144 @@ public class databaseUtilityTests {
 
     @Test
     public void ChangingCreditCardBalance_1() {
-        //addCreditCard(dbInstance, "11111", "ali", "1110");
-        //changeCreditCardBalance(dbInstance, "11111", 100);
-        //assert(getCreditCardBalance(dbInstance, "11111") == 100.0);
+        addCreditCard(dbInstance, "11111", "ali", "1110");
+        changeCreditCardBalance(dbInstance, "11111", 100.0);
+        assert(getCreditCardBalance(dbInstance, "11111") == 100.0);
+        changeCreditCardBalance(dbInstance, "11111", 10.0);
+        assert(getCreditCardBalance(dbInstance, "11111") == 10.0);
     }
 
     @Test
     public void ChangingCreditCardBalance_2() {
-
+        removeCreditCard(dbInstance, "11111");
+        changeCreditCardBalance(dbInstance, "11111", 100.0);
     }
 
     @Test
     public void ChangingIdentity_1() {
-
+        removeUser(dbInstance, "ali");
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        changeIdentity(dbInstance, "ali", "m");
+        assert(isManager(dbInstance, "ali"));
+        changeIdentity(dbInstance, "ali", "c");
+        assertFalse(isManager(dbInstance, "ali"));
     }
     
     @Test
     public void ChangingIdentity_2() {
-
+        removeUser(dbInstance, "ali");
+        changeIdentity(dbInstance, "ali", "m");
     }
 
     @Test
     public void ChangingUserPassword_1() {
-
+        removeUser(dbInstance, "ali");
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        changeUserPassword(dbInstance, "ali", "new pass");
+        assert(getUserPassword(dbInstance, "ali").equals("new pass"));
     }
 
     @Test
     public void ChangingUserPassword_2() {
-
-    }
-
-    @Test
-    public void ChangingUserPassword_3() {
-
+        removeUser(dbInstance, "ali");
+        changeUserPassword(dbInstance, "ali", "new pass");
     }
 
     @Test 
     public void CheckIfUserExists_1() {
-
+        addUser(dbInstance, "ali", "10e9rsidfh", "c");
+        assert(checkIfUserExists(dbInstance, "ali"));
     }
 
     @Test
     public void CheckIfUserExists_2() {
-
+        removeUser(dbInstance, "ali");
+        assertFalse(checkIfUserExists(dbInstance, "ali"));
     }
 
     @Test
     public void DeleteAllUpcoming_1() {
-
+        // TODO
     }
 
     @Test 
     public void FilterCinema_1() {
-
+        // TODO
     }
 
     @Test
     public void FilterScreenSize_1() {
-
+        // TODO
     }
 
     @Test
     public void GetEndTime_1() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 11:20:20");
+        assert(getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20").equals("2017-03-31 11:20:20"));
     }
 
     @Test
     public void GetEndTime_2() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
     }
 
     @Test
     public void GetMovieCast_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        setMovieCast(dbInstance, "vscode, the movie" ,"ali");
+        assert(getMovieCast(dbInstance, "vscode, the movie").equals("ali"));
     }
 
     @Test
     public void GetMovieCast_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieCast(dbInstance, "vscode, the movie");
     }
 
     @Test 
     public void GetMovieClassification_1() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
     }
 
     @Test
     public void GetMovieClassification_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieClassification(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieDirectors_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeDirectors(dbInstance, "vscode, the movie", "ali");
+        assert(getDirectors(dbInstance, "vscode, the movie").equals("ali"));
+        
+        
     }
 
     @Test
     public void GetMovieDirectors_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getDirectors(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieNames_1() {
-
+        getMovieNames(dbInstance);
     }
 
     @Test 
@@ -979,6 +1018,27 @@ public class databaseUtilityTests {
 
     @Test
     public void getCreditCardBalance_2() {
+
+    }
+
+    @Test
+    public void GetUserPassword_1() {
+        
+    }
+
+    @Test
+    public void GetUserPassword_2() {
+
+    }
+
+    @Test
+    public void SetMovieCast_1() {
+
+    }
+    
+
+    @Test
+    public void SetMovieCast_2() {
 
     }
 
