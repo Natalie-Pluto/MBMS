@@ -3,9 +3,7 @@
  */
 package MTBMS;
 
-import databaseutility.AddMovieSession;
-import databaseutility.AddingCinema;
-import databaseutility.RemovingCinema;
+import databaseutility.*;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +19,9 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-            "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+           // "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -53,9 +51,52 @@ public class AppTest {
 
     /*private void input(String data){
 
-
     }*/
 
+    @Test public void getUsernameTest(){
+        Guest guest = new Guest("Test", "c", "");
+        assertEquals("Test", guest.getUsername());
+    }
+
+    @Test public void getIdentityTest(){
+        Guest guest = new Guest("Test", "c", "");
+        assertEquals("c", guest.getIdentity());
+    }
+
+    @Test public void getSettingTest(){
+        Guest guest = new Guest("Test", "c", "Test");
+        assertEquals("Test", guest.getSettings());
+    }
+
+    @Test public void wrongInputTest() throws InterruptedException {
+        Guest.wrongInput();
+    }
+
+    @Test public void continueServiceTest(){
+        //
+    }
+
+    @Test public void customerHomePageTest(){
+        Guest.customerHomePage();
+    }
+
+    @Test public void nowShowingCus(){
+        Guest.nowShowingCus();
+    }
+
+    @Test public void CshowingFilterTest() throws InterruptedException {
+        getInput("test");
+        assertEquals("test", Guest.CshowingFilter());
+    }
+
+    @Test public void CupcomingFilterTest() throws InterruptedException {
+        getInput("test");
+        assertEquals("test", Guest.CupcomingFilter());
+    }
+
+    @Test public void filterMoviewsTest_U5(){
+        getInput("Test");
+    }
     /*@Test
     public void loginIn1() throws InterruptedException {
         BookingSystem.login("Bean", "1234", dbInstance);
@@ -80,7 +121,10 @@ public class AppTest {
         System.setIn(systemInput);
         assertNotNull(getOutput());
     }*/
+    @Test public void guestServiceTest_2() throws InterruptedException{
+        getInput("2");
 
+    }
    /* @Test
     public void guestService4() throws InterruptedException {
         Guest guest = new Guest("Bean", "C", " ");
@@ -206,8 +250,6 @@ public class AppTest {
     public void getPaymentTypeTest_1() throws InterruptedException {
         getInput("1");
         assertEquals("1", Guest.getPaymentType());
-
-
     }
 
     /*@Test public void updateSeatsTest() throws InterruptedException {
@@ -225,14 +267,20 @@ public class AppTest {
         assertNotEquals("Wrong output", Guest.getPaymentType(), "wrong input");
     } */
 
-   /* @Test public void checkPaymentTest_2() throws InterruptedException {
-        getInput("00000000000006GC");
+    @Test public void checkPaymentTest_2() throws InterruptedException {
+        RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
+        AddingGiftCard.addGiftCard(dbInstance, "99999999999999GC");
+        getInput("99999999999999GC");
         assertTrue(Guest.checkPayment("2"));
-    }*/
-/* 
+        RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
+    }
+
     @Test public void checkMovieName_1() throws InterruptedException {
-        getInput("Test");
-        assertEquals(Guest.checkMovieName(), "Test");
+        /*RemovingMovie.removeMovie(dbInstance, "Test");
+        MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
+        mib.insertMovie(); */
+        getInput("Ip Man");
+        assertEquals(Guest.checkMovieName(), "Ip Man");
     }
 
     @Test public void checkCinemaName_1() throws  InterruptedException {
@@ -240,9 +288,11 @@ public class AppTest {
         assertEquals(Guest.checkCinemaName("Ip Man"), "Blacktown");
     }
 
+    //debug addmoviesession
     @Test public void checkStartTimeTest() throws InterruptedException{
-        getInput("2021-10-28 21:00:00");
-        assertEquals("2021-10-28 21:00:00", Guest.checkStartTime("Ip Man", "Blacktown"));
+        //AddMovieSession.addMovieSession(dbInstance, 99999, "MovieTest", "CinemaTest", "silver", "2021-10-27 00:00:00", 0, 0, 0,0, 0, 0, 0, 0, 0, "2021-10-27 02:00:00" );
+        getInput("2021-10-28 17:00:00");
+        assertEquals("2021-10-28 17:00:00", Guest.checkStartTime("JUNGLE CRUISE", "Warringah Mall"));
     }
 
     @Test public void getAudienceNumTest() {
@@ -260,24 +310,30 @@ public class AppTest {
     }
 
     @Test public void cardNumberCheckTest_r() throws  InterruptedException{
-        getInput("00000");
+        RemovingCreditCard.removeCreditCard(dbInstance, "99999");
+        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
+        getInput("99999");
         assertTrue(Guest.cardNumberCheck());
     }
 
     @Test public void getCardHolderNameTest() throws InterruptedException{
-        getInput("test");
-        assertEquals("test", Guest.getCardHolderName());
+        getInput("TestName");
+        assertEquals("TestName", Guest.getCardHolderName());
     }
 
-    /*@Test public void cardHolderNameCheckTest_r() throws InterruptedException{
-        getInput("johnny");
+    @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
+        RemovingCreditCardHolderName.removeCreditCardHolderName(dbInstance, "TestName");
+        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
+        getInput("TestName");
         assertTrue(Guest.cardHolderNameCheck());
-    }*/
+    }
 
-    /* @Test public void saveCreditCardTest() {
+    @Test public void saveCreditCardTest_1() {
+        RemovingCreditCard.removeCreditCard(dbInstance, "99999");
+        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("1");
-        Guest.saveCreditCard("alien", "00001");
-    } */
+        Guest.saveCreditCard("Test", "9999");
+    }
 } 
 
 
