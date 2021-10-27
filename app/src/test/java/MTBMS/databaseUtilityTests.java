@@ -79,9 +79,11 @@ import databaseutility.CheckIfSessionExists;
 //import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
-/*public class databaseUtilityTests {
-    static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-    "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+public class databaseUtilityTests {
+    //static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+    //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+
+    static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     @Test
     public void AddingUser_1() {
@@ -398,7 +400,7 @@ import databaseutility.MovieInsertionBuilder;
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
     }
 
-    /* @Test 
+    @Test
     public void changeSeatCapacity_front_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -413,7 +415,7 @@ import databaseutility.MovieInsertionBuilder;
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 17);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
-    } */
+    }
 
     @Test
     public void changeSeatCapacity_mid_1() {
@@ -438,7 +440,7 @@ import databaseutility.MovieInsertionBuilder;
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
     }
 
-    /* @Test 
+    @Test
     public void changeSeatCapacity_mid_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -470,7 +472,7 @@ import databaseutility.MovieInsertionBuilder;
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
-    } */
+    }
 
     @Test
     public void changeSeatCapacity_back_1() {
@@ -967,4 +969,4 @@ import databaseutility.MovieInsertionBuilder;
 
     }
 
-}*/
+}
