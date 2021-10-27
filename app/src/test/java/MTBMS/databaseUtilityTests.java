@@ -759,7 +759,7 @@ public class databaseUtilityTests {
 
     @Test
     public void GetNowShowing_1() {
-
+        getNowShowing(dbInstance);
     }
 
     @Test
