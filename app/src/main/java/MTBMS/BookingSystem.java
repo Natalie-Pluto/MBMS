@@ -97,10 +97,10 @@ public class BookingSystem {
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 instance.loginGreeting("s", accName);
-                StaffService.staffService(dbInstance);
+                //StaffService.staffService(dbInstance);
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 instance.loginGreeting("m", accName);
-                ManagerService.managerService(dbInstance);
+                //ManagerService.managerService(dbInstance);
             } else {
                 instance.loginGreeting("c", accName);
                 Guest.customerHomePage();

@@ -7,7 +7,7 @@ import databaseutility.*;
 import java.util.List;
 //TODO
 public class ListMovieByGenre {
-    public static void listMovieByName(Database db, String genre) {
+    /*public static void listMovieByName(Database db, String genre) {
         List<String> name = FilterGenre.filterGenre(db, genre);
         for (String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
@@ -18,5 +18,5 @@ public class ListMovieByGenre {
 
     public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW*/
 }

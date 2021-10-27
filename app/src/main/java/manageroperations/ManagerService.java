@@ -5,7 +5,7 @@ import MTBMS.Database;
 import java.util.Scanner;
 
 public class ManagerService {
-    public static void managerService(Database d){
+    /*public static void managerService(Database d){
 
         System.out.println("Note: To quit, Enter \"-Exit-\"");
         System.out.println("1.Add/Remove Staff 2.Generate Cancellation Report");
@@ -39,5 +39,5 @@ public class ManagerService {
                     manageroperations.ReportGenerator.getCancellationReport(d);
             }
         }
-    }
+    }*/
 }

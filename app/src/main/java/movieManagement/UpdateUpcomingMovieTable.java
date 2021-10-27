@@ -16,10 +16,10 @@ import java.util.concurrent.TimeUnit;
 public class UpdateUpcomingMovieTable {
 
     public UpdateUpcomingMovieTable() {
-        this.updateUpcomingMovieTable();
+        updateUpcomingMovieTable();
     }
     // The upcoming movie table will be updated every Monday at 6am
-    public void updateUpcomingMovieTable() {
+    public static void updateUpcomingMovieTable() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         Calendar with = Calendar.getInstance();
         Map<Integer, Integer> dayToDelay = new HashMap<Integer, Integer>();

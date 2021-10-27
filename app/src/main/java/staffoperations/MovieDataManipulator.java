@@ -6,7 +6,7 @@ import MTBMS.Database;
 
 public class MovieDataManipulator {
 
-    public static void insertMovieData(Database d){
+    /*public static void insertMovieData(Database d){
 
         System.out.println("Note: To quit, Enter \"-Exit-\"");
         Scanner s = new Scanner(System.in);
@@ -291,7 +291,7 @@ public class MovieDataManipulator {
         }
 
 
-    }
+    }*/
 }
 
  
