@@ -26,7 +26,7 @@ public class BookingSystem {
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
         dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                                "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+                              "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
@@ -43,10 +43,10 @@ public class BookingSystem {
         switch (service) {
             case "1":
                 seperator();
-                String name_ = username();
+                String name = username();
                 String password = password();
                 seperator();
-                login(name_, password);
+                login(dbInstance, name, password);
                 break;
             case "2":
                 seperator();
@@ -58,10 +58,12 @@ public class BookingSystem {
                 options();
                 break;
             case "4":
-                filterMovie("U" + upcomingFilter());
+                filterMovie(dbInstance, "U" + upcomingFilter());
+                options();
                 break;
             case "5":
-                filterMovie("S" + showingFilter());
+                filterMovie(dbInstance, "S" + showingFilter());
+                options();
                 break;
             case "Caribbean":
                 System.out.println("Test");
@@ -84,13 +86,13 @@ public class BookingSystem {
     }
 
     // Login will interact with User table to check the user's info
-    public static void login(String accName, String accPw) throws InterruptedException {
-        if (!instance.tryLogin(accName, accPw)) {
+    public static void login(Database dbInstance, String accName, String accPw) throws InterruptedException {
+        if (!instance.tryLogin(dbInstance, accName, accPw)) {
             instance.loginMsg();
-            String name_ = instance.backCheck1();
-            String pw = instance.backCheck2();
-            if(!name_.equals("back") || !pw.equals("back")) {
-                login(name_, pw);
+            String name = instance.backCheck1(dbInstance);
+            String pw = instance.backCheck2(dbInstance);
+            if(!name.equals("back") || !pw.equals("back")) {
+                login(dbInstance, name, pw);
             }
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
@@ -101,7 +103,6 @@ public class BookingSystem {
                 ManagerService.managerService(dbInstance);
             } else {
                 instance.loginGreeting("c", accName);
-                Guest customer = new Guest(accName, "C", " ");
                 Guest.customerHomePage();
                 Guest.guestService();
             }
@@ -170,7 +171,7 @@ public class BookingSystem {
                     instance.cSignup(dbInstance, newAcc, newPw);
                 }
                 if (success) {
-                    login(newAcc, newPw);
+                    login(dbInstance, newAcc, newPw);
                 } else {
                     instance.signinFailed();
                     getGreeting(dbInstance);
@@ -219,7 +220,7 @@ public class BookingSystem {
     // "U7" -> filter upcoming movies via screen size
     // "S6" -> filter now showing movies via cinema
     // "S7" -> filter now showing movies via screen size
-    public static void filterMovie(String type) throws InterruptedException {
+    public static void filterMovie(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U6")) {
             listCinema();
             String cinema = Timer.timer("g");
@@ -244,7 +245,6 @@ public class BookingSystem {
                 nowShowing(dbInstance);
             }
         }
-        options();
     }
 
     // https://www.generacodice.com/en/articolo/4311769/hide-input-on-command-line
@@ -286,16 +286,16 @@ public class BookingSystem {
         return pwd1.equals(pwd2);
     }
 
-    public String backCheck1() throws InterruptedException {
-        String name_ = username();
-        if (name_.equals("back")) {
+    public String backCheck1(Database dbInstance) throws InterruptedException {
+        String name = username();
+        if (name.equals("back")) {
             getGreeting(dbInstance);
             options();
         }
-        return name_;
+        return name;
     }
 
-    public String backCheck2() throws InterruptedException {
+    public String backCheck2(Database dbInstance) throws InterruptedException {
         String pw = password();
         if (pw.equals("back")) {
             getGreeting(dbInstance);
@@ -305,7 +305,7 @@ public class BookingSystem {
     }
 
     // Retry log in
-    public boolean tryLogin(String username, String pwd) throws InterruptedException {
+    public boolean tryLogin(Database dbInstance, String username, String pwd) {
         if (!authenticate(dbInstance, username, pwd)) {
             System.out.println(RED_BOLD + "Incorrect username or password (｡´︿`｡)" + ANSI_RESET);
             System.out.println(RED_BOLD + "Please try again" + ANSI_RESET);

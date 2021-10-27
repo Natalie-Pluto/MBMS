@@ -4,6 +4,7 @@ import databaseutility.*;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import utils.StringUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,8 +18,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class bookingsystemTest {
     private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-      "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+        "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
@@ -238,16 +238,126 @@ public class bookingsystemTest {
 
     @Test
     public void signUpHelperTest2() throws InterruptedException {
-        instance.signUpHelper(dbInstance, "1", "abc", "123456");
+        getInput("shawshank");
+        instance.signUpHelper(dbInstance, "2", "abc", "123456");
         assertNotNull(getOutput());
         RemovingUser.removeUser(dbInstance, "abc");
     }
 
     @Test
     public void signUpHelperTest3() throws InterruptedException {
-        instance.signUpHelper(dbInstance, "1", "abc", "123456");
+        getInput("zootopia");
+        instance.signUpHelper(dbInstance, "3", "abc", "123456");
         assertNotNull(getOutput());
         RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void signUpHelperTest4() throws InterruptedException {
+        getInput("shaw");
+        instance.signUpHelper(dbInstance, "2", "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void signUpHelperTest5() throws InterruptedException {
+        getInput("zoo");
+        instance.signUpHelper(dbInstance, "3", "abc", "123456");
+        assertNotNull(getOutput());
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void tryLoginTest1() {
+        AddingUser.addUser(dbInstance, "abc", "123456", "s");
+        assertTrue(instance.tryLogin(dbInstance, "abc", "123456"));
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void tryLoginTest2() {
+        AddingUser.addUser(dbInstance, "abc", "123456", "s");
+        assertFalse(instance.tryLogin(dbInstance, "abc", "123"));
+        RemovingUser.removeUser(dbInstance, "abc");
+    }
+
+    @Test
+    public void backTest1() throws InterruptedException {
+        getInput("Nat");
+        instance.backCheck1(dbInstance);
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void backTest2() throws InterruptedException {
+        getInput("Nat");
+        instance.backCheck2(dbInstance);
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void pwdTest() {
+        assertTrue(BookingSystem.checkPwd("123", "123"));
+        assertFalse(BookingSystem.checkPwd("123", "1234"));
+    }
+
+    @Test
+    public void readPwdTest() throws InterruptedException {
+        getInput("123456");
+        assertNotNull(BookingSystem.readPwd());
+    }
+
+    @Test
+    public void filterMovieTest1() throws InterruptedException {
+        getInput("Warringah Mall");
+        BookingSystem.filterMovie(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2() throws InterruptedException {
+        getInput("Gold");
+        BookingSystem.filterMovie(dbInstance,"U7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest3() throws InterruptedException {
+        getInput("Warringah Mall");
+        BookingSystem.filterMovie(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4() throws InterruptedException {
+        getInput("Gold");
+        BookingSystem.filterMovie(dbInstance,"S7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest5() throws InterruptedException {
+        BookingSystem.filterMovie(dbInstance,"S");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest6() throws InterruptedException {
+        BookingSystem.filterMovie(dbInstance,"U");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void passwordTest() throws InterruptedException {
+        getInput("123456");
+        assertNotNull(BookingSystem.password());
+    }
+
+    @Test
+    public void usernameTest() throws InterruptedException {
+        getInput("Nat");
+        assertNotNull(BookingSystem.username());
     }
 
 
@@ -259,5 +369,14 @@ public class bookingsystemTest {
     @Test
     public void loginIn2() throws InterruptedException {
 
+    }
+
+    @Test
+    public void util(){
+        StringUtils str = new StringUtils();
+        assertTrue(str.isEmpty(""));
+        assertTrue(StringUtils.isEmpty(""));
+        assertTrue(StringUtils.isNotEmpty("abc"));
+        assertTrue(str.isNotEmpty("abc"));
     }
 }
