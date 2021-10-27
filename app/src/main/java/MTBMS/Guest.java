@@ -20,10 +20,10 @@ public class Guest {
     private String identity;
     private String settings;
 
-    //Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-    //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
@@ -142,6 +142,13 @@ public class Guest {
         book();
     }
 
+    public static String getContinueService() throws InterruptedException{
+        System.out.println("======================================================");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
+        System.out.println("======================================================\n");
+        return Timer.timer("c");
+    }
     public static void continueService() throws InterruptedException {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
@@ -157,21 +164,19 @@ public class Guest {
             case "2":
                 BookingSystem.logOut();
                 break;
+
             case "3":
                 bookingHelper();
                 break;
+
             default:
-                System.out.println("Please enter the correct number");
+                wrongInputMsg();
                 continueService();
         }
     }
 
     public static void continueService1() throws InterruptedException {
-        System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String service = Timer.timer("c");
+        String service = getContinueService();
         switch (service) {
             case "1":
                 customerHomePage();
@@ -184,11 +189,15 @@ public class Guest {
                 book();
                 break;
             default:
-                System.out.println("=================================");
-                System.out.println(RED_BOLD + "Please enter the correct number" + ANSI_RESET);
-                System.out.println("=================================");
+                wrongInputMsg();
                 continueService();
         }
+    }
+
+    public static void wrongInputMsg(){
+        System.out.println("=================================");
+        System.out.println(RED_BOLD + "Please enter the correct number" + ANSI_RESET);
+        System.out.println("=================================");
     }
 
     // This method will call method in movie class.
@@ -396,12 +405,15 @@ public class Guest {
         }
         return true;
     }
-
-    public static String checkMovieName() throws InterruptedException {
+    public static String getMovieName() throws InterruptedException {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Please enter the movie name that you wish to book" + ANSI_RESET);
         System.out.println("======================================================\n");
         String movieName = Timer.timer("c");
+        return movieName;
+    }
+    public static String checkMovieName() throws InterruptedException {
+        String movieName = getMovieName();
         if (!CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
             System.out.println("Movie " + movieName + " does not exist, please enter the correct movie name\n");
             return checkMovieName();
@@ -442,12 +454,12 @@ public class Guest {
         return startTime;
     }
 
-    public static int getAudienceNum(){
-        Scanner input = new Scanner(System.in);
+    public static int getAudienceNum() throws InterruptedException {
         System.out.println("\n======================================================");
         System.out.println(PURPLE_BOLD + "How many seats would you want to book?" + ANSI_RESET);
         System.out.println("======================================================\n");
-        int audienceNum = input.nextInt();
+        String audienceNumStr = Timer.timer("c");
+        int audienceNum = Integer.parseInt(audienceNumStr);
         return audienceNum;
     }
 
@@ -492,7 +504,7 @@ public class Guest {
         return true;
     }
 
-    public void cancelTrans() throws InterruptedException {
+    /*public void cancelTrans() throws InterruptedException {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel transaction" + ANSI_RESET);
@@ -502,7 +514,7 @@ public class Guest {
         if (cancel.equals("cancel")){
             getPaymentType();
         }
-    }
+    } */
 
     public static void saveCreditCard(String cardHolderName, String cardNum){
         Scanner input = new Scanner(System.in);
@@ -521,7 +533,7 @@ public class Guest {
     // This method will allow customers to update their password and specific settings.
     // opt 1 for changing password
     // opt 2 for changing settings
-    public void personalInfoUpdate(String opt) throws InterruptedException {//change opt from int to String
+    /*public void personalInfoUpdate(String opt) throws InterruptedException {//change opt from int to String
         Scanner input = new Scanner(System.in);
         switch(opt){
             case "1":
@@ -563,7 +575,7 @@ public class Guest {
                 personalInfoUpdate(opt);
         }
     }
-
+    */
     public String getUsername() {
         return username;
     }

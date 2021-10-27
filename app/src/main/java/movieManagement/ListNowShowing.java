@@ -6,7 +6,7 @@ import databaseutility.GetMovieNames;
 import databaseutility.GetMovieShowDate;
 import databaseutility.GetNowShowing;
 
-import java.util.Date;
+
 import java.util.List;
 
 public class ListNowShowing {
@@ -14,7 +14,7 @@ public class ListNowShowing {
         List<String> name = GetNowShowing.getNowShowing(db);
         for(String n : name) {
             String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-            Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+            String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
             System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
         }
     }

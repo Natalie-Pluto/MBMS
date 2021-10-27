@@ -662,7 +662,7 @@ THE LAST DUEL
 King Charles VI declares that Knight Jean de Carrouges settle his dispute with his squire by challenging him to a duel
 
 Classification: [MA15+]
-Release Date: 2021-10-21
+Release String: 2021-10-21
 Director: Ridley Scott
 Cast: Adam Driver, Ben Affleck, Matt Damon, Jodie Comer
 Screen Size: [Gold, Sliver]

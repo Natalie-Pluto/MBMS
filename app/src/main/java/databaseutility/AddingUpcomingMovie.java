@@ -3,7 +3,7 @@ package databaseutility;
 import MTBMS.Database;
 
 import java.text.ParseException;
-import java.util.Date;
+;
 import java.util.List;
 
 public class AddingUpcomingMovie {
@@ -14,7 +14,7 @@ public class AddingUpcomingMovie {
         List<String> names = GetNewUpcomingMovie.getNewUpcomingMovie(db);
         for (String nn : names) {
             String classification = GetMovieClassification.getMovieClassification(db, nn.replace("'", "''"));
-            Date Sdate = GetMovieShowDate.getMovieShowDate(db, nn.replace("'", "''"));
+            String Sdate = GetMovieShowDate.getMovieShowDate(db, nn.replace("'", "''"));
             String updateArgs = "'" + nn.replace("'", "''") +"', '" + classification + "', '" + Sdate + "'";
             updateStatus = db.sql_update("insert into moviebooking_db.upcomingmovie values(" + updateArgs + ") on conflict (name) do nothing;;");
             if(!updateStatus) {

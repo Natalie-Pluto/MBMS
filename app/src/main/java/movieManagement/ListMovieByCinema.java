@@ -5,7 +5,7 @@ import MTBMS.Database;
 import MTBMS.Guest;
 import databaseutility.*;
 
-import java.util.Date;
+
 import java.util.List;
 
 import static MTBMS.BookingSystem.RED_BOLD;
@@ -29,7 +29,7 @@ public class ListMovieByCinema {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
             for (String n : name) {
                 String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-                Date showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+                String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                 List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);
                 System.out.println("===============================================");
                 System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);

@@ -3,7 +3,7 @@ package MTBMS;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.sql.*;
-import java.util.Date;
+
 import static databaseutility.AddingUser.addUser;
 import static databaseutility.RemovingUser.removeUser;
 import static databaseutility.CheckStaff.isStaff;
@@ -83,11 +83,12 @@ import databaseutility.CheckIfSessionExists;
 import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
-    //static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-    //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+    "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
-    static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
+    //static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     @Test
     public void AddingUser_1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
@@ -663,22 +664,40 @@ public class databaseUtilityTests {
 
     @Test 
     public void GetMovieReleaseDate_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-03-31");
+        System.out.println(getMovieReleasedate(dbInstance, "vscode, the movie"));
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-03-31"));
     }
 
     @Test
     public void GetMovieReleaseDate_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieReleasedate(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieScreenSize_1() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        getMovieScreensize(dbInstance, "vscode, the movie");
+    }
 
+    @Test
+    public void GetMovieScreenSize_2() {
+        removeMovie(dbInstance, "vscode, the movie");
+        getMovieScreensize(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void GetMovieShowDate_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        getMovieShowDate(dbInstance, "vscode, the movie");
     }
 
     @Test

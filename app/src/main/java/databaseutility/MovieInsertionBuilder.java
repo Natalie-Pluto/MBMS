@@ -36,8 +36,8 @@ public class MovieInsertionBuilder {
     public boolean insertMovie() {
         if (this.classification == "") return false;
         if (!releaseDate.equals("null")) this.releaseDate = "'" + this.releaseDate + "'";
-        if (!synopsis.equals("null")) this.synopsis = "'" + this.synopsis + "'";
-        if (!directors.equals("null")) this.directors = "'" + this.directors + "'";
+        if (!synopsis.equals("null")) this.synopsis = "'" + this.synopsis.replace("'","''") + "'";
+        if (!directors.equals("null")) this.directors = "'" + this.directors.replace("'","''") + "'";
         String query = String.format("INSERT INTO moviebooking_db.Movie VALUES('%s', '%s', %s, %s, %s) on conflict (name) DO NOTHING;", name, classification, releaseDate, synopsis, directors);
         this.db.sql_update(query);
         return true;
