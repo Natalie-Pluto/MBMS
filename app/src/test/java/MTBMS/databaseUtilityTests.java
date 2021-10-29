@@ -358,6 +358,16 @@ public class databaseUtilityTests {
     }
 
     @Test
+    public void AddingGiftCard_3() {
+        //TODO
+    }
+
+    @Test
+    public void AddingGiftCard_4() {
+        //TODO
+    }
+
+    @Test
     public void AddingUpcomingMovie_1() {
         // TODO: description
     }
@@ -875,12 +885,16 @@ public class databaseUtilityTests {
 
     @Test
     public void RedeemedCheck_1() {
-
+        addGiftCard(dbInstance, "7392729382739173GC");
+        assertFalse(giftCardRedeemed(dbInstance,"7392729382739173GC"));
+        redeemGiftCard(dbInstance, "7392729382739173GC");
+        assert(giftCardRedeemed(dbInstance, "7392729382739173GC"));
     }
 
     @Test
     public void RedeemedCheck_2() {
-
+        removeGiftCard(dbInstance, "7392729382739173GC");
+        giftCardRedeemed(dbInstance, "7392729382739173GC");
     }
 
     @Test

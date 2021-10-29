@@ -44,6 +44,8 @@ AddingCreditCard_2 attempting to add a credit card with a credit card number tha
 
 AddingGiftCard_1 adding a gift card with a gift card number that does not exist should work
 AddingGiftCard_2 attempting to add a gift card with a gift card number already exists should not cause issues
+AddingGiftCard_3 attempting to add a gift card without the "GC" suffix should not work 
+AddingGiftCard_4 attempting to add a gift card with a number that isn't 18 digits should not work 
 
 AddingUpcomingMovie_1 : TODO (more difficult to test this class)
 
