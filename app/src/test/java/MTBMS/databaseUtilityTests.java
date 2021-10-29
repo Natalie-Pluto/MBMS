@@ -855,12 +855,17 @@ public class databaseUtilityTests {
 
     @Test
     public void MovieNameChanger_1() {
-
+        // will delete this method after green light from PO - Ali
     }
 
     @Test
     public void MovieNameChanger_2() {
+        // will delete this method after green light from PO - Ali
+    }
 
+    @Test
+    public void MovieNameChanger_3() {
+        // will delete this method after green light from PO - Ali
     }
 
     @Test

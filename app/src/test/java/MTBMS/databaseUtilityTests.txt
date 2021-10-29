@@ -135,8 +135,9 @@ GetTicketPrice_seniors_2 attempting to get the seniors ticket price of a session
 
 GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
 
-MovieNameChanger_1 the name of a movie that exists can be changed
-MovieNameChanger_2 attempting to change the name of a movie that does not exist does not cause issues
+[functionality removed] MovieNameChanger_1 the name of a movie that exists can be changed if the new name is unique
+[functionality removed] MovieNameChanger_2 attempting to change the name of a movie that does not exist does not cause issues
+[functionality removed] MovieNameChanger_3 attempting to change the name of a movie to a name that already exists does not cause issues
 
 MoviesCounter_1 attempting to get the number of movies in the database does not cause issues
 

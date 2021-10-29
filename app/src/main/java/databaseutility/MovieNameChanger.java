@@ -1,4 +1,4 @@
-package databaseutility;
+/* package databaseutility;
 
 import MTBMS.Database;
 
@@ -10,3 +10,4 @@ public class  MovieNameChanger {
         d.sql_update(query);
     }
 }
+ */
