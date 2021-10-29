@@ -441,7 +441,7 @@ public class databaseUtilityTests {
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
     }
 
-    @Test 
+    /* @Test 
     public void changeSeatCapacity_mid_2() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -456,7 +456,7 @@ public class databaseUtilityTests {
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 3);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
-    }
+    } */
 
     /* @Test
     public void changeSeatCapacity_mid_3() {
@@ -475,7 +475,7 @@ public class databaseUtilityTests {
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
     } */
 
-    @Test
+    /* @Test
     public void changeSeatCapacity_mid_4() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -490,7 +490,7 @@ public class databaseUtilityTests {
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 1);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
-    }
+    } */
 
     @Test
     public void changeSeatCapacity_back_1() {
@@ -604,7 +604,7 @@ public class databaseUtilityTests {
         // TODO
     }
 
-    @Test
+    /* @Test
     public void GetEndTime_1() {
         removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         addCinema(dbInstance, "ali's cinema");
@@ -614,7 +614,7 @@ public class databaseUtilityTests {
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 11:20:20");
         assert(getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20").equals("2017-03-31 11:20:20"));
-    }
+    } */
 
     @Test
     public void GetEndTime_2() {
