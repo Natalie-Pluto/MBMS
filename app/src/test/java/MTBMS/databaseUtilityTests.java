@@ -45,7 +45,7 @@ import static databaseutility.GetTicketPrice.getTicketPriceStudents;
 import static databaseutility.GetTicketPrice.getTicketPriceAdults;
 import static databaseutility.GetTicketPrice.getTicketPriceSeniors;
 import static databaseutility.GetUpcomingMovies.getUpcomingMovies;
-import static databaseutility.MovieNameChanger.changeMovieName;
+//import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.RedeemedCheck.giftCardRedeemed;
 import static databaseutility.RedeemingGiftCard.redeemGiftCard;
@@ -448,7 +448,7 @@ public class databaseUtilityTests {
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
     }
 
-    /*@Test
+    @Test
     public void changeSeatCapacity_mid_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -479,8 +479,8 @@ public class databaseUtilityTests {
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
-        assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
-    }*/
+        //assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
+    }
 
     @Test
     public void changeSeatCapacity_back_1() {
@@ -505,7 +505,7 @@ public class databaseUtilityTests {
         assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 7);
     }
 
-    /* @Test 
+     @Test 
     public void ChangeSeatCapacity_back_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -520,7 +520,7 @@ public class databaseUtilityTests {
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 3);
         assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 10);
-    } */
+    } 
 
     @Test
     public void ChangingCreditCardBalance_1() {
