@@ -793,7 +793,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_kids_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceKids(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -809,7 +810,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_adults_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceAdults(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -825,7 +827,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_students_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceStudents(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -836,12 +839,13 @@ public class databaseUtilityTests {
         inserter.insertMovie();
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         setSeniorsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
-        //assert(getTicketPriceSeniors(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
+        assert(getTicketPriceSeniors(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
     public void GetTicketPrice_seniors_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceSeniors(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test

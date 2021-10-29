@@ -9,7 +9,7 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)){
             return null;
         }else {
-            double kidPrice = db.sql_getDouble(String.format("select ticket_price_kids from moviebooking_db.cinema_session " +
+            Double kidPrice = db.sql_getDouble(String.format("select ticket_price_kids from moviebooking_db.cinema_session " +
                     "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
                     "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_kids");
             return kidPrice;
@@ -21,7 +21,7 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)||StringUtils.isEmpty(screenType)){
             return null;
         }else {
-            double adultPrice = db.sql_getDouble(String.format("select ticket_price_adults from moviebooking_db.cinema_session " +
+            Double adultPrice = db.sql_getDouble(String.format("select ticket_price_adults from moviebooking_db.cinema_session " +
                     "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
                     "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_adults");
             return adultPrice;
@@ -33,7 +33,7 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)||StringUtils.isEmpty(screenType)){
             return null;
         }else {
-            double studentPrice = db.sql_getDouble(String.format("select ticket_price_students from moviebooking_db.cinema_session " +
+            Double studentPrice = db.sql_getDouble(String.format("select ticket_price_students from moviebooking_db.cinema_session " +
                     "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
                     "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_students");
             return studentPrice;
@@ -45,7 +45,7 @@ public class GetTicketPrice {
                 ||StringUtils.isEmpty(startTime)||StringUtils.isEmpty(screenType)){
             return null;
         }else {
-            double seniorsPrice = db.sql_getDouble(String.format("select ticket_price_seniors from cinema_session " +
+            Double seniorsPrice = db.sql_getDouble(String.format("select ticket_price_seniors from moviebooking_db.cinema_session " +
                     "where cinema = '%s' and movie = '%s' and start_time = '%s' " +
                     "and screen_type = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType), "ticket_price_seniors");
             return seniorsPrice;
