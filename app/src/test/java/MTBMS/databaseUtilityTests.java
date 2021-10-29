@@ -899,12 +899,16 @@ public class databaseUtilityTests {
 
     @Test
     public void RedeemingGiftCard_1() {
-
+        addGiftCard(dbInstance, "7392729382739173GC");
+        assertFalse(giftCardRedeemed(dbInstance,"7392729382739173GC"));
+        redeemGiftCard(dbInstance, "7392729382739173GC");
+        assert(giftCardRedeemed(dbInstance, "7392729382739173GC"));
     }
 
     @Test
     public void RedeemingGiftCard_2() {
-
+        removeGiftCard(dbInstance, "7392729382739173GC");
+        redeemGiftCard(dbInstance, "7392729382739173GC");
     }
 
     @Test
