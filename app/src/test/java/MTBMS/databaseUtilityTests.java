@@ -913,12 +913,20 @@ public class databaseUtilityTests {
 
     @Test
     public void ReleaseDateChanger_1() {
-        
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-03-31 9:30:20");
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-03-31"));
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-05-31");
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-05-31"));
+        assertFalse(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2030-05-31"));
     }
 
     @Test
     public void ReleaseDateChanger_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-05-31 9:30:20");
     }
 
     @Test
