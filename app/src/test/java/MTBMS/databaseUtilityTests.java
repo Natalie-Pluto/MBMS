@@ -973,18 +973,34 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void RemovingMovie_1() {
+    public void RemovingGiftCard_3() {
+        //TODO
+    }
 
+    @Test
+    public void RemovingGiftCard_4() {
+        //TODO
+    }
+
+    @Test
+    public void RemovingMovie_1() {
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+        removeMovie(dbInstance, "vscode, the movie");
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
     }
 
     @Test
     public void RemovingMovie_2() {
-
-    }
+        removeMovie(dbInstance, "vscode, the movie");
+        removeMovie(dbInstance, "vscode, the movie");
+    }   
 
     @Test
     public void RemovingSession_1() {
-
+        
     }
 
     @Test

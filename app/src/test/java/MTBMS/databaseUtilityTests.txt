@@ -160,6 +160,8 @@ RemovingCreditCard_2 attempting to remove a credit card that does not exist does
 
 RemovingGiftCard_1 a gift card that exists can be removed
 RemovingGiftCard_2 attempting to remove a gift card that does not exist does not cause issues
+RemovingGiftCard_3 attempting to add a gift card with a number not having the suffix "GC" should not work.
+RemovingGiftCard_4 attempting to add a gift card with a number of the wrong length should not work
 
 RemovingMovie_1 a movie that exists can be removed
 RemovingMovie_2 attemptnig to remove a movie that does not exist does not cause issues
