@@ -45,7 +45,6 @@ import static databaseutility.GetTicketPrice.getTicketPriceStudents;
 import static databaseutility.GetTicketPrice.getTicketPriceAdults;
 import static databaseutility.GetTicketPrice.getTicketPriceSeniors;
 import static databaseutility.GetUpcomingMovies.getUpcomingMovies;
-//import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.RedeemedCheck.giftCardRedeemed;
 import static databaseutility.RedeemingGiftCard.redeemGiftCard;
@@ -56,13 +55,11 @@ import static databaseutility.RemovingGiftCard.removeGiftCard;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.RemovingSession.removeSession;
 import static databaseutility.SetSessionTime.setEndTime;
-//import static databaseutility.SetSessionTime.setStartTime;
 import static databaseutility.SetTicketPrice.setKidsTicketPrice;
 import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
 import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
 import static databaseutility.SetTicketPrice.setSeniorsTicketPrice;
 import static databaseutility.SynopsisChanger.changeSynopsis;
-//import static databaseutility.UpdateScreenSize.updateScreenSize;
 import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
@@ -77,12 +74,10 @@ import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
 import static databaseutility.GetUserPassword.getUserPassword;
 import static databaseutility.SetMovieCast.setMovieCast;
 import static databaseutility.SetMovieShowDate.setMovieShowDate;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfFrontSeatsBooked;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfMidSeatsBooked;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfBackSeatsBooked;
 
-import databaseutility.ChangeSeatCapacity;
-import databaseutility.CheckIfMovieExists;
-import databaseutility.CheckIfSessionExists;
-import databaseutility.GetMovieShowingTime;
-//import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
@@ -1070,7 +1065,7 @@ public class databaseUtilityTests {
 
     }
 
-    @Test
+    /* @Test
     public void UpdateScreenSize_1() {
 
     }
@@ -1078,26 +1073,53 @@ public class databaseUtilityTests {
     @Test
     public void UpdateScreenSize_2() {
 
-    }
+    } */
 
     @Test
     public void UpdateSeats_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "front");
+        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "front");
+        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_2() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "mid");
+        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "mid");
+        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_3() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "back");
+        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "back");
+        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_4() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "back");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "front");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "mid");
     }
 
     @Test
@@ -1178,6 +1200,36 @@ public class databaseUtilityTests {
 
     @Test
     public void SetMovieCast_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_front_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_front_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_mid_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_mid_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_back_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_Back_2() {
 
     }
 

@@ -236,3 +236,12 @@ SetMovieCast_2 attempting to change the cast of a movie that does not exist does
 
 SetMovieShowDate_1 the show date of an exising movie can be set
 SetMovieShowDate_2 attempting to set the date of a movie that does not exist does not cause issues
+
+GetNumberOfSeatsBooked_front_1 
+GetNumberOfSeatsBooked_front_2
+
+GetNumberOfSeatsBooked_mid_1 
+GetNumberOfSeatsBooked_mid_2
+
+GetNumberOfSeatsBooked_back_1 
+GetNumberOfSeatsBooked_back_2
