@@ -56,7 +56,7 @@ import static databaseutility.RemovingGiftCard.removeGiftCard;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.RemovingSession.removeSession;
 import static databaseutility.SetSessionTime.setEndTime;
-import static databaseutility.SetSessionTime.setStartTime;
+//import static databaseutility.SetSessionTime.setStartTime;
 import static databaseutility.SetTicketPrice.setKidsTicketPrice;
 import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
 import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
