@@ -62,7 +62,7 @@ import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
 import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
 import static databaseutility.SetTicketPrice.setSeniorsTicketPrice;
 import static databaseutility.SynopsisChanger.changeSynopsis;
-import static databaseutility.UpdateScreenSize.updateScreenSize;
+//import static databaseutility.UpdateScreenSize.updateScreenSize;
 import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
