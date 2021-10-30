@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -85,7 +85,7 @@ public class AppTest {
     }
 
     @Test public void nowShowingCus(){
-        Guest.nowShowingCus();
+        Guest.nowShowingCus(dbInstance);
         assertNotNull(getOutput());
     }
 
@@ -105,159 +105,14 @@ public class AppTest {
     }
 
     @Test public void filterMsgTest() throws InterruptedException {
-        Guest.filterMsg("e","test");
+        Guest.filterMsg(dbInstance, "e","test");
         assertNotNull(getOutput());
     }
-
-    /*@Test public void filterMoviewsTest_U5() throws InterruptedException {
-        getInput("Test");
-        Guest.filterMovies("U5");
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void loginIn1() throws InterruptedException {
-        BookingSystem.login("Bean", "1234", dbInstance);
-        BookingSystem.login("Lappland", "1234", dbInstance);
-        BookingSystem.login("Demo", "1234", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void loginIn2() throws InterruptedException {
-        BookingSystem.login("B", "1", dbInstance);
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void guestService() throws InterruptedException {
-        String data = "3" + System.getProperty("line.separator") + "1" + System.getProperty("line.separator");
-        InputStream systemInput = System.in;
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-        Guest guest = new Guest("Bean", "C", " ");
-        guest.guestService("C");
-        System.setIn(systemInput);
-        assertNotNull(getOutput());
-    }*/
 
     @Test public void guestServiceTest_2() throws InterruptedException{
         getInput("2");
 
     }
-   /* @Test
-    public void guestService4() throws InterruptedException {
-        Guest guest = new Guest("Bean", "C", " ");
-        getInput("1");
-        guest.guestService();
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void guestService5() throws InterruptedException {
-        Guest guest = new Guest("Bean", "C", " ");
-        getInput("2");
-        guest.guestService();
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void guestService1() throws InterruptedException {
-        Guest guest = new Guest("Bean", "C", " ");
-        getInput("1");
-        guest.guestService();
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void guestService2() throws InterruptedException {
-        Guest guest = new Guest("Bean", "C", " ");
-        input("2");
-        input("Balala");
-        input("1234");
-        input("1");
-        guest.guestService("G");
-        assertNotNull(getOutput());
-    }*/
-
-    /*@Test
-    public void guestService3() throws InterruptedException {
-        Guest guest = new Guest("Bean", "C", " ");
-        input("3");
-        input("1");
-        guest.guestService("G");
-        assertNotNull(getOutput());
-    }*/
-
-   /*@Test
-    public void signUp1() throws InterruptedException {
-        input("Cat" + System.lineSeparator() + "1234");
-        instance.signUp("C", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void signUp2() throws InterruptedException {
-        input("Demo" + "\n555" + "\n1234" + "\n1");
-        instance.signUp("NA", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void signUp3() throws InterruptedException {
-        input("balabala" + "\n1234" + "\n2" + "\nY");
-        instance.signUp("NA", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void signUp4() throws InterruptedException {
-        input("balabalala" + "\n1234" + "\n2" + "\nN");
-        instance.signUp("NA", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void signUp5() throws InterruptedException {
-        input("balabalalaha" + "\n1234" + "\n2" + "\nB" + "\nB" + "\nB");
-        instance.signUp("NA", dbInstance);
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void signUp6() throws InterruptedException {
-        input("balabalalala" + "\n1234" + "\n4" + "\n4" + "\n4");
-        instance.signUp("NA", dbInstance);
-        assertNotNull(getOutput());
-    }*/
-
-   /* @Test
-    public void defaultTest1() throws InterruptedException {
-        input("1");
-        instance.defaultPage();
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void defaultTest2() throws InterruptedException {
-        input("2");
-        instance.defaultPage();
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void defaultTest3() throws InterruptedException {
-        input("3");
-        instance.defaultPage();
-        assertNotNull(getOutput());
-    }
-
-    @Test
-    public void defaultTest4() throws InterruptedException {
-        input("4");
-        instance.defaultPage();
-        assertNotNull(getOutput());
-    }*/
-
 
     @Test
     public void greetingTest() throws InterruptedException {
@@ -372,6 +227,83 @@ public class AppTest {
         test.setSettings("Test");
         assertEquals("Test", test.getSettings());
     }
+
+    @Test
+    public void movieDetailTest() throws InterruptedException {
+        Guest.movieDetail(dbInstance, "Test");
+        assertNotNull(getOutput());
+    }
+
+    /*@Test
+    public void bookingHelperTest() throws InterruptedException {
+        getInput("1");
+        Guest.bookingHelper(dbInstance);
+        assertNotNull(getOutput());
+    }*/
+
+    /*@Test
+    public void filterMovieTest1() throws InterruptedException {
+        getInput("1");
+        Guest.filterMovies(dbInstance,"U5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2() throws InterruptedException {
+        getInput("1");
+        Guest.filterMovies(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2p2() throws InterruptedException {
+        getInput("2");
+        Guest.filterMovies(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2p3() throws InterruptedException {
+        getInput("3");
+        Guest.filterMovies(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+
+    @Test
+    public void filterMovieTest3() throws InterruptedException {
+        getInput("1");
+        Guest.filterMovies(dbInstance,"S5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4() throws InterruptedException {
+        getInput("1");
+        Guest.filterMovies(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4p2() throws InterruptedException {
+        getInput("2");
+        Guest.filterMovies(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4p3() throws InterruptedException {
+        getInput("3");
+        Guest.filterMovies(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest5() throws InterruptedException {
+        Guest.filterMovies(dbInstance,"S");
+        assertNotNull(getOutput());
+    }*/
+
 }
 
 

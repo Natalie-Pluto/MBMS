@@ -26,9 +26,9 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                              "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                    //          "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         //new UpdateUpcomingMovieTable();
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
@@ -221,7 +221,7 @@ public class BookingSystem {
     // "S7" -> filter now showing movies via screen size
     public static void filterMovie(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U6")) {
-            List<String> cinemaName1 = listCinema();
+            List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
             if(Integer.parseInt(cinema) > cinemaName1.size() - 1) {
                 filterMsg(dbInstance,"a", "hiuwgvcila");
@@ -231,9 +231,17 @@ public class BookingSystem {
         } else if (type.equals("U7")) {
             listScreen();
             String screen = Timer.timer("g");
-            filterMsg(dbInstance,"b", screen);
+            if(screen.equals("1")) {
+                filterMsg(dbInstance, "b", "Gold");
+            } else if (screen.equals("2")) {
+                filterMsg(dbInstance, "b", "Sliver");
+            } else if (screen.equals("3")) {
+                filterMsg(dbInstance, "b", "Bronze");
+            } else {
+                filterMsg(dbInstance, "b", "Hi");
+            }
         } else if (type.equals("S6")) {
-            List<String> cinemaName2 = listCinema();
+            List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
             if(Integer.parseInt(cinemaName) > cinemaName2.size() - 1) {
                 filterMsg(dbInstance,"c", "hiuwgvcila");
@@ -243,7 +251,15 @@ public class BookingSystem {
         } else if (type.equals("S7")) {
             listScreen();
             String size = Timer.timer("g");
-            filterMsg(dbInstance,"d", size);
+            if(size.equals("1")) {
+                filterMsg(dbInstance, "d", "Gold");
+            } else if (size.equals("2")) {
+                filterMsg(dbInstance, "d", "Sliver");
+            } else if (size.equals("3")) {
+                filterMsg(dbInstance, "d", "Bronze");
+            } else {
+                filterMsg(dbInstance, "d", "Hi");
+            }
         } else {
             filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
@@ -389,7 +405,7 @@ public class BookingSystem {
         seperator();
     }
 
-    public static List<String> listCinema() {
+    public static List<String> listCinema(Database dbInstance) {
         seperator();
         int counter = 1;
         System.out.println("=======================");
@@ -409,9 +425,9 @@ public class BookingSystem {
         System.out.println("============================");
         System.out.println(PURPLE_BOLD + "Please select a screen size:" + ANSI_RESET);
         System.out.println("============================");
-        System.out.println("Gold");
-        System.out.println("Sliver");
-        System.out.println("Bronze");
+        System.out.println("1. Gold");
+        System.out.println("2. Sliver");
+        System.out.println("3. Bronze");
         seperator();
     }
 

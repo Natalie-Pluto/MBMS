@@ -15,15 +15,15 @@ public class ListMovieByCinema {
         List<String> name_ = FilterCinema.filterCinema(db, cinema);
         if (name_.isEmpty()) {
             if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
-                System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Wrong input, please check the cinema name_ entered (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("========================================================\n");
-                Guest.bookingHelper();
+                System.out.println("\n=============================================================");
+                System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("=============================================================\n");
+                Guest.bookingHelper(db);
             } else {
                 System.out.println("\n========================================================");
                 System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
                 System.out.println("========================================================\n");
-                Guest.bookingHelper();
+                Guest.bookingHelper(db);
             }
         } else {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
