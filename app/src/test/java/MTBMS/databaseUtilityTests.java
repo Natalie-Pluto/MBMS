@@ -45,7 +45,6 @@ import static databaseutility.GetTicketPrice.getTicketPriceStudents;
 import static databaseutility.GetTicketPrice.getTicketPriceAdults;
 import static databaseutility.GetTicketPrice.getTicketPriceSeniors;
 import static databaseutility.GetUpcomingMovies.getUpcomingMovies;
-import static databaseutility.MovieNameChanger.changeMovieName;
 import static databaseutility.MoviesCounter.countMovies;
 import static databaseutility.RedeemedCheck.giftCardRedeemed;
 import static databaseutility.RedeemingGiftCard.redeemGiftCard;
@@ -56,13 +55,11 @@ import static databaseutility.RemovingGiftCard.removeGiftCard;
 import static databaseutility.RemovingMovie.removeMovie;
 import static databaseutility.RemovingSession.removeSession;
 import static databaseutility.SetSessionTime.setEndTime;
-import static databaseutility.SetSessionTime.setStartTime;
 import static databaseutility.SetTicketPrice.setKidsTicketPrice;
 import static databaseutility.SetTicketPrice.setAdultsTicketPrice;
 import static databaseutility.SetTicketPrice.setStudentsTicketPrice;
 import static databaseutility.SetTicketPrice.setSeniorsTicketPrice;
 import static databaseutility.SynopsisChanger.changeSynopsis;
-import static databaseutility.UpdateScreenSize.updateScreenSize;
 import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
@@ -77,11 +74,10 @@ import static databaseutility.GetCreditCardBalance.getCreditCardBalance;
 import static databaseutility.GetUserPassword.getUserPassword;
 import static databaseutility.SetMovieCast.setMovieCast;
 import static databaseutility.SetMovieShowDate.setMovieShowDate;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfFrontSeatsBooked;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfMidSeatsBooked;
+import static databaseutility.GetNumberOfSeatsBooked.getNumberOfBackSeatsBooked;
 
-import databaseutility.ChangeSeatCapacity;
-import databaseutility.CheckIfSessionExists;
-import databaseutility.GetMovieShowingTime;
-//import databaseutility.GetMovieDirectors;
 import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
@@ -358,6 +354,16 @@ public class databaseUtilityTests {
     }
 
     @Test
+    public void AddingGiftCard_3() {
+        //TODO
+    }
+
+    @Test
+    public void AddingGiftCard_4() {
+        //TODO
+    }
+
+    @Test
     public void AddingUpcomingMovie_1() {
         // TODO: description
     }
@@ -408,7 +414,7 @@ public class databaseUtilityTests {
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
     }
 
-   /* @Test
+   @Test
     public void changeSeatCapacity_front_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -423,7 +429,7 @@ public class databaseUtilityTests {
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 17);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
-    }*/
+    }
 
     @Test
     public void changeSeatCapacity_mid_1() {
@@ -448,7 +454,7 @@ public class databaseUtilityTests {
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 3);
     }
 
-    /*@Test
+    @Test
     public void changeSeatCapacity_mid_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -474,13 +480,13 @@ public class databaseUtilityTests {
         removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         assertFalse(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20"));
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
-        changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 1);
-        assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 1);
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
+        changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 1);
+        assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 1);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
-    }*/
+    }
 
     @Test
     public void changeSeatCapacity_back_1() {
@@ -505,12 +511,13 @@ public class databaseUtilityTests {
         assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 7);
     }
 
-    /* @Test 
+     @Test 
     public void ChangeSeatCapacity_back_3() {
         addCinema(dbInstance, "ali's cinema");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
         inserter.addClassification("r18+");
         inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
         removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         assertFalse(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20"));
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
@@ -519,8 +526,8 @@ public class databaseUtilityTests {
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 3);
-        assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 10);
-    } */
+        assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 10); 
+    } 
 
     @Test
     public void ChangingCreditCardBalance_1() {
@@ -793,7 +800,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_kids_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceKids(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -809,7 +817,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_adults_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceAdults(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -825,7 +834,8 @@ public class databaseUtilityTests {
 
     @Test
     public void GetTicketPrice_students_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceStudents(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
@@ -836,27 +846,18 @@ public class databaseUtilityTests {
         inserter.insertMovie();
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         setSeniorsTicketPrice(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", 100.0);
-        //assert(getTicketPriceSeniors(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
+        assert(getTicketPriceSeniors(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20","gold") == 100.0);
     }
 
     @Test
     public void GetTicketPrice_seniors_2() {
-
+        removeSession(dbInstance, "alis's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        getTicketPriceSeniors(dbInstance, "alis's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold");
     }
 
     @Test
     public void GetUpcomingMovies_1() {
         getUpcomingMovies(dbInstance);
-    }
-
-    @Test
-    public void MovieNameChanger_1() {
-
-    }
-
-    @Test
-    public void MovieNameChanger_2() {
-
     }
 
     @Test
@@ -866,102 +867,152 @@ public class databaseUtilityTests {
 
     @Test
     public void RedeemedCheck_1() {
-
+        addGiftCard(dbInstance, "7392729382739173GC");
+        assertFalse(giftCardRedeemed(dbInstance,"7392729382739173GC"));
+        redeemGiftCard(dbInstance, "7392729382739173GC");
+        assert(giftCardRedeemed(dbInstance, "7392729382739173GC"));
     }
 
     @Test
     public void RedeemedCheck_2() {
-
+        removeGiftCard(dbInstance, "7392729382739173GC");
+        giftCardRedeemed(dbInstance, "7392729382739173GC");
     }
 
     @Test
     public void RedeemingGiftCard_1() {
-
+        addGiftCard(dbInstance, "7392729382739173GC");
+        assertFalse(giftCardRedeemed(dbInstance,"7392729382739173GC"));
+        redeemGiftCard(dbInstance, "7392729382739173GC");
+        assert(giftCardRedeemed(dbInstance, "7392729382739173GC"));
     }
 
     @Test
     public void RedeemingGiftCard_2() {
-
+        removeGiftCard(dbInstance, "7392729382739173GC");
+        redeemGiftCard(dbInstance, "7392729382739173GC");
     }
 
     @Test
     public void ReleaseDateChanger_1() {
-        
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-03-31 9:30:20");
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-03-31"));
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-05-31");
+        assert(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2017-05-31"));
+        assertFalse(getMovieReleasedate(dbInstance, "vscode, the movie").equals("2030-05-31"));
     }
 
     @Test
     public void ReleaseDateChanger_2() {
-
+        removeMovie(dbInstance, "vscode, the movie");
+        changeReleaseDate(dbInstance, "vscode, the movie", "2017-05-31 9:30:20");
     }
 
     @Test
     public void RemovingCinema_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        assert(checkIfCinemaExists(dbInstance, "ali's cinema"));
+        removeCinema(dbInstance, "ali's cinema");
+        assertFalse(checkIfCinemaExists(dbInstance, "ali's cinema"));
     }
 
     @Test
     public void RemovingCinema_2() {
-
+        removeCinema(dbInstance, "vscode, the movie");
+        removeCinema(dbInstance, "vscode, the movie");
     }
 
     @Test
     public void RemovingCreditCard_1() {
-
+        addCreditCard(dbInstance, "83593", "alien", "7862");
+        removeCreditCard(dbInstance, "83593");
+        assertFalse(checkIfCreditCardExists(dbInstance, "83593"));
     }
 
     @Test
     public void RemovingCreditCard_2() {
-
+        removeCreditCard(dbInstance, "83593");
+        removeCreditCard(dbInstance, "83593");
     }
 
     @Test
     public void RemovingGiftCard_1() {
-
+        addGiftCard(dbInstance, "0987654312123456GC");
+        assert(checkIfGiftCardExists(dbInstance, "0987654312123456GC"));
+        removeGiftCard(dbInstance, "0987654312123456GC");
+        assertFalse(checkIfGiftCardExists(dbInstance, "0987654312123456GC"));
     }
 
     @Test
     public void RemovingGiftCard_2() {
+        removeGiftCard(dbInstance, "0987654312123456GC");
+        removeGiftCard(dbInstance, "0987654312123456GC");
+    }
 
+    @Test
+    public void RemovingGiftCard_3() {
+        //TODO
+    }
+
+    @Test
+    public void RemovingGiftCard_4() {
+        //TODO
     }
 
     @Test
     public void RemovingMovie_1() {
-
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        assert(checkIfMovieExists(dbInstance, "vscode, the movie"));
+        removeMovie(dbInstance, "vscode, the movie");
+        assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
     }
 
     @Test
     public void RemovingMovie_2() {
-
-    }
+        removeMovie(dbInstance, "vscode, the movie");
+        removeMovie(dbInstance, "vscode, the movie");
+    }   
 
     @Test
     public void RemovingSession_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        assert(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20"));
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        assertFalse(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20"));
     }
 
     @Test
     public void RemovingSession_2() {
-        
-    }
-
-    @Test
-    public void SetSessionTime_setStartTime_1() {
-
-    }
-
-    @Test
-    public void SetSessionTime_setStartTime_2() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
     }
 
     @Test
     public void SetSessionTime_setEndTime_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 11:30:20");
+        assert(getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20").equals("2017-03-31 11:30:20"));
+        setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 13:30:20");
+        assert(getEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20").equals("2017-03-31 13:30:20"));
     }
 
     @Test
-    public void SetSessionTimee_setEndTime_2() {
-
+    public void SetSessionTime_setEndTime_2() {
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        setEndTime(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", "2017-03-31 11:30:20");
     }
 
     @Test
@@ -1014,7 +1065,7 @@ public class databaseUtilityTests {
 
     }
 
-    @Test
+    /* @Test
     public void UpdateScreenSize_1() {
 
     }
@@ -1022,26 +1073,53 @@ public class databaseUtilityTests {
     @Test
     public void UpdateScreenSize_2() {
 
-    }
+    } */
 
     @Test
     public void UpdateSeats_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "front");
+        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "front");
+        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_2() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "mid");
+        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "mid");
+        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_3() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "back");
+        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "back");
+        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
     }
 
     @Test
     public void UpdateSeats_4() {
-
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "back");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "front");
+        updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "mid");
     }
 
     @Test
@@ -1122,6 +1200,36 @@ public class databaseUtilityTests {
 
     @Test
     public void SetMovieCast_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_front_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_front_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_mid_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_mid_2() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_back_1() {
+
+    }
+
+    @Test
+    public void GetNumberOfSeatsBooked_Back_2() {
 
     }
 
