@@ -866,21 +866,6 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void MovieNameChanger_1() {
-        // will delete this method after green light from PO - Ali
-    }
-
-    @Test
-    public void MovieNameChanger_2() {
-        // will delete this method after green light from PO - Ali
-    }
-
-    @Test
-    public void MovieNameChanger_3() {
-        // will delete this method after green light from PO - Ali
-    }
-
-    @Test
     public void MoviesCounter_1() {
         countMovies(dbInstance);
     }
@@ -1000,23 +985,21 @@ public class databaseUtilityTests {
 
     @Test
     public void RemovingSession_1() {
-
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        assert(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20"));
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        assertFalse(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20"));
     }
 
     @Test
     public void RemovingSession_2() {
-        
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20");
     }
-
-    /* @Test
-    public void SetSessionTime_setStartTime_1() {
-
-    }
-
-    @Test
-    public void SetSessionTime_setStartTime_2() {
-
-    } */
 
     @Test
     public void SetSessionTime_setEndTime_1() {
