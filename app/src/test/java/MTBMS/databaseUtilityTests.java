@@ -947,12 +947,14 @@ public class databaseUtilityTests {
 
     @Test
     public void RemovingCreditCard_1() {
-
+        addCreditCard(dbInstance, "83593", "alien", "7862");
+        removeCreditCard(dbInstance, "83593");
     }
 
     @Test
     public void RemovingCreditCard_2() {
-
+        removeCreditCard(dbInstance, "83593");
+        removeCreditCard(dbInstance, "83593");
     }
 
     @Test
