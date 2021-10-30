@@ -2,6 +2,8 @@ package MTBMS;
 import movieManagement.*;
 import databaseutility.*;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.*;
 
@@ -62,11 +64,11 @@ public class Guest {
                 guestService();
                 break;
             default:
-                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''").toLowerCase(Locale.ROOT)) == null) {
                     wrongInput();
                     guestService();
                 } else {
-                    movieDetail(service);
+                    movieDetail(service.toLowerCase(Locale.ROOT));
                 }
                 break;
 
@@ -91,7 +93,7 @@ public class Guest {
 
     public static void movieDetail(String name_) throws InterruptedException {
         BookingSystem.seperator();
-        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''"));
+        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''").toLowerCase(Locale.ROOT));
         continueService();
     }
 
@@ -203,16 +205,25 @@ public class Guest {
     // Both guest and customer can use this service.
     public static void filterMovies(String type) throws InterruptedException {
         if(type.equals("U5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName1 = BookingSystem.listCinema();
             String cinema = Timer.timer("c");
-            filterMsg("a", cinema);
+            if(Integer.parseInt(cinema) > cinemaName1.size() - 1){
+                filterMsg("a", "hiufbjkv");
+            } else {
+                filterMsg("a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            }
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
             String screen = Timer.timer("c");
             filterMsg("b", screen);
         } else if (type.equals("S5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName2 = BookingSystem.listCinema();
             String cinemaName = Timer.timer("c");
+            if(Integer.parseInt(cinemaName) > cinemaName2.size() - 1){
+                filterMsg("c", "hiufbjkv");
+            } else {
+                filterMsg("c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+            }
             filterMsg("c", cinemaName);
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();

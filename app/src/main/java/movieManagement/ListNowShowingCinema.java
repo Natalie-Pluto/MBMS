@@ -12,15 +12,10 @@ public class ListNowShowingCinema {
     public static void listNowShowingCinema(Database db, String cinema) throws InterruptedException {
         List<String> name_ = FilterNowshowingCinema.filternowshowingCinema(db, cinema);
         if (name_.isEmpty()) {
-            if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
-                System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Wrong input, please check the cinema name_ entered (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("========================================================\n");
-            } else {
-                System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("========================================================\n");
-            }
+                System.out.println("\n=============================================================");
+                System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("=============================================================\n");
+
         } else {
             System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
             for (String n : name_) {
