@@ -49,14 +49,15 @@ public class Guest {
                 break;
             case "2":
                 filterMovies(dbInstance, "U" + CupcomingFilter());
-                guestService();
+                continueService();
                 break;
             case "3":
                 bookingHelper(dbInstance);
+                book();
                 break;
             case "4":
                 filterMovies(dbInstance, "S" + CshowingFilter());
-                guestService();
+                continueService();
                 break;
             case "5":
                 BookingSystem.logOut();
@@ -140,7 +141,6 @@ public class Guest {
     }
 
     public static void bookingHelper(Database dbInstance) throws InterruptedException {
-        BookingSystem.seperator();
         List<String> cinemas = BookingSystem.listCinema(dbInstance);
         String cinema = Timer.timer("c");
         BookingSystem.seperator();
@@ -149,14 +149,14 @@ public class Guest {
         } else {
             ListMovieByCinema.listMovieByCinema(dbInstance, cinemas.get(Integer.parseInt(cinema)));
         }
-        book();
     }
 
     public static String getContinueService() throws InterruptedException{
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
+        System.out.println("======================================================");
+        BookingSystem.seperator();
         return Timer.timer("c");
     }
 
@@ -176,25 +176,6 @@ public class Guest {
                 bookingHelper(dbInstance);
                 break;
 
-            default:
-                wrongInputMsg();
-                continueService();
-        }
-    }
-
-    public static void continueService1() throws InterruptedException {
-        String service = getContinueService();
-        switch (service) {
-            case "1":
-                customerHomePage();
-                guestService();
-                break;
-            case "2":
-                BookingSystem.logOut();
-                break;
-            case "3":
-                book();
-                break;
             default:
                 wrongInputMsg();
                 continueService();
@@ -266,22 +247,18 @@ public class Guest {
         if (type.equals("a")) {
             BookingSystem.seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("b")) {
             BookingSystem.seperator();
             ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("c")) {
             BookingSystem.seperator();
             ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("d")) {
             BookingSystem.seperator();
             ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("e")){
             BookingSystem.seperator();

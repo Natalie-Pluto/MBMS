@@ -234,14 +234,14 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
-    /*@Test
+    @Test
     public void bookingHelperTest() throws InterruptedException {
         getInput("1");
         Guest.bookingHelper(dbInstance);
         assertNotNull(getOutput());
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void filterMovieTest1() throws InterruptedException {
         getInput("1");
         Guest.filterMovies(dbInstance,"U5");
@@ -302,7 +302,7 @@ public class AppTest {
     public void filterMovieTest5() throws InterruptedException {
         Guest.filterMovies(dbInstance,"S");
         assertNotNull(getOutput());
-    }*/
+    }
 
 }
 
