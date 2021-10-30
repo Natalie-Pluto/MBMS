@@ -196,10 +196,10 @@ public class bookingsystemTest {
         assertNotNull(getOutput());
     }
 
-    @Test
+    /*@Test
     public void listCinemaTest5() {
         assertNotNull(BookingSystem.listCinema());
-    }
+    }*/
 
     @Test
     public void movieDetailTest() {
@@ -307,12 +307,12 @@ public class bookingsystemTest {
         assertNotNull(BookingSystem.readPwd());
     }
 
-    @Test
+    /*@Test
     public void filterMovieTest1() throws InterruptedException {
         getInput("1");
         BookingSystem.filterMovie(dbInstance,"U6");
         assertNotNull(getOutput());
-    }
+    }*/
 
     @Test
     public void filterMovieTest2() throws InterruptedException {
@@ -321,12 +321,12 @@ public class bookingsystemTest {
         assertNotNull(getOutput());
     }
 
-    @Test
+   /* @Test
     public void filterMovieTest3() throws InterruptedException {
         getInput("1");
         BookingSystem.filterMovie(dbInstance,"S6");
         assertNotNull(getOutput());
-    }
+    }*/
 
     @Test
     public void filterMovieTest4() throws InterruptedException {
