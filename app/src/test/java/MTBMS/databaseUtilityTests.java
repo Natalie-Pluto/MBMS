@@ -949,6 +949,7 @@ public class databaseUtilityTests {
     public void RemovingCreditCard_1() {
         addCreditCard(dbInstance, "83593", "alien", "7862");
         removeCreditCard(dbInstance, "83593");
+        assertFalse(checkIfCreditCardExists(dbInstance, "83593"));
     }
 
     @Test
@@ -959,12 +960,16 @@ public class databaseUtilityTests {
 
     @Test
     public void RemovingGiftCard_1() {
-
+        addGiftCard(dbInstance, "0987654312123456GC");
+        assert(checkIfGiftCardExists(dbInstance, "0987654312123456GC"));
+        removeGiftCard(dbInstance, "0987654312123456GC");
+        assertFalse(checkIfGiftCardExists(dbInstance, "0987654312123456GC"));
     }
 
     @Test
     public void RemovingGiftCard_2() {
-
+        removeGiftCard(dbInstance, "0987654312123456GC");
+        removeGiftCard(dbInstance, "0987654312123456GC");
     }
 
     @Test
