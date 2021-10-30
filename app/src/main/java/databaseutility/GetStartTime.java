@@ -17,7 +17,7 @@ public class GetStartTime {
         if (StringUtils.isEmpty(cinemaName) || StringUtils.isEmpty(movieName)){
             return "";
         }else {
-            return db.sql_getString(String.format("select end_time from moviebooking_db.cinema_session " +
+            return db.sql_getString(String.format("select start_time from moviebooking_db.cinema_session " +
                     "where cinema = '%s' and movie = '%s' and screen_type = '%s' and start_time = '%s';",cinemaName.replace("'", "''"),movieName.replace("'", "''"),screenType,startTime), "start_time");
         }
     }

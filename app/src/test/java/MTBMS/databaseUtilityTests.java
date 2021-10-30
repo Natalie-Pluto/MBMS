@@ -1008,20 +1008,15 @@ public class databaseUtilityTests {
         
     }
 
-    @Test
+    /* @Test
     public void SetSessionTime_setStartTime_1() {
-        addCinema(dbInstance, "ali's cinema");
-        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
-        inserter.addClassification("r18+");
-        inserter.insertMovie();
-        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
-        setStartTime(dbInstance, "vscode, the movie", "2017-03-31 9:30:20", "ali's cinema", "gold", "2017-03-31 19:30:20");
+
     }
 
     @Test
     public void SetSessionTime_setStartTime_2() {
 
-    }
+    } */
 
     @Test
     public void SetSessionTime_setEndTime_1() {

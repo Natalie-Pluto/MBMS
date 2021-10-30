@@ -169,8 +169,8 @@ RemovingMovie_2 attemptnig to remove a movie that does not exist does not cause 
 RemovingSession_1 a session that exists can be removed
 RemovingSession_2 attempting to remove a session that does not exist does not cause issues
 
-SetSessionTime_setStartTime_1 the start time of a session that exists can be set
-SetSessionTime_setStartTime_2 attempting to set the start time of a session that does not exist does not cause issues
+[functionality to be removed] SetSessionTime_setStartTime_1 the start time of a session that exists can be set
+[functionality to be removed] SetSessionTime_setStartTime_2 attempting to set the start time of a session that does not exist does not cause issues
 
 SetSessionTime_setEndTime_1 the end time of a session that exists can be set
 SetSessionTimee_setEndTime_2 attempting to set the end time of a session that does not exist does not cause issues
