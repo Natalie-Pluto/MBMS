@@ -5,28 +5,33 @@ import databaseutility.*;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import static MTBMS.BookingSystem.RED_BOLD;
 
 public class ListNowShowingScreen {
     public static void listNowshowingScreen(Database db, String screenType) {
         List<String> name_ = FilterNowshowingScreen.filterNowshowingScreenSize(db, screenType);
-        if(name_.isEmpty()) {
-            if(!CheckScreenTypeExist.checkScreenExist(db,screenType)) {
-                System.out.println("\n=============================================================");
-                System.out.println(RED_BOLD + "Wrong input, please enter the right screen type num (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("=============================================================\n");
-            } else {
-                System.out.println("\n==============================================================================");
-                System.out.println(RED_BOLD + "Sorry no movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("==============================================================================\n");
+        if(name_ != null) {
+            if (name_.isEmpty()) {
+                if (name_.isEmpty()) {
+                    if (!CheckScreenTypeExist.checkScreenExist(db, screenType)) {
+                        System.out.println("\n=============================================================");
+                        System.out.println(RED_BOLD + "Wrong input, please enter the right screen type num (｡´︿`｡)" + ANSI_RESET);
+                        System.out.println("=============================================================\n");
+                    }
+                } else {
+                    for (String n : name_) {
+                        String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
+                        String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+                        System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+                    }
+                }
             }
         } else {
-            for (String n : name_) {
-                String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-                String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
-                System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
-            }
+            System.out.println("\n==============================================================================");
+            System.out.println(RED_BOLD + "Sorry no movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("==============================================================================\n");
         }
     }
 

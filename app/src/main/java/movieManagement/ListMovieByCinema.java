@@ -7,40 +7,43 @@ import databaseutility.*;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import static MTBMS.BookingSystem.RED_BOLD;
 
 public class ListMovieByCinema {
     public static void listMovieByCinema(Database db, String cinema) throws InterruptedException {
         List<String> name_ = FilterCinema.filterCinema(db, cinema);
-        if (name_.isEmpty()) {
-            if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
-                System.out.println("\n=============================================================");
-                System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("=============================================================\n");
-                Guest.bookingHelper(db);
+        if(name_ != null) {
+            if (name_.isEmpty()) {
+                if (!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
+                    System.out.println("\n=============================================================");
+                    System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
+                    System.out.println("=============================================================\n");
+                    Guest.bookingHelper(db);
+                }
             } else {
-                System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("========================================================\n");
-                Guest.bookingHelper(db);
+                System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
+                for (String n : name_) {
+                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
+                    String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
+                    List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);
+                    System.out.println("===============================================");
+                    System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+                    System.out.println("===============================================\n");
+                    System.out.println(PURPLE_BOLD_BRIGHT + "Showing Time" + ANSI_RESET);
+                    for (String time : showingTime) {
+                        String size = GetSingleScreenSize.getSingleScreenSize(db, n.replace("'", "''"), cinema, time);
+                        System.out.println(time + " " + PURPLE_BOLD + "[" + size + "]" + ANSI_RESET);
+                    }
+                    System.out.println("");
+                }
             }
         } else {
-            System.out.println(YELLOW_BOLD_BRIGHT+ cinema + ANSI_RESET + "\n");
-            for (String n : name_) {
-                String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
-                String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
-                List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);
-                System.out.println("===============================================");
-                System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
-                System.out.println("===============================================\n");
-                System.out.println(PURPLE_BOLD_BRIGHT + "Showing Time" + ANSI_RESET);
-                for (String time : showingTime) {
-                    String size = GetSingleScreenSize.getSingleScreenSize(db, n.replace("'", "''"), cinema, time);
-                    System.out.println(time + " " + PURPLE_BOLD + "[" + size + "]" + ANSI_RESET);
-                }
-                System.out.println("");
-            }
+            System.out.println("\n========================================================");
+            System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("========================================================\n");
+            Guest.bookingHelper(db);
         }
     }
 

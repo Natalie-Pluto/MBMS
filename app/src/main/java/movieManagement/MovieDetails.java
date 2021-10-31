@@ -10,7 +10,7 @@ import java.util.Locale;
 public class MovieDetails {
     public static boolean movieDetails (Database db, String movieName) {
         String synopsis = GetMovieSynopsis.getMovieSynopsis(db, movieName.replace("'", "''"));
-        String classicfication = GetMovieClassification.getMovieClassification(db, movieName.replace("'", "''"));
+        String classicfication = GetMovieClassification.getMovieClassification(db, movieName.replace("'", "''").toLowerCase(Locale.ROOT));
         String releaseDate = GetMovieReleaseDate.getMovieReleasedate(db, movieName.replace("'", "''"));
         String director = GetMovieDirectors.getDirectors(db, movieName.replace("'", "''"));
         String cast = GetMovieCast.getMovieCast(db, movieName.replace("'", "''"));

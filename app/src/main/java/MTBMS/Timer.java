@@ -51,7 +51,6 @@ public class Timer {
             } else if (type.equals("c")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
                 Guest.customerHomePage();
-                Guest.guestService();
             } else if (type.equals("s")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
                 // TODO return to staff main page
