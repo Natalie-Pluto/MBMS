@@ -56,6 +56,7 @@ CREATE TABLE Cinema (
 
 CREATE TABLE Cinema_Session (
     session_id INT, 
+    number_of_booking INT,
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name) ON UPDATE CASCADE ON DELETE CASCADE,
     screen_type VARCHAR(6) NOT NULL,
     movie varchar(100) NOT NULL REFERENCES Movie(name_) ON UPDATE CASCADE ON DELETE CASCADE,
