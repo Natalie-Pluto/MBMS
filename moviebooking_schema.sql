@@ -24,7 +24,8 @@ CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserve
     username VARCHAR(100) PRIMARY KEY,
     password_ VARCHAR(100),
     creditcard CHAR(5) REFERENCES Credit_Card(number),
-    identity_ CHAR(1) NOT NULL
+    identity_ CHAR(1) NOT NULL,
+    settings VARCHAR(100)
 );
 
 CREATE TABLE Gift_Card(

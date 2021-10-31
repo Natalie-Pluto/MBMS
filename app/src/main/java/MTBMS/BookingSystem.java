@@ -103,7 +103,8 @@ public class BookingSystem {
             } else {
                 instance.loginGreeting("c", accName);
                 Guest.customerHomePage();
-                Guest.guestService();
+                Guest guest = new Guest(accName, "c", GetuserSetting.getUsersetting(dbInstance, accName));
+                guest.guestService();
             }
         }
     }
@@ -223,7 +224,7 @@ public class BookingSystem {
         if(type.equals("U6")) {
             List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
-            if(Integer.parseInt(cinema) > cinemaName1.size() - 1) {
+            if(Integer.parseInt(cinema) > cinemaName1.size()) {
                 filterMsg(dbInstance,"a", "hiuwgvcila");
             } else {
                 filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
@@ -243,7 +244,7 @@ public class BookingSystem {
         } else if (type.equals("S6")) {
             List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
-            if(Integer.parseInt(cinemaName) > cinemaName2.size() - 1) {
+            if(Integer.parseInt(cinemaName) > cinemaName2.size()) {
                 filterMsg(dbInstance,"c", "hiuwgvcila");
             } else {
                 filterMsg(dbInstance, "c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
