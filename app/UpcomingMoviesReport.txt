@@ -1,0 +1,18 @@
+Movie Name: Black Box
+Classification: null
+Release Date: null
+Synopsis: null
+Directors: 
+Genre: Drams, Mystery, Thriller
+Casts: null
+Showing Date: 2021-11-05
+
+Movie Name: Sooryavanshi
+Classification: null
+Release Date: null
+Synopsis: null
+Directors: 
+Genre: Drams, Crime
+Casts: null
+Showing Date: 2021-11-05
+

@@ -4,6 +4,7 @@ import databaseutility.*;
 import movieManagement.*;
 import staffoperations.*;
 import manageroperations.*;
+import staffoperations.ReportGenerator;
 
 import java.text.ParseException;
 import java.util.List;
@@ -86,6 +87,7 @@ public class BookingSystem {
 
     // Login will interact with User table to check the user's info
     public static void login(Database dbInstance, String accName, String accPw) throws InterruptedException {
+        Scanner s = new Scanner(System.in);
         if (!instance.tryLogin(dbInstance, accName, accPw)) {
             instance.loginMsg();
             String name = instance.backCheck1(dbInstance);
@@ -96,11 +98,12 @@ public class BookingSystem {
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 instance.loginGreeting("s", accName);
-                Scanner s = new Scanner(System.in);
-
+                StaffService staffService = new StaffService(s, dbInstance);
+                staffService.run();
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 instance.loginGreeting("m", accName);
-                //ManagerService.managerService(dbInstance);
+                ManagerService managerService = new ManagerService(s, dbInstance);
+                managerService.run();
             } else {
                 instance.loginGreeting("c", accName);
                 Guest.customerHomePage();
