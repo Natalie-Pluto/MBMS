@@ -14,9 +14,9 @@ public class ListMovieByScreen {
         List<String> name_ = FilterScreenSize.filterScreenSize(db, screenType);
         if(name_.isEmpty()) {
             if(!CheckScreenTypeExist.checkScreenExist(db,screenType)) {
-                System.out.println("\n=========================================================");
-                System.out.println(RED_BOLD + "Wrong input, please check the screen size entered (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("=========================================================\n");
+                System.out.println("\n=============================================================");
+                System.out.println(RED_BOLD + "Wrong input, please enter the right screen type num (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("=============================================================\n");
             } else {
                 System.out.println("\n==============================================================================");
                 System.out.println(RED_BOLD + "Sorry no movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);

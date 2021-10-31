@@ -2,6 +2,8 @@ package MTBMS;
 import movieManagement.*;
 import databaseutility.*;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.*;
 
@@ -24,6 +26,7 @@ public class Guest {
                 "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+
     public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
@@ -41,17 +44,20 @@ public class Guest {
         String service = input.nextLine();
         switch (service) {
             case "1":
-                nowShowingCus();
+                nowShowingCus(dbInstance);
                 guestService();
                 break;
             case "2":
-                filterMovies("U" + CupcomingFilter());
+                filterMovies(dbInstance, "U" + CupcomingFilter());
+                continueService();
                 break;
             case "3":
-                bookingHelper();
+                bookingHelper(dbInstance);
+                book();
                 break;
             case "4":
-                filterMovies("S" + CshowingFilter());
+                filterMovies(dbInstance, "S" + CshowingFilter());
+                continueService();
                 break;
             case "5":
                 BookingSystem.logOut();
@@ -61,11 +67,12 @@ public class Guest {
                 guestService();
                 break;
             default:
-                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''").toLowerCase(Locale.ROOT)) == null) {
                     wrongInput();
                     guestService();
                 } else {
-                    movieDetail(service);
+                    movieDetail(dbInstance, service.toLowerCase(Locale.ROOT));
+                    continueService();
                 }
                 break;
 
@@ -88,10 +95,10 @@ public class Guest {
         System.out.println("============================================\n");
     }
 
-    public static void movieDetail(String name_) throws InterruptedException {
+    public static void movieDetail(Database dbInstance, String name_) throws InterruptedException {
         BookingSystem.seperator();
-        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''"));
-        continueService();
+        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''").toLowerCase(Locale.ROOT));
+        BookingSystem.seperator();
     }
 
     public static void customerHomePage() {
@@ -107,7 +114,7 @@ public class Guest {
         BookingSystem.seperator();
     }
 
-    public static void nowShowingCus() {
+    public static void nowShowingCus(Database dbInstance) {
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"   Enter 4 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
@@ -133,20 +140,23 @@ public class Guest {
         return Timer.timer("c");
     }
 
-    public static void bookingHelper() throws InterruptedException {
-        BookingSystem.seperator();
-        BookingSystem.listCinema();
+    public static void bookingHelper(Database dbInstance) throws InterruptedException {
+        List<String> cinemas = BookingSystem.listCinema(dbInstance);
         String cinema = Timer.timer("c");
         BookingSystem.seperator();
-        ListMovieByCinema.listMovieByCinema(dbInstance, cinema);
-        book();
+        if(Integer.parseInt(cinema) > cinemas.size() - 1) {
+            ListMovieByCinema.listMovieByCinema(dbInstance, "hfiuiuaa");
+        } else {
+            ListMovieByCinema.listMovieByCinema(dbInstance, cinemas.get(Integer.parseInt(cinema)));
+        }
     }
 
     public static String getContinueService() throws InterruptedException{
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
+        System.out.println("======================================================");
+        BookingSystem.seperator();
         return Timer.timer("c");
     }
 
@@ -163,28 +173,9 @@ public class Guest {
                 break;
 
             case "3":
-                bookingHelper();
+                bookingHelper(dbInstance);
                 break;
 
-            default:
-                wrongInputMsg();
-                continueService();
-        }
-    }
-
-    public static void continueService1() throws InterruptedException {
-        String service = getContinueService();
-        switch (service) {
-            case "1":
-                customerHomePage();
-                guestService();
-                break;
-            case "2":
-                BookingSystem.logOut();
-                break;
-            case "3":
-                book();
-                break;
             default:
                 wrongInputMsg();
                 continueService();
@@ -200,54 +191,74 @@ public class Guest {
     // This method will call method in movie class.
     // It will filter and display the movies up to user's choice.
     // Both guest and customer can use this service.
-    public static void filterMovies(String type) throws InterruptedException {
+    public static void filterMovies(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName1 = BookingSystem.listCinema(dbInstance);
             String cinema = Timer.timer("c");
-            filterMsg("a", cinema);
+            if(Integer.parseInt(cinema) > cinemaName1.size() - 1){
+                filterMsg(dbInstance,"a", "hiufbjkv");
+            } else {
+                filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            }
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
             String screen = Timer.timer("c");
-            filterMsg("b", screen);
+            if(screen.equals("1")) {
+                filterMsg(dbInstance, "b", "Gold");
+            } else if (screen.equals("2")) {
+                filterMsg(dbInstance, "b", "Sliver");
+            } else if (screen.equals("3")) {
+                filterMsg(dbInstance, "b", "Bronze");
+            } else {
+                filterMsg(dbInstance, "b", "Hi");
+            }
         } else if (type.equals("S5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName2 = BookingSystem.listCinema(dbInstance);
             String cinemaName = Timer.timer("c");
-            filterMsg("c", cinemaName);
+            if(Integer.parseInt(cinemaName) > cinemaName2.size() - 1){
+                filterMsg(dbInstance, "c", "hiufbjkv");
+            } else {
+                filterMsg(dbInstance,"c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+            }
+            filterMsg(dbInstance, "c", cinemaName);
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();
             String size = Timer.timer("c");
-            filterMsg("d", size);
+            if(size.equals("1")) {
+                filterMsg(dbInstance, "d", "Gold");
+            } else if (size.equals("2")) {
+                filterMsg(dbInstance, "d", "Sliver");
+            } else if (size.equals("3")) {
+                filterMsg(dbInstance, "d", "Bronze");
+            } else {
+                filterMsg(dbInstance, "d", "Hi");
+            }
         } else {
             BookingSystem.filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
                 guestService();
             } else if (type.contains("S")) {
-                nowShowingCus();
+                nowShowingCus(dbInstance);
             }
         }
-        guestService();
     }
 
-    public static void filterMsg(String type, String value) throws InterruptedException {
+    public static void filterMsg(Database dbInstance, String type, String value) throws InterruptedException {
         if (type.equals("a")) {
             BookingSystem.seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("b")) {
             BookingSystem.seperator();
             ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("c")) {
             BookingSystem.seperator();
             ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("d")) {
             BookingSystem.seperator();
             ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("e")){
             BookingSystem.seperator();
@@ -596,6 +607,7 @@ public class Guest {
         this.settings = settings;
         // TODO
     }
+
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";

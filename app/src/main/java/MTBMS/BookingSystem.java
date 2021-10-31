@@ -5,8 +5,9 @@ import movieManagement.*;
 import staffoperations.*;
 import manageroperations.*;
 
-
 import java.text.ParseException;
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import static databaseutility.UserAuthenticate.authenticate;
 
@@ -25,13 +26,11 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                            //  "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                              "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
-        new UpdateUpcomingMovieTable();
-        DeleteAllUpcoming.deleteUpcoming(dbInstance);
-        AddingUpcomingMovie.addUpcomingMovie(dbInstance);
+        //new UpdateUpcomingMovieTable();
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
         getGreeting(dbInstance);
         options();
@@ -73,7 +72,7 @@ public class BookingSystem {
                 options();
                 break;
             default:
-                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''").toLowerCase(Locale.ROOT)) == null) {
                     wrongInput();
                     options();
                 } else {
@@ -222,21 +221,45 @@ public class BookingSystem {
     // "S7" -> filter now showing movies via screen size
     public static void filterMovie(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U6")) {
-            listCinema();
+            List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
-            filterMsg(dbInstance,"a", cinema);
+            if(Integer.parseInt(cinema) > cinemaName1.size() - 1) {
+                filterMsg(dbInstance,"a", "hiuwgvcila");
+            } else {
+                filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            }
         } else if (type.equals("U7")) {
             listScreen();
             String screen = Timer.timer("g");
-            filterMsg(dbInstance,"b", screen);
+            if(screen.equals("1")) {
+                filterMsg(dbInstance, "b", "Gold");
+            } else if (screen.equals("2")) {
+                filterMsg(dbInstance, "b", "Sliver");
+            } else if (screen.equals("3")) {
+                filterMsg(dbInstance, "b", "Bronze");
+            } else {
+                filterMsg(dbInstance, "b", "Hi");
+            }
         } else if (type.equals("S6")) {
-            listCinema();
+            List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
-            filterMsg(dbInstance,"c", cinemaName);
+            if(Integer.parseInt(cinemaName) > cinemaName2.size() - 1) {
+                filterMsg(dbInstance,"c", "hiuwgvcila");
+            } else {
+                filterMsg(dbInstance, "c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+            }
         } else if (type.equals("S7")) {
             listScreen();
             String size = Timer.timer("g");
-            filterMsg(dbInstance,"d", size);
+            if(size.equals("1")) {
+                filterMsg(dbInstance, "d", "Gold");
+            } else if (size.equals("2")) {
+                filterMsg(dbInstance, "d", "Sliver");
+            } else if (size.equals("3")) {
+                filterMsg(dbInstance, "d", "Bronze");
+            } else {
+                filterMsg(dbInstance, "d", "Hi");
+            }
         } else {
             filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
@@ -371,7 +394,7 @@ public class BookingSystem {
 
     public static void movieDetail(Database dbInstance, String name) {
         seperator();
-        MovieDetails.movieDetails(dbInstance, name.replace("'", "''"));
+        MovieDetails.movieDetails(dbInstance, name.replace("'", "''").toLowerCase(Locale.ROOT));
         System.out.println("\n===================================================================");
         System.out.println("You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ ");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Log in\""  + ANSI_RESET);
@@ -382,16 +405,19 @@ public class BookingSystem {
         seperator();
     }
 
-    public static void listCinema() {
+    public static List<String> listCinema(Database dbInstance) {
         seperator();
+        int counter = 1;
         System.out.println("=======================");
         System.out.println(PURPLE_BOLD + "Please select a cinema:" + ANSI_RESET);
         System.out.println("=======================");
-        System.out.println("Warringah Mall");
-        System.out.println("Town Hall");
-        System.out.println("Eastgarden");
-        System.out.println("Blacktown");
+        List<String> name = GetCinemaName.getCinemaName(dbInstance);
+        for(String n : name) {
+            System.out.println(counter + ". " + n);
+            counter ++;
+        }
         seperator();
+        return name;
     }
 
     public static void listScreen() {
@@ -399,9 +425,9 @@ public class BookingSystem {
         System.out.println("============================");
         System.out.println(PURPLE_BOLD + "Please select a screen size:" + ANSI_RESET);
         System.out.println("============================");
-        System.out.println("Gold");
-        System.out.println("Sliver");
-        System.out.println("Bronze");
+        System.out.println("1. Gold");
+        System.out.println("2. Sliver");
+        System.out.println("3. Bronze");
         seperator();
     }
 
@@ -569,7 +595,6 @@ public class BookingSystem {
         System.out.println("Enter 2 - for \"Staff\"");
         System.out.println("Enter 3 - for \"Manager\"");
     }
-
 
 
 

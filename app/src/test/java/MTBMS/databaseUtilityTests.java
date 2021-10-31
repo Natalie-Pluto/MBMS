@@ -86,7 +86,7 @@ public class databaseUtilityTests {
 
     //static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
-    //static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+   // static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     @Test
     public void AddingUser_1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");

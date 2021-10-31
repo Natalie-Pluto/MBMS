@@ -14,9 +14,9 @@ public class ListUpcomingByCinema {
         List<String> name_ = FilterUpcomingMCinema.filterUpcomingCinema(db, cinema);
         if (name_.isEmpty()) {
             if(!CheckIfCinemaExists.checkIfCinemaExists(db, cinema)) {
-                System.out.println("\n========================================================");
-                System.out.println(RED_BOLD + "Wrong input, please check the cinema name_ entered (｡´︿`｡)" + ANSI_RESET);
-                System.out.println("========================================================\n");
+                System.out.println("\n=============================================================");
+                System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
+                System.out.println("=============================================================\n");
             } else {
                 System.out.println("\n======================================================================================");
                 System.out.println(RED_BOLD + "Sorry, no upcoming movie is scheduled to be played in this cinema at the moment (｡´︿`｡)" + ANSI_RESET);
