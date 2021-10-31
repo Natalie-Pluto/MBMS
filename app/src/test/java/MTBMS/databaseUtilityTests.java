@@ -1065,16 +1065,6 @@ public class databaseUtilityTests {
 
     }
 
-    /* @Test
-    public void UpdateScreenSize_1() {
-
-    }
-
-    @Test
-    public void UpdateScreenSize_2() {
-
-    } */
-
     @Test
     public void UpdateSeats_1() {
         addCinema(dbInstance, "ali's cinema");
