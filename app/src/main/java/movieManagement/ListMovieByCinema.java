@@ -21,11 +21,6 @@ public class ListMovieByCinema {
                     System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("=============================================================\n");
                     Guest.bookingHelper(db);
-                } else {
-                    System.out.println("\n========================================================");
-                    System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
-                    System.out.println("========================================================\n");
-                    Guest.bookingHelper(db);
                 }
             } else {
                 System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
@@ -44,6 +39,11 @@ public class ListMovieByCinema {
                     System.out.println("");
                 }
             }
+        } else {
+            System.out.println("\n========================================================");
+            System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("========================================================\n");
+            Guest.bookingHelper(db);
         }
     }
 

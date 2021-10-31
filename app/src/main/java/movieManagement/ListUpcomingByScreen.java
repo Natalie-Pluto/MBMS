@@ -18,10 +18,6 @@ public class ListUpcomingByScreen {
                     System.out.println("\n=============================================================");
                     System.out.println(RED_BOLD + "Wrong input, please enter the right screen type num (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("=============================================================\n");
-                } else {
-                    System.out.println("\n==============================================================================");
-                    System.out.println(RED_BOLD + "Sorry no upcoming movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
-                    System.out.println("==============================================================================\n");
                 }
             } else {
                 for (String n : name_) {
@@ -30,6 +26,10 @@ public class ListUpcomingByScreen {
                     System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
                 }
             }
+        } else {
+            System.out.println("\n==============================================================================");
+            System.out.println(RED_BOLD + "Sorry no upcoming movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("==============================================================================\n");
         }
     }
 

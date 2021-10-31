@@ -19,10 +19,6 @@ public class ListNowShowingScreen {
                         System.out.println("\n=============================================================");
                         System.out.println(RED_BOLD + "Wrong input, please enter the right screen type num (｡´︿`｡)" + ANSI_RESET);
                         System.out.println("=============================================================\n");
-                    } else {
-                        System.out.println("\n==============================================================================");
-                        System.out.println(RED_BOLD + "Sorry no movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
-                        System.out.println("==============================================================================\n");
                     }
                 } else {
                     for (String n : name_) {
@@ -32,6 +28,10 @@ public class ListNowShowingScreen {
                     }
                 }
             }
+        } else {
+            System.out.println("\n==============================================================================");
+            System.out.println(RED_BOLD + "Sorry no movie is scheduled to be played in this screen type (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("==============================================================================\n");
         }
     }
 

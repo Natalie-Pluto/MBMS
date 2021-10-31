@@ -19,10 +19,6 @@ public class ListUpcomingByCinema {
                     System.out.println("\n=============================================================");
                     System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("=============================================================\n");
-                } else {
-                    System.out.println("\n======================================================================================");
-                    System.out.println(RED_BOLD + "Sorry, no upcoming movie is scheduled to be played in this cinema at the moment (｡´︿`｡)" + ANSI_RESET);
-                    System.out.println("======================================================================================\n");
                 }
             } else {
                 System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
@@ -41,6 +37,10 @@ public class ListUpcomingByCinema {
                     System.out.println("");
                 }
             }
+        } else {
+            System.out.println("\n======================================================================================");
+            System.out.println(RED_BOLD + "Sorry, no upcoming movie is scheduled to be played in this cinema at the moment (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("======================================================================================\n");
         }
     }
 
