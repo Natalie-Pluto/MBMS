@@ -24,7 +24,8 @@ CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserve
     username VARCHAR(100) PRIMARY KEY,
     password_ VARCHAR(100),
     creditcard CHAR(5) REFERENCES Credit_Card(number),
-    identity_ CHAR(1) NOT NULL
+    identity_ CHAR(1) NOT NULL,
+    settings VARCHAR(100)
 );
 
 CREATE TABLE Gift_Card(
@@ -55,6 +56,7 @@ CREATE TABLE Cinema (
 
 CREATE TABLE Cinema_Session (
     session_id INT, 
+    number_of_booking INT,
     cinema VARCHAR(100) REFERENCES Cinema(cinema_name) ON UPDATE CASCADE ON DELETE CASCADE,
     screen_type VARCHAR(6) NOT NULL,
     movie varchar(100) NOT NULL REFERENCES Movie(name_) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -72,6 +74,12 @@ CREATE TABLE Cinema_Session (
     ticket_price_students DECIMAL(10,4),
     CONSTRAINT frontMidBackCheck CHECK(front_seat_capacity <= mid_seat_capacity and mid_seat_capacity <= back_seat_capacity),
     PRIMARY KEY(cinema, screen_type, movie, start_time)
+);
+
+CREATE TABLE Canceled_transaction(
+    transaction_time TIMESTAMP,
+    user VARCHAR (100),
+    reason VARCHAR (100),
 );
 
 -------------------------------------------

@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 public class bookingsystemTest {
     private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
         "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -198,7 +198,7 @@ public class bookingsystemTest {
 
     @Test
     public void listCinemaTest5() {
-        BookingSystem.listCinema();
+        BookingSystem.listCinema(dbInstance);
         assertNotNull(getOutput());
     }
 
@@ -310,28 +310,56 @@ public class bookingsystemTest {
 
     @Test
     public void filterMovieTest1() throws InterruptedException {
-        getInput("Warringah Mall");
+        getInput("1");
         BookingSystem.filterMovie(dbInstance,"U6");
         assertNotNull(getOutput());
     }
 
     @Test
     public void filterMovieTest2() throws InterruptedException {
-        getInput("Gold");
+        getInput("1");
+        BookingSystem.filterMovie(dbInstance,"U7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2p2() throws InterruptedException {
+        getInput("2");
+        BookingSystem.filterMovie(dbInstance,"U7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest2p3() throws InterruptedException {
+        getInput("3");
         BookingSystem.filterMovie(dbInstance,"U7");
         assertNotNull(getOutput());
     }
 
     @Test
     public void filterMovieTest3() throws InterruptedException {
-        getInput("Warringah Mall");
+        getInput("1");
         BookingSystem.filterMovie(dbInstance,"S6");
         assertNotNull(getOutput());
     }
 
     @Test
     public void filterMovieTest4() throws InterruptedException {
-        getInput("Gold");
+        getInput("1");
+        BookingSystem.filterMovie(dbInstance,"S7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4p2() throws InterruptedException {
+        getInput("2");
+        BookingSystem.filterMovie(dbInstance,"S7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4p3() throws InterruptedException {
+        getInput("3");
         BookingSystem.filterMovie(dbInstance,"S7");
         assertNotNull(getOutput());
     }
@@ -360,15 +388,11 @@ public class bookingsystemTest {
         assertNotNull(BookingSystem.username());
     }
 
-
     @Test
-    public void loginIn1() throws InterruptedException {
-
-    }
-
-    @Test
-    public void loginIn2() throws InterruptedException {
-
+    public void optionTest() throws InterruptedException {
+        getInput("Caribbean");
+        BookingSystem.options();
+        assertNotNull(getOutput());
     }
 
     @Test
@@ -379,4 +403,6 @@ public class bookingsystemTest {
         assertTrue(StringUtils.isNotEmpty("abc"));
         assertTrue(str.isNotEmpty("abc"));
     }
+
+
 }

@@ -1,0 +1,135 @@
+This file describes the tests for the classes in the databaseutility package
+The line format of the test descriptions: <<databaseutility class>_<number>> <description>
+
+beforeEach:
+setUpOutput is a print flow method that is set before each method is executed
+
+afterEach:
+reset method resets the input and output streams after each method is executed
+
+getOutput get the output stream
+
+getInput To get the parameter for the data input stream
+
+Tests:
+signinMsg4test test choice as to the identity of the information to print,
+ and assert that the output stream is not NULL
+signinMsg3test test existing identity information to print,
+ and assert that the output stream is not NULL
+signinMsg1test test input error information to print,
+ and assert that the output stream is not NULL
+signinfailedtest test the sign-up failed,
+ and assert that the output stream is not NULL
+
+greetingTest test welcome message print method,
+ and assert that the output stream is not NULL
+
+wrongInputTest test error input information print method,
+ and assert that the output stream is not NULL
+loginMsgTest test login welcome information print method,
+ and assert that the output stream is not NULL
+
+loginGreetingTest1 test the login method 1,
+ join the username for Shawn first to the database, the password is 123456,
+  s identity, incoming id login information parameters and acc Name,
+   and assert that the output stream is not NULL, and remove User username for Shawn
+loginGreetingTest2 test login method 2,
+ join the username for Shawn first to the database,
+  the password is 123456, identity for m, incoming id login information parameters and acc Name,
+   and assert that the output stream is not NULL, and remove User username for Shawn
+loginGreetingTest3 test login method 3,
+ join the username for Shawn first to the database,
+  the password is 123456, identity for c, incoming id login information parameters and acc Name,
+   and assert that the output stream is not NULL, and remove User username for Shawn
+
+nowshowingTest list current listing all of the information database,
+ and assert that the output stream is not NULL
+
+createpwTest test to create a password,
+ and assert that the output stream is not NULL
+createpw2Test repeat and confirm test to create a password,
+ and assert that the output stream is not NULL
+
+seperatorTest test Booking System isolation method,
+ and assert that the output stream is not NULL
+
+msgTest test Booking System confirmation printing method 1,
+ and assert that the output stream is not NULL
+msg2Test test Booking System confirmation printing method 2,
+ a return to more than 1 print method options, and assert that the output stream is not NULL
+msg3Test test Booking System confirmation printing method 3,
+ out of print information, and assert that the output stream is not NULL
+
+defaultTest test Booking System default page information print method,
+ and assert that the output stream is not NULL
+
+filterMsgTest1 according to the second parameter passed in value to determine the method,
+ called the third argument passed in the 'a' call the List Upcoming By Cinema a List of Upcoming By method of Cinema,
+  and assert that the output stream is not NULL
+filterMsgTest2 according to the second parameter passed in value to determine the method 2,
+ called the third argument to 'b' is called the List Upcoming By Screen a List of Upcoming By Screen method,
+  and assert that the output stream is not NULL
+filterMsgTest3 according to the second parameter passed in value to determine the method 2,
+ called the third argument to 'c' call the List Now Showing a List of Cinema Now Showing method of Cinema,
+  and assert that the output stream is not NULL
+filterMsgTest4 according to the second parameter passed in value to determine the method 2,
+ called the third argument passed in 'd' is called the List Now Showing the List of Screen Nowshowing Screen method,
+  and assert that the output stream is not NULL
+filterMsgTest5 according to the second parameter passed in value to determine the method 2,
+ called the third argument passed in '4', not executed logic,
+  and assert that the output stream is not NULL
+
+listScreenTest print all the screen in the Booking System list information,
+ and assert that the output stream is not NULL
+listCinemaTest5 print all the cinema in the Booking System list information,
+ and assert that the output stream is not NULL
+
+movieDetailTest print Movie Details all the Movie in detail, and assert that the output stream is not NULL
+
+upcomingFilterTest to obtain data for 6 input stream, through the selection of input filter for judgment,
+ and assert that the output stream is not NULL
+nowshowingFilterTest to obtain data for 6 input stream, through input filtering to show the result of selection,
+ and assert that the output stream is not NULL
+
+csignUpTest add this customer 's detail to the users table and assert that the output stream is not NULL,
+ remove User username for ABC
+
+signUpHelperTest1 registration input is 1, the new Acc for ABC and new Pw 123456 for the User,
+ and assert that the output stream is not NULL, delete the username for ABC's User
+signUpHelperTest2 get the shawshank input stream, the registered input is 2,
+ new Acc for ABC and new Pw 123456 for User, and assert that the output stream is not NULL, delete the username for ABC's User
+signUpHelperTest3 get zootopia input stream, the registered input is 3,
+ the new Acc for ABC and new Pw 123456 for the User, and assert that the output stream is not NULL, delete the username for ABC's User
+signUpHelperTest4 get shaw input stream, the registered input is 2,
+ the new Acc for ABC and new Pw 123456 for the User, and assert that the output stream is not NULL, delete the username for the ABC of the User
+signUpHelperTest5 get the zoo input stream, the registered input is 3,
+ new Acc for ABC and new Pw 123456 for the User, and assert that the output stream is not NULL, delete the username for ABC's User
+
+tryLoginTest1 try to login test 1, the username for ABC, the password is 123456,
+ identity for the User to log in, s assertion login successful, delete the username for ABC's User
+tryLoginTest2 login attempt to test 2, the username for ABC, the password is 123456,
+ identity for the User to log in, s assertion login failed, delete the username for ABC's User
+
+backTest1 obtain a data input stream for Nat, check the user name, and assert that the output stream is not NULL
+backTest2 obtain a data input stream for Nat, check the password, and assert that the output stream is not NULL
+
+pwdTest check whether the password is the same, assertion is True, 123123 claims 123123 4 to False
+
+readPwdTest to obtain a data input stream for 123456, the test method to obtain the password
+
+filterMovieTest1 get a data for "Warringah Mall" in the input stream, filter type are U6 film,
+ and assert that the output stream is not NULL
+filterMovieTest2 to obtain a data as the "Gold" of the input stream, filter type is U7 movie,
+ and assert that the output stream is not NULL
+filterMovieTest3 get a data for "Warringah Mall" in the input stream, filter type is S7 movie,
+ and assert that the output stream is not NULL
+filterMovieTest4 to obtain a data as the "Gold" of the input stream, filter type is S7 movie,
+ and assert that the output stream is not NULL
+
+filterMovieTest5 filter type is S movie, and assert that the output stream is not NULL
+filterMovieTest6 film filter type is U, and assert that the output stream is not NULL
+
+passwordTest to obtain a data input stream for 123456, the test input password access method
+usernameTest to obtain a data input stream for NAT, test input account access method
+
+util character is not NULL or empty

@@ -1,7 +1,10 @@
 package MTBMS;
 import movieManagement.*;
 import databaseutility.*;
+import org.checkerframework.checker.units.qual.A;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.regex.*;
 
@@ -36,36 +39,43 @@ public class Guest {
     //     You should use this method to accept further user's input, create suitable CLI to interact with the user.
     //     It's kinda like a main method for guest class
     //     */
-    public static void guestService() throws InterruptedException {
+    public void guestService() throws InterruptedException {
         Scanner input = new Scanner(System.in);
         String service = input.nextLine();
         switch (service) {
             case "1":
-                nowShowingCus();
+                nowShowingCus(dbInstance);
                 guestService();
                 break;
             case "2":
-                filterMovies("U" + CupcomingFilter());
+                filterMovies(dbInstance, "U" + CupcomingFilter());
+                continueService();
                 break;
             case "3":
-                bookingHelper();
+                bookingHelper(dbInstance);
+                book();
                 break;
             case "4":
-                filterMovies("S" + CshowingFilter());
+                filterMovies(dbInstance, "S" + CshowingFilter());
+                continueService();
                 break;
             case "5":
                 BookingSystem.logOut();
+                break;
+            case "6":
+                continuePersonalSettings(personalSettingsMsgs());
                 break;
             case "return":
                 customerHomePage();
                 guestService();
                 break;
             default:
-                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''")) == null) {
+                if (GetMovieSynopsis.getMovieSynopsis(dbInstance, service.replace("'", "''").toLowerCase(Locale.ROOT)) == null) {
                     wrongInput();
                     guestService();
                 } else {
-                    movieDetail(service);
+                    movieDetail(dbInstance, service.toLowerCase(Locale.ROOT));
+                    continueService();
                 }
                 break;
 
@@ -84,39 +94,147 @@ public class Guest {
         System.out.println("3 - for booking tickets");
         System.out.println("4 - for filter now showing movies");
         System.out.println("5 - for log out");
+        System.out.println("6 - for personal settings");
         System.out.println("Enter correct movie name_ for movie detail");
         System.out.println("============================================\n");
     }
 
-    public static void movieDetail(String name_) throws InterruptedException {
+    public static void movieDetail(Database dbInstance, String name_) throws InterruptedException {
         BookingSystem.seperator();
-        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''"));
-        continueService();
+        MovieDetails.movieDetails(dbInstance, name_.replace("'", "''").toLowerCase(Locale.ROOT));
+        BookingSystem.seperator();
     }
 
     public static void customerHomePage() {
         BookingSystem.seperator();
         System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Now Showing\"   Enter 2 for \"Filter\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Now Showing\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Filter\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Personal Settings\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>" + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
         BookingSystem.seperator();
     }
 
-    public static void nowShowingCus() {
+    public static void nowShowingCus(Database dbInstance) {
         System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"   Enter 4 for \"Filter\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 4 for \"Filter\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 6 for \"Personal Settings\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Now Showing!>>"   + ANSI_RESET);
         ListNowShowing.listNowShowing(dbInstance);
         BookingSystem.seperator();
+    }
+
+    public static String personalSettingsMsgs() throws InterruptedException {
+        BookingSystem.seperator();
+        System.out.println("======================================================");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Update Password\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Cinema Preference\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
+        System.out.println("======================================================");
+        BookingSystem.seperator();
+        return Timer.timer("c");
+    }
+
+    public static String wrongpersonalSettingsMsgs() throws InterruptedException {
+        BookingSystem.seperator();
+        System.out.println("======================================================");
+        System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+        System.out.println("Please:");
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Update Password\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Cinema Preference\"" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
+        System.out.println("======================================================");
+        BookingSystem.seperator();
+        return Timer.timer("c");
+    }
+
+    public void continuePersonalSettings(String type) throws InterruptedException {
+        switch(type) {
+            case "1":
+                passwordUpdate();
+                break;
+            case "2":
+                setCinemaPreference();
+                break;
+            case "return":
+                customerHomePage();
+                guestService();
+                break;
+            default:
+                continuePersonalSettings(wrongpersonalSettingsMsgs());
+                break;
+        }
+
+    }
+
+    public void setCinemaPreference() throws InterruptedException {
+        List<String> cinemas = cinemaPreferenceMsg();
+        String num = Timer.timer("c");
+        BookingSystem.seperator();
+        boolean success = setSuccessful(num, cinemas);
+        if(!success) {
+            continuePersonalSettings(personalSettingsMsgs());
+        }
+    }
+
+    public List<String> cinemaPreferenceMsg() {
+        BookingSystem.seperator();
+        System.out.println(YELLOW_BACKGROUND + "By choosing the cinema preference, the list of scheduled sessions of " + ANSI_RESET);
+        System.out.println(YELLOW_BACKGROUND + "your preference cinema will be displayed in your home page." + ANSI_RESET + "\n");
+        System.out.println("Please choose a cinema:");
+        return BookingSystem.listCinema(dbInstance);
+    }
+
+    public boolean setSuccessful(String num, List<String> cinemas) {
+        if(Integer.parseInt(num) > cinemas.size()) {
+            System.out.println(RED_BOLD + "Please enter the right cinema number" + ANSI_RESET);
+            return false;
+        }
+        SetUserSetting.setUserSetting(dbInstance, username, cinemas.get(Integer.parseInt(num) - 1));
+        System.out.println("Your cinema preference is set (｡･ω･｡)ﾉ");
+        return true;
+    }
+
+    // This method will allow customers to update their password and specific settings.
+    // opt 1 for changing password
+    // opt 2 for changing settings
+    public void passwordUpdate() throws InterruptedException {//change opt from int to String
+        BookingSystem.seperator();
+        String presentPwd = GetUserPassword.getUserPassword(dbInstance, username);
+        //check new password twice to ensure customers are typing their expected password correctly
+        System.out.println("Please enter your new password");
+        String newPwd_1 = BookingSystem.readPwd();
+        System.out.println("Please enter your new password again");
+        String newPwd_2 = BookingSystem.readPwd();
+        boolean success = checkPwd(newPwd_1, newPwd_2, presentPwd);
+        if(!success) {
+            continuePersonalSettings(personalSettingsMsgs());
+        } else {
+            //update new password to database
+            ChangingUserPassword.changeUserPassword(dbInstance, username, newPwd_1);
+        }
+    }
+
+    public boolean checkPwd(String p1, String p2, String p3) {
+        if(p1.equals(p3) || p2.equals(p3)) {
+            System.out.println(RED_BOLD + "New password can not be the same as your present one" + ANSI_RESET);
+            return false;
+        } else if (!p1.equals(p2)) {
+            System.out.println(RED_BOLD + "Password not matching, please try again" + ANSI_RESET);
+            return false;
+        }
+        System.out.println("Your new password is set (｡･ω･｡)ﾉ");
+        return true;
     }
 
     public static String CshowingFilter() throws InterruptedException {
@@ -133,24 +251,28 @@ public class Guest {
         return Timer.timer("c");
     }
 
-    public static void bookingHelper() throws InterruptedException {
-        BookingSystem.seperator();
-        BookingSystem.listCinema();
+    public static void bookingHelper(Database dbInstance) throws InterruptedException {
+        List<String> cinemas = BookingSystem.listCinema(dbInstance);
         String cinema = Timer.timer("c");
         BookingSystem.seperator();
-        ListMovieByCinema.listMovieByCinema(dbInstance, cinema);
-        book();
+        if(Integer.parseInt(cinema) > cinemas.size()) {
+            ListMovieByCinema.listMovieByCinema(dbInstance, "hfiuiuaa");
+        } else {
+            ListMovieByCinema.listMovieByCinema(dbInstance, cinemas.get(Integer.parseInt(cinema) - 1));
+        }
     }
 
     public static String getContinueService() throws InterruptedException{
         System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\"   2 for \"Log out\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 1 for \"Return to the home page\""  + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter 2 for \"Log out\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
-        System.out.println("======================================================\n");
+        System.out.println("======================================================");
+        BookingSystem.seperator();
         return Timer.timer("c");
     }
 
-    public static void continueService() throws InterruptedException {
+    public void continueService() throws InterruptedException {
         String service = getContinueService();
         switch (service) {
             case "1":
@@ -163,28 +285,9 @@ public class Guest {
                 break;
 
             case "3":
-                bookingHelper();
+                bookingHelper(dbInstance);
                 break;
 
-            default:
-                wrongInputMsg();
-                continueService();
-        }
-    }
-
-    public static void continueService1() throws InterruptedException {
-        String service = getContinueService();
-        switch (service) {
-            case "1":
-                customerHomePage();
-                guestService();
-                break;
-            case "2":
-                BookingSystem.logOut();
-                break;
-            case "3":
-                book();
-                break;
             default:
                 wrongInputMsg();
                 continueService();
@@ -200,54 +303,74 @@ public class Guest {
     // This method will call method in movie class.
     // It will filter and display the movies up to user's choice.
     // Both guest and customer can use this service.
-    public static void filterMovies(String type) throws InterruptedException {
+    public void filterMovies(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName1 = BookingSystem.listCinema(dbInstance);
             String cinema = Timer.timer("c");
-            filterMsg("a", cinema);
+            if(Integer.parseInt(cinema) > cinemaName1.size()){
+                filterMsg(dbInstance,"a", "hiufbjkv");
+            } else {
+                filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            }
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
             String screen = Timer.timer("c");
-            filterMsg("b", screen);
+            if(screen.equals("1")) {
+                filterMsg(dbInstance, "b", "Gold");
+            } else if (screen.equals("2")) {
+                filterMsg(dbInstance, "b", "Sliver");
+            } else if (screen.equals("3")) {
+                filterMsg(dbInstance, "b", "Bronze");
+            } else {
+                filterMsg(dbInstance, "b", "Hi");
+            }
         } else if (type.equals("S5")) {
-            BookingSystem.listCinema();
+            List<String> cinemaName2 = BookingSystem.listCinema(dbInstance);
             String cinemaName = Timer.timer("c");
-            filterMsg("c", cinemaName);
+            if(Integer.parseInt(cinemaName) > cinemaName2.size()){
+                filterMsg(dbInstance, "c", "hiufbjkv");
+            } else {
+                filterMsg(dbInstance,"c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+            }
+            filterMsg(dbInstance, "c", cinemaName);
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();
             String size = Timer.timer("c");
-            filterMsg("d", size);
+            if(size.equals("1")) {
+                filterMsg(dbInstance, "d", "Gold");
+            } else if (size.equals("2")) {
+                filterMsg(dbInstance, "d", "Sliver");
+            } else if (size.equals("3")) {
+                filterMsg(dbInstance, "d", "Bronze");
+            } else {
+                filterMsg(dbInstance, "d", "Hi");
+            }
         } else {
             BookingSystem.filterMsg(dbInstance,"e", " ");
             if (type.contains("U")) {
                 guestService();
             } else if (type.contains("S")) {
-                nowShowingCus();
+                nowShowingCus(dbInstance);
             }
         }
-        guestService();
     }
 
-    public static void filterMsg(String type, String value) throws InterruptedException {
+    public static void filterMsg(Database dbInstance, String type, String value) throws InterruptedException {
         if (type.equals("a")) {
             BookingSystem.seperator();
             ListUpcomingByCinema.listUpcomingByCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("b")) {
             BookingSystem.seperator();
             ListUpcomingByScreen.listUpcomingByScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("c")) {
             BookingSystem.seperator();
             ListNowShowingCinema.listNowShowingCinema(dbInstance, value);
-            continueService1();
             BookingSystem.seperator();
         } else if (type.equals("d")) {
             BookingSystem.seperator();
             ListNowShowingScreen.listNowshowingScreen(dbInstance, value);
-            continueService();
             BookingSystem.seperator();
         } else if (type.equals("e")){
             BookingSystem.seperator();
@@ -409,6 +532,7 @@ public class Guest {
         String movieName = Timer.timer("c");
         return movieName;
     }
+
     public static String checkMovieName() throws InterruptedException {
         String movieName = getMovieName();
         if (CheckIfMovieExists.checkIfMovieExists(dbInstance, movieName)) {
@@ -527,52 +651,6 @@ public class Guest {
         }
     }
 
-    // This method will allow customers to update their password and specific settings.
-    // opt 1 for changing password
-    // opt 2 for changing settings
-    /*public void personalInfoUpdate(String opt) throws InterruptedException {//change opt from int to String
-        Scanner input = new Scanner(System.in);
-        switch(opt){
-            case "1":
-                System.out.println("Please enter your present password");
-                String presentPwd = input.next();
-                //TODO: check pwd
-                //check new password twice to ensure customers are typing their expected password correctly
-                System.out.println("Please enter your new password");
-                String newPwd_1 = BookingSystem.readPwd();
-                System.out.println("Please enter your new password again");
-                String newPwd_2 = BookingSystem.readPwd();
-                if (newPwd_2.equals(presentPwd) || newPwd_1.equals(presentPwd)) {
-                    System.out.println("New password can not be the same as your present one");
-                    personalInfoUpdate(opt);
-                }else if (newPwd_1.equals(newPwd_2)){
-                    //update new password to database
-                    ChangingUserPassword.changeUserPassword(dbInstance, username, newPwd_1);
-                    System.out.println("Password changed, please login again");
-                    guestService();
-                }else {
-                    System.out.println("Two Passwords do not match, please try again");
-                    personalInfoUpdate(opt);
-                }
-                break;
-
-            case "2":
-                System.out.println("What setting do you wanna change?");
-                System.out.println("1.Preferred Genre       2.Preferred Cinema      3.Preferred Classification        4.Skip");
-                //TODO
-                String newSetting = input.next();
-                if (newSetting.equals("4")){
-                    break;
-
-                }else setSettings(newSetting);
-                break;
-
-            default:
-                System.out.println("Please enter a correct number");
-                personalInfoUpdate(opt);
-        }
-    }
-    */
     public String getUsername() {
         return username;
     }
@@ -596,6 +674,7 @@ public class Guest {
         this.settings = settings;
         // TODO
     }
+
 
     // Regular
     public static final String ANSI_RESET = "\u001B[0m";
