@@ -238,3 +238,11 @@ GetNumberOfSeatsBooked_mid_2
 
 GetNumberOfSeatsBooked_back_1 
 GetNumberOfSeatsBooked_back_2
+
+GetUserSetting_1 the settings of an existing user can be retrieved
+GetUserSetting_2 attempting to get the settings of a user that does not exist does not cause issues
+GetUserSetting_3 attempting to get the setting of a user for which no cinema has been set returns null
+
+SetUserSetting_1 the settings of an existing user can be set
+SetUserSetting_2 attempting to get the settings of a user that does not exist does not cause issues
+SetUserSetting_3 attempting to set the cinema preference of a user to a cinema that does not exist does not cause issues
