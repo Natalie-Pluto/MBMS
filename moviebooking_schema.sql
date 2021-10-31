@@ -74,6 +74,12 @@ CREATE TABLE Cinema_Session (
     PRIMARY KEY(cinema, screen_type, movie, start_time)
 );
 
+CREATE TABLE Canceled_transaction(
+    transaction_time Date,
+    user VARCHAR (100),
+    reason VARCHAR (100),
+);
+
 -------------------------------------------
 ---- Sample Data ----
 -------------------------------------------
