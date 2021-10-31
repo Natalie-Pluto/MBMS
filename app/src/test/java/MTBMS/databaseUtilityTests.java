@@ -189,7 +189,7 @@ public class databaseUtilityTests {
         changeDirectors(dbInstance,"movie", "afhd");
     }
 
-    @Test 
+    /*@Test
     public void MovieClassificationChanger_1() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -199,7 +199,7 @@ public class databaseUtilityTests {
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("pg"));
     }
 
-    @Test 
+    @Test
     public void MovieClassificationChanger_2() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -314,7 +314,7 @@ public class databaseUtilityTests {
         inserter.addClassification("invalid classification");
         inserter.insertMovie();
         assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
-    }
+    }*/
 
     @Test
     public void AddingCinema_1() {
