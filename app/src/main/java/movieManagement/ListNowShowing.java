@@ -8,13 +8,14 @@ import databaseutility.GetNowShowing;
 
 
 import java.util.List;
+import java.util.Locale;
 
 public class ListNowShowing {
     public static void listNowShowing(Database db) {
         List<String> name_ = GetNowShowing.getNowShowing(db);
         if(name_ != null) {
             for (String n : name_) {
-                String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
+                String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
                 String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                 System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
             }

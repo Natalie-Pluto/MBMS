@@ -5,6 +5,7 @@ import databaseutility.*;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import static MTBMS.BookingSystem.RED_BOLD;
 
@@ -19,7 +20,7 @@ public class ListNowShowingCinema {
             } else {
                 System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
                 for (String n : name_) {
-                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
+                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
                     String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                     List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);
                     System.out.println("===============================================");

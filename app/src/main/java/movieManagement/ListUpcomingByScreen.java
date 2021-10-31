@@ -5,6 +5,7 @@ import databaseutility.*;
 
 
 import java.util.List;
+import java.util.Locale;
 
 import static MTBMS.BookingSystem.RED_BOLD;
 
@@ -24,7 +25,7 @@ public class ListUpcomingByScreen {
                 }
             } else {
                 for (String n : name_) {
-                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''"));
+                    String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
                     String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                     System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
                 }
