@@ -96,7 +96,8 @@ public class BookingSystem {
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
                 instance.loginGreeting("s", accName);
-                //StaffService.staffService(dbInstance);
+                Scanner s = new Scanner(System.in);
+
             } else if (CheckStaff.isManager(dbInstance, accName)) {
                 instance.loginGreeting("m", accName);
                 //ManagerService.managerService(dbInstance);
