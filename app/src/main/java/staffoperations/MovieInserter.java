@@ -8,24 +8,43 @@ public class MovieInserter {
     private Scanner s;
     private Database d;
 
+    // Regular
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
+
+    // Bold
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+
+    // Background
+    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
+
+
+    // Bold High Intensity
+    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+    public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
+
     public MovieInserter(Scanner scanner, Database db){
         s = scanner;
         d = db;
     }
 
     public String collectMovieName(){
-        System.out.println("Enter the name of the movie: ");
+        System.out.println(PURPLE_BOLD + "Enter the name of the movie: " + ANSI_RESET);
         String movieName = s.nextLine();
         boolean movieExist = CheckIfMovieExists.checkIfMovieExists(d, movieName);
         if(movieExist){
-            System.out.println("Error: Movie already exists.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Movie already exists. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             movieName = collectMovieName();
         }
         return movieName;
     }
 
     public String collectMovieClassification(){
-        System.out.println("Enter the classification: ");
+        System.out.println(PURPLE_BOLD + "Enter the classification: " + ANSI_RESET);
         String classification = s.nextLine();
         boolean contain = false;
         String[] validClassifications = {"r18+","g","pg","ma15+","m"};
@@ -36,7 +55,9 @@ public class MovieInserter {
             }
         }
         if(!contain){
-            System.out.println("Error: Classification is invalid.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Classification is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             classification = collectMovieClassification();
         }
         return classification;
@@ -44,14 +65,18 @@ public class MovieInserter {
     }
 
     public String collectMovieReleaseDate(){
-        System.out.println("Enter the release date in YYYY-MM-DD format:");
+        System.out.println(PURPLE_BOLD + "Enter the release date in YYYY-MM-DD format:" + ANSI_RESET);
         String releaseDate = s.nextLine();
         if(releaseDate.length() != 10){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             releaseDate = collectMovieReleaseDate();
         }
         if(releaseDate.charAt(4) != '-' || releaseDate.charAt(7) != '-'){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             releaseDate = collectMovieReleaseDate();
         }
         String year = releaseDate.substring(0, 4);
@@ -64,53 +89,63 @@ public class MovieInserter {
             monthInt = Integer.parseInt(month);
             dayInt = Integer.parseInt(day);
         }catch(NumberFormatException e){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             releaseDate = collectMovieReleaseDate();
         }
         if(monthInt > 12 ||dayInt > 31){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             releaseDate = collectMovieReleaseDate();
         }
         return releaseDate;
     }
 
     public String collectMovieSynopsis(){
-        System.out.println("Enter the synopsis:");
+        System.out.println(PURPLE_BOLD + "Enter the synopsis:" + ANSI_RESET);
         String synopsis = s.nextLine();
         return synopsis;
     }
 
     public String collectMovieDirectors(){
-        System.out.println("Enter the directors:");
+        System.out.println(PURPLE_BOLD + "Enter the directors:" + ANSI_RESET);
         String directors = s.nextLine();
         return directors;
     }
 
     public String collectMovieGenre(){
-        System.out.println("Enter the genre:");
+        System.out.println(PURPLE_BOLD + "Enter the genre:" + ANSI_RESET);
         String genre = s.nextLine();
         if(genre.length() > 100){
-            System.out.println("Error: Text is too long.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Text is too long. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             genre = collectMovieGenre();
         }
         return genre;
     }
 
     public String collectMovieCasts(){
-        System.out.println("Enter the casts:");
+        System.out.println(PURPLE_BOLD + "Enter the casts:" + ANSI_RESET);
         String casts = s.nextLine();
         return casts;
     }
 
     public String collectMovieShowingDate(){
-        System.out.println("Enter the showing date in YYYY-MM-DD format:");
+        System.out.println(PURPLE_BOLD + "Enter the showing date in YYYY-MM-DD format:" + ANSI_RESET);
         String showingDate = s.nextLine();
         if(showingDate.length() != 10){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             showingDate = collectMovieShowingDate();
         }
         if(showingDate.charAt(4) != '-' || showingDate.charAt(7) != '-'){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             showingDate = collectMovieShowingDate();
         }
         String year = showingDate.substring(0, 4);
@@ -123,11 +158,15 @@ public class MovieInserter {
             monthInt = Integer.parseInt(month);
             dayInt = Integer.parseInt(day);
         }catch(NumberFormatException e){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             showingDate = collectMovieShowingDate();
         }
         if(monthInt > 12 ||dayInt > 31){
-            System.out.println("Error: Invalid date format.");
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Invalid date format. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
             showingDate = collectMovieShowingDate();
         }
         return showingDate;

@@ -11,6 +11,9 @@ public class ListAllFailedTransactions {
         List<String> user = d.sql_getStrings(query, "user");
         List<String> reason = d.sql_getStrings(query, "reason");
         ArrayList<String[]> failedTransactions = new ArrayList<String[]>();
+        if(transactionTime == null){
+            return failedTransactions;
+        }
         for(int i = 0; i < transactionTime.size(); i++){
             String[] failedTransaction = new String[10];
             failedTransaction[0] = transactionTime.get(i);
