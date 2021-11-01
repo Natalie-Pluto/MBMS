@@ -60,7 +60,7 @@ public class CinemaSessionRemover {
     public String collectScreenType(){
         System.out.println(PURPLE_BOLD + "Enter the screen type: " + ANSI_RESET);
         String screenType = s.nextLine();
-        if(screenType.length() > 6){
+        if(!screenType.equals("Gold") && !screenType.equals("Silver") && !screenType.equals("Bronze")){
             System.out.println("\n============================================");
             System.out.println(RED_BOLD + "Error: Screen type is invalid. (｡´︿`｡)" + ANSI_RESET);
             System.out.println("============================================\n");

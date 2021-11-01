@@ -63,13 +63,69 @@ public class CinemaSessionInserter {
     public String collectScreenType(){
         System.out.println(PURPLE_BOLD + "Enter the screen type: " + ANSI_RESET);
         String screenType = s.nextLine();
-        if(screenType.length() > 6){
+        if(!screenType.equals("Gold") && !screenType.equals("Silver") && !screenType.equals("Bronze")){
             System.out.println("\n============================================");
             System.out.println(RED_BOLD + "Error: Screen type is invalid. (｡´︿`｡)" + ANSI_RESET);
             System.out.println("============================================\n");
             screenType = collectScreenType();
         }
         return screenType;
+    }
+
+    public String collectKidTicketPrice(){
+        System.out.println(PURPLE_BOLD + "Enter the ticket price for kid: " + ANSI_RESET);
+        String kidPrice = s.nextLine();
+        try{
+            Double.parseDouble(kidPrice);
+        }catch(NumberFormatException e){
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Ticket Price is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            kidPrice = collectKidTicketPrice();
+        }
+        return kidPrice;
+    }
+
+    public String collectAdultTicketPrice(){
+        System.out.println(PURPLE_BOLD + "Enter the ticket price for adult: " + ANSI_RESET);
+        String adultPrice = s.nextLine();
+        try{
+            Double.parseDouble(adultPrice);
+        }catch(NumberFormatException e){
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Ticket Price is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            adultPrice = collectAdultTicketPrice();
+        }
+        return adultPrice;
+    }
+
+    public String collectSeniorTicketPrice(){
+        System.out.println(PURPLE_BOLD + "Enter the ticket price for senior: " + ANSI_RESET);
+        String seniorPrice = s.nextLine();
+        try{
+            Double.parseDouble(seniorPrice);
+        }catch(NumberFormatException e){
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Ticket Price is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            seniorPrice = collectSeniorTicketPrice();
+        }
+        return seniorPrice;
+    }
+
+    public String collectStudentTicketPrice(){
+        System.out.println(PURPLE_BOLD + "Enter the ticket price for student: " + ANSI_RESET);
+        String studentPrice = s.nextLine();
+        try{
+            Double.parseDouble(studentPrice);
+        }catch(NumberFormatException e){
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Ticket Price is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            studentPrice = collectStudentTicketPrice();
+        }
+        return studentPrice;
     }
 
     public String collectStartTime(){
@@ -83,6 +139,10 @@ public class CinemaSessionInserter {
         String movieName = collectMovieName();
         String screenType = collectScreenType();
         String startTime = collectStartTime();
+        String kidPrice = collectKidTicketPrice();
+        String adultPrice = collectAdultTicketPrice();
+        String seniorPrice = collectSeniorTicketPrice();
+        String studentPrice = collectStudentTicketPrice();
         boolean sessionExist = CheckIfSessionExists.checkIfSessionExists(d, cinemaName, movieName, screenType, startTime);
         if(sessionExist){
             System.out.println("\n============================================");
@@ -90,7 +150,7 @@ public class CinemaSessionInserter {
             System.out.println("============================================\n");
             return false;
         }else{
-            boolean success = AddMovieSession.addMovieSession(d, cinemaName, movieName, screenType, startTime);
+            boolean success = AddMovieSession.addMovieSession(d, cinemaName, movieName, screenType, startTime, kidPrice, adultPrice, seniorPrice, studentPrice);
             return success;
         }
 
