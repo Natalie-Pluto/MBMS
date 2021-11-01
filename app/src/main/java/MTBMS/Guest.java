@@ -153,7 +153,7 @@ public class Guest {
     public String wrongpersonalSettingsMsgs() throws InterruptedException {
         BookingSystem.seperator();
         System.out.println("======================================================");
-        System.out.println(RED_BOLD + "Wrong Input! (｡´︿`｡)" + ANSI_RESET);
+        System.out.println(RED_BOLD + "Wrong input! (｡´︿`｡)" + ANSI_RESET);
         System.out.println("Please:");
         System.out.println(PURPLE_BOLD + "Enter 1 for \"Update Password\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 2 for \"Cinema Preference\"" + ANSI_RESET);
@@ -201,7 +201,12 @@ public class Guest {
     }
 
     public boolean setSuccessful(String num, List<String> cinemas) {
-        if(Integer.parseInt(num) > cinemas.size()) {
+        try {
+            if (Integer.parseInt(num) > cinemas.size()) {
+                System.out.println(RED_BOLD + "Please enter the right cinema number" + ANSI_RESET);
+                return false;
+            }
+        } catch (NumberFormatException e) {
             System.out.println(RED_BOLD + "Please enter the right cinema number" + ANSI_RESET);
             return false;
         }
@@ -213,16 +218,29 @@ public class Guest {
     // This method will allow customers to update their password and specific settings.
     // opt 1 for changing password
     // opt 2 for changing settings
-    public void passwordUpdate() throws InterruptedException {//change opt from int to String
+    public void passwordUpdate() throws InterruptedException {
         BookingSystem.seperator();
         String presentPwd = GetUserPassword.getUserPassword(dbInstance, username);
         //check new password twice to ensure customers are typing their expected password correctly
-        System.out.println("Please enter your new password");
-        String newPwd_1 = BookingSystem.readPwd();
+        String newPwd_1 = "";
+        int i = 0;
+        while (i < 3) {
+            System.out.println("Please enter your new password");
+            newPwd_1 = BookingSystem.readPwd();
+            if (newPwd_1.length() < 5) {
+                i++;
+                if(i == 3) {
+                    System.out.println(RED_BOLD + "Updates on password failed!" + ANSI_RESET);
+                    continuePersonalSettings(personalSettingsMsgs());
+                }
+                System.out.println(RED_BOLD + "Password has to be longer than 4 characters! (｡´︿`｡) Please try again" + ANSI_RESET);
+            }
+        }
         System.out.println("Please enter your new password again");
         String newPwd_2 = BookingSystem.readPwd();
         boolean success = checkPwd(newPwd_1, newPwd_2, presentPwd);
         if(!success) {
+            System.out.println(RED_BOLD + "Updates on password failed!" + ANSI_RESET);
             continuePersonalSettings(personalSettingsMsgs());
         } else {
             //update new password to database
