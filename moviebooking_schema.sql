@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS UpcomingMovie CASCADE;
 DROP TABLE IF EXISTS Cinema_Session CASCADE;
 DROP TABLE IF EXISTS Movie CASCADE;
 DROP TABLE IF EXISTS Cinema CASCADE;
-DROP TABLE IF EXISTS Seat_Availability CASCADE;
+DROP TABLE IF EXISTS Canceled_transaction CASCADE;
 
 CREATE TABLE Credit_Card (
     number CHAR(5) PRIMARY KEY,
@@ -79,7 +79,7 @@ CREATE TABLE Cinema_Session (
 CREATE TABLE Canceled_transaction(
     transaction_time TIMESTAMP,
     customer VARCHAR (100),
-    reason VARCHAR (100),
+    reason VARCHAR (100)
 );
 
 -------------------------------------------
@@ -108,6 +108,9 @@ INSERT INTO moviebooking_db.movie VALUES('SPACE JAM: A NEW LEGACY', 'PG', '2021-
 INSERT INTO moviebooking_db.movie VALUES('MY HERO ACADEMIA: WORLD HEROE''S MISSION', 'MA15+', '2021-10-28', 'A mysterious group called Humarize strongly believes in the Quirk Singularity Doomsday theory', 'Kenji Nagasaki', 'Action, Animation', 'Okitsu', '2021-10-28')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('Japanese Action Movie', 'R18+', '2021-10-21', 'Something interesting', 'Human', 'Action', 'Human', '2021-10-21')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('ANTLERS', 'MA15+', '2021-10-28', 'A small-town Oregon teacher and her brother, the local sheriff, become entwined with a young student harboring a dangerous secret with frightening consequences', 'Scott Cooper', 'Horror, Mystery', 'Jesse Plemons, Keri Russell, Amy Madigan, Rory Cochrane, Graham Greene', '2021-10-28')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28', 'Ron''s Gone Wrong tells the story of an 11-year-old boy who finds that his robot buddy doesn''t quite work', 'Alessandro Carloni', 'Adventure, Animation, Comedy, Family, Science Fiction', 'Thomas Barbusca, Bentley Kalu, Ava Morse', '2021-10-28')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-28')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-30')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28', 'Ron''s Gone Wrong tells the story of an 11-year-old boy who finds that his robot buddy doesn''t quite work', 'Alessandro Carloni', 'Adventure, Animation, Comedy, Family, Science Fiction', 'Thomas Barbusca, Bentley Kalu, Ava Morse', '2021-10-28')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-28')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-30')on conflict (name_) do nothing;
