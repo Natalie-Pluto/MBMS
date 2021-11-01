@@ -330,10 +330,14 @@ public class Guest {
         if(type.equals("U5")) {
             List<String> cinemaName1 = BookingSystem.listCinema(dbInstance);
             String cinema = Timer.timer(username);
-            if(Integer.parseInt(cinema) > cinemaName1.size()){
-                filterMsg(dbInstance,"a", "hiufbjkv");
-            } else {
-                filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            try {
+                if (Integer.parseInt(cinema) > cinemaName1.size()) {
+                    filterMsg(dbInstance, "a", "hiufbjkv");
+                } else {
+                    filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+                }
+            } catch (NumberFormatException e) {
+                filterMsg(dbInstance, "a", "hiufbjkv");
             }
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
@@ -350,12 +354,15 @@ public class Guest {
         } else if (type.equals("S5")) {
             List<String> cinemaName2 = BookingSystem.listCinema(dbInstance);
             String cinemaName = Timer.timer(username);
-            if(Integer.parseInt(cinemaName) > cinemaName2.size()){
+            try {
+                if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
+                    filterMsg(dbInstance, "c", "hiufbjkv");
+                } else {
+                    filterMsg(dbInstance, "c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+                }
+            } catch (NumberFormatException e) {
                 filterMsg(dbInstance, "c", "hiufbjkv");
-            } else {
-                filterMsg(dbInstance,"c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
             }
-            filterMsg(dbInstance, "c", cinemaName);
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();
             String size = Timer.timer(username);

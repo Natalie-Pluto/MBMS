@@ -228,10 +228,14 @@ public class BookingSystem {
         if(type.equals("U6")) {
             List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
-            if(Integer.parseInt(cinema) > cinemaName1.size()) {
-                filterMsg(dbInstance,"a", "hiuwgvcila");
-            } else {
-                filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+            try {
+                if (Integer.parseInt(cinema) > cinemaName1.size()) {
+                    filterMsg(dbInstance, "a", "hiuwgvcila");
+                } else {
+                    filterMsg(dbInstance, "a", cinemaName1.get(Integer.parseInt(cinema) - 1));
+                }
+            } catch (NumberFormatException e) {
+                filterMsg(dbInstance, "a", "hiuwgvcila");
             }
         } else if (type.equals("U7")) {
             listScreen();
@@ -248,10 +252,14 @@ public class BookingSystem {
         } else if (type.equals("S6")) {
             List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
-            if(Integer.parseInt(cinemaName) > cinemaName2.size()) {
-                filterMsg(dbInstance,"c", "hiuwgvcila");
-            } else {
-                filterMsg(dbInstance, "c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+            try {
+                if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
+                    filterMsg(dbInstance, "c", "hiuwgvcila");
+                } else {
+                    filterMsg(dbInstance, "c", cinemaName2.get(Integer.parseInt(cinemaName) - 1));
+                }
+            } catch (NumberFormatException e) {
+                filterMsg(dbInstance, "c", "hiuwgvcila");
             }
         } else if (type.equals("S7")) {
             listScreen();
