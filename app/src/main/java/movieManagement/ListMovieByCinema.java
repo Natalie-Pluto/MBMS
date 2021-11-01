@@ -23,21 +23,26 @@ public class ListMovieByCinema {
                     Guest.bookingHelper(db);
                 }
             } else {
-                System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
+                System.out.println(YELLOW_BOLD_BRIGHT + "Movies  on show at " + cinema + ANSI_RESET + "\n");
+                int counter = 1;
                 for (String n : name_) {
                     String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
                     String showDate = GetMovieShowDate.getMovieShowDate(db, n.replace("'", "''"));
                     List<String> showingTime = GetMovieShowingTime.getShowingTime(db, n.replace("'", "''"), cinema);
                     System.out.println("===============================================");
-                    System.out.println(n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
+                    System.out.println(counter + ". " + n + " " + PURPLE_BOLD + "[" + classification + "]" + ANSI_RESET + " " + YELLOW_BOLD + showDate + ANSI_RESET);
                     System.out.println("===============================================\n");
                     System.out.println(PURPLE_BOLD_BRIGHT + "Showing Time" + ANSI_RESET);
                     for (String time : showingTime) {
                         String size = GetSingleScreenSize.getSingleScreenSize(db, n.replace("'", "''"), cinema, time);
                         System.out.println(time + " " + PURPLE_BOLD + "[" + size + "]" + ANSI_RESET);
                     }
+                    counter++;
                     System.out.println("");
                 }
+                /*System.out.println("===============================================");
+                System.out.println(counter + ". Reselect Cinema"); // go back to select cinema
+                System.out.println("===============================================\n");*/
             }
         } else {
             System.out.println("\n========================================================");
