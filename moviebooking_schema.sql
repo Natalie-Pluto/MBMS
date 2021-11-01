@@ -78,7 +78,7 @@ CREATE TABLE Cinema_Session (
 
 CREATE TABLE Canceled_transaction(
     transaction_time TIMESTAMP,
-    user VARCHAR (100),
+    customer VARCHAR (100),
     reason VARCHAR (100)
 );
 
