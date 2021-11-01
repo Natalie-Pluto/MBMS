@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ReportGenerator {
@@ -46,7 +47,7 @@ public class ReportGenerator {
         try{
             FileWriter myWriter = new FileWriter("UpcomingMoviesReport.txt");
             for(int i = 0; i < movieNames.size(); i++) {
-                String movieName = movieNames.get(i);
+                String movieName = movieNames.get(i).toLowerCase(Locale.ROOT);
                 String classification = GetMovieClassification.getMovieClassification(d, movieName);
                 String releaseDate = GetMovieReleaseDate.getMovieReleasedate(d, movieName);
                 String synopsis = GetMovieSynopsis.getMovieSynopsis(d, movieName);

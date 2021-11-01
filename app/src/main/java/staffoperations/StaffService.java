@@ -1,5 +1,6 @@
 package staffoperations;
 
+import MTBMS.BookingSystem;
 import MTBMS.Database;
 
 import java.util.Scanner;
@@ -47,12 +48,22 @@ public class StaffService {
         reportGenerator = new ReportGenerator(s, d);
     }
 
-    public void run() {
-        System.out.println(YELLOW_BOLD_BRIGHT + "Note: To quit, Enter \"-Exit-\"" + ANSI_RESET + "\n");
-        System.out.println(PURPLE_BOLD + "Enter the number to operate: " + ANSI_RESET);
-        System.out.println("1.Add Movie 2.Remove Movie 3.Modify Movie 4.Enter Gift Card 5.Redeem Gift Card");
-        System.out.println("6.Add Movie Session 7.Remove Movie Session");
-        System.out.println("8.Generate Upcoming Movie Report 9.Generate Movie Session Report");
+    public void run() throws InterruptedException {
+        BookingSystem.seperator();
+        System.out.println("\n============================================");
+        System.out.println("Enter the number to operate: ");
+        System.out.println("============================================\n");
+        System.out.println(PURPLE_BOLD + "1.Add Movie" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "2.Remove Movie" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "3.Modify Movie" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "4.Enter Gift Card" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "5.Redeem Gift Card" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "6.Add Movie Session" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "7.Remove Movie Session" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "8.Generate Upcoming Movie Report" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "9.Generate Movie Session Report" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "10.Log out" + ANSI_RESET + "\n");
+        BookingSystem.seperator();
         String userInput = scanner.nextLine();
         boolean success = true;
         switch (userInput) {
@@ -141,8 +152,8 @@ public class StaffService {
                 reportGenerator.generateMovieSessionReport();
                 run();
                 break;
-            case "-Exit":
-                System.out.println(YELLOW_BOLD_BRIGHT + "Operation exits." + ANSI_RESET + "\n");
+            case "10":
+                BookingSystem.logOut();
                 break;
             default:
                 System.out.println("\n============================================");
