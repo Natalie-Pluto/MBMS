@@ -12,13 +12,4 @@ public class GetStartTime {
                     "where cinema = '%s' and movie = '%s';",cinemaName.replace("'","''"),movieName.replace("'","''")), "start_time");
         }
     }
-/* 
-    public static String getStartTime(Database db, String cinemaName, String movieName, String screenType, String startTime){
-        if (StringUtils.isEmpty(cinemaName) || StringUtils.isEmpty(movieName)){
-            return "";
-        }else {
-            return db.sql_getString(String.format("select start_time from moviebooking_db.cinema_session " +
-                    "where cinema = '%s' and movie = '%s' and screen_type = '%s' and start_time = '%s';",cinemaName.replace("'", "''"),movieName.replace("'", "''"),screenType,startTime), "start_time");
-        }
-    } */
 }

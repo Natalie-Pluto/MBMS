@@ -77,6 +77,8 @@ import static databaseutility.SetMovieShowDate.setMovieShowDate;
 import static databaseutility.GetNumberOfSeatsBooked.getNumberOfFrontSeatsBooked;
 import static databaseutility.GetNumberOfSeatsBooked.getNumberOfMidSeatsBooked;
 import static databaseutility.GetNumberOfSeatsBooked.getNumberOfBackSeatsBooked;
+import static databaseutility.GetuserSetting.getUsersetting;
+import static databaseutility.SetUserSetting.setUserSetting;
 
 import databaseutility.MovieInsertionBuilder;
 
@@ -187,7 +189,7 @@ public class databaseUtilityTests {
         changeDirectors(dbInstance,"movie", "afhd");
     }
 
-    @Test 
+    /*@Test
     public void MovieClassificationChanger_1() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -197,7 +199,7 @@ public class databaseUtilityTests {
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("pg"));
     }
 
-    @Test 
+    @Test
     public void MovieClassificationChanger_2() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -312,7 +314,7 @@ public class databaseUtilityTests {
         inserter.addClassification("invalid classification");
         inserter.insertMovie();
         assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
-    }
+    }*/
 
     @Test
     public void AddingCinema_1() {
@@ -1065,16 +1067,6 @@ public class databaseUtilityTests {
 
     }
 
-    /* @Test
-    public void UpdateScreenSize_1() {
-
-    }
-
-    @Test
-    public void UpdateScreenSize_2() {
-
-    } */
-
     @Test
     public void UpdateSeats_1() {
         addCinema(dbInstance, "ali's cinema");
@@ -1231,6 +1223,52 @@ public class databaseUtilityTests {
     @Test
     public void GetNumberOfSeatsBooked_Back_2() {
 
+    }
+
+    @Test
+    public void GetUserSetting_1() {
+        addCinema(dbInstance, "abc cinema");
+        addUser(dbInstance, "alien", "asdf", "c");
+        setUserSetting(dbInstance, "alien", "abc cinema");
+        assert(getUsersetting(dbInstance, "alien").equals("abc cinema"));
+    }
+
+    @Test
+    public void GetUserSettings_() {
+        removeUser(dbInstance, "alien");
+        assert(getUsersetting(dbInstance, "alien") == null);
+    }
+
+    
+    @Test
+    public void GetUserSetting_3() {
+        removeUser(dbInstance, "alien");
+        addCinema(dbInstance, "abc cinema");
+        addUser(dbInstance, "alien", "asdf", "c");
+        assert(getUsersetting(dbInstance, "alien") == null);
+    }
+
+    @Test
+    public void SetUserSettings_1() {
+        addUser(dbInstance, "alien", "asdf", "s");
+        setUserSetting(dbInstance, "alien", "abc cinema");
+        assert(getUsersetting(dbInstance, "alien").equals("abc cinema"));
+        setUserSetting(dbInstance, "alien", "aaa cinema");
+        assert(getUsersetting(dbInstance, "alien").equals("aaa cinema"));
+    }
+
+    @Test
+    public void SetUserSettings_2() {
+        addCinema(dbInstance, "afsd cinema");
+        removeUser(dbInstance, "alien");
+        setUserSetting(dbInstance, "alien","afsd cinema");
+    }
+
+    @Test
+    public void SetUserSettings_3() {
+        removeCinema(dbInstance, "afsd cinema");
+        addUser(dbInstance, "alien", "aa", "c");
+        setUserSetting(dbInstance, "alien", "afsd cinema");
     }
 
 }

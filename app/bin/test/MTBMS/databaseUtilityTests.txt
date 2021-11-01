@@ -137,10 +137,6 @@ GetTicketPrice_seniors_2 attempting to get the seniors ticket price of a session
 
 GetUpcomingMovies_1 attempting to get upcoming movies does not cause issues
 
-[functionality removed] MovieNameChanger_1 the name of a movie that exists can be changed if the new name is unique
-[functionality removed] MovieNameChanger_2 attempting to change the name of a movie that does not exist does not cause issues
-[functionality removed] MovieNameChanger_3 attempting to change the name of a movie to a name that already exists does not cause issues
-
 MoviesCounter_1 attempting to get the number of movies in the database does not cause issues
 
 RedeemedCheck_1 the redeemed status of a gift card that exists can be retrieved
@@ -168,9 +164,6 @@ RemovingMovie_2 attemptnig to remove a movie that does not exist does not cause 
 
 RemovingSession_1 a session that exists can be removed
 RemovingSession_2 attempting to remove a session that does not exist does not cause issues
-
-[functionality to be removed] SetSessionTime_setStartTime_1 the start time of a session that exists can be set
-[functionality to be removed] SetSessionTime_setStartTime_2 attempting to set the start time of a session that does not exist does not cause issues
 
 SetSessionTime_setEndTime_1 the end time of a session that exists can be set
 SetSessionTimee_setEndTime_2 attempting to set the end time of a session that does not exist does not cause issues
@@ -245,3 +238,11 @@ GetNumberOfSeatsBooked_mid_2
 
 GetNumberOfSeatsBooked_back_1 
 GetNumberOfSeatsBooked_back_2
+
+GetUserSetting_1 the settings of an existing user can be retrieved
+GetUserSetting_2 attempting to get the settings of a user that does not exist does not cause issues
+GetUserSetting_3 attempting to get the setting of a user for which no cinema has been set returns null
+
+SetUserSetting_1 the settings of an existing user can be set
+SetUserSetting_2 attempting to get the settings of a user that does not exist does not cause issues
+SetUserSetting_3 attempting to set the cinema preference of a user to a cinema that does not exist does not cause issues
