@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final Guest instance = new Guest("Andy", "c", " ");
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
@@ -132,7 +132,7 @@ public class AppTest {
         Guest.updateSeats("Test", "Test", "2021-10-27 18:00","silver", 1,"front");
     }*/
 
-    @Test public void getPaymentTypeTest_2(){
+    /*@Test public void getPaymentTypeTest_2(){
         getInput("2");
         assertEquals("Wrong output","2", Guest.getPaymentType());
     }
@@ -150,7 +150,7 @@ public class AppTest {
         RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
     }
 
-    @Test public void checkMovieName_1() throws InterruptedException {
+    /*@Test public void checkMovieName_1() throws InterruptedException {
         RemovingMovie.removeMovie(dbInstance, "Test");
         MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
         mib.insertMovie();
@@ -170,7 +170,7 @@ public class AppTest {
         assertEquals("2021-10-28 17:00:00", Guest.checkStartTime("JUNGLE CRUISE", "Warringah Mall"));
     } */
 
-    @Test public void getAudienceNumTest() throws InterruptedException {
+   /* @Test public void getAudienceNumTest() throws InterruptedException {
         getInput("1");
         assertEquals(1, Guest.getAudienceNum());
     }
@@ -204,7 +204,7 @@ public class AppTest {
         assertTrue(Guest.cardHolderNameCheck());
     }
 
-    @Test public void saveCreditCardTest_1() {
+    @Test public void saveCreditCardTest_1() throws InterruptedException {
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("1");
