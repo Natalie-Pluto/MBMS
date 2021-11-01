@@ -75,12 +75,12 @@ public class AppTest {
 
     @Test public void continueServiceTest_2() throws InterruptedException {
         getInput("2");
-        Guest.getContinueService();
+        instance.getContinueService();
         assertNotNull(getOutput());
     }
 
-    @Test public void customerHomePageTest(){
-        Guest.customerHomePage();
+    @Test public void customerHomePageTest() throws InterruptedException {
+        instance.customerHomePage();
         assertNotNull(getOutput());
     }
 
@@ -91,12 +91,12 @@ public class AppTest {
 
     @Test public void CshowingFilterTest() throws InterruptedException {
         getInput("test");
-        assertEquals("test", Guest.CshowingFilter());
+        assertEquals("test", instance.CshowingFilter());
     }
 
     @Test public void CupcomingFilterTest() throws InterruptedException {
         getInput("test");
-        assertEquals("test", Guest.CupcomingFilter());
+        assertEquals("test", instance.CupcomingFilter());
     }
 
     @Test public void wrongInputMsgTest(){
@@ -155,7 +155,7 @@ public class AppTest {
         MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
         mib.insertMovie();
         getInput("Test");
-        assertEquals(Guest.checkMovieName(), "Test");
+        assertEquals(instance.checkMovieName(), "Test");
     }
 
     /* @Test public void checkCinemaName_1() throws  InterruptedException {
@@ -172,36 +172,36 @@ public class AppTest {
 
     @Test public void getAudienceNumTest() throws InterruptedException {
         getInput("1");
-        assertEquals(1, Guest.getAudienceNum());
+        assertEquals(1, instance.getAudienceNum());
     }
 
     @Test public void getSeatLocationTest() throws InterruptedException {
         getInput("front");
-        assertEquals("front", Guest.getSeatLocation());
+        assertEquals("front", instance.getSeatLocation());
     }
 
     @Test public void getCardNumTest() throws InterruptedException{
         getInput("0000");
-        assertEquals("0000", Guest.getCardNum());
+        assertEquals("0000", instance.getCardNum());
     }
 
    @Test public void cardNumberCheckTest_r() throws  InterruptedException{
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("99999");
-        assertTrue(Guest.cardNumberCheck());
+        assertTrue(instance.cardNumberCheck());
     }
 
     @Test public void getCardHolderNameTest() throws InterruptedException{
         getInput("TestName");
-        assertEquals("TestName", Guest.getCardHolderName());
+        assertEquals("TestName", instance.getCardHolderName());
     }
 
     @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
         RemovingCreditCardHolderName.removeCreditCardHolderName(dbInstance, "TestName");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("TestName");
-        assertTrue(Guest.cardHolderNameCheck());
+        assertTrue(instance.cardHolderNameCheck());
     }
 
     @Test public void saveCreditCardTest_1() {
@@ -237,7 +237,7 @@ public class AppTest {
     @Test
     public void bookingHelperTest() throws InterruptedException {
         getInput("1");
-        Guest.bookingHelper(dbInstance);
+        instance.bookingHelper(dbInstance);
         assertNotNull(getOutput());
     }
 

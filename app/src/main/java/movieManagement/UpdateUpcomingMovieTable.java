@@ -20,7 +20,6 @@ public class UpdateUpcomingMovieTable {
     }
     // The upcoming movie table will be updated every Monday at 6am
     public static void updateUpcomingMovieTable() {
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         Calendar with = Calendar.getInstance();
         Map<Integer, Integer> dayToDelay = new HashMap<Integer, Integer>();
         dayToDelay.put(Calendar.FRIDAY, 2);
@@ -34,13 +33,14 @@ public class UpdateUpcomingMovieTable {
         int hour = with.get(Calendar.HOUR_OF_DAY);
         int delayInDays = dayToDelay.get(dayOfWeek);
         int delayInHours = 0;
-        if(delayInDays == 6 && hour < 6){
-            delayInHours = 6 - hour;
+        if(delayInDays == 6 && hour < 11){
+            delayInHours = 11 - hour;
         }else{
-            delayInHours = delayInDays * 24 + ((24-hour) + 6);
+            delayInHours = delayInDays * 24 + ((24-hour) + 11);
         }
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new MondayUpdate(), delayInHours,
-                174, TimeUnit.HOURS);
+                179, TimeUnit.HOURS);
     }
 
     public static class MondayUpdate implements Runnable{

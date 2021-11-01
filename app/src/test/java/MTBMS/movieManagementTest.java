@@ -45,7 +45,7 @@ public class movieManagementTest {
 
     @Test
     public void listCinemaTest1() throws InterruptedException {
-        ListMovieByCinema.listMovieByCinema(dbInstance, "Warringah Mall");
+        ListMovieByCinema.listMovieByCinema(dbInstance, "Warringah Mall", "Andy");
         assertNotNull(getOutput());
     }
 

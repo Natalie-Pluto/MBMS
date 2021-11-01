@@ -39,24 +39,30 @@ public class Timer {
         int i = 0;
         String str;
         do {
-            str = deque.poll(120, TimeUnit.SECONDS);
+            str = deque.poll(5, TimeUnit.SECONDS);
             i++;
         } while (i < 1);
 
         if(str == null) {
             if (type.equals("g")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
+                Thread.sleep(2000);
                 BookingSystem.getGreeting(dbInstance);
                 BookingSystem.options();
-            } else if (type.equals("c")) {
-                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                Guest.customerHomePage();
             } else if (type.equals("s")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
+                Thread.sleep(2000);
                 // TODO return to staff main page
             } else if (type.equals("m")) {
                 System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
+                Thread.sleep(2000);
                 // TODO return to manager main page
+            } else {
+                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
+                Thread.sleep(2000);
+                Guest guest = new Guest(type, "c", " ");
+                guest.customerHomePage();
+                guest.guestService();
             }
 
         }

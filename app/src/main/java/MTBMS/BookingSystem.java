@@ -106,8 +106,8 @@ public class BookingSystem {
                 managerService.run();
             } else {
                 instance.loginGreeting("c", accName);
-                Guest.customerHomePage();
                 Guest guest = new Guest(accName, "c", GetuserSetting.getUsersetting(dbInstance, accName));
+                guest.customerHomePage();
                 guest.guestService();
             }
         }

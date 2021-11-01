@@ -12,7 +12,8 @@ import java.util.Locale;
 import static MTBMS.BookingSystem.RED_BOLD;
 
 public class ListMovieByCinema {
-    public static void listMovieByCinema(Database db, String cinema) throws InterruptedException {
+    public static void listMovieByCinema(Database db, String cinema, String username) throws InterruptedException {
+        Guest guestInstance = new Guest(username, "c", " ");
         List<String> name_ = FilterCinema.filterCinema(db, cinema);
         if(name_ != null) {
             if (name_.isEmpty()) {
@@ -20,7 +21,7 @@ public class ListMovieByCinema {
                     System.out.println("\n=============================================================");
                     System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("=============================================================\n");
-                    Guest.bookingHelper(db);
+                    guestInstance.bookingHelper(db);
                 }
             } else {
                 System.out.println(YELLOW_BOLD_BRIGHT + cinema + ANSI_RESET + "\n");
@@ -43,7 +44,7 @@ public class ListMovieByCinema {
             System.out.println("\n========================================================");
             System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
             System.out.println("========================================================\n");
-            Guest.bookingHelper(db);
+            guestInstance.bookingHelper(db);
         }
     }
 
