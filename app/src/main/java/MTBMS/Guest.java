@@ -53,7 +53,6 @@ public class Guest {
                 continueService();
                 break;
             case "3":
-                bookingHelper(dbInstance);
                 book(dbInstance);
                 break;
             case "4":
@@ -96,7 +95,7 @@ public class Guest {
         System.out.println("4 - for filter now showing movies");
         System.out.println("5 - for log out");
         System.out.println("6 - for personal settings");
-        System.out.println("Enter correct movie name_ for movie detail");
+        System.out.println("Enter correct movie name for movie detail");
         System.out.println("============================================\n");
     }
 
@@ -114,7 +113,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter 3 for \"Booking\"" + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Log out\""  + ANSI_RESET);
         System.out.println(PURPLE_BOLD + "Enter 6 for \"Personal Settings\""  + ANSI_RESET);
-        System.out.println(PURPLE_BOLD + "Enter movie name_ for more details" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Enter movie name for more details" + ANSI_RESET);
         System.out.println("======================================================\n");
         System.out.println(YELLOW_BOLD_BRIGHT + "<<Upcoming Movies!>>" + ANSI_RESET);
         GetUpcomingMovies.getUpcomingMovies(dbInstance);
@@ -277,20 +276,19 @@ public class Guest {
 
     public String bookingHelper(Database dbInstance) throws InterruptedException {
         List<String> cinemas = BookingSystem.listCinema(dbInstance);
-        String cinema = Timer.timer("c");
+        String cinema = Timer.timer(username);
         BookingSystem.seperator();
         try {
             if (Integer.parseInt(cinema) > cinemas.size()) {
                 ListMovieByCinema.listMovieByCinema(dbInstance, "hfiuiuaa", username);
-                return bookingHelper(dbInstance);
             } else {
                 ListMovieByCinema.listMovieByCinema(dbInstance, cinemas.get(Integer.parseInt(cinema) - 1), username);
-                return cinema;
+                return cinemas.get(Integer.parseInt(cinema) - 1);
             }
         } catch (NumberFormatException e) {
             ListMovieByCinema.listMovieByCinema(dbInstance, "hfiuiuaa", username);
-            return bookingHelper(dbInstance);
         }
+        return " ";
     }
 
     public String getContinueService() throws InterruptedException{
@@ -422,7 +420,6 @@ public class Guest {
     // It will allow user to book movie tickets.
     // Note: only customer can use this service.
     public void book(Database dbInstance) throws InterruptedException {
-        BookingSystem.seperator();
         String cinemaName = bookingHelper(dbInstance);
         String movieName = getMovieName(dbInstance, cinemaName);
         String screenType = getScreenType(dbInstance, cinemaName, movieName);
@@ -580,7 +577,7 @@ public class Guest {
         }
     }
 
-    public static String getMovieName(Database dbInstance, String cinemaName) throws InterruptedException {
+    public String getMovieName(Database dbInstance, String cinemaName) throws InterruptedException {
         BookingSystem.seperator();
         int counter = 1;
         System.out.println("======================================================");
@@ -591,12 +588,17 @@ public class Guest {
             System.out.println(counter + ". " + movieName);
             counter++;
         }
-        String movie = Timer.timer("c");
-        if(Integer.parseInt(movie) > movieNames.size()) {
+        String movie = Timer.timer(username);
+        try {
+            if (Integer.parseInt(movie) > counter) {
+                System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
+                return getMovieName(dbInstance, cinemaName);
+            } else {
+                return movieNames.get(Integer.parseInt(movie));
+            }
+        } catch (NumberFormatException e) {
             System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
             return getMovieName(dbInstance, cinemaName);
-        } else {
-            return movieNames.get(Integer.parseInt(movie));
         }
         //System.out.println((counter + 1) + ". go back");
     }
@@ -664,11 +666,16 @@ public class Guest {
             counter++;
         }
         String starttime = Timer.timer("c");
-        if(Integer.parseInt(starttime) > startTimes.size()) {
+        try {
+            if (Integer.parseInt(starttime) > startTimes.size()) {
+                System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
+                return getStartTime(dbInstance, cinemaName, movieName, screenType);
+            } else {
+                return startTimes.get(Integer.parseInt(starttime));
+            }
+        } catch (NumberFormatException e) {
             System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
             return getStartTime(dbInstance, cinemaName, movieName, screenType);
-        } else {
-            return startTimes.get(Integer.parseInt(starttime));
         }
         //System.out.println((counter + 1) + ". go back");
     }

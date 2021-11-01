@@ -24,7 +24,7 @@ public class ListMovieByCinema {
                     guestInstance.bookingHelper(db);
                 }
             } else {
-                System.out.println(YELLOW_BOLD_BRIGHT + "Movies  on show at " + cinema + ANSI_RESET + "\n");
+                System.out.println(YELLOW_BOLD_BRIGHT + "Movies on show at " + cinema + ANSI_RESET + "\n");
                 int counter = 1;
                 for (String n : name_) {
                     String classification = GetMovieClassification.getMovieClassification(db, n.replace("'", "''").toLowerCase(Locale.ROOT));
