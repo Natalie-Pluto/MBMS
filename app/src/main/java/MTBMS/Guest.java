@@ -422,12 +422,21 @@ public class Guest {
         String screenType = getScreenType(dbInstance, cinemaName, movieName);
         String startTime = getStartTime(dbInstance, cinemaName, movieName, screenType);
         String seatLocation = getSeatLocation(dbInstance, cinemaName, movieName, screenType, startTime);
-        //int audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
-        //double ticketPrices = GetTicketPrices(dbInstance, cinemaName, movieName, screenType, startTime);
-        //updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum, seatLocation);
+        List<Integer> audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
+        double totalPrice = getTotalPrice(dbInstance, cinemaName, movieName, screenType, startTime, audienceNum);
+        updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum.size(), seatLocation, audienceNum);
         BookingSystem.seperator();
     }
-
+    public double getTotalPrice(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum) throws InterruptedException {
+        List<Double> ticketPrices = getTicketPrices(dbInstance, cinemaName, movieName, screenType, startTime);
+        double totalPrice = 0.0;
+        for(Integer audience: audienceNum){
+            for(Double price: ticketPrices){
+                totalPrice += (audience * price);
+            }
+        }
+        return totalPrice;
+    }
     /*
     public static String getBookChoice(){
         Scanner input = new Scanner(System.in);
@@ -461,16 +470,21 @@ public class Guest {
         BookingSystem.seperator();
     }
     */
-
-    public void updateSeats(Database db, String movieName, String cinemaName, String movieStartTime, String screenType, int audienceNum, String seatLocation) throws InterruptedException {
+    public void bookSuccess(){
         UUID transId = UUID.randomUUID();
+        BookingSystem.seperator();
+        System.out.println(GREEN_BOLD + "You have successfully booked a movie!\n" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
+    }
+    public boolean updateSeats(Database db, String movieName, String cinemaName, String startTime, String screenType, int audienceNum, String seatLocation, List<Integer> audienceList) throws InterruptedException {
         String paymentType = getPaymentType();
-        if (checkPayment(paymentType)) {
-            UpdateSeats.updateSeats(db, cinemaName, movieName, movieStartTime, screenType, audienceNum, seatLocation);
+        if (!checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList)) {
+            UpdateSeats.updateSeats(db, cinemaName, movieName, startTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
-            System.out.println(GREEN_BOLD + "You have successfully booked a movie!\n" + ANSI_RESET);
-            System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
+            return true;
         }
+
+        return false;
     }
 
     public String getPaymentType() throws InterruptedException {
@@ -500,18 +514,19 @@ public class Guest {
 
     // This method should be called by book( )
     // It will check if the payment is successful.
-    public boolean checkPayment(String paymentType) throws InterruptedException {
+    public boolean checkPayment(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum) throws InterruptedException {
+        String paymentType = getPaymentType();
         switch (paymentType){
-            case "1"://card
-                //PayByCreditCard()
+            case "1"://PayByCreditCard()
                 String cardNum = getCardNum();
                 String cardHolderName = getCardHolderName();
                 if(checkCreditCard(cardNum, cardHolderName)){
                     double cardBalance = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
-                    //double ticketPrice = getTicketPrice();
+                    double ticketPrice = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     //ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
                 }else{
-                    System.out.println(RED_BOLD + "Wrong card number or name, please");
+                    System.out.println(RED_BOLD + "Wrong card number or name");
+                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
                 }
                 break;
 
@@ -526,7 +541,7 @@ public class Guest {
                 if (giftCardNum.length() != 18 || !(giftCardNum.endsWith("GC"))){
                     System.out.println("\n");
                     System.out.println(RED_BOLD + "Wrong gift card number, it should be 16-digit with suffix GC" + ANSI_RESET);
-                    checkPayment(paymentType);
+                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     break;
                 }
 
@@ -537,13 +552,13 @@ public class Guest {
                 }else {
                     BookingSystem.seperator();
                     System.out.println(RED_BOLD + "This gift card does not exist or has been redeemed" + ANSI_RESET);
-                    checkPayment(paymentType);
+                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     break;
                 }
 
             default:
                 wrongInputMsg();
-                checkPayment(paymentType);
+                checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
         }
 
         return true;
@@ -706,6 +721,14 @@ public class Guest {
         }
     }
 
+    public List<Double> getTicketPrices(Database db, String cinemaName, String movieName, String screenType, String startTime) throws InterruptedException {
+        List<Double> ticketPrices = new ArrayList<>();
+        ticketPrices.add(GetTicketPrice.getTicketPriceKids(db, cinemaName, movieName, screenType, startTime));
+        ticketPrices.add(GetTicketPrice.getTicketPriceSeniors(db, cinemaName, movieName, screenType, startTime));
+        ticketPrices.add(GetTicketPrice.getTicketPriceAdults(db, cinemaName, movieName, screenType, startTime));
+        ticketPrices.add(GetTicketPrice.getTicketPriceStudents(db, cinemaName, movieName, screenType, startTime));
+        return ticketPrices;
+    }
     public String getCardNum() throws InterruptedException {
         System.out.println("Please enter your card number");
         //TODO hide card number
