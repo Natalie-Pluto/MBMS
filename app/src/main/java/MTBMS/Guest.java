@@ -423,12 +423,22 @@ public class Guest {
         String startTime = getStartTime(dbInstance, cinemaName, movieName, screenType);
         String seatLocation = getSeatLocation(dbInstance, cinemaName, movieName, screenType, startTime);
         List<Integer> audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
-        double totalPrice = getTotalPrice(dbInstance, movieName, cinemaName, startTime, screenType, audienceNum);
-        if(updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum.size(), seatLocation, audienceNum)){
+        int audiences = getAudiences(audienceNum);
+        System.out.println(audiences);
+        System.out.println(seatLocation);
+        if(updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audiences, seatLocation, audienceNum)){
             bookSuccess();
         }
         BookingSystem.seperator();
         continueService();
+    }
+    public int getAudiences(List<Integer> audienceNum){
+        int audiences = 0;
+        for(int i =0; i < audienceNum.size();i++){
+            audiences += audienceNum.get(i);
+        }
+
+        return audiences;
     }
     public double getTotalPrice(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum) throws InterruptedException {
         List<Double> ticketPrices = getTicketPrices(db, cinemaName, movieName, startTime, screenType);
@@ -486,7 +496,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
     }
     public boolean updateSeats(Database db, String movieName, String cinemaName, String startTime, String screenType, int audienceNum, String seatLocation, List<Integer> audienceList) throws InterruptedException {
-        if (!checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList)) {
+        if (checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList)) {
             UpdateSeats.updateSeats(db, cinemaName, movieName, startTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
             return true;
@@ -727,11 +737,19 @@ public class Guest {
     public String getSeatLocation(Database db, String cinemaName, String movieName, String screenType, String StartTime) throws InterruptedException {
         ListSeats.listSeats(db, cinemaName, movieName, screenType, StartTime);
         String seatLocation = Timer.timer(username);
-        if (seatLocation.equals("1") || seatLocation.equals("2") || seatLocation.equals("3")){
-            return seatLocation;
-        }else{
-            System.out.println(RED_BOLD + "Please enter a correct number");
-            return getSeatLocation(db, cinemaName, movieName, screenType, StartTime);
+        switch (seatLocation) {
+            case "1":
+                return "front";
+
+            case "2":
+                return "mid";
+
+            case "3":
+                return "back";
+
+            default:
+                System.out.println(RED_BOLD + "Please enter a correct number");
+                return getSeatLocation(db, cinemaName, movieName, screenType, StartTime);
         }
     }
 
@@ -777,7 +795,7 @@ public class Guest {
         return true;
     }
     public void checkTimeOut(String timeOut) throws InterruptedException {
-        if (!timeOut.equals(null)){
+        if (timeOut.equals(null)){
             cancelTrans(username, "Timeout");
         }
     }
