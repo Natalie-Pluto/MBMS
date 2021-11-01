@@ -18,8 +18,8 @@ Showing Date: 2021-11-11
 
 Movie Name: vscode, the movie
 Classification: r18+
-Release Date: 2021-11-11
-Synopsis: Not human friendly
+Release Date: 2021-11-10
+Synopsis: Not child friendly
 Directors: Human
 Genre: Horror
 Casts: Human

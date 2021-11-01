@@ -1,10 +1,14 @@
-package manageroperations;
+package staffoperations;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ManagerServiceTest {
+class GiftCardInserterTest {
+
+    @Test
+    void collectGiftCardNumber() {
+    }
 
     @Test
     void run() {
