@@ -1,18 +1,27 @@
-Movie Name: Black Box
+Movie Name: Double 11
 Classification: null
 Release Date: null
 Synopsis: null
 Directors: 
-Genre: Drams, Mystery, Thriller
+Genre: Action
 Casts: null
-Showing Date: 2021-11-05
+Showing Date: 2021-11-11
 
-Movie Name: Sooryavanshi
+Movie Name: MadeUp
 Classification: null
 Release Date: null
 Synopsis: null
 Directors: 
-Genre: Drams, Crime
+Genre: Action
 Casts: null
-Showing Date: 2021-11-05
+Showing Date: 2021-11-11
+
+Movie Name: vscode, the movie
+Classification: r18+
+Release Date: 2021-11-11
+Synopsis: Not human friendly
+Directors: Human
+Genre: Horror
+Casts: Human
+Showing Date: 2021-11-12
 
