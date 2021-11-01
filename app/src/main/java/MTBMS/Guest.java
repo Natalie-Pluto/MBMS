@@ -3,9 +3,7 @@ import movieManagement.*;
 import databaseutility.*;
 import org.checkerframework.checker.units.qual.A;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.*;
 
 
@@ -13,7 +11,6 @@ import javax.print.attribute.AttributeSetUtilities;
 import javax.xml.crypto.Data;
 import java.rmi.ServerError;
 import java.sql.SQLOutput;
-import java.util.Scanner;
 
 //TODO/*
 //  This class will interact with user (guest & customer)
@@ -24,9 +21,9 @@ public class Guest {
     private String identity;
     private String settings;
 
-    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+    //            "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -425,8 +422,9 @@ public class Guest {
         String screenType = getScreenType(dbInstance, cinemaName, movieName);
         String startTime = getStartTime(dbInstance, cinemaName, movieName, screenType);
         String seatLocation = getSeatLocation(dbInstance, cinemaName, movieName, screenType, startTime);
-        int audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
-        updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum, seatLocation);
+        //int audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
+        //double ticketPrices = GetTicketPrices(dbInstance, cinemaName, movieName, screenType, startTime);
+        //updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum, seatLocation);
         BookingSystem.seperator();
     }
 
@@ -468,21 +466,11 @@ public class Guest {
         UUID transId = UUID.randomUUID();
         String paymentType = getPaymentType();
         if (checkPayment(paymentType)) {
-            UpdateSeats updateSeats = new UpdateSeats();
-            updateSeats.updateSeats(dbInstance, cinemaName, movieName, movieStartTime, screenType, audienceNum, seatLocation);
+            UpdateSeats.updateSeats(db, cinemaName, movieName, movieStartTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
-            System.out.println(GREEN_BOLD + "You have successfully booked a movie!" + ANSI_RESET);
-            System.out.println("\n Transaction id: " + transId);
-
-            /*if (paymentType == 1){
-                String cardNum = getCardNum();
-                cardNumberCheck();
-                String cardHolderName = getCardHolderName();
-                cardNumberCheck();
-            }*/
-            //TODO: auto-generated id
+            System.out.println(GREEN_BOLD + "You have successfully booked a movie!\n" + ANSI_RESET);
+            System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
         }
-
     }
 
     public String getPaymentType() throws InterruptedException {
@@ -531,12 +519,11 @@ public class Guest {
                 BookingSystem.seperator();
                 System.out.println("======================================================");
                 System.out.println(PURPLE_BOLD + "Please enter your gift card number" + ANSI_RESET);
-                System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel the transaction" + ANSI_RESET);
+                cancelTransMsg();
                 System.out.println("======================================================\n");
                 String giftCardNum = Timer.timer(username);
-                if (giftCardNum.equals("cancel")){
-                    customerHomePage();
-                } else if (giftCardNum.length() != 16 || !(giftCardNum.endsWith("GC"))){
+                checkCancelTrans(giftCardNum);
+                if (giftCardNum.length() != 18 || !(giftCardNum.endsWith("GC"))){
                     System.out.println("\n");
                     System.out.println(RED_BOLD + "Wrong gift card number, it should be 16-digit with suffix GC" + ANSI_RESET);
                     checkPayment(paymentType);
@@ -673,24 +660,34 @@ public class Guest {
     }
 
 
-    public int getBookNum() throws InterruptedException {
+    public List<Integer> getBookNum() throws InterruptedException {
         System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "How many seats would you want to book?" + ANSI_RESET);
+        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
         System.out.println("======================================================\n");
-        String audienceNumStr = Timer.timer(username);
-        int audienceNum = Integer.parseInt(audienceNumStr);
-        return audienceNum;
+        String audienceNumStrAdults = Timer.timer(username);
+        System.out.println("\n======================================================");
+        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for kids?" + ANSI_RESET);
+        System.out.println("======================================================\n");
+        String audienceNumStrKids = Timer.timer(username);
+        System.out.println("\n======================================================");
+        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
+        System.out.println("======================================================\n");
+        String audienceNumStrStudents = Timer.timer(username);
+        System.out.println("\n======================================================");
+        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for seniors?" + ANSI_RESET);
+        System.out.println("======================================================\n");
+        String audienceNumStrSeniors = Timer.timer(username);
+        List<Integer> seatsBooked = new ArrayList<>();
+        seatsBooked.add(Integer.parseInt(audienceNumStrKids));
+        seatsBooked.add(Integer.parseInt(audienceNumStrSeniors));
+        seatsBooked.add(Integer.parseInt(audienceNumStrAdults));
+        seatsBooked.add(Integer.parseInt(audienceNumStrStudents));
+        return seatsBooked;
     }
 
-    public static void seatsDisplay(){
-        //display seats
-        //front number:
-        //mid number:
-        //back number:
-    }
-    public int getSeatNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
-         int numberBook = getBookNum();
-         if (numberBook > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+    public List<Integer> getSeatNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
+         List<Integer> numberBook = getBookNum();
+         if (numberBook.size() > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
              System.out.println(RED_BOLD + "This row does not have this much seats");
              getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation);
          }
@@ -713,38 +710,49 @@ public class Guest {
         System.out.println("Please enter your card number");
         //TODO hide card number
         String cardNum = Timer.timer(username);
+        checkTimeOut(cardNum);
+        checkCancelTrans(cardNum);
         return cardNum;
     }
 
     public String getCardHolderName() throws InterruptedException {
-        System.out.println("Please enter your cardholder name");
+        System.out.println("\n======================================================");
+        System.out.println(PURPLE_BOLD + "Please enter your cardholder name" + ANSI_RESET);
+        cancelTransMsg();
+        System.out.println("======================================================");
         String cardHolderName = Timer.timer(username);
+        checkTimeOut(cardHolderName);
+        checkCancelTrans(cardHolderName);
         return cardHolderName;
     }
 
     public static boolean checkCreditCard(String cardNum, String cardHolderName) throws InterruptedException {
-        if (!(CheckIfCreditCardExists.checkIfCreditCardExists(dbInstance, cardNum))){
-            System.out.println(RED_BOLD + "Wrong card number" + ANSI_RESET);
+        if (!(CheckCreditCard.checkCreditCard(dbInstance, cardNum, cardHolderName))){
+            System.out.println(RED_BOLD + "\nWrong card number or card holder name\n" + ANSI_RESET);
             return checkCreditCard(cardNum, cardHolderName);
-        }else if (!CheckIfHolderNameExist.checkIfHolderNameExist(dbInstance,cardHolderName)){
-            System.out.println(RED_BOLD + "Wrong card holder name" + ANSI_RESET);
         }
+
         return true;
     }
-
-    /*public void cancelTrans() throws InterruptedException {
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel transaction" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String cancel = Timer.timer(username);
-        if (cancel.equals("cancel")){
-            getPaymentType();
+    public void checkTimeOut(String timeOut) throws InterruptedException {
+        if (!timeOut.equals(null)){
+            cancelTrans(username, "Timeout");
         }
-    } */
+    }
+    public void checkCancelTrans(String cancel) throws InterruptedException {
+        if (cancel.equals("cancel")){
+            cancelTrans(username, "Cancelled Transaction");
+        }
+    }
+    public static void cancelTransMsg(){
+        System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel transaction" + ANSI_RESET);
+    }
+    public void cancelTrans(String username, String reason) throws InterruptedException {
+        UpdateCancelTrans.updateCancelTrans(dbInstance, username, reason);
+        customerHomePage();
+    }
 
-    public void saveCreditCard(String cardHolderName, String cardNum) throws InterruptedException {
+    public void saveCreditCard(Database dbInstance, String cardNum) throws InterruptedException {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Do you want to save your credit card information in your account?" + ANSI_RESET);
@@ -752,8 +760,19 @@ public class Guest {
         System.out.println("======================================================\n");
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         String saveInfo = Timer.timer(username);
-        if (saveInfo.equals("1")){
-            //TODO setSettings();
+        switch (saveInfo){
+            case"1":
+                SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
+                System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time" + ANSI_RESET);
+                break;
+
+            case"2":
+                System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
+                break;
+
+            default:
+                System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
+                saveCreditCard(dbInstance, cardNum);
         }
     }
 
