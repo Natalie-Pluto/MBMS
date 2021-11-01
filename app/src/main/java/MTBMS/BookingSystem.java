@@ -27,9 +27,9 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                              "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+           //                   "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
@@ -94,7 +94,7 @@ public class BookingSystem {
             String name = instance.backCheck1(dbInstance);
             String pw = instance.backCheck2(dbInstance);
             if(!name.equals("back") || !pw.equals("back")) {
-                login(dbInstance, name, pw);
+                 login(dbInstance, name, pw);
             }
         } else {
             if (CheckStaff.isStaff(dbInstance, accName)) {
@@ -163,12 +163,18 @@ public class BookingSystem {
                         counter2++;
                         instance.signinMsg4();
                         String input = Timer.timer("g");
-                        String num = instance.signUpHelper(dbInstance, input, newAcc, newPw);
-                        if (num.equals("1")) {
-                            isFinished = true;
-                            success = true;
-                        } else if (!num.equals("0")) {
-                            instance.signUpHelper(dbInstance, num, newAcc, newPw);
+                        boolean code = false;
+                        int counter4 = 0;
+                        while(!code && counter4 < 3) {
+                            if (instance.signUpHelper(dbInstance, input, newAcc, newPw).equals("1")) {
+                                isFinished = true;
+                                success = true;
+                                code = true;
+                            }
+                            counter4++;
+                            if (counter4 == 3 && !code) {
+                                System.out.println(RED_BOLD + "\nPlease choose your identity again\n" + ANSI_RESET);
+                            }
                         }
                     }
                 } else {
