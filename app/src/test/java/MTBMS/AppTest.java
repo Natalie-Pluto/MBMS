@@ -123,7 +123,7 @@ public class AppTest {
     @Test
     public void getPaymentTypeTest_1() throws InterruptedException {
         getInput("1");
-        assertEquals("1", Guest.getPaymentType());
+        assertEquals("1", instance.getPaymentType());
     }
 
     /*@Test
