@@ -74,6 +74,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "2":
                 success = movieRemover.run();
                 if (success) {
@@ -84,6 +85,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "3":
                 success = movieModifier.run();
                 if (success) {
@@ -94,6 +96,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "4":
                 success = cardInserter.run();
                 if (success) {
@@ -104,6 +107,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "5":
                 success = cardRedeemTool.run();
                 if (success) {
@@ -113,6 +117,8 @@ public class ManagerService {
                     System.out.println(RED_BOLD + "Error: Gift Card failed to be redeemed. (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                 }
+                run();
+                break;
             case "6":
                 success = sessionInserter.run();
                 if (success) {
@@ -123,6 +129,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "7":
                 success = sessionRemover.run();
                 if (success) {
@@ -133,6 +140,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "8":
                 success = staffInserter.run();
                 if (success) {
@@ -143,6 +151,7 @@ public class ManagerService {
                     System.out.println("============================================\n");
                 }
                 run();
+                break;
             case "9":
                 success = staffRemover.run();
                 if (success) {
@@ -154,16 +163,22 @@ public class ManagerService {
 
                 }
                 run();
+                break;
             case "10":
                 staffReportGenerator.generateUpcomingMovieReport();
                 run();
+                break;
             case "11":
                 staffReportGenerator.generateMovieSessionReport();
                 run();
+                break;
             case "12":
                 managerReportGenerator.getCancellationReport();
-            case "-Exit":
-                System.out.println("Operation exits.");
+                run();
+                break;
+            case "-Exit-":
+                System.out.println(YELLOW_BOLD_BRIGHT + "Operation exits." + ANSI_RESET + "\n");
+                break;
             default:
                 System.out.println("\n============================================");
                 System.out.println(RED_BOLD + "Error: Invalid number. (｡´︿`｡)" + ANSI_RESET);

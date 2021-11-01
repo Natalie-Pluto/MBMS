@@ -60,7 +60,7 @@ public class ReportGenerator {
             e.printStackTrace();
         }
         if(success){
-            System.out.println(PURPLE_BOLD_BRIGHT + "Successfully generated the Movie Session Report. (｡･ω･｡)ﾉ" + ANSI_RESET);
+            System.out.println(PURPLE_BOLD_BRIGHT + "Successfully generated the Cancellation Report. (｡･ω･｡)ﾉ" + ANSI_RESET);
         }
     }
 }

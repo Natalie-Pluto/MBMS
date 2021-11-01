@@ -90,12 +90,13 @@ public class ReportGenerator {
                 String movieName = cinemaSession[1];
                 String screenType = cinemaSession[2];
                 String startTime = cinemaSession[3];
-                int frontSeatBooking = Integer.parseInt(cinemaSession[4]);
-                int midSeatBooking = Integer.parseInt(cinemaSession[5]);
-                int backSeatBooking = Integer.parseInt(cinemaSession[6]);
-                int frontSeatCapacity = Integer.parseInt(cinemaSession[7]);
-                int midSeatCapacity = Integer.parseInt(cinemaSession[8]);
-                int backSeatCapacity = Integer.parseInt(cinemaSession[9]);
+                int numberOfBooking = Integer.parseInt(cinemaSession[4]);
+                int frontSeatBooking = Integer.parseInt(cinemaSession[5]);
+                int midSeatBooking = Integer.parseInt(cinemaSession[6]);
+                int backSeatBooking = Integer.parseInt(cinemaSession[7]);
+                int frontSeatCapacity = Integer.parseInt(cinemaSession[8]);
+                int midSeatCapacity = Integer.parseInt(cinemaSession[9]);
+                int backSeatCapacity = Integer.parseInt(cinemaSession[10]);
 
                 int frontSeatAvailable = frontSeatCapacity - frontSeatBooking;
                 if (frontSeatAvailable < 0) {
@@ -113,6 +114,7 @@ public class ReportGenerator {
                 myWriter.write("Movie: " + movieName + System.lineSeparator());
                 myWriter.write("Screen Type: " + screenType + System.lineSeparator());
                 myWriter.write("Start Time: " + startTime + System.lineSeparator());
+                myWriter.write("Total number of bookings" + numberOfBooking + System.lineSeparator());
                 myWriter.write("Front Seat Booking: " + String.valueOf(frontSeatBooking) + System.lineSeparator());
                 myWriter.write("Front Seat Available: " + String.valueOf(frontSeatAvailable) + System.lineSeparator());
                 myWriter.write("Middle Seat Booking: " + String.valueOf(midSeatBooking) + System.lineSeparator());
