@@ -21,9 +21,9 @@ public class Guest {
     private String identity;
     private String settings;
 
-    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+      //          "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -423,18 +423,27 @@ public class Guest {
         String startTime = getStartTime(dbInstance, cinemaName, movieName, screenType);
         String seatLocation = getSeatLocation(dbInstance, cinemaName, movieName, screenType, startTime);
         List<Integer> audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
-        double totalPrice = getTotalPrice(dbInstance, cinemaName, movieName, screenType, startTime, audienceNum);
-        updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum.size(), seatLocation, audienceNum);
+        double totalPrice = getTotalPrice(dbInstance, movieName, cinemaName, startTime, screenType, audienceNum);
+        if(updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audienceNum.size(), seatLocation, audienceNum)){
+            bookSuccess();
+        }
         BookingSystem.seperator();
+        continueService();
     }
     public double getTotalPrice(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum) throws InterruptedException {
-        List<Double> ticketPrices = getTicketPrices(dbInstance, cinemaName, movieName, screenType, startTime);
+        List<Double> ticketPrices = getTicketPrices(db, cinemaName, movieName, startTime, screenType);
         double totalPrice = 0.0;
-        for(Integer audience: audienceNum){
-            for(Double price: ticketPrices){
-                totalPrice += (audience * price);
-            }
+        for(int i = 0; i < audienceNum.size(); i++){
+            totalPrice += (audienceNum.get(i) * ticketPrices.get(i));
         }
+        /*for(Integer audience: audienceNum){
+            System.out.println(audience);
+            for(Double price: ticketPrices){
+                System.out.println(price);
+                double prices = audience * price;
+                totalPrice += prices;
+            }
+        }*/
         return totalPrice;
     }
     /*
@@ -477,7 +486,6 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
     }
     public boolean updateSeats(Database db, String movieName, String cinemaName, String startTime, String screenType, int audienceNum, String seatLocation, List<Integer> audienceList) throws InterruptedException {
-        String paymentType = getPaymentType();
         if (!checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList)) {
             UpdateSeats.updateSeats(db, cinemaName, movieName, startTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
@@ -520,10 +528,16 @@ public class Guest {
             case "1"://PayByCreditCard()
                 String cardNum = getCardNum();
                 String cardHolderName = getCardHolderName();
-                if(checkCreditCard(cardNum, cardHolderName)){
+                if(CheckCreditCard.checkCreditCard(db, cardNum, cardHolderName)){
                     double cardBalance = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
                     double ticketPrice = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
-                    //ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
+                    if (cardBalance < ticketPrice){
+                        System.out.println(RED_BOLD + "Insufficient balance" + ANSI_RESET);
+                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                    }else {
+                        ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
+                        return true;
+                    }
                 }else{
                     System.out.println(RED_BOLD + "Wrong card number or name");
                     checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
@@ -547,7 +561,7 @@ public class Guest {
 
                 if (!RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)){
                     RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
-                    break;
+                    return true;
 
                 }else {
                     BookingSystem.seperator();
@@ -721,16 +735,19 @@ public class Guest {
         }
     }
 
-    public List<Double> getTicketPrices(Database db, String cinemaName, String movieName, String screenType, String startTime) throws InterruptedException {
+    public List<Double> getTicketPrices(Database db, String cinemaName, String movieName, String startTime, String screenType) throws InterruptedException {
         List<Double> ticketPrices = new ArrayList<>();
-        ticketPrices.add(GetTicketPrice.getTicketPriceKids(db, cinemaName, movieName, screenType, startTime));
-        ticketPrices.add(GetTicketPrice.getTicketPriceSeniors(db, cinemaName, movieName, screenType, startTime));
-        ticketPrices.add(GetTicketPrice.getTicketPriceAdults(db, cinemaName, movieName, screenType, startTime));
-        ticketPrices.add(GetTicketPrice.getTicketPriceStudents(db, cinemaName, movieName, screenType, startTime));
+        ticketPrices.add(GetTicketPrice.getTicketPriceKids(db, cinemaName, movieName, startTime, screenType));
+        ticketPrices.add(GetTicketPrice.getTicketPriceSeniors(db, cinemaName, movieName, startTime, screenType));
+        ticketPrices.add(GetTicketPrice.getTicketPriceAdults(db, cinemaName, movieName, startTime, screenType));
+        ticketPrices.add(GetTicketPrice.getTicketPriceStudents(db, cinemaName, movieName, startTime, screenType));
         return ticketPrices;
     }
     public String getCardNum() throws InterruptedException {
-        System.out.println("Please enter your card number");
+        System.out.println("\n======================================================");
+        System.out.println(PURPLE_BOLD + "Please enter your card number" + ANSI_RESET);
+        cancelTransMsg();
+        System.out.println("======================================================");
         //TODO hide card number
         String cardNum = Timer.timer(username);
         checkTimeOut(cardNum);
@@ -749,10 +766,12 @@ public class Guest {
         return cardHolderName;
     }
 
-    public static boolean checkCreditCard(String cardNum, String cardHolderName) throws InterruptedException {
+    public boolean checkCreditCard(Database dbInstance) throws InterruptedException {
+        String cardNum = getCardNum();
+        String cardHolderName = getCardHolderName();
         if (!(CheckCreditCard.checkCreditCard(dbInstance, cardNum, cardHolderName))){
             System.out.println(RED_BOLD + "\nWrong card number or card holder name\n" + ANSI_RESET);
-            return checkCreditCard(cardNum, cardHolderName);
+            return checkCreditCard(dbInstance);
         }
 
         return true;

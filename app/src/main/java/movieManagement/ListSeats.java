@@ -21,7 +21,7 @@ public class ListSeats {
     }
 
     public static int getSeatNum(Database db, String cinemaName, String movieName, String screenType, String startTime, String seatLocation){
-        String query = "from moviebooking_db.cinema_session where cinema = '"+ cinemaName + "'and movie = '" + movieName + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
+        String query = " from moviebooking_db.cinema_session where cinema = '"+ cinemaName + "'and movie = '" + movieName + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
         int frontNum = db.sql_getInt("select front_seat_capacity"+query, "front_seat_capacity");
         int midNum = db.sql_getInt("select mid_seat_capacity"+query, "mid_seat_capacity");
         int backNum = db.sql_getInt("select back_seat_capacity"+query, "back_seat_capacity");
