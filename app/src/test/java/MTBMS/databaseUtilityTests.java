@@ -64,7 +64,6 @@ import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
 import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
-import static databaseutility.CheckIfCreditCardExists.checkIfCreditCardExists;
 import static databaseutility.CheckIfGiftCardExists.checkIfGiftCardExists;
 import static databaseutility.GetSeatCapacity.getFrontSeatCapacity;
 import static databaseutility.GetSeatCapacity.getMidSeatCapacity;
@@ -83,10 +82,10 @@ import static databaseutility.SetUserSetting.setUserSetting;
 import databaseutility.MovieInsertionBuilder;
 
 public class databaseUtilityTests {
-    //static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-    //"dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+    "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
 
-    static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     //static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     @Test
@@ -327,13 +326,6 @@ public class databaseUtilityTests {
     public void AddingCinema_2() {
         addCinema(dbInstance, "Ali's cinema");
         addCinema(dbInstance, "Ali's cinema");
-    }
-
-    @Test 
-    public void AddingCreditCard_1() {
-        removeCreditCard(dbInstance, "23322");
-        addCreditCard(dbInstance, "23322", "ali", "1111");
-        assert(checkIfCreditCardExists(dbInstance, "23322"));
     }
 
     @Test 
@@ -925,13 +917,6 @@ public class databaseUtilityTests {
     public void RemovingCinema_2() {
         removeCinema(dbInstance, "vscode, the movie");
         removeCinema(dbInstance, "vscode, the movie");
-    }
-
-    @Test
-    public void RemovingCreditCard_1() {
-        addCreditCard(dbInstance, "83593", "alien", "7862");
-        removeCreditCard(dbInstance, "83593");
-        assertFalse(checkIfCreditCardExists(dbInstance, "83593"));
     }
 
     @Test

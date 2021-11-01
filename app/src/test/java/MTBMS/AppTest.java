@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class AppTest {
-    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static final Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final Guest instance = new Guest("Andy", "c", " ");
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
     private final PrintStream systemOutput = System.out;
@@ -142,13 +142,13 @@ public class AppTest {
         assertNotEquals("Wrong output", Guest.getPaymentType(), "wrong input");
     } */
 
-    @Test public void checkPaymentTest_2() throws InterruptedException {
+    /*@Test public void checkPaymentTest_2() throws InterruptedException {
         RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
         AddingGiftCard.addGiftCard(dbInstance, "99999999999999GC");
         getInput("99999999999999GC");
         assertTrue(instance.checkPayment("2"));
         RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
-    }
+    }*/
 
     /*@Test public void checkMovieName_1() throws InterruptedException {
         RemovingMovie.removeMovie(dbInstance, "Test");
