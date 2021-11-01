@@ -1,10 +1,14 @@
-package manageroperations;
+package staffoperations;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ManagerServiceTest {
+class MovieRemoverTest {
+
+    @Test
+    void collectMovieName() {
+    }
 
     @Test
     void run() {
