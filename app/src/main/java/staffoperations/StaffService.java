@@ -65,7 +65,8 @@ public class StaffService {
                     System.out.println(RED_BOLD + "Error: Movie failed to be added. (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                 }
-                run();break;
+                run();
+                break;
             case "2":
                 success = movieRemover.run();
                 if (success) {
@@ -75,7 +76,8 @@ public class StaffService {
                     System.out.println(RED_BOLD + "Error: Movie failed to be removed. (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                 }
-                run();break;
+                run();
+                break;
             case "3":
                 success = movieModifier.run();
                 if (success) {
@@ -85,7 +87,8 @@ public class StaffService {
                     System.out.println(RED_BOLD + "Error: Movie failed to be modified. (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                 }
-                run();break;
+                run();
+                break;
             case "4":
                 success = cardInserter.run();
                 if (success) {
@@ -95,7 +98,8 @@ public class StaffService {
                     System.out.println(RED_BOLD + "Error: Gift Card failed to be added. (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("============================================\n");
                 }
-                run();break;
+                run();
+                break;
             case "5":
                 success = cardRedeemTool.run();
                 if (success) {

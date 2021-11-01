@@ -191,6 +191,18 @@ Back Seat Booking: 0
 Back Seat Available: 20
 
 Cinema: Warringah Mall
+Movie: Ip Man 2
+Screen Type: gold
+Start Time: 1002-11-22 00:33:22
+Total number of bookings0
+Front Seat Booking: 0
+Front Seat Available: 0
+Middle Seat Booking: 0
+Middle Seat Available: 0
+Back Seat Booking: 0
+Back Seat Available: 0
+
+Cinema: Warringah Mall
 Movie: JUNGLE CRUISE
 Screen Type: Bronze
 Start Time: 2021-10-28 17:00:00

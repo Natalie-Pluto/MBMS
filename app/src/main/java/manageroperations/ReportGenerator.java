@@ -42,7 +42,7 @@ public class ReportGenerator {
         }
         boolean success = true;
         try{
-            FileWriter myWriter = new FileWriter("CancellationReport");
+            FileWriter myWriter = new FileWriter("CancellationReport.txt");
             for(int i = 0; i < failedTransactions.size(); i++){
                 String[] failedTransaction = failedTransactions.get(i);
                 String transactionTime = failedTransaction[0];

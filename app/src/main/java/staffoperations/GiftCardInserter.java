@@ -35,6 +35,12 @@ public class GiftCardInserter {
     public String collectGiftCardNumber(){
         System.out.println(PURPLE_BOLD + "Enter the gift card number:" + ANSI_RESET);
         String giftCardNumber = s.nextLine();
+        if (giftCardNumber.length() != 18 || !(giftCardNumber.endsWith("GC"))) {
+            System.out.println("\n============================================");
+            System.out.println(RED_BOLD + "Error: Gift card format is invalid. (｡´︿`｡)" + ANSI_RESET);
+            System.out.println("============================================\n");
+            giftCardNumber = collectGiftCardNumber();
+        }
         boolean exist = CheckIfGiftCardExists.checkIfGiftCardExists(d, giftCardNumber);
         if(exist){
             System.out.println("\n============================================");
