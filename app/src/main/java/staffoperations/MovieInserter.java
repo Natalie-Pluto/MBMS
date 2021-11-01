@@ -181,7 +181,9 @@ public class MovieInserter {
         String genre = collectMovieGenre();
         String casts = collectMovieCasts();
         String showingDate = collectMovieShowingDate();
-        String query = String.format("INSERT INTO moviebooking_db.Movie VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') on conflict (name_) DO NOTHING;", movieName, classification, releaseDate, synopsis, directors, genre, casts, showingDate);
+        String query = String.format("INSERT INTO moviebooking_db.Movie VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') on conflict (name_) DO NOTHING;", movieName.replace("'", "''"),
+                classification.replace("'", "''"), releaseDate.replace("'", "''"), synopsis.replace("'", "''"),
+                directors.replace("'", "''"), genre.replace("'", "''"), casts.replace("'", "''"), showingDate);
         boolean success = d.sql_update(query);
         return success;
     }

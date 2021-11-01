@@ -88,7 +88,7 @@ public class databaseUtilityTests {
 
     static Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
-   // static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     @Test
     public void AddingUser_1() {
         removeUser(dbInstance, "aaaaaaaaaaaaaaaaaaaa");
@@ -189,7 +189,7 @@ public class databaseUtilityTests {
         changeDirectors(dbInstance,"movie", "afhd");
     }
 
-    /*@Test
+    @Test
     public void MovieClassificationChanger_1() {
         removeMovie(dbInstance, "vscode, the movie");
         MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
@@ -198,7 +198,7 @@ public class databaseUtilityTests {
         changeMovieClassification(dbInstance, "vscode, the movie", "pg");
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("pg"));
     }
-
+    /*
     @Test
     public void MovieClassificationChanger_2() {
         removeMovie(dbInstance, "vscode, the movie");
@@ -208,7 +208,7 @@ public class databaseUtilityTests {
         changeMovieClassification(dbInstance, "vscode, the movie", "invalid classification");
         assert(getMovieClassification(dbInstance, "vscode, the movie").equals("r18+"));
     } 
-
+    */
     @Test
     public void MovieClassificationChanger_3() {
         removeMovie(dbInstance, "vscode, the movie");
@@ -314,7 +314,7 @@ public class databaseUtilityTests {
         inserter.addClassification("invalid classification");
         inserter.insertMovie();
         assertFalse(checkIfMovieExists(dbInstance, "vscode, the movie"));
-    }*/
+    }
 
     @Test
     public void AddingCinema_1() {

@@ -132,7 +132,7 @@ public class AppTest {
         Guest.updateSeats("Test", "Test", "2021-10-27 18:00","silver", 1,"front");
     }*/
 
-    @Test public void getPaymentTypeTest_2(){
+    /*@Test public void getPaymentTypeTest_2(){
         getInput("2");
         assertEquals("Wrong output","2", Guest.getPaymentType());
     }
@@ -146,11 +146,11 @@ public class AppTest {
         RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
         AddingGiftCard.addGiftCard(dbInstance, "99999999999999GC");
         getInput("99999999999999GC");
-        assertTrue(Guest.checkPayment("2"));
+        assertTrue(instance.checkPayment("2"));
         RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
     }
 
-    @Test public void checkMovieName_1() throws InterruptedException {
+    /*@Test public void checkMovieName_1() throws InterruptedException {
         RemovingMovie.removeMovie(dbInstance, "Test");
         MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
         mib.insertMovie();
@@ -170,7 +170,7 @@ public class AppTest {
         assertEquals("2021-10-28 17:00:00", Guest.checkStartTime("JUNGLE CRUISE", "Warringah Mall"));
     } */
 
-    @Test public void getAudienceNumTest() throws InterruptedException {
+   /* @Test public void getAudienceNumTest() throws InterruptedException {
         getInput("1");
         assertEquals(1, instance.getAudienceNum());
     }
@@ -204,7 +204,7 @@ public class AppTest {
         assertTrue(instance.cardHolderNameCheck());
     }
 
-    @Test public void saveCreditCardTest_1() {
+    @Test public void saveCreditCardTest_1() throws InterruptedException {
         RemovingCreditCard.removeCreditCard(dbInstance, "99999");
         AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
         getInput("1");
