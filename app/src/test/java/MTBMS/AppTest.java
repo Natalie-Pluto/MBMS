@@ -79,10 +79,10 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
-    @Test public void customerHomePageTest() throws InterruptedException {
+   /* @Test public void customerHomePageTest() throws InterruptedException {
         instance.customerHomePage();
         assertNotNull(getOutput());
-    }
+    }*/
 
     @Test public void nowShowingCus(){
         Guest.nowShowingCus(dbInstance);

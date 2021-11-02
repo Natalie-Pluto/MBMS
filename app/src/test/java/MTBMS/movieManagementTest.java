@@ -43,11 +43,11 @@ public class movieManagementTest {
         System.setIn(testInput);
     }
 
-    @Test
+   /* @Test
     public void listCinemaTest1() throws InterruptedException {
         ListMovieByCinema.listMovieByCinema(dbInstance, "Warringah Mall", "Andy");
         assertNotNull(getOutput());
-    }
+    }*/
 
     @Test
     public void listCinemaTest2() throws InterruptedException {
