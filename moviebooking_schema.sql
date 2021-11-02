@@ -112,14 +112,16 @@ INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28'
 INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-28')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-30')on conflict (name_) do nothing;
 INSERT INTO moviebooking_db.movie VALUES('RON''S GONE WRONG', 'PG', '2021-10-28', 'Ron''s Gone Wrong tells the story of an 11-year-old boy who finds that his robot buddy doesn''t quite work', 'Alessandro Carloni', 'Adventure, Animation, Comedy, Family, Science Fiction', 'Thomas Barbusca, Bentley Kalu, Ava Morse', '2021-10-28')on conflict (name_) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-10-23', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-28')on conflict (name_) do nothing;
-INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-10-24', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-10-30')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 8', 'PG', '2021-11-15', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-11-15')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Harry Potter 9', 'PG', '2021-11-16', 'Not exist Harry Potter 8 but I wish there could be one', 'Imagination', 'Action', 'Dreams', '2021-11-16')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Double 11', 'G', '2021-11-11', 'Double 11 is chinese boxing day XD', 'Imagination', 'Action', 'Dreams', '2021-11-11')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.movie VALUES('Made Up', 'PG', '2021-11-12', 'Made up for demo', 'Imagination', 'Action', 'Dreams', '2021-11-12')on conflict (name_) do nothing;
 
 
 -- sample UpdatingMovie data --
 
-INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 8', 'PG', '2021-10-23')on conflict (name_) do nothing;
-INSERT INTO moviebooking_db.upcomingMovie VALUES('Harry Potter 9', 'PG', '2021-10-24')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Double 11', 'G', '2021-11-11')on conflict (name_) do nothing;
+INSERT INTO moviebooking_db.upcomingMovie VALUES('Made Up', 'M', '2021-11-12')on conflict (name_) do nothing;
 
 -- sample Cinema data --
 
@@ -205,6 +207,14 @@ INSERT INTO moviebooking_db.cinema_session VALUES('18', 'Town Hall', 'Bronze', '
 INSERT INTO moviebooking_db.cinema_session VALUES('19', 'Eastgarden', 'Gold', 'Sooryavanshi', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-11-06 20:00:00', '2021-11-06 22:00:00', '35', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
 INSERT INTO moviebooking_db.cinema_session VALUES('20', 'Eastgarden', 'Sliver', 'Black Box', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-11-05 11:00:00', '22021-11-05 13:00:00', '25', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
 INSERT INTO moviebooking_db.cinema_session VALUES('21', 'Blacktown', 'Bronze', 'Black Box', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-11-06 10:00:00', '2021-11-06 12:00:00', '10', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('22', 'Warringah Mall', 'Sliver', 'Double 11', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-11-11 09:00:00', '2021-11-11 11:00:00', '25', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('23', 'Warringah Mall', 'Gold', 'Made Up', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-11-12 11:00:00', '2021-11-12 13:00:00', '35', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('24', 'Warringah Mall', 'Bronze', 'Harry Potter 8', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-11-15 10:00:00', '2021-11-15 12:00:00', '10', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('25', 'Town Hall', 'Sliver', 'Double 11', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-11-12 15:00:00', '2021-11-12 17:00:00', '25', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('26', 'Town Hall', 'Bronze', 'Made Up', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-11-12 18:00:00', '2021-11-12 20:00:00', '10', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('27', 'Eastgarden', 'Gold', 'Harry Potter 8', '35', '45', '40','0', '0', '0', '20', '20', '20', '2021-11-17 20:00:00', '2021-11-17 22:00:00', '35', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('28', 'Eastgarden', 'Sliver', 'Made Up', '25', '35', '28','0', '0', '0', '20', '20', '20', '2021-11-11 11:00:00', '22021-11-11 13:00:00', '25', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
+INSERT INTO moviebooking_db.cinema_session VALUES('29', 'Blacktown', 'Bronze', 'Double 11', '10', '20', '15','0', '0', '0', '15', '15', '15', '2021-11-12 10:00:00', '2021-11-12 12:00:00', '10', '0')on conflict (movie, cinema, screen_type, start_time) do nothing;
 
 -- sample Users data--
 
