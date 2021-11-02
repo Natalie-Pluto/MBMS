@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS Canceled_transaction CASCADE;
 CREATE TABLE Credit_Card (
     number CHAR(5) PRIMARY KEY,
     cardholder_name VARCHAR(100) NOT NULL,
-    pin CHAR(4) NOT NULL,
-    balance DECIMAL(12,5) NOT NULL -- DECIMAL(<#digits>,<#post-decimal places>)
+    pin CHAR(4) DEFAULT '0000',
+    balance DECIMAL(12,5) NOT NULL DEFAULT 0 -- DECIMAL(<#digits>,<#post-decimal places>)
 );
 
 CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserved keyword 
@@ -129,6 +129,10 @@ INSERT INTO moviebooking_db.cinema VALUES('Blacktown')on conflict (cinema_name) 
 INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name) do nothing;
 
 -- sample Credit_Card data --
+
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(40691, 'Charles') on conflict (number) do nothing;
+
+
 
 -- sample cinema_session data --
 
