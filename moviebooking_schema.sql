@@ -133,11 +133,11 @@ INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name)
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(40691, 'Charles') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(42689, 'Sergio') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(60146, 'Kasey') on conflict (number) do nothing;
-INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(40691, 'Charles') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(59141, 'Vincent') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(55134, 'Ruth') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(23858, 'Donald') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(35717, 'Christine') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(72500, 'Helene') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(44756, 'Brian') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(97523, 'Wanda') on conflict (number) do nothing;
 INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(48685, 'Elaine') on conflict (number) do nothing;
