@@ -25,6 +25,7 @@ public class Guest {
      //           "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+
     public Guest(String username, String identity, String settings) {
         this.username = username;
         this.identity = identity;
@@ -77,7 +78,6 @@ public class Guest {
                 break;
 
         }
-
         //Ask users to continue using or close the service
         continueService();
     }
@@ -312,6 +312,7 @@ public class Guest {
 
             case "3":
                 bookingHelper(dbInstance);
+                book(dbInstance);
                 break;
 
             default:
@@ -424,8 +425,6 @@ public class Guest {
         String seatLocation = getSeatLocation(dbInstance, cinemaName, movieName, screenType, startTime);
         List<Integer> audienceNum = getSeatNum(dbInstance, cinemaName, movieName, screenType, startTime, seatLocation);
         int audiences = getAudiences(audienceNum);
-        System.out.println(audiences);
-        System.out.println(seatLocation);
         if(updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audiences, seatLocation, audienceNum)){
             bookSuccess();
         } else {
@@ -555,6 +554,7 @@ public class Guest {
                         checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     }else {
                         ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
+                        saveCreditCard(db, cardNum,cardHolderName);
                         return true;
                     }
                 }else{
@@ -815,6 +815,16 @@ public class Guest {
             return cardHolderName;
     }
 
+    public void checkTimeOut(String timeOut) throws InterruptedException {
+        if (timeOut.equals(null)){
+            cancelTrans(username, "Timeout");
+        }
+    }
+    public void checkCancelTrans(String cancel) throws InterruptedException {
+        if (cancel.equals("cancel")){
+            cancelTrans(username, "Cancelled Transaction");
+        }
+    }
     public boolean checkCreditCard(Database dbInstance) throws InterruptedException {
         String cardNum = getCardNum();
         String cardHolderName = getCardHolderName();
@@ -834,7 +844,7 @@ public class Guest {
         UpdateCancelTrans.updateCancelTrans(dbInstance, username, reason);
     }
 
-    public void saveCreditCard(Database dbInstance, String cardNum) throws InterruptedException {
+    public void saveCreditCard(Database dbInstance, String cardNum, String cardHolderName) throws InterruptedException {
         System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
         System.out.println("======================================================");
         System.out.println(PURPLE_BOLD + "Do you want to save your credit card information in your account?" + ANSI_RESET);
@@ -845,7 +855,7 @@ public class Guest {
         switch (saveInfo){
             case"1":
                 SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
-                System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time" + ANSI_RESET);
+                System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time!" + ANSI_RESET);
                 break;
 
             case"2":
@@ -854,7 +864,7 @@ public class Guest {
 
             default:
                 System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
-                saveCreditCard(dbInstance, cardNum);
+                saveCreditCard(dbInstance, cardNum, cardHolderName);
         }
     }
 
