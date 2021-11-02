@@ -16,8 +16,8 @@ DROP TABLE IF EXISTS Canceled_transaction CASCADE;
 CREATE TABLE Credit_Card (
     number CHAR(5) PRIMARY KEY,
     cardholder_name VARCHAR(100) NOT NULL,
-    pin CHAR(4) NOT NULL,
-    balance DECIMAL(12,5) NOT NULL -- DECIMAL(<#digits>,<#post-decimal places>)
+    pin CHAR(4) DEFAULT '0000',
+    balance DECIMAL(12,5) NOT NULL DEFAULT 0 -- DECIMAL(<#digits>,<#post-decimal places>)
 );
 
 CREATE TABLE Users ( -- note: table can't be named 'User' as 'User' is a reserved keyword 
@@ -129,6 +129,57 @@ INSERT INTO moviebooking_db.cinema VALUES('Blacktown')on conflict (cinema_name) 
 INSERT INTO moviebooking_db.cinema VALUES('Eastgarden')on conflict (cinema_name) do nothing;
 
 -- sample Credit_Card data --
+
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(40691, 'Charles') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(42689, 'Sergio') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(60146, 'Kasey') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(59141, 'Vincent') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(55134, 'Ruth') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(23858, 'Donald') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(35717, 'Christine') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(72500, 'Helene') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(44756, 'Brian') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(97523, 'Wanda') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(48685, 'Elaine') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(14138, 'Blake') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(92090, 'Debbie') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(31093, 'Felix') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(90669, 'John') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(95953, 'Deena') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(77852, 'Joan') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(60632, 'Kenneth') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(45925, 'Audrey') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(27402, 'Francisco') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(28376, 'Christopher') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(53477, 'Manuel') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(66192, 'Mark') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(67707, 'William') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(54981, 'Rebecca') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(41696, 'Arthur') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(85202, 'Robert') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(87286, 'Christopher') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(23842, 'Edwin') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(26436, 'Stacey') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(24531, 'Michael') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(69655, 'Janet') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(74061, 'Jeremy') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(30690, 'Patricia') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(56907, 'Julie') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(38409, 'Linda') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(64820, 'Evelyn') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(75183, 'Liana') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(89037, 'Simone') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(98708, 'Jeffrey') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(96667, 'Elizabeth') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(82050, 'Andy') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(34572, 'Chad') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(33527, 'James') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(78073, 'Ruby') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(43114, 'Naomi') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(20565, 'James') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(72238, 'Leonard') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(30831, 'Marguerite') on conflict (number) do nothing;
+INSERT INTO moviebooking_db.credit_card (number, cardholder_name) VALUES(34402, 'Maxine') on conflict (number) do nothing;
 
 -- sample cinema_session data --
 
