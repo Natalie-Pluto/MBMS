@@ -305,7 +305,7 @@ public class bookingsystemTest {
     @Test
     public void readPwdTest() throws InterruptedException {
         getInput("123456");
-        assertNotNull(BookingSystem.readPwd());
+        assertNotNull(BookingSystem.readPwd("1"));
     }
 
     @Test

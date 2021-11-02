@@ -27,9 +27,10 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                              "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+          //                    "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         //dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
@@ -140,7 +141,7 @@ public class BookingSystem {
             String newPw = "";
             while (!isValid && counter3 < 3) {
                 counter3++;
-                newPw = readPwd();
+                newPw = readPwd("1");
                 if (newPw.length() < 5) {
                     System.out.println(RED_BOLD + "Password has to be longer than 4 characters! (｡´︿`｡) Please try again" + ANSI_RESET);
                     if (counter3 == 3) {
@@ -153,7 +154,7 @@ public class BookingSystem {
                 }
             }
             createPwd2();
-            String newPw2 = readPwd();
+            String newPw2 = readPwd("1");
             if (checkPwd(newPw, newPw2)) {
                 isMatched = true;
                 if (id.equals("NA")) {
@@ -224,7 +225,7 @@ public class BookingSystem {
     // Get password
     public static String password() throws InterruptedException {
         System.out.println("Please enter your password:");
-        return readPwd();
+        return readPwd("1");
     }
 
     // "U6" -> filter upcoming movies via cinema
@@ -315,11 +316,18 @@ public class BookingSystem {
 
 
     // Read password securely
-    public static String readPwd() throws InterruptedException {
+    public static String readPwd(String type) throws InterruptedException {
         EraserThread er = new EraserThread(" ");
         Thread mask = new Thread(er);
         mask.start();
-        String password = Timer.timer("g");
+        String password = "";
+        if(type.equals("1")) {
+            password = Timer.timer("g");
+        } else if (type.equals("2")) {
+            password = Timer.timer("p");
+        }  else {
+            password = Timer.timer(type);
+        }
         er.stopMasking();
         return password;
     }
@@ -366,7 +374,7 @@ public class BookingSystem {
             AddingUser.addUser(dbInstance, newAcc, newPw, "c");
         } else if (input.equals("3")) {
             System.out.println("Please enter the staff code:");
-            if (readPwd().equals("zootopia")) {
+            if (readPwd("1").equals("zootopia")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this manager's detail to users table
@@ -377,7 +385,7 @@ public class BookingSystem {
             }
         } else if (input.equals("2")) {
             System.out.println("Please enter the staff code:");
-            if (readPwd().equals("shawshank")) {
+            if (readPwd("1").equals("shawshank")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this staff's detail to users table
