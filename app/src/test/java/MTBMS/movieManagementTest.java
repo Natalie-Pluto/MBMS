@@ -14,13 +14,16 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import static databaseutility.AddMovieSession.addMovieSession;
+import static databaseutility.AddingCinema.addCinema;
+import static databaseutility.RemovingSession.removeSession;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class movieManagementTest {
 
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
@@ -101,6 +104,24 @@ public class movieManagementTest {
     public void listScreenTest4() {
         ListUpcomingByScreen.listUpcomingByScreen(dbInstance, "G");
         assertNotNull(getOutput());
+    }
+
+    @Test
+    public void ListSeatTest() throws InterruptedException {
+       /*removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
+        ChangeSeatCapacity.changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
+        ChangeSeatCapacity.changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
+        ChangeSeatCapacity.changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
+        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "front");
+        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "mid");
+        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "back");*/
+        ListSeats.listSeats(dbInstance,"Warringah Mall", "Black Box", "Bronze","2021-11-07 10:00:00");
+        //removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
     }
 
 }
