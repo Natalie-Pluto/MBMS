@@ -503,8 +503,9 @@ public class AppTest {
 
     @Test
     public void saveCreditCardTest() throws InterruptedException {
+        getInput("1");
         AddingUser.addUser(dbInstance, "Natalie", "000000", "c");
-        instance.saveCreditCard(dbInstance, "111", "Natalie");
+        instance.saveCreditCard(dbInstance, "1", "Natalie");
         RemovingUser.removeUser(dbInstance, "Natalie");
     }
 

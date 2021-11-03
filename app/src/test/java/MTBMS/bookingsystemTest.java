@@ -315,6 +315,20 @@ public class bookingsystemTest {
     }
 
     @Test
+    public void filterMovieTest1p2() throws InterruptedException {
+        getInput("100000000");
+        BookingSystem.filterMovie(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest1p3() throws InterruptedException {
+        getInput("abc");
+        BookingSystem.filterMovie(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
     public void filterMovieTest2() throws InterruptedException {
         getInput("1");
         BookingSystem.filterMovie(dbInstance,"U7");
@@ -336,8 +350,29 @@ public class bookingsystemTest {
     }
 
     @Test
+    public void filterMovieTest2p4() throws InterruptedException {
+        getInput("4");
+        BookingSystem.filterMovie(dbInstance,"U7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
     public void filterMovieTest3() throws InterruptedException {
         getInput("1");
+        BookingSystem.filterMovie(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest3p1() throws InterruptedException {
+        getInput("1000000");
+        BookingSystem.filterMovie(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest3p2() throws InterruptedException {
+        getInput("abc");
         BookingSystem.filterMovie(dbInstance,"S6");
         assertNotNull(getOutput());
     }
@@ -359,6 +394,13 @@ public class bookingsystemTest {
     @Test
     public void filterMovieTest4p3() throws InterruptedException {
         getInput("3");
+        BookingSystem.filterMovie(dbInstance,"S7");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest4p4() throws InterruptedException {
+        getInput("4");
         BookingSystem.filterMovie(dbInstance,"S7");
         assertNotNull(getOutput());
     }
