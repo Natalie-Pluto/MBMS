@@ -7,8 +7,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 public class Timer {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     // Timer for user's input
     // Types are 'c' for customer, 's' for staff, 'm' for manager and 'g' for guest
@@ -48,14 +48,7 @@ public class Timer {
                 Thread.sleep(2000);
                 BookingSystem.getGreeting(dbInstance);
                 BookingSystem.options();
-            } else if (type.equals("s")) {
-                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                Thread.sleep(2000);
-                // TODO return to staff main page
-            } else if (type.equals("m")) {
-                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                Thread.sleep(2000);
-                // TODO return to manager main page
+                return null;
             } else if(type.equals("p")) {
                 return null;
             } else {
@@ -64,6 +57,7 @@ public class Timer {
                 Guest guest = new Guest(type, "c", " ");
                 guest.customerHomePage();
                 guest.guestService();
+                return null;
             }
 
         }
