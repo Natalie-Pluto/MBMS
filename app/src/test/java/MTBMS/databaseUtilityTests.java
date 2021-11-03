@@ -1053,7 +1053,7 @@ public class databaseUtilityTests {
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "front");
         assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "front");
-        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
+        assert(getNumberOfFrontSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 150);
     }
 
     @Test
@@ -1066,7 +1066,7 @@ public class databaseUtilityTests {
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "mid");
         assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "mid");
-        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
+        assert(getNumberOfMidSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 150);
     }
 
     @Test
@@ -1079,7 +1079,7 @@ public class databaseUtilityTests {
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 100, "back");
         assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 100);
         updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 50, "back");
-        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 50);
+        assert(getNumberOfBackSeatsBooked(dbInstance, "ali's cinema", "vscode, the movie", "gold", "2017-03-31 9:30:20") == 150);
     }
 
     @Test
