@@ -538,13 +538,20 @@ public class Guest {
         String paymentType = getPaymentType();
         switch (paymentType){
             case "1"://PayByCreditCard()
-                String cardNum = getCardNum();
-                if(cardNum == null) {
-                    break;
-                }
-                String cardHolderName = getCardHolderName();
-                if(cardHolderName == null) {
-                    break;
+                String cardNum = "";
+                String cardHolderName = "";
+                if(GetCardNumByUserName.getCardNumByUserName(db, username) != null) {
+                    cardNum = GetCardNumByUserName.getCardNumByUserName(db, username);
+                    cardHolderName = GetCardNameByCardNum.getCardNameByCardNum(db, cardNum);
+                } else {
+                    cardNum = getCardNum();
+                    if (cardNum == null) {
+                        break;
+                    }
+                    cardHolderName = getCardHolderName();
+                    if (cardHolderName == null) {
+                        break;
+                    }
                 }
                 if(CheckCreditCard.checkCreditCard(db, cardNum, cardHolderName)){
                     double cardBalance = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
@@ -845,26 +852,28 @@ public class Guest {
     }
 
     public void saveCreditCard(Database dbInstance, String cardNum, String cardHolderName) throws InterruptedException {
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        System.out.println("======================================================");
-        System.out.println(PURPLE_BOLD + "Do you want to save your credit card information in your account?" + ANSI_RESET);
-        System.out.println(YELLOW_BOLD + "1.Yes       2.No" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-        String saveInfo = Timer.timer(username);
-        switch (saveInfo){
-            case"1":
-                SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
-                System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time!" + ANSI_RESET);
-                break;
+        if(GetCardNumByUserName.getCardNumByUserName(dbInstance, username) == null) {
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+            System.out.println("======================================================");
+            System.out.println(PURPLE_BOLD + "Do you want to save your credit card information in your account?" + ANSI_RESET);
+            System.out.println(YELLOW_BOLD + "1.Yes       2.No" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
+            String saveInfo = Timer.timer(username);
+            switch (saveInfo) {
+                case "1":
+                    SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
+                    System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time!" + ANSI_RESET);
+                    break;
 
-            case"2":
-                System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
-                break;
+                case "2":
+                    System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
+                    break;
 
-            default:
-                System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
-                saveCreditCard(dbInstance, cardNum, cardHolderName);
+                default:
+                    System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
+                    saveCreditCard(dbInstance, cardNum, cardHolderName);
+            }
         }
     }
 
