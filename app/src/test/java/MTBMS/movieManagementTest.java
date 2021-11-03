@@ -14,6 +14,9 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import static databaseutility.AddMovieSession.addMovieSession;
+import static databaseutility.AddingCinema.addCinema;
+import static databaseutility.RemovingSession.removeSession;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -102,5 +105,6 @@ public class movieManagementTest {
         ListUpcomingByScreen.listUpcomingByScreen(dbInstance, "G");
         assertNotNull(getOutput());
     }
+
 
 }

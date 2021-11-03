@@ -21,6 +21,7 @@ public class Guest {
     private String identity;
     private String settings;
 
+
     private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
@@ -547,7 +548,10 @@ public class Guest {
                 String cardHolderName = "";
                 if(GetCardNumByUserName.getCardNumByUserName(db, username) != null) {
                     cardNum = GetCardNumByUserName.getCardNumByUserName(db, username);
-                    cardHolderName = GetCardNameByCardNum.getCardNameByCardNum(db, cardNum);
+                    double cardBalancee = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
+                    double ticketPricee = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                    ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalancee - ticketPricee);
+                    return true;
                 } else {
                     cardNum = getCardNum();
                     if (cardNum == null) {
@@ -576,17 +580,31 @@ public class Guest {
                 break;
 
             case "2"://giftcard
-                Msg1();
-                String giftCardNum = Timer.timer("p");
-                String result = checkGiftCard(giftCardNum);
-                if(result.equals("1") || result.equals("2")) {
-                    break;
-                } else if (result.equals("3") || result.equals("5")) {
-                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
-                    break;
-                } else if (result.equals("4")) {
-                    return true;
+                int counter = 0;
+                for (Integer audience: audienceNum){
+                    counter += audience;
                 }
+                String result = "";
+                String giftCardNum = "";
+                boolean checkGiftCards = false;
+                while (counter > 0){
+                    Msg1();
+                    giftCardNum = Timer.timer("p");
+                    System.out.println(giftCardNum);
+                    result = checkGiftCard(giftCardNum);
+                    System.out.println(result);
+                    if(result.equals("1") || result.equals("2")) {
+                        break;
+                    } else if (result.equals("3") || result.equals("5")) {
+                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
+                        break;
+                    } else if (result.equals("4")) {
+                        checkGiftCards = true;
+                    }
+                    counter -= 1;
+                }
+                return checkGiftCards;
+
             default:
                 wrongInputMsg();
                 checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
@@ -619,16 +637,20 @@ public class Guest {
                 return "3";
             }
 
-            if (!RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)) {
-                RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
-                return "4";
-
-            } else {
+            if (!CheckIfGiftCardExists.checkIfGiftCardExists(dbInstance, giftCardNum) || (RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum))){
                 BookingSystem.seperator();
                 System.out.println(RED_BOLD + "This gift card does not exist or has been redeemed" + ANSI_RESET);
                 return "5";
             }
+
+            if (!RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)) {
+                RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
+                return "4";
+
+            }
+
         }
+        return null;
     }
 
 
