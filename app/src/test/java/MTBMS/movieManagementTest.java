@@ -106,22 +106,5 @@ public class movieManagementTest {
         assertNotNull(getOutput());
     }
 
-    @Test
-    public void ListSeatTest() throws InterruptedException {
-       /*removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
-        addCinema(dbInstance, "ali's cinema");
-        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
-        inserter.addClassification("r18+");
-        inserter.insertMovie();
-        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
-        ChangeSeatCapacity.changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
-        ChangeSeatCapacity.changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
-        ChangeSeatCapacity.changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
-        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "front");
-        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "mid");
-        UpdateSeats.updateSeats(dbInstance, "ali's cinema", "vscode, the movie", "2017-03-31 9:30:20", "gold", 1, "back");*/
-        ListSeats.listSeats(dbInstance,"Warringah Mall", "Black Box", "Bronze","2021-11-07 10:00:00");
-        //removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
-    }
 
 }
