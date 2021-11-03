@@ -18,6 +18,7 @@ import static databaseutility.AddMovieSession.addMovieSession;
 import static databaseutility.AddingCinema.addCinema;
 import static databaseutility.RemovingSession.removeSession;
 import static databaseutility.ChangeSeatCapacity.changeBackSeatCapacity;
+import static databaseutility.ShowingDateChanger.changeShowingDate;
 
 import databaseutility.MovieInsertionBuilder;
 
@@ -132,6 +133,16 @@ public class movieManagementTest {
         changeBackSeatCapacity(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", 1);
         assert(ListSeats.getSeatNum(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "3") == 1);
 
+    }
+
+    @Test
+    public void listNowShowing1() {
+        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance, "movie a");
+        x.addClassification("g");
+        x.insertMovie();
+        changeShowingDate(dbInstance, "movie a", "2017-03-31 9:30:20");
+        ListNowShowing.listNowShowing(dbInstance);
+        assertNotNull(getOutput());
     }
 
 
