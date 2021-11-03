@@ -436,25 +436,25 @@ public class AppTest {
     @Test
     public void bookNumHelperTest1() throws InterruptedException {
         getInput("1");
-        instance.bookNumHelper("1");
+        //instance.bookNumHelper("1");
     }
 
     @Test
     public void bookNumHelperTest2() throws InterruptedException {
         getInput("1");
-        instance.bookNumHelper("2");
+        //instance.bookNumHelper("2");
     }
 
     @Test
     public void bookNumHelperTest3() throws InterruptedException {
         getInput("1");
-        instance.bookNumHelper("3");
+        //instance.bookNumHelper("3");
     }
 
     @Test
     public void bookNumHelperTest4() throws InterruptedException {
         getInput("1");
-        instance.bookNumHelper("4");
+        //instance.bookNumHelper("4");
     }
 
     @Test

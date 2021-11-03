@@ -1255,6 +1255,4 @@ public class databaseUtilityTests {
         listAllCinemaSessions(dbInstance);
     }
 
-    
-
 }
