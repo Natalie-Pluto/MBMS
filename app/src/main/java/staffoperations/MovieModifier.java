@@ -202,7 +202,7 @@ public class MovieModifier {
                 return success;
             case "6":
                 String casts = collectMovieCasts();
-                success = CastsChanger.changeCasts(d, movieName, casts);
+                success = SetMovieCast.setMovieCast(d, movieName, casts);
                 return success;
             case "7":
                 String showingDate = collectMovieShowingDate();
