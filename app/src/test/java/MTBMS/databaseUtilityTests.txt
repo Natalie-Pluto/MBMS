@@ -22,7 +22,6 @@ DirectorChanger_1 changing directors of a movie that exists
 DirectorChanger_2 attempting to change the director of a movie that does not exist does not cause error.
 
 MovieClassificationChanger_1 Changing movie classification to a valid classification
-MovieClassificationChanger_2 Changing movie classification to an invalid classification does not change classification
 MovieClassificationChanger_3 Attempting to change the movie classification of a movie that does not exist does not cause error.
 
 MovieInsertionBuilder_1 Attempting to insert a movie without classification should not work and not cause issues
