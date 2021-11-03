@@ -21,10 +21,9 @@ public class Guest {
     private String identity;
     private String settings;
 
-    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -567,7 +566,7 @@ public class Guest {
                         checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                     }else {
                         ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
-                        saveCreditCard(db, cardNum,cardHolderName);
+                        saveCreditCard(db, cardNum, username);
                         return true;
                     }
                 }else{
@@ -744,22 +743,14 @@ public class Guest {
 
 
     public List<Integer> getBookNum() throws InterruptedException {
-        System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String audienceNumStrAdults = Timer.timer(username);
-        System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for kids?" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String audienceNumStrKids = Timer.timer(username);
-        System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String audienceNumStrStudents = Timer.timer(username);
-        System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "How many seats do you wish to book for seniors?" + ANSI_RESET);
-        System.out.println("======================================================\n");
-        String audienceNumStrSeniors = Timer.timer(username);
+        String audienceNumStrAdults = bookNumHelper("1");
+        String audienceNumStrKids = bookNumHelper("2");
+        String audienceNumStrStudents = bookNumHelper("3");
+        String audienceNumStrSeniors = bookNumHelper("4");
+        return bookNumHelper2(audienceNumStrKids, audienceNumStrSeniors, audienceNumStrAdults, audienceNumStrStudents);
+    }
+
+    public List<Integer> bookNumHelper2 (String audienceNumStrKids, String audienceNumStrSeniors, String audienceNumStrAdults, String audienceNumStrStudents) {
         List<Integer> seatsBooked = new ArrayList<>();
         seatsBooked.add(Integer.parseInt(audienceNumStrKids));
         seatsBooked.add(Integer.parseInt(audienceNumStrSeniors));
@@ -767,6 +758,31 @@ public class Guest {
         seatsBooked.add(Integer.parseInt(audienceNumStrStudents));
         return seatsBooked;
     }
+
+    public String bookNumHelper(String type) throws InterruptedException {
+        if(type.equals("1")) {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            return Timer.timer(username);
+        } else if (type.equals("2")) {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for kids?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            return Timer.timer(username);
+        } else if (type.equals("3")) {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+           return Timer.timer(username);
+        } else {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for seniors?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            return Timer.timer(username);
+        }
+    }
+
 
     public List<Integer> getSeatNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
          List<Integer> numberBook = getBookNum();
@@ -811,17 +827,7 @@ public class Guest {
         cancelTransMsg();
         System.out.println("======================================================");
         String cardNum = BookingSystem.readPwd("2");
-        if (cardNum == null) {
-            System.out.println(RED_BOLD + "Time out! Transaction cancelled." + ANSI_RESET);
-            cancelTrans(username, "Timeout");
-            return null;
-        }  else if(cardNum.toLowerCase(Locale.ROOT).equals("cancel")) {
-            System.out.println(RED_BOLD + "Transaction cancelled." + ANSI_RESET);
-            cancelTrans(username, "Cancelled Transaction");
-            return null;
-        }
-
-        return cardNum;
+        return getCardHelper(cardNum);
     }
 
     public String getCardHolderName() throws InterruptedException {
@@ -830,38 +836,21 @@ public class Guest {
         cancelTransMsg();
         System.out.println("======================================================");
         String cardHolderName = Timer.timer("p");
-        if (cardHolderName == null) {
+        return getCardHelper(cardHolderName);
+    }
+
+    public String getCardHelper(String input) throws InterruptedException {
+        if (input == null) {
             System.out.println(RED_BOLD + "Time out! Transaction cancelled." + ANSI_RESET);
             cancelTrans(username, "Timeout");
             return null;
-        } else if(cardHolderName.toLowerCase(Locale.ROOT).equals("cancel")) {
+        } else if(input.toLowerCase(Locale.ROOT).equals("cancel")) {
             System.out.println(RED_BOLD + "Transaction cancelled." + ANSI_RESET);
             cancelTrans(username, "Cancelled Transaction");
             return null;
         }
-            return cardHolderName;
+        return input;
     }
-
-    public void checkTimeOut(String timeOut) throws InterruptedException {
-        if (timeOut.equals(null)){
-            cancelTrans(username, "Timeout");
-        }
-    }
-    public void checkCancelTrans(String cancel) throws InterruptedException {
-        if (cancel.equals("cancel")){
-            cancelTrans(username, "Cancelled Transaction");
-        }
-    }
-    public boolean checkCreditCard(Database dbInstance) throws InterruptedException {
-        String cardNum = getCardNum();
-        String cardHolderName = getCardHolderName();
-        if (!(CheckCreditCard.checkCreditCard(dbInstance, cardNum, cardHolderName))){
-            System.out.println(RED_BOLD + "\nWrong card number or card holder name\n" + ANSI_RESET);
-            return checkCreditCard(dbInstance);
-        }
-        return true;
-    }
-
 
     public static void cancelTransMsg(){
         System.out.println(PURPLE_BOLD + "Enter \"cancel\" to cancel transaction" + ANSI_RESET);
@@ -871,7 +860,7 @@ public class Guest {
         UpdateCancelTrans.updateCancelTrans(dbInstance, username, reason);
     }
 
-    public void saveCreditCard(Database dbInstance, String cardNum, String cardHolderName) throws InterruptedException {
+    public void saveCreditCard(Database dbInstance, String cardNum, String username) throws InterruptedException {
         if(GetCardNumByUserName.getCardNumByUserName(dbInstance, username) == null) {
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             System.out.println("======================================================");
@@ -880,20 +869,22 @@ public class Guest {
             System.out.println("======================================================\n");
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
             String saveInfo = Timer.timer(username);
-            switch (saveInfo) {
-                case "1":
-                    SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
-                    System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time!" + ANSI_RESET);
-                    break;
+            saveCardHelper(dbInstance, saveInfo, cardNum, username);
+        }
+    }
 
-                case "2":
-                    System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
-                    break;
-
-                default:
-                    System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
-                    saveCreditCard(dbInstance, cardNum, cardHolderName);
-            }
+    public void saveCardHelper(Database dbInstance, String saveInfo, String cardNum, String username) throws InterruptedException {
+        if (saveInfo == null) {
+            System.out.println(RED_BOLD + "Time Out!" + ANSI_RESET);
+            System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
+        }else if(saveInfo.equals("1")) {
+            SaveCreditCard.saveCreditCard(dbInstance, cardNum, username);
+            System.out.println(GREEN_BOLD + "Your credit card has been stored in your account, you can use it next time!" + ANSI_RESET);
+        } else if (saveInfo.equals("2")) {
+            System.out.println(PURPLE_BOLD + "Credit card not saved" + ANSI_RESET);
+        } else {
+            System.out.println(RED_BOLD + "Please enter a correct number" + ANSI_RESET);
+            saveCreditCard(dbInstance, cardNum, username);
         }
     }
 
