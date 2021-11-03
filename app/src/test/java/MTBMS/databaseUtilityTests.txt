@@ -246,3 +246,5 @@ SetUserSetting_1 the settings of an existing user can be set
 SetUserSetting_2 attempting to get the settings of a user that does not exist does not cause issues
 SetUserSetting_3 attempting to set the cinema preference of a user to a cinema that does not exist does not cause issues
 
+ListAllCinemaSessions_1 calling this method causes no issues/exceptions
+

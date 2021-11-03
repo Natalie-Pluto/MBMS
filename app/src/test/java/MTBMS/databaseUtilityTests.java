@@ -79,6 +79,7 @@ import static databaseutility.GetNumberOfSeatsBooked.getNumberOfMidSeatsBooked;
 import static databaseutility.GetNumberOfSeatsBooked.getNumberOfBackSeatsBooked;
 import static databaseutility.GetuserSetting.getUsersetting;
 import static databaseutility.SetUserSetting.setUserSetting;
+import static databaseutility.ListAllCinemaSessions.listAllCinemaSessions;
 
 import databaseutility.MovieInsertionBuilder;
 
@@ -1248,6 +1249,11 @@ public class databaseUtilityTests {
         removeCinema(dbInstance, "afsd cinema");
         addUser(dbInstance, "alien", "aa", "c");
         setUserSetting(dbInstance, "alien", "afsd cinema");
+    }
+
+    @Test
+    public void ListAllCinemaSessions_1() {
+        listAllCinemaSessions(dbInstance);
     }
 
     
