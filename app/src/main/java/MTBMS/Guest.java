@@ -548,7 +548,10 @@ public class Guest {
                 String cardHolderName = "";
                 if(GetCardNumByUserName.getCardNumByUserName(db, username) != null) {
                     cardNum = GetCardNumByUserName.getCardNumByUserName(db, username);
-                    cardHolderName = GetCardNameByCardNum.getCardNameByCardNum(db, cardNum);
+                    double cardBalancee = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
+                    double ticketPricee = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                    ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalancee - ticketPricee);
+                    return true;
                 } else {
                     cardNum = getCardNum();
                     if (cardNum == null) {
