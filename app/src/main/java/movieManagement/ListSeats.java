@@ -4,7 +4,7 @@ import MTBMS.Database;
 
 public class ListSeats {
     public static void listSeats(Database db, String cinemaName, String movieName, String screenType, String startTime){
-        String query = " from moviebooking_db.cinema_session where cinema = '"+ cinemaName + "'and movie = '" + movieName + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
+        String query = " from moviebooking_db.cinema_session where cinema = '"+ cinemaName.replace("'", "''") + "'and movie = '" + movieName.replace("'", "''") + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
         int frontNum = db.sql_getInt("select front_seat_capacity"+query, "front_seat_capacity");
         int midNum = db.sql_getInt("select mid_seat_capacity"+query, "mid_seat_capacity");
         int backNum = db.sql_getInt("select back_seat_capacity"+query, "back_seat_capacity");
@@ -13,15 +13,15 @@ public class ListSeats {
         int backBooked = db.sql_getInt("select number_of_back_seats_booked" + query, "number_of_back_seats_booked");
 
         System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "Please select your seatLocation:" + ANSI_RESET);
-        System.out.println("======================================================\n");
+        System.out.println(PURPLE_BOLD + "Please select your seat location:" + ANSI_RESET);
+        System.out.println("======================================================");
         System.out.println("1.Front: " + PURPLE_BOLD + (frontNum - frontBooked) + ANSI_RESET + " seats left");
         System.out.println("2.Mid: " + PURPLE_BOLD + (midNum - midBooked) + ANSI_RESET + " seats left");
-        System.out.println("3.Back: " + PURPLE_BOLD + (backNum - backBooked) + ANSI_RESET + " seats left");
+        System.out.println("3.Back: " + PURPLE_BOLD + (backNum - backBooked) + ANSI_RESET + " seats left\n");
     }
 
     public static int getSeatNum(Database db, String cinemaName, String movieName, String screenType, String startTime, String seatLocation){
-        String query = " from moviebooking_db.cinema_session where cinema = '"+ cinemaName + "'and movie = '" + movieName + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
+        String query = " from moviebooking_db.cinema_session where cinema = '"+ cinemaName.replace("'", "''") + "'and movie = '" + movieName.replace("'", "''") + "' and screen_type= '" + screenType + "' and start_time= '" + startTime + "';";
         int frontNum = db.sql_getInt("select front_seat_capacity"+query, "front_seat_capacity");
         int midNum = db.sql_getInt("select mid_seat_capacity"+query, "mid_seat_capacity");
         int backNum = db.sql_getInt("select back_seat_capacity"+query, "back_seat_capacity");

@@ -17,6 +17,10 @@ import java.util.Scanner;
 import static databaseutility.AddMovieSession.addMovieSession;
 import static databaseutility.AddingCinema.addCinema;
 import static databaseutility.RemovingSession.removeSession;
+import static databaseutility.ChangeSeatCapacity.changeBackSeatCapacity;
+
+import databaseutility.MovieInsertionBuilder;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -104,6 +108,30 @@ public class movieManagementTest {
     public void listScreenTest4() {
         ListUpcomingByScreen.listUpcomingByScreen(dbInstance, "G");
         assertNotNull(getOutput());
+    }
+
+    @Test
+    public void listSeats1() {
+        addCinema(dbInstance, "abc cinema");
+        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance, "movie a");
+        x.addClassification("g");
+        x.insertMovie();
+        addMovieSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "0", "15", "15", "12");
+        ListSeats.listSeats(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void getSeatNum1() {
+        addCinema(dbInstance, "abc cinema");
+        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance, "movie a");
+        x.addClassification("g");
+        x.insertMovie();
+        removeSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20");
+        addMovieSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "0", "15", "15", "12");
+        changeBackSeatCapacity(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", 1);
+        assert(ListSeats.getSeatNum(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "3") == 1);
+
     }
 
 

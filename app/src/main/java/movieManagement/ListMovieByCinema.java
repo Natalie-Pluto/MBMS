@@ -21,7 +21,7 @@ public class ListMovieByCinema {
                     System.out.println("\n=============================================================");
                     System.out.println(RED_BOLD + "Wrong input! Please enter the right cinema number (｡´︿`｡)" + ANSI_RESET);
                     System.out.println("=============================================================\n");
-                    guestInstance.bookingHelper(db);
+                    guestInstance.book(db);
                 }
             } else {
                 System.out.println(YELLOW_BOLD_BRIGHT + "Movies on show at " + cinema + ANSI_RESET + "\n");
@@ -49,7 +49,7 @@ public class ListMovieByCinema {
             System.out.println("\n========================================================");
             System.out.println(RED_BOLD + "Sorry, no movie is played currently in this cinema (｡´︿`｡)" + ANSI_RESET);
             System.out.println("========================================================\n");
-            guestInstance.bookingHelper(db);
+            guestInstance.book(db);
         }
     }
 

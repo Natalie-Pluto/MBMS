@@ -25,14 +25,22 @@ MovieClassificationChanger_1 Changing movie classification to a valid classifica
 MovieClassificationChanger_3 Attempting to change the movie classification of a movie that does not exist does not cause error.
 
 MovieInsertionBuilder_1 Attempting to insert a movie without classification should not work and not cause issues
-MovieInsertionBuilder_2 Inserting a movie with classification, release date, synopsis and directors should work
-MovieInsertionBuilder_3 Inserting a movie with classifcation, release date, synopsis but without directors should work
-MovieInsertionBuilder_4 Inserting a movie with classifcation and release date and directors but without synopsis should work
-MovieInsertionBuilder_5 Inserting a movie with classifcation and release date but without directors or synopsis should work
-MovieInsertionBuilder_6 Inserting a movie with classifcation, synopsis and directors but without release date should work
-MovieInsertionBuilder_7 Inserting a movie with classifcation and synopsis but without release date or directors should work
-MovieInsertionBuilder_8 Inserting a movie with classifcation and directors but without release date or synopsis should work
-MovieInsertionBuilder_9 Inserting a movie with classifcation without directors, release date or synopsis should work
+MovieInsertionBuilder_2 Inserting a movie with classification,
+ release date, synopsis and directors should work
+MovieInsertionBuilder_3 Inserting a movie with classifcation,
+ release date, synopsis but without directors should work
+MovieInsertionBuilder_4 Inserting a movie with classifcation
+ and release date and directors but without synopsis should work
+MovieInsertionBuilder_5 Inserting a movie with classifcation
+ and release date but without directors or synopsis should work
+MovieInsertionBuilder_6 Inserting a movie with classifcation,
+ synopsis and directors but without release date should work
+MovieInsertionBuilder_7 Inserting a movie with classifcation
+ and synopsis but without release date or directors should work
+MovieInsertionBuilder_8 Inserting a movie with classifcation
+ and directors but without release date or synopsis should work
+MovieInsertionBuilder_9 Inserting a movie with classifcation
+ without directors, release date or synopsis should work
 MovieInsertionBuilder_10 Attempting to insert a movie with invalid classification should not work and not cause issues
 
 AddingCinema_1 adding a cinema with a name that does not already exist
@@ -51,33 +59,43 @@ AddingUpcomingMovie_1 : TODO (more difficult to test this class)
 AddMovieSession_1 Inserting a session that does not already occur in the database
 AddMovieSession_2 Attempting to insert a session that already exists in the database should not cause issues
 
-ChangeSeatCapacity_front_1 Attempt to change a session's front seat capacity with a parameter combination that does not identify a session should not cause issues
-ChangeSeatCapacity_front_2 Changing the front seat capacity with a parameter combination that identifies a session works 
+ChangeSeatCapacity_front_1 Attempt to change a session's front seat capacity
+ with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_front_2 Changing the front seat capacity
+ with a parameter combination that identifies a session works
 ChangeSeatCapacity_front_3 Changing the front seat capacity to be more than the mid seat capacity should not work
 
-ChangeSeatCapacity_mid_1 Attempt to change a session's mid seat capacity with a parameter combination that does not identify a session should not cause issues
-ChangeSeatCapacity_mid_2 Changing the mid seat capacity with a parameter combination that identifies a session works 
+ChangeSeatCapacity_mid_1 Attempt to change a session's mid seat capacity
+ with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_mid_2 Changing the mid seat capacity
+ with a parameter combination that identifies a session works
 ChangeSeatCapacity_mid_3 Changing the mid seat capacity to be more than the back seat capacity should not work
 ChangeSeatCapacity_mid_4 Changing the mid seat capacity to be less than the front seat capacity should not work
 
-ChangeSeatCapacity_back_1 Attempt to change a session's back seat capacity with a parameter combination that does not identify a session should not cause issues
+ChangeSeatCapacity_back_1 Attempt to change a session's back seat capacity with a parameter combination
+ that does not identify a session should not cause issues
 ChangeSeatCapacity_back_2 Changing the back seat capacity with a parameter combination that identifies a session works 
 ChangeSeatCapacity_back_3 Changing the back seat capacity to be less than the mid seat capacity should not work
 
 ChangingCreditCardBalance_1 changing the balance on a credit card that exists works
-ChangingCreditCardBalance_2 attempting the change the balance of a credit card that does not exist does not cause issues
+ChangingCreditCardBalance_2 attempting the change the balance of a credit card
+ that does not exist does not cause issues
 
 ChangingIdentity_1 changing the identity of a user that exists works
-ChangingIdentity_2 attempting the change the identity of a user that does not exist does not cause issues
+ChangingIdentity_2 attempting the change the identity of a user
+ that does not exist does not cause issues
 
 ChangingUserPassword_1 changing the user password of a user that exists works
-ChangingUserPassword_2 attempting the change the password of a user that does not exist does not cause issues
+ChangingUserPassword_2 attempting the change the password of a user
+ that does not exist does not cause issues
 
 CheckIfMovieExists_1 checking if a movie that exists, exists
-CheckIfMovieExists_2 checking if a movie that does not exist, does not exist
+CheckIfMovieExists_2 checking if a movie that does not exist,
+ does not exist
 
 CheckIfUserExists_1 checking if a user exists, exists
-CheckingIfUserExists_2 checking if a user does not exist, does not exist
+CheckingIfUserExists_2 checking if a user does not exist,
+ does not exist
 
 DeleteAllUpcoming_1 checking that all entries in the table for upcoming movies are deleted
 
@@ -86,21 +104,28 @@ FilterCinema_1 (todo)
 FilterScreenSize_1 (todo)
 
 GetEndTime_1 the end time of a session that exists can be retrieved
-GetEndTime_2 attempting to get the end time of a session that does not exist does not cause issues
+GetEndTime_2 attempting to get the end time of a session
+ that does not exist does not cause issues
 
-GetMovieCast_1 the movie cast of a session that exists can be retrieved
-GetMovieCast_2 attempting to get the movie cast of a session that does not exist does not cause issues
+GetMovieCast_1 the movie cast of a session
+ that exists can be retrieved
+GetMovieCast_2 attempting to get the movie cast of a session
+ that does not exist does not cause issues
 
-GetMovieClassification_1 the classification of a movie that exists can be retrieved
-GetMovieClassification_2 attempting to get the classification of a movie that does not exist does not cause issues
+GetMovieClassification_1 the classification of a movie
+ that exists can be retrieved
+GetMovieClassification_2 attempting to get the classification of a movie
+ that does not exist does not cause issues
 
 GetMovieDirectors_1 the directors of a movie that exists can be retrieved
-GetMovieDirectors_2 attempting to get the director of a movie that does not exist does not cause issues
+GetMovieDirectors_2 attempting to get the director of a movie
+ that does not exist does not cause issues
 
 GetMovieNames_1 attempting to get the names of all the movies in the database does not cause issues
 
 GetMovieReleaseDate_1 the release of a movie that exists can be retrieved
-GetMovieReleaseDate_2 attempting to get the release of a movie that does not exist does not cause issues
+GetMovieReleaseDate_2 attempting to get the release of a movie
+ that does not exist does not cause issues
 
 GetMovieScreenSize_1 attempting to get the screen sizes of a movie does not cause issues
 GetMovieScreenSize_2 attempting to get the screen sizes of a movie that does not exist does not cause issues
