@@ -17,13 +17,15 @@ import java.util.Scanner;
 import static databaseutility.AddMovieSession.addMovieSession;
 import static databaseutility.AddingCinema.addCinema;
 import static databaseutility.RemovingSession.removeSession;
+import databaseutility.MovieInsertionBuilder;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class movieManagementTest {
 
-    //private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
@@ -103,6 +105,17 @@ public class movieManagementTest {
     @Test
     public void listScreenTest4() {
         ListUpcomingByScreen.listUpcomingByScreen(dbInstance, "G");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void listSeats1() {
+        addCinema(dbInstance, "abc cinema");
+        MovieInsertionBuilder x = new MovieInsertionBuilder(dbInstance, "movie a");
+        x.addClassification("g");
+        x.insertMovie();
+        addMovieSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "0", "15", "15", "12");
+        ListSeats.listSeats(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20");
         assertNotNull(getOutput());
     }
 

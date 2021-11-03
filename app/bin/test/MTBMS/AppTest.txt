@@ -16,55 +16,77 @@ getUsernameTest Test for Guest object is equal to the attribute
 getIdentityTest Obtain the Guest object identity attribute judgment are equal
 getSettingTest Equal access to Guest object setting attributes determine whether
 
-wrongInputTest Call the wrong Input method to print, and finally asserts that the output stream is not NULL
+wrongInputTest Call the wrong Input method to print,
+ and finally asserts that the output stream is not NULL
 
-continueServiceTest_2 Set the input stream, and call the Guest get the Continue the Service method for printing,
-finally asserts that the output stream is not NULL
+continueServiceTest_2 Set the input stream,
+ and call the Guest get the Continue the Service method for printing,
+  finally asserts that the output stream is not NULL
 
-customerHomePageTest call the Guest customer Home Page method For printing operations and For listing upcoming movie in the default Page,
-finally asserts that the output stream is not NULL
+customerHomePageTest call the Guest customer Home Page method For printing operations
+ and For listing upcoming movie in the default Page,
+  finally asserts that the output stream is not NULL
 
-nowShowingCus call the Guest now Showing Cus method for printing operations, and make a List now Showing the operation,
-finally asserts that the output stream is not NULL
+nowShowingCus call the Guest now Showing Cus method for printing operations,
+ and make a List now Showing the operation,
+  finally asserts that the output stream is not NULL
 
-CshowingFilterTest to get the data to Test the input stream, assert that Guest Cshowing Filter method execution after the return value of the equal with the Test
-CupcomingFilterTest to get the data to Test the input stream, assert that Guest Cupcoming Filter method execution after the return value of the equal with the Test
+CshowingFilterTest to get the data to Test the input stream,
+ assert that Guest Cshowing Filter method execution
+ after the return value of the equal with the Test
+CupcomingFilterTest to get the data to Test the input stream,
+ assert that Guest Cupcoming Filter method execution
+ after the return value of the equal with the Test
 
-wrongInputMsgTest call Guest wrong Input Msg method, finally asserts that the output stream is not NULL
+wrongInputMsgTest call Guest wrong Input Msg method,
+ finally asserts that the output stream is not NULL
 
-filterMsgTest call Guest the filter method of Msg filtration Test of e, finally asserts that the output stream is not NULL
+filterMsgTest call Guest the filter method of Msg filtration Test of e,
+ finally asserts that the output stream is not NULL
 
 guestServiceTest_2 to obtain a data for 2 input stream
 
-greetingTest Call Booking System get the Greeting method and introduced into the db instance visit test,
-finally asserts that the output stream is not NULL
+greetingTest Call Booking System get the Greeting method
+ and introduced into the db instance visit test,
+  finally asserts that the output stream is not NULL
 
-getPaymentTypeTest_1 get data for 1 of the input stream, and determine the Guest get Payment Type, the return value is equal
+getPaymentTypeTest_1 get data for 1 of the input stream,
+ and determine the Guest get Payment Type,
+  the return value is equal
 
 checkPaymentTest_2 remove gift Card Number is 99999999999999 GC's gift Card,
-add 99999999999999 GC's gift Card, get the data of 99999999999999 GC input stream,
+add 99999999999999 GC's gift Card,
+ get the data of 99999999999999 GC input stream,
 determine the check Payment to TRUE and then remove the gift Card Number 99999999999999 GC gift Card.
 
-checkMovieName_1 delete 1 film called Test to create a Movie called Test Insertion Builder, and insert film,
-get the input stream of data to Test, assert that Movie called Test
+checkMovieName_1 delete 1 film called Test to create a Movie called Test Insertion Builder,
+ and insert film,
+get the input stream of data to Test,
+ assert that Movie called Test
 
-getAudienceNumTest get the input stream of data for 1, assertions on Num 1
-getSeatLocationTest data for the front of the input stream, assert that Seat Location for the front
-getCardNumTest get data for 0000 input stream, assertion Card Num for 0000
+getAudienceNumTest get the input stream of data for 1,
+ assertions on Num 1
+getSeatLocationTest data for the front of the input stream,
+ assert that Seat Location for the front
+getCardNumTest get data for 0000 input stream,
+ assertion Card Num for 0000
 
 cardNumberCheckTest_r delete card Number for 99999 Credit card,
-add the card Number is 99999, card Holder, the Name for the Test Name, pin for 0000 Credit card, get data for 99999 input stream,
+add the card Number is 99999, card Holder, the Name for the Test Name,
+ pin for 0000 Credit card, get data for 99999 input stream,
 assert that card Number Check to True
 
-getCardHolderNameTest obtained Test data to Test the Name of the input stream, assert that Card Holder Name for the Test Name
+getCardHolderNameTest obtained Test data to Test the Name of the input stream,
+ assert that Card Holder Name for the Test Name
 
 cardHolderNameCheckTest_r delete the card Holder's Name to Test the Name of the Credit card,
-add the card Holder Name for the Test Name, card Number is 99999 and bin is 0000 of Credit card.
+ add the card Holder Name for the Test Name, card Number is 99999 and bin is 0000 of Credit card.
 
 saveCreditCardTest_1 remove Card Number for 99999 Credit Card,
-add the Card Holder's Name for the Test Name, Card Number and bin for 99999 to 0000 of the Credit Card,
-get the input stream of data to 1, and join the Card Holder's Name for the Test Name, Card Number is 99999 of Credit Card
+ add the Card Holder's Name for the Test Name, Card Number and bin for 99999 to 0000 of the Credit Card,
+  get the input stream of data to 1, and join the Card Holder's Name for the Test Name, Card Number is 99999 of Credit Card
 
 getPaymentTypeWrongMsgTest call Guest get Payment Type Wrong Msg
 
-setSettingsTest to set Guest object, and assert that the Guest object Settings properties with the same Test
+setSettingsTest to set Guest object,
+ and assert that the Guest object Settings properties with the same Test
