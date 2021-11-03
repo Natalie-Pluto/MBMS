@@ -22,8 +22,8 @@ public class Guest {
     private String settings;
 
 
-    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
-    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
+    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     public Guest(String username, String identity, String settings) {
@@ -311,7 +311,6 @@ public class Guest {
                 break;
 
             case "3":
-                bookingHelper(dbInstance);
                 book(dbInstance);
                 break;
 
@@ -786,22 +785,20 @@ public class Guest {
 
 
     public List<Integer> getBookNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
-        String audienceNumStrAdults = bookNumHelper("1");
-        bookNumHelper2(audienceNumStrAdults, db, cinemaName, movieName, screenType, StartTime, seatLocation);
-        String audienceNumStrKids = bookNumHelper("2");
-        bookNumHelper2(audienceNumStrKids, db, cinemaName, movieName, screenType, StartTime, seatLocation);
-        String audienceNumStrStudents = bookNumHelper("3");
-        bookNumHelper2(audienceNumStrStudents, db, cinemaName, movieName, screenType, StartTime, seatLocation);
-        String audienceNumStrSeniors = bookNumHelper("4");
-        bookNumHelper2(audienceNumStrStudents, db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrAdults = bookNumHelper2("3", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrKids = bookNumHelper2("1", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrStudents = bookNumHelper2("4", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrSeniors = bookNumHelper2("2", db, cinemaName, movieName, screenType, StartTime, seatLocation);
         return bookNumHelper2(audienceNumStrKids, audienceNumStrSeniors, audienceNumStrAdults, audienceNumStrStudents);
     }
 
-    public void bookNumHelper2(String num, Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
-        if (Integer.parseInt(num) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+    public String bookNumHelper2(String type, Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
+        String number = bookNumHelper(type);
+        if (Integer.parseInt(number) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
             System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
-            getBookNum(db, cinemaName, movieName, screenType, StartTime, seatLocation);
+            return bookNumHelper2(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
         }
+        return number;
     }
 
     public List<Integer> bookNumHelper2 (String audienceNumStrKids, String audienceNumStrSeniors, String audienceNumStrAdults, String audienceNumStrStudents) {
