@@ -21,10 +21,10 @@ public class Guest {
     private String identity;
     private String settings;
 
-    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-     //           "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
+                "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -166,7 +166,7 @@ public class Guest {
                 passwordUpdate();
                 break;
             case "2":
-                setCinemaPreference();
+                setCinemaPreference(dbInstance);
                 break;
             case "return":
                 customerHomePage();
@@ -179,8 +179,8 @@ public class Guest {
 
     }
 
-    public void setCinemaPreference() throws InterruptedException {
-        List<String> cinemas = cinemaPreferenceMsg();
+    public void setCinemaPreference(Database dbInstance) throws InterruptedException {
+        List<String> cinemas = cinemaPreferenceMsg(dbInstance);
         String num = Timer.timer(username);
         BookingSystem.seperator();
         boolean success = setSuccessful(num, cinemas);
@@ -189,7 +189,7 @@ public class Guest {
         }
     }
 
-    public List<String> cinemaPreferenceMsg() {
+    public List<String> cinemaPreferenceMsg(Database dbInstance) {
         BookingSystem.seperator();
         System.out.println(YELLOW_BACKGROUND + "By choosing the cinema preference, the list of scheduled sessions of " + ANSI_RESET);
         System.out.println(YELLOW_BACKGROUND + "your preference cinema will be displayed in your home page." + ANSI_RESET + "\n");
@@ -335,6 +335,7 @@ public class Guest {
             List<String> cinemaName1 = BookingSystem.listCinema(dbInstance);
             String cinema = Timer.timer(username);
             try {
+                assert cinema != null;
                 if (Integer.parseInt(cinema) > cinemaName1.size()) {
                     filterMsg(dbInstance, "a", "hiufbjkv");
                 } else {
@@ -346,6 +347,7 @@ public class Guest {
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
             String screen = Timer.timer(username);
+            assert screen != null;
             if(screen.equals("1")) {
                 filterMsg(dbInstance, "b", "Gold");
             } else if (screen.equals("2")) {
@@ -359,6 +361,7 @@ public class Guest {
             List<String> cinemaName2 = BookingSystem.listCinema(dbInstance);
             String cinemaName = Timer.timer(username);
             try {
+                assert cinemaName != null;
                 if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
                     filterMsg(dbInstance, "c", "hiufbjkv");
                 } else {
@@ -370,6 +373,7 @@ public class Guest {
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();
             String size = Timer.timer(username);
+            assert size != null;
             if(size.equals("1")) {
                 filterMsg(dbInstance, "d", "Gold");
             } else if (size.equals("2")) {
@@ -434,6 +438,8 @@ public class Guest {
         BookingSystem.seperator();
         continueService();
     }
+
+
     public int getAudiences(List<Integer> audienceNum){
         int audiences = 0;
         for(int i =0; i < audienceNum.size();i++){
@@ -498,7 +504,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Transaction id: " + transId + ANSI_RESET);
     }
     public boolean updateSeats(Database db, String movieName, String cinemaName, String startTime, String screenType, int audienceNum, String seatLocation, List<Integer> audienceList) throws InterruptedException {
-        if (checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList)) {
+        if (checkPayment(db, movieName, cinemaName, startTime, screenType, audienceList, username)) {
             UpdateSeats.updateSeats(db, cinemaName, movieName, startTime, screenType, audienceNum, seatLocation);
             BookingSystem.seperator();
             return true;
@@ -534,7 +540,7 @@ public class Guest {
 
     // This method should be called by book( )
     // It will check if the payment is successful.
-    public boolean checkPayment(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum) throws InterruptedException {
+    public boolean checkPayment(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum, String username) throws InterruptedException {
         String paymentType = getPaymentType();
         switch (paymentType){
             case "1"://PayByCreditCard()
@@ -558,7 +564,7 @@ public class Guest {
                     double ticketPrice = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     if (cardBalance < ticketPrice){
                         System.out.println(RED_BOLD + "Insufficient balance" + ANSI_RESET);
-                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                     }else {
                         ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
                         saveCreditCard(db, cardNum,cardHolderName);
@@ -566,50 +572,64 @@ public class Guest {
                     }
                 }else{
                     System.out.println(RED_BOLD + "Wrong card number or name");
-                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                 }
                 break;
 
             case "2"://giftcard
-                BookingSystem.seperator();
-                System.out.println("======================================================");
-                System.out.println(PURPLE_BOLD + "Please enter your gift card number" + ANSI_RESET);
-                cancelTransMsg();
-                System.out.println("======================================================\n");
+                Msg1();
                 String giftCardNum = Timer.timer("p");
-                if(giftCardNum == null) {
-                    System.out.println(RED_BOLD + "Time out! Transaction cancelled." + ANSI_RESET);
-                    cancelTrans(username, "Time out");
+                String result = checkGiftCard(giftCardNum);
+                if(result.equals("1") || result.equals("2")) {
                     break;
-                } else if(giftCardNum.toLowerCase(Locale.ROOT).equals("cancel")) {
-                    System.out.println(RED_BOLD + "Transaction cancelled." + ANSI_RESET);
-                    cancelTrans(username, "Cancelled Transaction");
+                } else if (result.equals("3") || result.equals("5")) {
+                    checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                     break;
-                } else {
-                    if (giftCardNum.length() != 18 || !(giftCardNum.endsWith("GC"))) {
-                        System.out.println("\n");
-                        System.out.println(RED_BOLD + "Wrong gift card number, it should be 16-digit with suffix GC" + ANSI_RESET);
-                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
-                        break;
-                    }
-
-                    if (!RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)) {
-                        RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
-                        return true;
-
-                    } else {
-                        BookingSystem.seperator();
-                        System.out.println(RED_BOLD + "This gift card does not exist or has been redeemed" + ANSI_RESET);
-                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
-                        break;
-                    }
+                } else if (result.equals("4")) {
+                    return true;
                 }
             default:
                 wrongInputMsg();
-                checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum);
+                checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
         }
 
         return false;
+    }
+
+    public void Msg1() {
+        BookingSystem.seperator();
+        System.out.println("======================================================");
+        System.out.println(PURPLE_BOLD + "Please enter your gift card number" + ANSI_RESET);
+        cancelTransMsg();
+        System.out.println("======================================================\n");
+    }
+
+    public String checkGiftCard(String giftCardNum) throws InterruptedException {
+        if(giftCardNum == null) {
+            System.out.println(RED_BOLD + "Time out! Transaction cancelled." + ANSI_RESET);
+            cancelTrans(username, "Time out");
+            return "1";
+        } else if(giftCardNum.toLowerCase(Locale.ROOT).equals("cancel")) {
+            System.out.println(RED_BOLD + "Transaction cancelled." + ANSI_RESET);
+            cancelTrans(username, "Cancelled Transaction");
+            return "2";
+        } else {
+            if (giftCardNum.length() != 18 || !(giftCardNum.endsWith("GC"))) {
+                System.out.println("\n");
+                System.out.println(RED_BOLD + "Wrong gift card number, it should be 16-digit with suffix GC" + ANSI_RESET);
+                return "3";
+            }
+
+            if (!RedeemedCheck.giftCardRedeemed(dbInstance, giftCardNum)) {
+                RedeemingGiftCard.redeemGiftCard(dbInstance, giftCardNum);
+                return "4";
+
+            } else {
+                BookingSystem.seperator();
+                System.out.println(RED_BOLD + "This gift card does not exist or has been redeemed" + ANSI_RESET);
+                return "5";
+            }
+        }
     }
 
 

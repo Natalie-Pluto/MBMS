@@ -17,8 +17,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 public class bookingsystemTest {
-    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-        "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static final Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static final Database dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
     private static final BookingSystem instance = new BookingSystem();
     private final ByteArrayOutputStream testOutput = new ByteArrayOutputStream();
@@ -270,9 +269,9 @@ public class bookingsystemTest {
 
     @Test
     public void tryLoginTest1() {
-        AddingUser.addUser(dbInstance, "abc", "123456", "s");
-        assertTrue(instance.tryLogin(dbInstance, "abc", "123456"));
-        RemovingUser.removeUser(dbInstance, "abc");
+        AddingUser.addUser(dbInstance, "abbc", "123456", "c");
+        assertTrue(instance.tryLogin(dbInstance, "abbc", "123456"));
+        RemovingUser.removeUser(dbInstance, "abbc");
     }
 
     @Test

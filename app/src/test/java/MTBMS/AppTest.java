@@ -13,8 +13,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import static databaseutility.AddMovieSession.addMovieSession;
+import static databaseutility.AddingCinema.addCinema;
+import static databaseutility.CheckIfSessionExists.checkIfSessionExists;
+import static databaseutility.RemovingSession.removeSession;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -79,10 +85,62 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
-   /* @Test public void customerHomePageTest() throws InterruptedException {
+   @Test public void customerHomePageTest() throws InterruptedException {
         instance.customerHomePage();
         assertNotNull(getOutput());
-    }*/
+    }
+
+    @Test public void personalSettingsMsgsTest() throws InterruptedException {
+        getInput("Town Hall");
+        instance.personalSettingsMsgs();
+        assertNotNull(getOutput());
+    }
+
+    @Test public void WrongpersonalSettingsMsgsTest() throws InterruptedException {
+        getInput("Town Hall");
+        instance.wrongpersonalSettingsMsgs();
+        assertNotNull(getOutput());
+    }
+
+    @Test public void setCinemaPreferenceTest() throws InterruptedException {
+        getInput("1");
+        instance.setCinemaPreference(dbInstance);
+        assertNotNull(getOutput());
+    }
+
+    @Test public void CinemaPreferenceTest(){
+        getInput("Town Hall");
+        instance.cinemaPreferenceMsg(dbInstance);
+        assertNotNull(getOutput());
+    }
+
+    @Test public void setSuccessfulTest1() {
+        List<String> cinemas = BookingSystem.listCinema(dbInstance);
+        assertFalse(instance.setSuccessful("1000000", cinemas));
+    }
+
+    @Test public void setSuccessfulTest2() {
+        List<String> cinemas = BookingSystem.listCinema(dbInstance);
+        assertFalse(instance.setSuccessful("abc", cinemas));
+    }
+
+    @Test public void setSuccessfulTest3() {
+        List<String> cinemas = BookingSystem.listCinema(dbInstance);
+        assertTrue(instance.setSuccessful("1", cinemas));
+    }
+
+    @Test public void checkPwdTest1() {
+        assertFalse(instance.checkPwd("1", "1", "1"));
+    }
+
+    @Test public void checkPwdTest2() {
+        assertFalse(instance.checkPwd("2", "3", "1"));
+    }
+
+    @Test public void checkPwdTest3() {
+        assertTrue(instance.checkPwd("2", "2", "1"));
+    }
+
 
     @Test public void nowShowingCus(){
         Guest.nowShowingCus(dbInstance);
@@ -126,95 +184,49 @@ public class AppTest {
         assertEquals("1", instance.getPaymentType());
     }
 
-    /*@Test
-    public void updateSeatsTest() throws InterruptedException {
-        getInput("2" + System.lineSeparator() + "00000000000001GC");
-        Guest.updateSeats("Test", "Test", "2021-10-27 18:00","silver", 1,"front");
-    }*/
+    @Test
+    public void getAudiencesTest() {
+        List<Integer> audienceNum = new ArrayList<>();
+        audienceNum.add(1);
+        audienceNum.add(2);
+        instance.getAudiences(audienceNum);
+    }
 
-    /*@Test public void getPaymentTypeTest_2(){
+    @Test
+    public void getpriceTest() throws InterruptedException {
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+        addCinema(dbInstance, "ali's cinema");
+        MovieInsertionBuilder inserter = new MovieInsertionBuilder(dbInstance, "vscode, the movie");
+        inserter.addClassification("r18+");
+        inserter.insertMovie();
+        addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
+        List<Integer> audienceNum = new ArrayList<>();
+        audienceNum.add(1);
+        audienceNum.add(2);
+        instance.getTotalPrice(dbInstance, "vscode, the movie", "ali's cinema", "2017-03-31 9:30:20", "gold", audienceNum);
+        removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
+    }
+
+    @Test
+    public void bookSuccessTest() {
+        instance.bookSuccess();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void getPaymentTypeTest1() throws InterruptedException {
+        getInput("1");
+        instance.getPaymentType();
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void getPaymentTypeTest2() throws InterruptedException {
         getInput("2");
-        assertEquals("Wrong output","2", Guest.getPaymentType());
+        instance.getPaymentType();
+        assertNotNull(getOutput());
     }
 
-    /*@Test public void getPaymentTypeTest_w(){
-        getInput("wrong input");
-        assertNotEquals("Wrong output", Guest.getPaymentType(), "wrong input");
-    } */
-
-    /*@Test public void checkPaymentTest_2() throws InterruptedException {
-        RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
-        AddingGiftCard.addGiftCard(dbInstance, "99999999999999GC");
-        getInput("99999999999999GC");
-        assertTrue(instance.checkPayment("2"));
-        RemovingGiftCard.removeGiftCard(dbInstance,"99999999999999GC");
-    }*/
-
-    /*@Test public void checkMovieName_1() throws InterruptedException {
-        RemovingMovie.removeMovie(dbInstance, "Test");
-        MovieInsertionBuilder mib = new MovieInsertionBuilder(dbInstance, "Test");
-        mib.insertMovie();
-        getInput("Test");
-        assertEquals(instance.checkMovieName(), "Test");
-    }
-
-    /* @Test public void checkCinemaName_1() throws  InterruptedException {
-        getInput("Blacktown");
-        assertEquals(Guest.checkCinemaName("Ip Man"), "Blacktown");
-    } */
-
-     //debug addmoviesession
-    /* @Test public void checkStartTimeTest() throws InterruptedException{
-        //AddMovieSession.addMovieSession(dbInstance, 99999, "MovieTest", "CinemaTest", "silver", "2021-10-27 00:00:00", 0, 0, 0,0, 0, 0, 0, 0, 0, "2021-10-27 02:00:00" );
-        getInput("2021-10-28 17:00:00");
-        assertEquals("2021-10-28 17:00:00", Guest.checkStartTime("JUNGLE CRUISE", "Warringah Mall"));
-    } */
-
-   /* @Test public void getAudienceNumTest() throws InterruptedException {
-        getInput("1");
-        assertEquals(1, instance.getAudienceNum());
-    }
-
-    @Test public void getSeatLocationTest() throws InterruptedException {
-        getInput("front");
-        assertEquals("front", instance.getSeatLocation());
-    }
-
-    @Test public void getCardNumTest() throws InterruptedException{
-        getInput("0000");
-        assertEquals("0000", instance.getCardNum());
-    }
-
-   @Test public void cardNumberCheckTest_r() throws  InterruptedException{
-        RemovingCreditCard.removeCreditCard(dbInstance, "99999");
-        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
-        getInput("99999");
-        assertTrue(instance.cardNumberCheck());
-    }
-
-    @Test public void getCardHolderNameTest() throws InterruptedException{
-        getInput("TestName");
-        assertEquals("TestName", instance.getCardHolderName());
-    }
-
-    @Test public void cardHolderNameCheckTest_r() throws InterruptedException{
-        RemovingCreditCardHolderName.removeCreditCardHolderName(dbInstance, "TestName");
-        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
-        getInput("TestName");
-        assertTrue(instance.cardHolderNameCheck());
-    }
-
-    @Test public void saveCreditCardTest_1() throws InterruptedException {
-        RemovingCreditCard.removeCreditCard(dbInstance, "99999");
-        AddingCreditCard.addCreditCard(dbInstance, "99999", "TestName", "0000");
-        getInput("1");
-        Guest.saveCreditCard("Test", "9999");
-    }
-
-    /*@Test public void filterMoviesTest_U5() throws  InterruptedException{
-        getInput("Town Hall");
-        Guest.filterMovies("U5");
-    }*/
 
     @Test
     public void getPaymentTypeWrongMsgTest(){
@@ -235,7 +247,7 @@ public class AppTest {
     }
 
     @Test
-    public void bookingHelperTest() throws InterruptedException {
+    public void bookingHelperTest1() throws InterruptedException {
         getInput("1");
         instance.bookingHelper(dbInstance);
         assertNotNull(getOutput());
@@ -244,6 +256,20 @@ public class AppTest {
     @Test
     public void filterMovieTest1() throws InterruptedException {
         getInput("1");
+        instance.filterMovies(dbInstance,"U5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest1p1() throws InterruptedException {
+        getInput("100000");
+        instance.filterMovies(dbInstance,"U5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest1p2() throws InterruptedException {
+        getInput("abc");
         instance.filterMovies(dbInstance,"U5");
         assertNotNull(getOutput());
     }
@@ -269,10 +295,31 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
+    @Test
+    public void filterMovieTest2p4() throws InterruptedException {
+        getInput("4");
+        instance.filterMovies(dbInstance,"U6");
+        assertNotNull(getOutput());
+    }
+
 
     @Test
     public void filterMovieTest3() throws InterruptedException {
         getInput("1");
+        instance.filterMovies(dbInstance,"S5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest3p1() throws InterruptedException {
+        getInput("10000");
+        instance.filterMovies(dbInstance,"S5");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void filterMovieTest3p2() throws InterruptedException {
+        getInput("abc");
         instance.filterMovies(dbInstance,"S5");
         assertNotNull(getOutput());
     }
@@ -298,9 +345,22 @@ public class AppTest {
         assertNotNull(getOutput());
     }
 
+   @Test
+    public void filterMovieTest4p4() throws InterruptedException {
+        getInput("4");
+        instance.filterMovies(dbInstance,"S6");
+        assertNotNull(getOutput());
+    }
+
     @Test
     public void filterMovieTest5() throws InterruptedException {
         instance.filterMovies(dbInstance,"S");
+        assertNotNull(getOutput());
+    }
+
+    @Test
+    public void MsgTest() {
+        instance.Msg1();
         assertNotNull(getOutput());
     }
 

@@ -27,10 +27,9 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres",
-        //                      "dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         //dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
@@ -237,6 +236,7 @@ public class BookingSystem {
             List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
             try {
+                assert cinema != null;
                 if (Integer.parseInt(cinema) > cinemaName1.size()) {
                     filterMsg(dbInstance, "a", "hiuwgvcila");
                 } else {
@@ -248,6 +248,7 @@ public class BookingSystem {
         } else if (type.equals("U7")) {
             listScreen();
             String screen = Timer.timer("g");
+            assert screen != null;
             if(screen.equals("1")) {
                 filterMsg(dbInstance, "b", "Gold");
             } else if (screen.equals("2")) {
@@ -261,6 +262,7 @@ public class BookingSystem {
             List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
             try {
+                assert cinemaName != null;
                 if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
                     filterMsg(dbInstance, "c", "hiuwgvcila");
                 } else {
@@ -272,6 +274,7 @@ public class BookingSystem {
         } else if (type.equals("S7")) {
             listScreen();
             String size = Timer.timer("g");
+            assert size != null;
             if(size.equals("1")) {
                 filterMsg(dbInstance, "d", "Gold");
             } else if (size.equals("2")) {
