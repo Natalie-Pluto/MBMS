@@ -13,11 +13,11 @@ public class ListSeats {
         int backBooked = db.sql_getInt("select number_of_back_seats_booked" + query, "number_of_back_seats_booked");
 
         System.out.println("\n======================================================");
-        System.out.println(PURPLE_BOLD + "Please select your seatLocation:" + ANSI_RESET);
-        System.out.println("======================================================\n");
+        System.out.println(PURPLE_BOLD + "Please select your seat location:" + ANSI_RESET);
+        System.out.println("======================================================");
         System.out.println("1.Front: " + PURPLE_BOLD + (frontNum - frontBooked) + ANSI_RESET + " seats left");
         System.out.println("2.Mid: " + PURPLE_BOLD + (midNum - midBooked) + ANSI_RESET + " seats left");
-        System.out.println("3.Back: " + PURPLE_BOLD + (backNum - backBooked) + ANSI_RESET + " seats left");
+        System.out.println("3.Back: " + PURPLE_BOLD + (backNum - backBooked) + ANSI_RESET + " seats left\n");
     }
 
     public static int getSeatNum(Database db, String cinemaName, String movieName, String screenType, String startTime, String seatLocation){
