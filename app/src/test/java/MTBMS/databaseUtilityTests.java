@@ -64,6 +64,7 @@ import static databaseutility.UpdateSeats.updateSeats;
 import static databaseutility.UserAuthenticate.authenticate;
 import static databaseutility.CheckIfCinemaExists.checkIfCinemaExists;
 import static databaseutility.CheckIfHolderNameExist.checkIfHolderNameExist;
+import static databaseutility.CheckCreditCard.checkCreditCard;
 import static databaseutility.CheckIfGiftCardExists.checkIfGiftCardExists;
 import static databaseutility.GetSeatCapacity.getFrontSeatCapacity;
 import static databaseutility.GetSeatCapacity.getMidSeatCapacity;
@@ -78,6 +79,7 @@ import static databaseutility.GetNumberOfSeatsBooked.getNumberOfMidSeatsBooked;
 import static databaseutility.GetNumberOfSeatsBooked.getNumberOfBackSeatsBooked;
 import static databaseutility.GetuserSetting.getUsersetting;
 import static databaseutility.SetUserSetting.setUserSetting;
+import static databaseutility.ListAllCinemaSessions.listAllCinemaSessions;
 
 import databaseutility.MovieInsertionBuilder;
 
@@ -1119,13 +1121,16 @@ public class databaseUtilityTests {
     }
 
     @Test
-    public void CheckIfCreditCardExists_1() {
-
+    public void CheckCreditCard_1() {
+        addCreditCard(dbInstance, "11111", "sdfjkl", "0000");
+        assert(checkCreditCard(dbInstance, "11111", "sdfjkl"));
+        removeCreditCard(dbInstance, "11111");
     }
 
     @Test
     public void CheckIfCreditCardExists_2() {
-
+        removeCreditCard(dbInstance, "11111");
+        assertFalse(checkCreditCard(dbInstance, "11111", "sdfjkl"));
     }
 
     @Test
@@ -1244,5 +1249,12 @@ public class databaseUtilityTests {
         addUser(dbInstance, "alien", "aa", "c");
         setUserSetting(dbInstance, "alien", "afsd cinema");
     }
+
+    @Test
+    public void ListAllCinemaSessions_1() {
+        listAllCinemaSessions(dbInstance);
+    }
+
+    
 
 }
