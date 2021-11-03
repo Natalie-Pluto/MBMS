@@ -25,17 +25,8 @@ This project is a simple ticket booking & management system.
 
 You are viewing the sprint 3 ver. 3.1. 
 
-By far, the program is able to perform all the functionalities related to guest user interface. 
-(Some features such as case-insensitive search will be updated in sprint 3)
+This is the final version of the Movie Ticket Booking Management System.
 
-The customer interface is able to perform all features in guest user's interface. Booking option is make available for the customers.
-Despite customers are able to choose the "booking" option, there are some issue related to booking and payment remain unsolved in this version,
-user could meet booking or payment failure. This will be fixed in the next sprint.
-
-The staff interface is made available for staff/manager in this version. However, the CLI format is not finalised. User will be 
-directed to staff interface if they logged in as staff/manager, but the functionalities related to
-staff interface is not fully implemented hence users could meet unexpected error. These issues will all 
-be fixed in the next sprint.
 
 
 ## Setup
@@ -536,28 +527,39 @@ Wrong input (｡´︿`｡)
 ```
 **Filter Through Cinema**
 
-User will be ask to enter the cinema name. It is case-sensitive in this version but it will be improved
-in next release:
+User will be ask to choose the cinema. They can choose by entering the number:
 
 ```
+
 =======================
 Please select a cinema:
 =======================
-Warringah Mall
-Town Hall
-Eastgarden
-Blacktown
+1. Warringah Mall
+2. Town Hall
+3. Blacktown
+4. Eastgarden
+5. abc cinema
+6. Ali's cinema
+7. ali's cinema
+
 ```
 
-If wrong cinema name received:
+If wrong cinema number received:
 
 ```
-========================================================
-Wrong input, please check the cinema name entered (｡´︿`｡)
-========================================================
+=============================================================
+Wrong input! Please enter the right cinema number (｡´︿`｡)
+=============================================================
+
+=====================================================================
+You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ 
+Enter 1 for "Log in"
+Enter 2 for "Sign up"
+Enter "return" to return to home page
+=====================================================================
+
 ```
 
-User has to return to home page and select filter again.
 
 If no upcoming movie is scheduled to be played in this cinema:
 
@@ -601,23 +603,32 @@ Showing Time
 
 **Filter Through Screen Size**
 
-User will be ask to enter the screen size. It is case-sensitive in this version but it will be improved
-in next release:
+User will be ask to enter the screen size. They can choose the screen size by entering
+the number:
 
 ```
 ============================
 Please select a screen size:
 ============================
-Gold
-Sliver
-Bronze
+1. Gold
+2. Sliver
+3. Bronze
 ```
 If wrong input received:
 
 ```
-========================================================
-Wrong input, please check the screen size entered (｡´︿`｡)
-========================================================
+
+=============================================================
+Wrong input, please enter the right screen type num (｡´︿`｡)
+=============================================================
+
+
+=====================================================================
+You have to log in / sign up to book movie tickets! (｡･ω･｡)ﾉ 
+Enter 1 for "Log in"
+Enter 2 for "Sign up"
+Enter "return" to return to home page
+=====================================================================
 ```
 
 User has to return to home page and select filter again.
@@ -653,8 +664,7 @@ THE LAST DUEL [MA15+] 2021-10-21
 
 - ### **Movie Details**
 
-User can view the movie details via enter the movie name. (It is case-sensitive in this version but
-it will be improved in the next release)
+User can view the movie details via enter the movie name (case-insensitive)
 
 ```
 THE LAST DUEL
@@ -679,75 +689,454 @@ If they choose the "Booking" option at the home page, they will be ask to choose
 =======================
 Please select a cinema:
 =======================
-Warringah Mall
-Town Hall
-Eastgarden
-Blacktown
+1. Warringah Mall
+2. Town Hall
+3. Blacktown
+4. Eastgarden
+5. abc cinema
+6. Ali's cinema
+7. ali's cinema
 ```
 
-Then they will be asked to enter the movie name:
+After they have chose the cinema, a list of movie sessions in the cinema they chose will be printed out:
+
+```
+Movies on show at Warringah Mall
+
+===============================================
+1. Sooryavanshi [PG] 2021-11-05
+===============================================
+
+Showing Time
+2021-11-07 09:00:00 [Sliver]
+
+===============================================
+2. Ip Man [PG] 2021-10-25
+===============================================
+
+Showing Time
+2021-11-04 17:00:00 [Gold]
+
+===============================================
+3. Double 11 [G] 2021-11-11
+===============================================
+
+```
+Then they will be asked to choose the movie via number:
 
 ```
 ======================================================
-Please enter the movie name that you wish to book
+Please select a movie:
 ======================================================
+
+1. Sooryavanshi
+2. Ip Man
+3. Double 11
+4. Made Up
+5. Harry Potter 8
+6. JUNGLE CRUISE
+7. THE LAST DUEL
+8. FREE GUY
+9. Black Box
+```
+
+Then they will be asked to choose the screen type via number:
+
+```
+======================================================
+Please select a screenType:
+======================================================
+
+1. Gold
+```
+
+Then they will be asked to choose the time via number:
+
+```
+======================================================
+Please select a start time:
+======================================================
+
+1. 2021-11-04 17:00:00
+```
+
+Then they will be asked to choose seat location:
+
+```
+======================================================
+Please select your seatLocation:
+======================================================
+
+1.Front: 19 seats left
+2.Mid: 19 seats left
+3.Back: 20 seats left
+```
+Then they will be asked for the number of tickets wish to book and the ticket type:
+
+```
+======================================================
+How many seats do you wish to book for adults?
+======================================================
+
+1
+
+======================================================
+How many seats do you wish to book for kids?
+======================================================
+
+0
+
+======================================================
+How many seats do you wish to book for students?
+======================================================
+
+0
+
+======================================================
+How many seats do you wish to book for seniors?
+======================================================
+
+0
+```
+
+Then they will be processed to payment:
+
+```
+======================================================
+Which payment do you want to make?
+1.Credit Card       2.Gift Card
+======================================================
+```
+
+#### **Choose 1 （Credit Card)**
+
+Their card number input will not be shown.
+```
+======================================================
+Please enter your card number
+Enter "cancel" to cancel transaction
+======================================================
+                                                                                                                                                                            
+======================================================
+Please enter your cardholder name
+Enter "cancel" to cancel transaction
+======================================================
+Blake
+```
+
+Their card detail will be checked. If the card detail provided is not valid, error message
+will be printed out:
+
+```
+Wrong card number or name
+```
+
+If their card has insufficent balance error message
+will be printed out:
+
+```
+Insufficient balance
+```
+
+If it wasn't their first payment and they chose to save their credit card detail,
+their card info will be auto filled.
+
+#### **Choose 2 （Gift Card)**
+
+```
+======================================================
+Please enter your gift card number
+Enter "cancel" to cancel transaction
+======================================================
+```
+If invalid gift card number received:
+
+```
+Wrong gift card number, it should be 16-digit with suffix GC
+```
+
+If book succeed:
+```
+You have successfully booked a movie!
+Transaction id: 2c4d316e-2845-4dce-ae49-9750fcf928f0
+```
+
+- ### **Cancellation During Payment**
+
+If user enter cancel, the transaction will be ended.
+
+If no user's input in 2 minutes, time out, and the transaction will be ended.
+
+- ### **Personal Setting**
+
+```
+======================================================
+Enter 1 for "Update Password"
+Enter 2 for "Cinema Preference"
+Enter "return" to return to home page
+======================================================
+```
+Customer can choose to update their account's password or set their cinema preference.
+
+After they have set their cinema preference, a list of movie sessions in the cinema they chose
+will be list out in their home page.
+
+- ### **Staff Interface**
+
+```
+============================================
+Enter the number to operate: 
+============================================
+
+1.Add Movie
+2.Remove Movie
+3.Modify Movie
+4.Enter Gift Card
+5.Redeem Gift Card
+6.Add Movie Session
+7.Remove Movie Session
+8.Generate Upcoming Movie Report
+9.Generate Movie Session Report
+10.Log out
+```
+
+- ### **Manager Interface**
+```
+============================================
+Enter the number to operate: 
+============================================
+
+1.Add Movie
+2.Remove Movie
+3.Modify Movie
+4.Enter Gift Card
+5.Redeem Gift Card
+6.Add Movie Session
+7.Remove Movie Session
+8.Add staff
+9.Remove Staff
+10.Generate Upcoming Movie Report
+11.Generate Movie Session Report
+12.Generate Cancellation Report
+13.Log Out
+```
+
+- ### **Add Movie**
+
+```
+1
+Enter the name of the movie: 
+Demo
+Enter the classification: 
+G
+Enter the release date in YYYY-MM-DD format:
+2021-11-11
+Enter the synopsis:
+It's for demo
+Enter the directors:
+Nat
+Enter the genre:
+Horror
+Enter the casts:
+Nat
+Enter the showing date in YYYY-MM-DD format:
+2021-11-11
+Success: Movie added. (｡･ω･｡)ﾉ
+```
+
+- ### **Remove Movie**
+
+```
+2
+Enter the name of the movie: 
+Demo
+Success: Movie removed. (｡･ω･｡)ﾉ
 ```
 
 If the movie does not exist:
 
 ```
-ha
-Movie ha does not exist, please enter the correct movie name
+a
 
-======================================================
-Please enter the movie name that you wish to book
-======================================================
+============================================
+Error: Movie does not exists. (｡´︿`｡)
+============================================
+
+Enter the name of the movie: 
 ```
 
-They will be able to enter again.
-
-After they have entered the right movie name, they will be ask to confirm the cinema
-they want to go:
+- ### **Modify Movie**
 
 ```
-======================================================
-Please enter the cinema name that you wish to book
-======================================================
+3
+Enter the name of the movie: 
+Test
+1.Enter the number of the section to modify: 
+1.Classification 2.Release Date 3.Synopsis 4.Directors 5.Genre 6.Casts 7.Showing Date
+1
+Enter the classification: 
+G
+Success: Movie Modified. (｡･ω･｡)ﾉ
 ```
-
-If the cinema name does not exist:
-
-```
-ha
-Cinema ha does not exist, please enter the correct cinema name
-
-======================================================
-Please enter the cinema name that you wish to book
-======================================================
-```
-
-They will be able to enter again.
-
-After the customer confirmed the cinema name, they will be asked to choose the time:
+If the movie does not exist:
 
 ```
-======================================================
-Please enter the start time of the movie that you wish to book
-======================================================
+============================================
+Error: Movie does not exists. (｡´︿`｡)
+============================================
+
+Enter the name of the movie: 
 ```
 
-If the movie they choose does not play at the time they entered:
+- ### **Enter Gift Card**
 
 ```
-2021-11-05 18:00:00
-FREE GUY does not have start time at 2021-11-05 18:00:00 in Blacktown
-
-======================================================
-Please enter the start time of the movie that you wish to book
-======================================================
+4
+Enter the gift card number:
+1111111111111113GC
+Success: Gift Card added. (｡･ω･｡)ﾉ
 ```
 
-They will be able to choose again.
+If wrong gift card entered:
+
+```
+============================================
+Error: Gift card format is invalid. (｡´︿`｡)
+============================================
+
+Enter the gift card number:
+```
+- ### **Redeem Gift Card**
+```
+5
+Enter the gift card number:
+1111111111111117GC
+Success: Gift Card redeemed. (｡･ω･｡)ﾉ
+```
+
+If wrong gift card entered:
+
+```
+============================================
+Error: Gift card format is invalid. (｡´︿`｡)
+============================================
+
+Enter the gift card number:
+```
+
+- ### **Add Movie Session**
+
+```
+Enter the name of the cinema: 
+Warringah Mall
+Enter the name of the movie: 
+Test
+Enter the screen type: 
+Gold
+Enter the start time in YYYY-MM-DD HH:MI:SS format:
+2021-11-11 12:00:00
+Enter the ticket price for kid: 
+10
+Enter the ticket price for adult: 
+20
+Enter the ticket price for senior: 
+10
+Enter the ticket price for student: 
+10
+Success: Movie Session added. (｡･ω･｡)ﾉ
+```
+If cinema not exist:
+
+```
+Enter the name of the cinema: 
+Warringah
+
+============================================
+Error: Cinema does not exist. (｡´︿`｡)
+============================================
+```
+
+If movie not exist:
+
+```
+6
+Enter the name of the cinema: 
+Warringah Mall
+Enter the name of the movie: 
+a
+
+============================================
+Error: Movie does not exists. (｡´︿`｡)
+============================================
+```
+
+If invalid screen type entered (it is case-sensitive). Screen types: 
+Gold, Bronze, Sliver
+
+```
+Enter the screen type: 
+G
+
+============================================
+Error: Screen type is invalid. (｡´︿`｡)
+============================================
+```
+
+- ### **Remove Movie Session**
+
+```
+Enter the name of the cinema: 
+Warringah Mall
+Enter the name of the movie: 
+Test
+Enter the screen type: 
+Gold
+Enter the start time in YYYY-MM-DD HH:MI:SS format:
+2021-11-11 11:00:00
+Success: Movie Session removed. (｡･ω･｡)ﾉ
+
+```
+
+If the session not exist:
+
+```
+Enter the name of the cinema: 
+Warringah Mall
+Enter the name of the movie: 
+Test
+Enter the screen type: 
+Gold
+Enter the start time in YYYY-MM-DD HH:MI:SS format:
+2021-11-11 12:00:00
+
+============================================
+Error: Movie Session does not exists. (｡´︿`｡)
+============================================
+
+
+============================================
+Error: Movie failed to be removed. (｡´︿`｡)
+============================================
+```
+
+- ### **Generate Report**
+
+Staff can:
+
+1.Generate Upcoming Movie Report
+
+2.Generate Movie Session Report
+
+Manager can:
+
+1.Generate Upcoming Movie Report
+
+2.Generate Movie Session Report
+
+3.Generate Cancellation Report
+
+The report will be made in a txt file
+
 
 - ### **Handle Invalid Input at Default Page**
 
@@ -815,8 +1204,22 @@ Please enter:
 Enter correct movie name for movie detail
 ============================================
 ```
+- ### **Log out**
 
+If user choose to log out, they will be logged out from their account and brought back to 
+default page.
+```
+=================
+Logging out...
+=================
 
+    Welcome to Fancy Cinemas Official Website!!
+
+    If you have an account, please sign in (｡･ω･｡)ﾉ 
+    If you haven't joined us, you can sign up today! o(｀ω´ )o
+
+    Enter 1 for "Log in"            Enter 2 for "Sign up"
+```
 
 ## **Tests**
 

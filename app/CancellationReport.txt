@@ -1,0 +1,117 @@
+Transaction Time: 2021-11-02 11:31:31.628 Customer: abc Reason: Cancelled Transaction.
+Transaction Time: 2021-11-02 12:38:32.239 Customer: abc Reason: Time out.
+Transaction Time: 2021-11-03 13:43:04.99 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 13:43:06.718 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:30:03.168 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:30:03.87 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:34:18.624 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:34:19.204 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:36:27.523 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:36:28.09 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:39:00.627 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:39:01.182 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:49:16.535 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:49:17.01 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:50:46.995 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:50:47.642 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 14:57:54.949 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 14:57:55.632 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:01:25.131 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:01:25.602 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:01:28.056 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:10:12.729 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:10:13.371 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:10:16.388 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:10:16.401 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:12:03.751 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:12:04.336 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:12:08.438 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:12:08.463 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:23:30.52 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:23:31.026 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:23:33.695 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:23:33.71 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:27:26.929 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:27:27.488 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:27:30.218 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:27:30.256 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:31:00.387 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:31:01.172 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:31:03.539 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:31:03.553 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:32:24.189 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:32:24.652 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:32:27.256 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:32:27.27 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:32:52.991 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:32:53.439 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:32:55.766 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:32:55.781 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:33:20.176 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:33:20.578 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:33:22.983 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:33:22.996 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:34:33.615 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:34:34.152 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:34:37.067 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:34:37.08 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:36:21.424 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:36:22.183 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:36:24.761 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:36:24.777 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:36:43.343 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:36:43.934 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:36:46.904 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:36:46.918 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:37:45.961 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:37:47.293 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:37:51.015 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:37:51.029 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:38:41.314 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:38:41.794 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:38:44.471 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:38:44.484 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:39:16.727 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:39:17.417 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:39:20.013 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:39:20.037 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:40:06.972 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:40:07.551 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:40:10.32 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:40:10.356 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:41:22.945 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:41:23.406 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:41:26.152 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:41:26.182 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:44:00.463 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 15:44:00.881 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 15:44:03.617 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 15:44:03.637 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 16:58:01.01 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 16:58:01.834 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 16:58:04.807 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 16:58:04.821 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:01:43.104 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:01:43.586 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:01:46.755 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:01:46.77 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:06:11.571 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:06:13.044 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:06:17.771 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:06:17.788 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:07:08.479 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:07:09.594 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:07:15.249 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:07:15.344 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:16:32.816 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:16:33.507 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:16:36.779 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:16:36.797 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:25:17.67 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:25:18.297 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:25:21.47 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:25:21.497 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:35:07.569 Customer: Andy Reason: Time out.
+Transaction Time: 2021-11-03 17:35:08.228 Customer: Andy Reason: Cancelled Transaction.
+Transaction Time: 2021-11-03 17:35:13.223 Customer: Andy Reason: Timeout.
+Transaction Time: 2021-11-03 17:35:13.247 Customer: Andy Reason: Cancelled Transaction.

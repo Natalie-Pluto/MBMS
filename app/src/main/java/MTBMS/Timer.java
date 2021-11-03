@@ -48,14 +48,7 @@ public class Timer {
                 Thread.sleep(2000);
                 BookingSystem.getGreeting(dbInstance);
                 BookingSystem.options();
-            } else if (type.equals("s")) {
-                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                Thread.sleep(2000);
-                // TODO return to staff main page
-            } else if (type.equals("m")) {
-                System.out.println(RED_BOLD + "Time out! Returning..." + ANSI_RESET);
-                Thread.sleep(2000);
-                // TODO return to manager main page
+                return null;
             } else if(type.equals("p")) {
                 return null;
             } else {
@@ -64,6 +57,7 @@ public class Timer {
                 Guest guest = new Guest(type, "c", " ");
                 guest.customerHomePage();
                 guest.guestService();
+                return null;
             }
 
         }
