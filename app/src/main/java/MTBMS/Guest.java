@@ -514,7 +514,7 @@ public class Guest {
     }
 
     public String getPaymentType() throws InterruptedException {
-        System.out.println("======================================================");
+        System.out.println("\n======================================================");
         System.out.println(PURPLE_BOLD + "Which payment do you want to make?" + ANSI_RESET);
         System.out.println(YELLOW_BOLD + "1.Credit Card       2.Gift Card"+ ANSI_RESET);
         System.out.println("======================================================\n");
@@ -566,7 +566,7 @@ public class Guest {
                     double cardBalance = GetCreditCardBalance.getCreditCardBalance(dbInstance, cardNum);
                     double ticketPrice = getTotalPrice(db, movieName, cinemaName, startTime, screenType, audienceNum);
                     if (cardBalance < ticketPrice){
-                        System.out.println(RED_BOLD + "Insufficient balance" + ANSI_RESET);
+                        System.out.println(RED_BOLD + "Insufficient balance\n" + ANSI_RESET);
                         checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                     }else {
                         ChangingCreditCardBalance.changeCreditCardBalance(dbInstance, cardNum, cardBalance - ticketPrice);
@@ -574,7 +574,7 @@ public class Guest {
                         return true;
                     }
                 }else{
-                    System.out.println(RED_BOLD + "Wrong card number or name");
+                    System.out.println(RED_BOLD + "Wrong card number or name\n");
                     checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
                 }
                 break;
@@ -590,18 +590,16 @@ public class Guest {
                 while (counter > 0){
                     Msg1();
                     giftCardNum = Timer.timer("p");
-                    System.out.println(giftCardNum);
                     result = checkGiftCard(giftCardNum);
-                    System.out.println(result);
                     if(result.equals("1") || result.equals("2")) {
                         break;
                     } else if (result.equals("3") || result.equals("5")) {
-                        checkPayment(db, movieName, cinemaName, startTime, screenType, audienceNum, username);
-                        break;
+                        return checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
+
                     } else if (result.equals("4")) {
                         checkGiftCards = true;
+                        counter -= 1;
                     }
-                    counter -= 1;
                 }
                 return checkGiftCards;
 
@@ -611,6 +609,29 @@ public class Guest {
         }
 
         return false;
+    }
+    public boolean checkPaymentGiftCard(Database db, String movieName, String cinemaName, String startTime, String screenType, List<Integer> audienceNum, String username, int counters) throws InterruptedException {
+        int counter = counters;
+        for (Integer audience: audienceNum){
+            counter += audience;
+        }
+        String result = "";
+        String giftCardNum = "";
+        boolean checkGiftCards = false;
+        while (counter > 0){
+            Msg1();
+            giftCardNum = Timer.timer("p");
+            result = checkGiftCard(giftCardNum);
+            if(result.equals("1") || result.equals("2")) {
+                break;
+            } else if (result.equals("3") || result.equals("5")) {
+                return checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
+            } else if (result.equals("4")) {
+                checkGiftCards = true;
+                counter -= 1;
+            }
+        }
+        return checkGiftCards;
     }
 
     public void Msg1() {
@@ -764,11 +785,11 @@ public class Guest {
     }
 
 
-    public List<Integer> getBookNum() throws InterruptedException {
-        String audienceNumStrAdults = bookNumHelper("1");
-        String audienceNumStrKids = bookNumHelper("2");
-        String audienceNumStrStudents = bookNumHelper("3");
-        String audienceNumStrSeniors = bookNumHelper("4");
+    public List<Integer> getBookNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
+        String audienceNumStrAdults = bookNumHelper("1", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrKids = bookNumHelper("2", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrStudents = bookNumHelper("3", db, cinemaName, movieName, screenType, StartTime, seatLocation);
+        String audienceNumStrSeniors = bookNumHelper("4", db, cinemaName, movieName, screenType, StartTime, seatLocation);
         return bookNumHelper2(audienceNumStrKids, audienceNumStrSeniors, audienceNumStrAdults, audienceNumStrStudents);
     }
 
@@ -781,36 +802,60 @@ public class Guest {
         return seatsBooked;
     }
 
-    public String bookNumHelper(String type) throws InterruptedException {
+    public String bookNumHelper(String type,Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
         if(type.equals("1")) {
-            System.out.println("\n======================================================");
-            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
-            System.out.println("======================================================\n");
-            return Timer.timer(username);
-        } else if (type.equals("2")) {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for kids?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
-        } else if (type.equals("3")) {
-            System.out.println("\n======================================================");
-            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
-            System.out.println("======================================================\n");
-           return Timer.timer(username);
-        } else {
+            String kidsNum = Timer.timer(username);
+            if (Integer.parseInt(kidsNum) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+                System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
+                return bookNumHelper(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
+            }
+            return kidsNum;
+        } else if (type.equals("2")) {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for seniors?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
+            String seniorsNum = Timer.timer(username);
+            if (Integer.parseInt(seniorsNum) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+                System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
+                return bookNumHelper(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
+            }
+            return seniorsNum;
+        } else if (type.equals("3")) {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            String adultsNum = Timer.timer(username);
+            if (Integer.parseInt(adultsNum) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+                System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
+                return bookNumHelper(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
+            }
+            return adultsNum;
+        } else {
+            System.out.println("\n======================================================");
+            System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
+            System.out.println("======================================================\n");
+            String studentsNum = Timer.timer(username);
+            if (Integer.parseInt(studentsNum) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+                System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
+                return bookNumHelper(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
+            }
+            return studentsNum;
         }
     }
 
 
     public List<Integer> getSeatNum(Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
-         List<Integer> numberBook = getBookNum();
-         if (numberBook.size() > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
-             System.out.println(RED_BOLD + "This row does not have this much seats");
-             getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation);
+         List<Integer> numberBook = getBookNum(db, cinemaName, movieName, screenType, StartTime, seatLocation);
+         int number = 0;
+         for (Integer n: numberBook){
+             number += n;
+         }
+         if (number > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)){
+             System.out.println(RED_BOLD + "The seat number you are booking is more than the capacity of " + seatLocation + "row" + ANSI_RESET);
+             return getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation);
          }
 
          return numberBook;
@@ -830,7 +875,7 @@ public class Guest {
                 return "back";
 
             default:
-                System.out.println(RED_BOLD + "Please enter a correct number");
+                System.out.println(RED_BOLD + "\nPlease enter a correct number" + ANSI_RESET);
                 return getSeatLocation(db, cinemaName, movieName, screenType, StartTime);
         }
     }
