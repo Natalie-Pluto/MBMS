@@ -7,7 +7,7 @@ public class UpdateSeats {
         if (StringUtils.isNotEmpty(cinemaName) && StringUtils.isNotEmpty(movieName)
                 && StringUtils.isNotEmpty(startTime)){
                         if (seatLocation.equals("front"))
-                                db.sql_update(String.format("update moviebooking_db.cinema_session set number_of_front_seats_booked = %s where " +
+                                db.sql_update(String.format("update moviebooking_db.cinema_session set number_of_front_seats_booked = %s and front_seat_capacity = %s where " +
                                         "cinema = '%s' and movie = '%s' and start_time = '%s' and screen_type = '%s';",
                                         numBooked,cinemaName.replace("'","''"),movieName.replace("'","''"),startTime,screenType));
                         else if (seatLocation.equals("mid"))
