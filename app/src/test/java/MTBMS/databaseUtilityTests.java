@@ -410,8 +410,8 @@ public class databaseUtilityTests {
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
-        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
+        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 17);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
     }
@@ -452,7 +452,7 @@ public class databaseUtilityTests {
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
-        changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 30);
+        changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 50);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
     }
 
@@ -465,9 +465,9 @@ public class databaseUtilityTests {
         removeSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20");
         assertFalse(checkIfSessionExists(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20"));
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
-        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
-        changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 1);
+        changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
+        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 1);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 5);
@@ -508,8 +508,8 @@ public class databaseUtilityTests {
         addMovieSession(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20","0","0","0","0");
         changeFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 0);
         assert(getFrontSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 0);
-        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeMidSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 5);
+        changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 10);
         changeBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20", 3);
         assert(getBackSeatCapacity(dbInstance, "ali's cinema", "vscode, the movie", "gold","2017-03-31 9:30:20") == 10); 
     } 

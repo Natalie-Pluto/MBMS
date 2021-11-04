@@ -130,8 +130,7 @@ public class movieManagementTest {
         x.insertMovie();
         removeSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20");
         addMovieSession(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "0", "15", "15", "12");
-        changeBackSeatCapacity(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", 1);
-        assert(ListSeats.getSeatNum(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "3") == 1);
+        assert(ListSeats.getSeatNum(dbInstance, "abc cinema", "movie a", "gold", "2017-03-31 9:30:20", "3") == 40);
 
     }
 
