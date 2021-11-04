@@ -1,5 +1,6 @@
 package MTBMS;
 
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.BlockingDeque;
@@ -38,7 +39,7 @@ public class Timer {
         int i = 0;
         String str;
         do {
-            str = deque.poll(10, TimeUnit.SECONDS);
+            str = deque.poll(120, TimeUnit.SECONDS);
             i++;
         } while (i < 1);
 
