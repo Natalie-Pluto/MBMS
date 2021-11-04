@@ -23,7 +23,7 @@ A movie ticket booking & management application written in Java.
 ---
 This project is a simple ticket booking & management system. 
 
-You are viewing the sprint 3 ver. 3.1. 
+You are viewing the sprint 3 ver. 3.2. 
 
 This is the final version of the Movie Ticket Booking Management System.
 
