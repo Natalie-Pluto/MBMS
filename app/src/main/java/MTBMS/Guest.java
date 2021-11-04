@@ -430,6 +430,7 @@ public class Guest {
         int audiences = getAudiences(audienceNum);
         if(updateSeats(dbInstance,movieName, cinemaName, startTime, screenType, audiences, seatLocation, audienceNum)){
             bookSuccess();
+            UpdateNumberOfBooking.updateNumberOfBooking(dbInstance, cinemaName, movieName, startTime, screenType);
         } else {
             customerHomePage();
             guestService();
