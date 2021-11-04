@@ -27,9 +27,9 @@ public class BookingSystem {
 
     public static void main(String[] args) throws InterruptedException, ParseException {
         instance = new BookingSystem();
-        //dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+        dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres","dbmasteruser", "A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
         //dbInstance =  new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-        dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+        //dbInstance =  new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
         // Update upcoming movie table every Monday at 6am
         new UpdateUpcomingMovieTable();
         // Greeting, then ask user to login or sign up or they can view the upcoming movies list
@@ -44,7 +44,15 @@ public class BookingSystem {
             case "1":
                 seperator();
                 String name = username();
+                if(name == null) {
+                    getGreeting(dbInstance);
+                    options();
+                }
                 String password = password();
+                if(password == null) {
+                    getGreeting(dbInstance);
+                    options();
+                }
                 seperator();
                 login(dbInstance, name, password);
                 break;
@@ -58,11 +66,21 @@ public class BookingSystem {
                 options();
                 break;
             case "4":
-                filterMovie(dbInstance, "U" + upcomingFilter());
+                String op1 = upcomingFilter();
+                if(op1 == null) {
+                    getGreeting(dbInstance);
+                    options();
+                }
+                filterMovie(dbInstance, "U" + op1);
                 options();
                 break;
             case "5":
-                filterMovie(dbInstance, "S" + showingFilter());
+                String op2 = showingFilter();
+                if(op2 == null) {
+                    getGreeting(dbInstance);
+                    options();
+                }
+                filterMovie(dbInstance, "S" + op2);
                 options();
                 break;
             case "Caribbean":
@@ -124,6 +142,10 @@ public class BookingSystem {
         String newAcc = "";
         while (isExisted) {
             newAcc = Timer.timer("g");
+            if(newAcc == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             // check if the username existed already
             if (CheckIfUserExists.checkIfUserExists(dbInstance, newAcc)) {
                 instance.signinMsg3();
@@ -140,6 +162,10 @@ public class BookingSystem {
             while (!isValid && counter3 < 3) {
                 counter3++;
                 newPw = readPwd("1");
+                if(newPw == null) {
+                    getGreeting(dbInstance);
+                    options();
+                }
                 if (newPw.length() < 5) {
                     System.out.println(RED_BOLD + "Password has to be longer than 4 characters! (｡´︿`｡) Please try again" + ANSI_RESET);
                     if (counter3 == 3) {
@@ -153,6 +179,10 @@ public class BookingSystem {
             }
             createPwd2();
             String newPw2 = readPwd("1");
+            if(newPw2 == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             if (checkPwd(newPw, newPw2)) {
                 isMatched = true;
                 if (id.equals("NA")) {
@@ -162,6 +192,10 @@ public class BookingSystem {
                         counter2++;
                         instance.signinMsg4();
                         String input = Timer.timer("g");
+                        if(input == null) {
+                            getGreeting(dbInstance);
+                            options();
+                        }
                         boolean code = false;
                         int counter4 = 0;
                         while(!code && counter4 < 3) {
@@ -234,6 +268,10 @@ public class BookingSystem {
         if(type.equals("U6")) {
             List<String> cinemaName1 = listCinema(dbInstance);
             String cinema = Timer.timer("g");
+            if(cinema == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             try {
                 assert cinema != null;
                 if (Integer.parseInt(cinema) > cinemaName1.size()) {
@@ -247,6 +285,10 @@ public class BookingSystem {
         } else if (type.equals("U7")) {
             listScreen();
             String screen = Timer.timer("g");
+            if(screen == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             assert screen != null;
             if(screen.equals("1")) {
                 filterMsg(dbInstance, "b", "Gold");
@@ -260,6 +302,10 @@ public class BookingSystem {
         } else if (type.equals("S6")) {
             List<String> cinemaName2 = listCinema(dbInstance);
             String cinemaName = Timer.timer("g");
+            if(cinemaName == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             try {
                 assert cinemaName != null;
                 if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
@@ -273,6 +319,10 @@ public class BookingSystem {
         } else if (type.equals("S7")) {
             listScreen();
             String size = Timer.timer("g");
+            if(size == null) {
+                getGreeting(dbInstance);
+                options();
+            }
             assert size != null;
             if(size.equals("1")) {
                 filterMsg(dbInstance, "d", "Gold");
@@ -327,8 +377,6 @@ public class BookingSystem {
             password = Timer.timer("g");
         } else if (type.equals("2")) {
             password = Timer.timer("p");
-        }  else {
-            password = Timer.timer(type);
         }
         er.stopMasking();
         return password;
@@ -341,6 +389,10 @@ public class BookingSystem {
 
     public String backCheck1(Database dbInstance) throws InterruptedException {
         String name = username();
+        if(name == null) {
+            getGreeting(dbInstance);
+            options();
+        }
         if (name.equals("back")) {
             getGreeting(dbInstance);
             options();
@@ -350,6 +402,10 @@ public class BookingSystem {
 
     public String backCheck2(Database dbInstance) throws InterruptedException {
         String pw = password();
+        if(pw == null) {
+            getGreeting(dbInstance);
+            options();
+        }
         if (pw.equals("back")) {
             getGreeting(dbInstance);
             options();
@@ -369,6 +425,10 @@ public class BookingSystem {
 
     public String signUpHelper(Database dbInstance, String input, String newAcc, String newPw) throws InterruptedException {
         String success = "0";
+        if(input == null) {
+            getGreeting(dbInstance);
+            options();
+        }
         if (input.equals("1")) {
             success = "1";
             System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
@@ -376,7 +436,12 @@ public class BookingSystem {
             AddingUser.addUser(dbInstance, newAcc, newPw, "c");
         } else if (input.equals("3")) {
             System.out.println("Please enter the staff code:");
-            if (readPwd("1").equals("zootopia")) {
+            String pscc = readPwd("1");
+            if(pscc == null) {
+                getGreeting(dbInstance);
+                options();
+            }
+            if (pscc.equals("zootopia")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this manager's detail to users table
@@ -387,7 +452,12 @@ public class BookingSystem {
             }
         } else if (input.equals("2")) {
             System.out.println("Please enter the staff code:");
-            if (readPwd("1").equals("shawshank")) {
+            String psc = readPwd("1");
+            if(psc == null) {
+                getGreeting(dbInstance);
+                options();
+            }
+            if (psc.equals("shawshank")) {
                 success = "1";
                 System.out.println(PURPLE_BOLD_BRIGHT + "Congratulations! You have made your account (｡･ω･｡)ﾉ" + ANSI_RESET);
                 // Add this staff's detail to users table

@@ -1,0 +1,36 @@
+Movie Name: double 11
+Classification: G
+Release Date: 2021-11-11
+Synopsis: Double 11 is chinese boxing day XD
+Directors: Imagination
+Genre: null
+Casts: Dreams
+Showing Date: null
+
+Movie Name: made up
+Classification: PG
+Release Date: 2021-11-12
+Synopsis: Made up for demo
+Directors: Imagination
+Genre: null
+Casts: Dreams
+Showing Date: null
+
+Movie Name: harry potter 8
+Classification: PG
+Release Date: 2021-11-15
+Synopsis: Not exist Harry Potter 8 but I wish there could be one
+Directors: Imagination
+Genre: null
+Casts: Dreams
+Showing Date: null
+
+Movie Name: harry potter 9
+Classification: PG
+Release Date: 2021-11-16
+Synopsis: Not exist Harry Potter 8 but I wish there could be one
+Directors: Imagination
+Genre: null
+Casts: Dreams
+Showing Date: null
+

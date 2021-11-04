@@ -22,9 +22,9 @@ public class Guest {
     private String settings;
 
 
-    //private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
+    private static Database dbInstance = new Database("jdbc:postgresql://ls-d4381878930280384f33af335289e24c73224a04.c0apyqxz8x8m.ap-southeast-2.rds.amazonaws.com:5432/postgres", "dbmasteruser","A>XV>D*7r-V{y_wL}}I{+U=8zEtj1*T<");
     //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/MTBMS", "postgres", "329099");
-    private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
+    //private static Database dbInstance = new Database("jdbc:postgresql://localhost:5432/postgres", "postgres", "0000");
 
     public Guest(String username, String identity, String settings) {
         this.username = username;
@@ -47,14 +47,24 @@ public class Guest {
                 guestService();
                 break;
             case "2":
-                filterMovies(dbInstance, "U" + CupcomingFilter());
+                String op1 = CupcomingFilter();
+                if(op1 == null) {
+                    customerHomePage();
+                    guestService();
+                }
+                filterMovies(dbInstance, "U" + op1);
                 continueService();
                 break;
             case "3":
                 book(dbInstance);
                 break;
             case "4":
-                filterMovies(dbInstance, "S" + CshowingFilter());
+                String op2 = CshowingFilter();
+                if(op2 == null) {
+                    customerHomePage();
+                    guestService();
+                }
+                filterMovies(dbInstance, "S" +op2);
                 continueService();
                 break;
             case "5":
@@ -144,7 +154,7 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println("======================================================");
         BookingSystem.seperator();
-        return Timer.timer(username);
+        return Timer.timer("g");
     }
 
     public String wrongpersonalSettingsMsgs() throws InterruptedException {
@@ -157,11 +167,15 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter \"return\" to return to home page"  + ANSI_RESET);
         System.out.println("======================================================");
         BookingSystem.seperator();
-        return Timer.timer(username);
+        return Timer.timer("g");
     }
 
     public void continuePersonalSettings(String type) throws InterruptedException {
-        switch(type) {
+        if(type == null) {
+            customerHomePage();
+            guestService();
+        }
+        switch(Objects.requireNonNull(type)) {
             case "1":
                 passwordUpdate();
                 break;
@@ -181,7 +195,11 @@ public class Guest {
 
     public void setCinemaPreference(Database dbInstance) throws InterruptedException {
         List<String> cinemas = cinemaPreferenceMsg(dbInstance);
-        String num = Timer.timer(username);
+        String num = Timer.timer("g");
+        if(num == null) {
+            customerHomePage();
+            guestService();
+        }
         BookingSystem.seperator();
         boolean success = setSuccessful(num, cinemas);
         if(!success) {
@@ -223,7 +241,11 @@ public class Guest {
         int i = 0;
         while (i < 3) {
             System.out.println("Please enter your new password");
-            newPwd_1 = BookingSystem.readPwd(username);
+            newPwd_1 = BookingSystem.readPwd("1");
+            if(newPwd_1 == null) {
+                customerHomePage();
+                guestService();
+            }
             if (newPwd_1.length() < 5) {
                 i++;
                 if(i == 3) {
@@ -234,7 +256,11 @@ public class Guest {
             }
         }
         System.out.println("Please enter your new password again");
-        String newPwd_2 = BookingSystem.readPwd(username);
+        String newPwd_2 = BookingSystem.readPwd("1");
+        if(newPwd_2 == null) {
+            customerHomePage();
+            guestService();
+        }
         boolean success = checkPwd(newPwd_1, newPwd_2, presentPwd);
         if(!success) {
             System.out.println(RED_BOLD + "Updates on password failed!" + ANSI_RESET);
@@ -261,19 +287,23 @@ public class Guest {
         BookingSystem.seperator();
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Filter through cinema\"" + "     " + "Enter 6 for \"Filter through screen size\"" + ANSI_RESET);
         BookingSystem.seperator();
-        return Timer.timer(username);
+        return Timer.timer("g");
     }
 
     public String CupcomingFilter() throws InterruptedException {
         BookingSystem.seperator();
         System.out.println(PURPLE_BOLD + "Enter 5 for \"Filter through cinema\"" + "     " + "Enter 6 for \"Filter through screen size\"" + ANSI_RESET);
         BookingSystem.seperator();
-        return Timer.timer(username);
+        return Timer.timer("g");
     }
 
     public String bookingHelper(Database dbInstance) throws InterruptedException {
         List<String> cinemas = BookingSystem.listCinema(dbInstance);
-        String cinema = Timer.timer(username);
+        String cinema = Timer.timer("g");
+        if(cinema == null) {
+            customerHomePage();
+            guestService();
+        }
         BookingSystem.seperator();
         try {
             if (Integer.parseInt(cinema) > cinemas.size()) {
@@ -295,11 +325,15 @@ public class Guest {
         System.out.println(PURPLE_BOLD + "Enter 3 for Booking"  + ANSI_RESET);
         System.out.println("======================================================");
         BookingSystem.seperator();
-        return Timer.timer(username);
+        return Timer.timer("g");
     }
 
     public void continueService() throws InterruptedException {
         String service = getContinueService();
+        if(service == null) {
+            customerHomePage();
+            guestService();
+        }
         switch (service) {
             case "1":
                 customerHomePage();
@@ -332,7 +366,11 @@ public class Guest {
     public void filterMovies(Database dbInstance, String type) throws InterruptedException {
         if(type.equals("U5")) {
             List<String> cinemaName1 = BookingSystem.listCinema(dbInstance);
-            String cinema = Timer.timer(username);
+            String cinema = Timer.timer("g");
+            if(cinema == null) {
+                customerHomePage();
+                guestService();
+            }
             try {
                 assert cinema != null;
                 if (Integer.parseInt(cinema) > cinemaName1.size()) {
@@ -345,7 +383,11 @@ public class Guest {
             }
         } else if (type.equals("U6")) {
             BookingSystem.listScreen();
-            String screen = Timer.timer(username);
+            String screen = Timer.timer("g");
+            if(screen == null) {
+                customerHomePage();
+                guestService();
+            }
             assert screen != null;
             if(screen.equals("1")) {
                 filterMsg(dbInstance, "b", "Gold");
@@ -358,7 +400,11 @@ public class Guest {
             }
         } else if (type.equals("S5")) {
             List<String> cinemaName2 = BookingSystem.listCinema(dbInstance);
-            String cinemaName = Timer.timer(username);
+            String cinemaName = Timer.timer("g");
+            if(cinemaName == null) {
+                customerHomePage();
+                guestService();
+            }
             try {
                 assert cinemaName != null;
                 if (Integer.parseInt(cinemaName) > cinemaName2.size()) {
@@ -371,7 +417,11 @@ public class Guest {
             }
         } else if (type.equals("S6")) {
             BookingSystem.listScreen();
-            String size = Timer.timer(username);
+            String size = Timer.timer("g");
+            if(size == null) {
+                customerHomePage();
+                guestService();
+            }
             assert size != null;
             if(size.equals("1")) {
                 filterMsg(dbInstance, "d", "Gold");
@@ -519,7 +569,11 @@ public class Guest {
         System.out.println(YELLOW_BOLD + "1.Credit Card       2.Gift Card"+ ANSI_RESET);
         System.out.println("======================================================\n");
 
-        String paymentType = Timer.timer(username);
+        String paymentType = Timer.timer("g");
+        if(paymentType == null) {
+            customerHomePage();
+            guestService();
+        }
         switch (paymentType){
             case "1":
                 return "1";
@@ -592,8 +646,8 @@ public class Guest {
                     giftCardNum = Timer.timer("p");
                     result = checkGiftCard(giftCardNum);
                     if(result.equals("1") || result.equals("2")) {
-                        checkGiftCards = checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
-                        counter = 0;
+                        customerHomePage();
+                        guestService();
                     } else if (result.equals("3") || result.equals("5")) {
                         checkGiftCards = checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
                         counter = 0;
@@ -622,8 +676,8 @@ public class Guest {
             giftCardNum = Timer.timer("p");
             result = checkGiftCard(giftCardNum);
             if(result.equals("1") || result.equals("2")) {
-                checkGiftCards = checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
-                counter = 0;
+                customerHomePage();
+                guestService();
             } else if (result.equals("3") || result.equals("5")) {
                 checkGiftCards = checkPaymentGiftCard(db, movieName, cinemaName, startTime, screenType, audienceNum, username, counter);
                 counter = 0;
@@ -688,7 +742,11 @@ public class Guest {
             counter++;
         }
         BookingSystem.seperator();
-        String movie = Timer.timer(username);
+        String movie = Timer.timer("g");
+        if(movie == null) {
+            customerHomePage();
+            guestService();
+        }
         try {
             if (Integer.parseInt(movie) > counter) {
                 System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
@@ -718,7 +776,7 @@ public class Guest {
         System.out.println("\n======================================================");
         System.out.println(PURPLE_BOLD + "Please enter the c that you wish to book" + ANSI_RESET);
         System.out.println("======================================================\n");
-        String cinemaName = Timer.timer(username);
+        String cinemaName = Timer.timer("g");
 
         if (!(CheckIfCinemaExists.checkIfCinemaExists(dbInstance, cinemaName))) {
             System.out.println(RED_BOLD + "Cinema " + cinemaName + " does not exist, please enter the correct cinema name\n" + ANSI_RESET);
@@ -743,7 +801,11 @@ public class Guest {
             System.out.println(counter + ". " + screenType);
             counter++;
         }
-        String screentype = Timer.timer(username);
+        String screentype = Timer.timer("g");
+        if(screentype == null) {
+            customerHomePage();
+            guestService();
+        }
         try {
             if (Integer.parseInt(screentype) > screenTypes.size()) {
                 System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
@@ -770,7 +832,11 @@ public class Guest {
             System.out.println(counter + ". " + startTime);
             counter++;
         }
-        String starttime = Timer.timer(username);
+        String starttime = Timer.timer("g");
+        if(starttime ==  null) {
+            customerHomePage();
+            guestService();
+        }
         try {
             if (Integer.parseInt(starttime) > startTimes.size()) {
                 System.out.println(RED_BOLD + "please enter a correct number" + ANSI_RESET);
@@ -796,7 +862,12 @@ public class Guest {
 
     public String bookNumHelper2(String type, Database db, String cinemaName, String movieName, String screenType, String StartTime, String seatLocation) throws InterruptedException {
         String number = bookNumHelper(type);
+        if(number == null) {
+            customerHomePage();
+            guestService();
+        }
         try {
+            assert number != null;
             if (Integer.parseInt(number) > ListSeats.getSeatNum(db, cinemaName, movieName, screenType, StartTime, seatLocation)) {
                 System.out.println(RED_BOLD + seatLocation + " row does not have this much seats!" + ANSI_RESET);
                 return bookNumHelper2(type, db, cinemaName, movieName, screenType, StartTime, seatLocation);
@@ -822,22 +893,22 @@ public class Guest {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for kids?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
+            return Timer.timer("g");
         } else if (type.equals("2")) {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for seniors?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
+            return Timer.timer("g");
         } else if (type.equals("3")) {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for adults?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
+            return Timer.timer("g");
         } else {
             System.out.println("\n======================================================");
             System.out.println(PURPLE_BOLD + "How many seats do you wish to book for students?" + ANSI_RESET);
             System.out.println("======================================================\n");
-            return Timer.timer(username);
+            return Timer.timer("g");
         }
     }
 
@@ -858,7 +929,11 @@ public class Guest {
 
     public String getSeatLocation(Database db, String cinemaName, String movieName, String screenType, String StartTime) throws InterruptedException {
         ListSeats.listSeats(db, cinemaName, movieName, screenType, StartTime);
-        String seatLocation = Timer.timer(username);
+        String seatLocation = Timer.timer("g");
+        if(seatLocation == null) {
+            customerHomePage();
+            guestService();
+        }
         switch (seatLocation) {
             case "1":
                 return "front";
@@ -930,7 +1005,11 @@ public class Guest {
             System.out.println(YELLOW_BOLD + "1.Yes       2.No" + ANSI_RESET);
             System.out.println("======================================================\n");
             System.out.println("\n" + YELLOW_BACKGROUND + "                                                                                " + ANSI_RESET + "\n");
-            String saveInfo = Timer.timer(username);
+            String saveInfo = Timer.timer("g");
+            if(saveInfo == null) {
+                customerHomePage();
+                guestService();
+            }
             saveCardHelper(dbInstance, saveInfo, cardNum, username);
         }
     }
